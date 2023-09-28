@@ -1,14 +1,20 @@
 {
   "name": "astroimg",
-  "version": "1.0.0",
+  "version": "0.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite --config ./build/dev.config.ts",
     "build": "vue-tsc --noEmit && vite build --config ./build/build.config.ts"
   },
-  "type": "module",
-  "typings": "./dist/astroimg.es.d.ts",
+  "style": "dist/style.css",
+  "types": "./dist/astroimg.es.d.ts",
+  "main": "./dist/astroimg.umd.js",
+  "module": "./dist/astroimg.es.js",
   "exports": {
     ".": {
+      "types": "./dist/astroimg.d.ts",
       "import": "./dist/astroimg.es.js",
       "require": "./dist/astroimg.umd.js"
     }
