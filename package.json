@@ -8,7 +8,7 @@
     "dev": "vite --config ./build/dev.config.ts",
     "build": "vue-tsc --noEmit && vite build --config ./build/build.config.ts"
   },
-  "style": "dist/style.css",
+  "style": "./dist/style.css",
   "types": "./dist/astroimg.es.d.ts",
   "main": "./dist/astroimg.umd.js",
   "module": "./dist/astroimg.es.js",
