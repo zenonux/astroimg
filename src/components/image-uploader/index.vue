@@ -9,9 +9,9 @@
       <img
         v-if="props.modelValue"
         :src="_buildCosUrl(props.modelValue)"
-        class="ur-uploader__cover"
+        class="a-uploader__cover"
       />
-      <el-icon v-else class="ur-uploader__icon">
+      <el-icon v-else class="a-uploader__icon">
         <!-- <IconifyIcon icon="ep:plus" /> -->
       </el-icon>
       <template #tip>
