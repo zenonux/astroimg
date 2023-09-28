@@ -1,6 +1,6 @@
 <template>
     <el-upload
-      class="z-uploader"
+      class="a-uploader"
       :show-file-list="false"
       :http-request="handleUpload"
       :before-upload="beforeUpload"
@@ -123,7 +123,7 @@
   };
   </script>
   <style lang="scss">
-  .z-uploader {
+  .a-uploader {
     .el-upload {
       border: 1px dashed var(--el-border-color);
       border-radius: 6px;
