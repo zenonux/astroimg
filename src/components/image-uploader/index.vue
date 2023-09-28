@@ -141,7 +141,7 @@
       height: 148px;
       object-fit: cover;
     }
-    .el-icon.ur-uploader__icon {
+    .el-icon.a-uploader__icon {
       font-size: 28px;
       color: #8c939d;
       width: 148px;
