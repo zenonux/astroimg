@@ -1,2 +1,2 @@
-import AUploader from './index.vue';
-export { AUploader };
+import AImageUploader from './index.vue';
+export { AImageUploader };

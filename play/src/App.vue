@@ -1,12 +1,12 @@
 <template>
   <section>
     <h1>AUploader</h1>
-    <AUploader v-model="fileList" :config="uploadConfig"></AUploader>
+    <AImageUploader v-model="fileList" :config="uploadConfig"></AImageUploader>
   </section>
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
-import { AUploader } from "../../src/components";
+import { AImageUploader } from "../../src/components";
 const uploadConfig = {
   domain: "",
   bucket: "",
