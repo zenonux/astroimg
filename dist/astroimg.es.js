@@ -1,31 +1,31 @@
-import { openBlock as i, createElementBlock as f, defineComponent as y, createBlock as d, unref as p, withCtx as u, createElementVNode as b } from "vue";
-import x from "cos-js-sdk-v5";
-import { ElUpload as S, ElIcon as T, ElMessage as _ } from "element-plus";
-const v = (r, c) => {
-  const e = r.__vccOpts || r;
-  for (const [l, s] of c)
-    e[l] = s;
+import { openBlock as i, createElementBlock as f, defineComponent as y, createBlock as l, unref as p, withCtx as u, pushScopeId as S, popScopeId as x, createElementVNode as v } from "vue";
+import T from "cos-js-sdk-v5";
+import { ElUpload as C, ElIcon as I, ElMessage as _ } from "element-plus";
+const m = (n, c) => {
+  const e = n.__vccOpts || n;
+  for (const [d, s] of c)
+    e[d] = s;
   return e;
-}, C = {};
-function B(r, c) {
+}, w = {};
+function B(n, c) {
   return i(), f("button");
 }
-const A = /* @__PURE__ */ v(C, [["render", B]]), E = ["src"], V = /* @__PURE__ */ b("div", { class: "el-upload__tip" }, " 支持 jpg/jpeg/png 格式，大小不超过500kb，建议使用tinypng压缩后上传 ", -1), F = /* @__PURE__ */ y({
+const M = /* @__PURE__ */ m(w, [["render", B]]), E = (n) => (S("data-v-029bddd2"), n = n(), x(), n), V = ["src"], U = /* @__PURE__ */ E(() => /* @__PURE__ */ v("div", { class: "el-upload__tip" }, " 支持 jpg/jpeg/png 格式，大小不超过500kb，建议使用tinypng压缩后上传 ", -1)), j = /* @__PURE__ */ y({
   __name: "index",
   props: {
     modelValue: {},
     config: {}
   },
   emits: ["update:modelValue"],
-  setup(r, { emit: c }) {
-    const e = r, l = (t) => e.config.domain + "/" + t, s = () => new x({
-      getAuthorization(t, n) {
+  setup(n, { emit: c }) {
+    const e = n, d = (t) => e.config.domain + "/" + t, s = () => new T({
+      getAuthorization(t, r) {
         e.config.getTempSecret({
           region: e.config.region,
           bucket: e.config.bucket,
           resource: e.config.resource
         }).then((o) => {
-          n({
+          r({
             TmpSecretId: o.data.credentials.tmpSecretId,
             TmpSecretKey: o.data.credentials.tmpSecretKey,
             SecurityToken: o.data.credentials.token,
@@ -36,42 +36,42 @@ const A = /* @__PURE__ */ v(C, [["render", B]]), E = ["src"], V = /* @__PURE__ *
           });
         });
       }
-    }), m = () => {
+    }), g = () => {
       const t = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      for (var n = "", o = 0; o < 10; o++) {
+      for (var r = "", o = 0; o < 10; o++) {
         var a = Math.floor(Math.random() * t.length);
-        n += t.substring(a, a + 1);
+        r += t.substring(a, a + 1);
       }
-      return (/* @__PURE__ */ new Date()).getTime() + "-" + n;
-    }, g = (t) => {
+      return (/* @__PURE__ */ new Date()).getTime() + "-" + r;
+    }, h = (t) => {
       var o;
-      const n = (o = t.split(".").pop()) == null ? void 0 : o.toLowerCase();
-      return e.config.resource + "/" + m() + "." + n;
-    }, h = (t) => t.size / 1024 > 500 ? (_.error("图片不能超过500kb"), !1) : !0, k = (t) => s().uploadFile({
+      const r = (o = t.split(".").pop()) == null ? void 0 : o.toLowerCase();
+      return e.config.resource + "/" + g() + "." + r;
+    }, b = (t) => t.size / 1024 > 500 ? (_.error("图片不能超过500kb"), !1) : !0, k = (t) => s().uploadFile({
       Bucket: e.config.bucket,
       Region: e.config.region,
-      Key: g(t.file.name),
+      Key: h(t.file.name),
       Body: t.file,
-      onFileFinish: function(n, o, a) {
-        n ? _.error("上传失败") : c("update:modelValue", a.Key);
+      onFileFinish: function(r, o, a) {
+        r ? _.error("上传失败") : c("update:modelValue", a.Key);
       }
     });
-    return (t, n) => (i(), d(p(S), {
+    return (t, r) => (i(), l(p(C), {
       class: "a-uploader",
       "show-file-list": !1,
       "http-request": k,
-      "before-upload": h,
+      "before-upload": b,
       accept: ".jpg,.jpeg,.png"
     }, {
       tip: u(() => [
-        V
+        U
       ]),
       default: u(() => [
         e.modelValue ? (i(), f("img", {
           key: 0,
-          src: l(e.modelValue),
+          src: d(e.modelValue),
           class: "a-uploader__cover"
-        }, null, 8, E)) : (i(), d(p(T), {
+        }, null, 8, V)) : (i(), l(p(I), {
           key: 1,
           class: "a-uploader__icon"
         }))
@@ -80,7 +80,8 @@ const A = /* @__PURE__ */ v(C, [["render", B]]), E = ["src"], V = /* @__PURE__ *
     }));
   }
 });
+const D = /* @__PURE__ */ m(j, [["__scopeId", "data-v-029bddd2"]]);
 export {
-  A as ADebounceAsyncButton,
-  F as AUploader
+  M as ADebounceAsyncButton,
+  D as AUploader
 };

@@ -122,7 +122,7 @@
     });
   };
   </script>
-  <style lang="scss">
+  <style lang="scss" scoped>
   .a-uploader {
     .el-upload {
       border: 1px dashed var(--el-border-color);

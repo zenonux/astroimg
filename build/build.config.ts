@@ -8,6 +8,7 @@ export default defineConfig({
     outDir: "dist",
     lib: {
       entry: resolve(__dirname, "../src/components/index.ts"),
+      name: "Astroimg",
       fileName: (format) => `astroimg.${format}.js`,
     },
     rollupOptions: {
@@ -25,6 +26,8 @@ export default defineConfig({
     vue({
       include: [/\.vue$/],
     }),
-    dts(),
+    dts({
+      rollupTypes: true
+    }),
   ],
 });

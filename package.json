@@ -5,6 +5,14 @@
     "dev": "vite --config ./build/dev.config.ts",
     "build": "vue-tsc --noEmit && vite build --config ./build/build.config.ts"
   },
+  "type": "module",
+  "typings": "./dist/astroimg.es.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/astroimg.es.js",
+      "require": "./dist/astroimg.umd.js"
+    }
+  },
   "author": "zenonux",
   "license": "MIT",
   "peerDependencies": {
