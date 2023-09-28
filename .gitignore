@@ -11,9 +11,3 @@ package-lock.json
 # test
 test/coverage
 
-# dist file
-es
-lib
-dist
-**/site-dist
-changelog.generated.md
