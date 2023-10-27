@@ -1,0 +1,48 @@
+{
+  "name": "@urcloud/oss-deploy",
+  "version": "1.9.2",
+  "description": "Deploy static assests to tencent cos.",
+  "bin": {
+    "oss-deploy": "dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts src/cli.ts --format cjs --dts",
+    "test": "jest"
+  },
+  "author": "换个头像心好累",
+  "license": "MIT",
+  "keywords": [
+    "cos",
+    "tencent cos",
+    "cos deploy"
+  ],
+  "dependencies": {
+    "commander": "^9.4.1",
+    "cos-nodejs-sdk-v5": "^2.12.4",
+    "p-limit": "^3.1.0",
+    "readdirp": "^3.6.0",
+    "yaml": "^2.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zenonux/oss-deploy"
+  },
+  "homepage": "https://github.com/zenonux/oss-deploy#readme",
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.7.1",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
+    "eslint": "^7.32.0",
+    "jest": "^27.3.1",
+    "prettier": "^2.4.1",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.9.1",
+    "tsup": "^5.12.6",
+    "typescript": "^4.4.3"
+  }
+}
