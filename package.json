@@ -22,6 +22,7 @@
     "url": "https://github.com/zenonux/astroimg"
   },
   "homepage": "https://github.com/zenonux/astroimg#readme",
-  "dependencies": {
+  "devDependencies": {
+    "typescript": "^5.2.2"
   }
 }
