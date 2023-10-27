@@ -1,5 +1,5 @@
 {
-  "name": "@urcloud/oss-deploy",
+  "name": "@astroimg/oss-deploy",
   "version": "1.9.2",
   "description": "Deploy static assests to tencent cos.",
   "bin": {
@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "commander": "^9.4.1",
-    "cos-nodejs-sdk-v5": "^2.12.4",
+    "cos-nodejs-sdk-v5": "^2.12.5",
     "p-limit": "^3.1.0",
     "readdirp": "^3.6.0",
     "yaml": "^2.1.1"
