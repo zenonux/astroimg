@@ -2,8 +2,8 @@
 
 [![NPM version][npm-image]][npm-url]
 
-[npm-image]: https://img.shields.io/npm/v/@urcloud/oss-deploy.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/@urcloud/oss-deploy
+[npm-image]: https://img.shields.io/npm/v/@astroimg/oss-deploy.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@astroimg/oss-deploy
 
 Cli tool for deploy assets to tencent cos.
 
@@ -15,7 +15,7 @@ Cli tool for deploy assets to tencent cos.
 ## Install
 
 ```bash
-npm i @urcloud/oss-deploy -D
+npm i @astroimg/oss-deploy -D
 ```
 
 ## Usage
