@@ -1,0 +1,35 @@
+{
+  "name": "@astroimg/native-js-bridge",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts  --format esm,cjs,iife --dts"
+  },
+  "version": "1.0.1",
+  "description": "native & js bridge",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "devDependencies": {
+    "@swc/core": "^1.3.70",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.6"
+  },
+  "keywords": [
+    "native bridge",
+    "js bridge"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zenonux/native-js-bridge"
+  },
+  "homepage": "https://github.com/zenonux/native-js-bridge#readme",
+  "author": "换个头像心好累",
+  "license": "MIT"
+}
