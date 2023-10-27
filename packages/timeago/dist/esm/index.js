@@ -60,8 +60,8 @@ var default_default = [
     label: "IN_5_MIN",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "\u521A\u521A",
-        en_US: "now"
+        "zh-CN": "\u521A\u521A",
+        en: "now"
       };
       return locales[locale];
     }
@@ -70,8 +70,8 @@ var default_default = [
     label: "IN_1_HOUR",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "%s\u5206\u949F\u524D",
-        en_US: "%sm ago"
+        "zh-CN": "%s\u5206\u949F\u524D",
+        en: "%sm ago"
       };
       let value = Math.floor(diffSeconds / 60);
       return locales[locale].replace(/%s/gi, value);
@@ -81,8 +81,8 @@ var default_default = [
     label: "IN_TODAY",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "%s\u5C0F\u65F6\u524D",
-        en_US: "%sh ago"
+        "zh-CN": "%s\u5C0F\u65F6\u524D",
+        en: "%sh ago"
       };
       let value = Math.floor(diffSeconds / 3600);
       return locales[locale].replace(/%s/gi, value);
@@ -92,8 +92,8 @@ var default_default = [
     label: "IN_YESTERDAY",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "\u6628\u5929 %s",
-        en_US: "yday %s"
+        "zh-CN": "\u6628\u5929 %s",
+        en: "yday %s"
       };
       return locales[locale].replace(/%s/gi, formatTime(date));
     }
@@ -134,8 +134,8 @@ var comment_default = [
     label: "IN_1_HOUR",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "%s\u5206\u949F\u524D",
-        en_US: "%sm ago"
+        "zh-CN": "%s\u5206\u949F\u524D",
+        en: "%sm ago"
       };
       let value = Math.floor(diffSeconds / 60);
       value = value || 1;
@@ -146,8 +146,8 @@ var comment_default = [
     label: "IN_TODAY",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "%s\u5C0F\u65F6\u524D",
-        en_US: "%sh ago"
+        "zh-CN": "%s\u5C0F\u65F6\u524D",
+        en: "%sh ago"
       };
       let value = Math.floor(diffSeconds / 3600);
       return locales[locale].replace(/%s/gi, value);
@@ -157,8 +157,8 @@ var comment_default = [
     label: "IN_YESTERDAY",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "\u6628\u5929 %s",
-        en_US: "yday %s"
+        "zh-CN": "\u6628\u5929 %s",
+        en: "yday %s"
       };
       return locales[locale].replace(/%s/gi, formatTime(date));
     }
@@ -167,8 +167,8 @@ var comment_default = [
     label: "IN_4_DAYS",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "%s\u5929\u524D",
-        en_US: "%sd"
+        "zh-CN": "%s\u5929\u524D",
+        en: "%sd"
       };
       return locales[locale].replace(/%s/gi, formatTime(date));
     }
@@ -193,8 +193,8 @@ var chat_default = [
     label: "IN_5_MIN",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "\u521A\u521A",
-        en_US: "now"
+        "zh-CN": "\u521A\u521A",
+        en: "now"
       };
       return locales[locale];
     }
@@ -209,8 +209,8 @@ var chat_default = [
     label: "IN_YESTERDAY",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "\u6628\u5929 %s",
-        en_US: "yday %s"
+        "zh-CN": "\u6628\u5929 %s",
+        en: "yday %s"
       };
       return locales[locale].replace(/%s/gi, formatTime(date));
     }
@@ -235,8 +235,8 @@ var message_default = [
     label: "IN_5_MIN",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "\u521A\u521A",
-        en_US: "now"
+        "zh-CN": "\u521A\u521A",
+        en: "now"
       };
       return locales[locale];
     }
@@ -251,8 +251,8 @@ var message_default = [
     label: "IN_YESTERDAY",
     parse: (diffSeconds, date, locale) => {
       const locales = {
-        zh_CN: "\u6628\u5929",
-        en_US: "yday"
+        "zh-CN": "\u6628\u5929",
+        en: "yday"
       };
       return locales[locale];
     }
@@ -304,7 +304,7 @@ var handlers = {
     return !isThisYear(date);
   }
 };
-var format = (time, type = "DEFAULT", locale = "zh_CN") => {
+var format = (time, type = "DEFAULT", locale = "zh-CN") => {
   let date = toDate(time);
   let diffSeconds = (new Date().getTime() - date.getTime()) / 1e3;
   let breaks = getFormatType(type);
