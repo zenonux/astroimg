@@ -9,6 +9,9 @@
     "lib",
     "es"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vant-cli dev",
     "lint": "vant-cli lint",
