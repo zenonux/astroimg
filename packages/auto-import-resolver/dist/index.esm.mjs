@@ -20,7 +20,7 @@ function getSideEffects(dirName, options) {
     return `@astroimg/vue/${moduleType}/${dirName}/style/less`;
   return `@astroimg/vue/${moduleType}/${dirName}/style/index`;
 }
-function vueResolver(options = {}) {
+function AstroimgResolver(options = {}) {
   const moduleType = getModuleType(options);
   return {
     type: "component",
@@ -37,5 +37,5 @@ function vueResolver(options = {}) {
   };
 }
 export {
-  vueResolver
+  AstroimgResolver
 };

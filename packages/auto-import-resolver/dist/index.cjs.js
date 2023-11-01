@@ -20,7 +20,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
-  vueResolver: () => vueResolver
+  AstroimgResolver: () => AstroimgResolver
 });
 module.exports = __toCommonJS(src_exports);
 function kebabCase(key) {
@@ -44,7 +44,7 @@ function getSideEffects(dirName, options) {
     return `@astroimg/vue/${moduleType}/${dirName}/style/less`;
   return `@astroimg/vue/${moduleType}/${dirName}/style/index`;
 }
-function vueResolver(options = {}) {
+function AstroimgResolver(options = {}) {
   const moduleType = getModuleType(options);
   return {
     type: "component",
