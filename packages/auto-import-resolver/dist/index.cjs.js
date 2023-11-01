@@ -49,8 +49,8 @@ function AstroimgResolver(options = {}) {
   return {
     type: "component",
     resolve: (name) => {
-      if (name.startsWith("Van")) {
-        const partialName = name.slice(3);
+      if (name.startsWith("Ai")) {
+        const partialName = name.slice(2);
         return {
           name: partialName,
           from: `@astroimg/vue/${moduleType}`,

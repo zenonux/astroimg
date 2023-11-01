@@ -1,6 +1,6 @@
 {
   "name": "@astroimg/vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "lib/astroimg.js",
   "module": "es/index.js",
   "style": "lib/index.css",
