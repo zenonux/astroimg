@@ -1,4 +1,4 @@
-# DebounceAsyncButton
+# AsyncButton
 
 ### 介绍
 
@@ -9,9 +9,9 @@
 ### 基础用法
 
 ```html
-<DebounceAsyncButton v-slot="slotProps" @click="(e) => asyncFunc()">
+<ai-async-button v-slot="slotProps" @click="(e) => asyncFunc()">
   <button :loading="slotProps.loading">button</button>
-</DebounceAsyncButton>
+</ai-async-button>
 ```
 
 ## API

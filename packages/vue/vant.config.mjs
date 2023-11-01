@@ -25,8 +25,8 @@ export default {
         title: '基础组件',
         items: [
           {
-            path: 'debounce-async-button',
-            title: 'DebounceAsyncButton',
+            path: 'async-button',
+            title: 'AsyncButton',
           },
         ],
       },

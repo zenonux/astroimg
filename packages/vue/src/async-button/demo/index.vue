@@ -1,13 +1,13 @@
 <template>
   <demo-block title="基础用法">
-    <DebounceAsyncButton v-slot="slotProps" @click="() => testAsync('click')">
+    <AiAsyncButton v-slot="slotProps" @click="() => testAsync('click')">
       <button :loading="slotProps.loading">button</button>
-    </DebounceAsyncButton>
+    </AiAsyncButton>
   </demo-block>
 </template>
 
 <script setup>
-import DebounceAsyncButton from "../index.vue";
+import AiAsyncButton from "../index.vue";
 const delay = (time) => {
   return new Promise((resolve) => {
     setTimeout(() => {

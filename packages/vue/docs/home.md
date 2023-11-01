@@ -9,6 +9,6 @@
 ## 使用
 
 ```js
-import { DebounceAsyncButton } from "@astroimg/vue";
-app.use(DebounceAsyncButton);
+import { AsyncButton } from "@astroimg/vue";
+app.use(AsyncButton);
 ```

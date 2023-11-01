@@ -20,6 +20,12 @@
     "test:watch": "vant-cli test --watch",
     "test:coverage": "open test/coverage/index.html"
   },
+  "sideEffects": [
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.css"
+  ],
+  "web-types": "lib/web-types.json",
   "peerDependencies": {
     "vue": "^3.3.4"
   },
