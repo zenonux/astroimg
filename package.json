@@ -2,18 +2,12 @@
   "name": "astroimg",
   "version": "0.0.1",
   "description": "Astroimg",
+  "scripts": {
+    "dev": "pnpm --dir ./packages/vue dev",
+    "build": "pnpm --dir ./packages/vue build"
+  },
   "publishConfig": {
     "access": "public"
-  },
-  "types": "./dist/astroimg.es.d.ts",
-  "main": "./dist/astroimg.umd.js",
-  "module": "./dist/astroimg.es.js",
-  "exports": {
-    ".": {
-      "types": "./dist/astroimg.d.ts",
-      "import": "./dist/astroimg.es.js",
-      "require": "./dist/astroimg.umd.js"
-    }
   },
   "author": "zenonux",
   "license": "MIT",
