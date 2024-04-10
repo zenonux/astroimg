@@ -3,13 +3,15 @@ import data from './data.json'
 import { EqualHeightWaterfall } from '../src/index'
 
 let ins = new EqualHeightWaterfall({
-  containerWidth: window.screen.width
+  containerWidth: document.body.clientWidth,
+  breakLineAspectRatioSum: 2.5,
+  itemMaxHeight: 300
 })
 const { items, renderTotalHeight } = ins.add(
   data.map((v) => {
     return {
-      width: v.firstPost.images[0].fileWidth,
-      height: v.firstPost.images[0].fileHeight,
+      width: v.post.attachments[0].width,
+      height: v.post.attachments[0].height
     }
   })
 )
@@ -31,7 +33,9 @@ const { items, renderTotalHeight } = ins.add(
       }"
       v-for="(item, index) in items"
       :key="index"
-    />
+    >
+      <div class="item__index">{{ index }}</div>
+    </div>
   </main>
 </template>
 <style>
@@ -48,6 +52,16 @@ main {
 }
 .item {
   object-fit: cover;
-  background: red;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.item__index {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  z-index: 10;
+  background: rgba(000, 000, 000, 0.5);
+  color: #fff;
 }
 </style>

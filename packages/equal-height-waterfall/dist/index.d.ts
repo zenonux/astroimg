@@ -29,7 +29,6 @@ export declare class EqualHeightWaterfall {
     _lastLine: EqualHeightRenderItem[];
     _lastLineTop: number;
     constructor(opts: EqualHeightWaterfallOptions);
-    _getLineRenderAspectRatioTotal(list: EqualHeightRenderItem[]): number;
     _getItemAspectRatio(item: EqualHeightItem): number;
     _getRenderItemAspectRatio(item: EqualHeightRenderItem): number;
     _resizeItem(item: EqualHeightItem, lastLine: EqualHeightRenderItem[]): EqualHeightRenderItem;

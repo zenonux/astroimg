@@ -15,11 +15,6 @@ class m {
     r(this, "_lastLineTop", 0);
     this._breakLineAspectRatioSum = t.breakLineAspectRatioSum || 2, this._containerWidth = t.containerWidth, this._gutter = t.gutter || 4, this._itemFallbackAspectRatio = t.itemFallbackAspectRatio || 1, this._itemMaxWidthPercent = t.itemMaxWidthPercent || 2 / 3, this._itemMinWidthPercent = t.itemMinWidthPercent || 1 / 4, this._itemMaxHeight = t.itemMaxHeight || 300;
   }
-  _getLineRenderAspectRatioTotal(t) {
-    return t.length ? t.map((e) => this._getRenderItemAspectRatio(e)).reduce(function(e, s) {
-      return e + s;
-    }, 0) : 0;
-  }
   _getItemAspectRatio(t) {
     return t.height ? t.width / t.height : this._itemFallbackAspectRatio;
   }
@@ -66,7 +61,7 @@ class m {
   add(t) {
     for (let e = 0; e < t.length; e++) {
       const s = t[e];
-      this._lastLine.length && (this._getLineRenderAspectRatioTotal(this._lastLine) + this._getItemAspectRatio(s) > this._breakLineAspectRatioSum || this._getLineUsedWidth(this._lastLine) >= this._containerWidth) && (this._lastLine = []);
+      this._lastLine.length && this._getLineUsedWidth(this._lastLine) >= this._containerWidth && (this._lastLine = []);
       const i = this._resizeItem(s, this._lastLine);
       this._lastLine.push(i), this._items.push(i);
     }

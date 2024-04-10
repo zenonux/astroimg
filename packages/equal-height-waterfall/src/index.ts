@@ -41,20 +41,12 @@ export class EqualHeightWaterfall {
     this._itemMinWidthPercent = opts.itemMinWidthPercent || 1 / 4
     this._itemMaxHeight = opts.itemMaxHeight || 300
   }
-  _getLineRenderAspectRatioTotal(list: EqualHeightRenderItem[]) {
-    return list.length
-      ? list
-          .map((v) => this._getRenderItemAspectRatio(v))
-          .reduce(function (prev, curr) {
-            return prev + curr
-          }, 0)
-      : 0
-  }
+
   _getItemAspectRatio(item: EqualHeightItem) {
     return item.height ? item.width / item.height : this._itemFallbackAspectRatio
   }
   _getRenderItemAspectRatio(item: EqualHeightRenderItem) {
-    return item.renderWidth / item.renderHeight 
+    return item.renderWidth / item.renderHeight
   }
   _resizeItem(item: EqualHeightItem, lastLine: EqualHeightRenderItem[]): EqualHeightRenderItem {
     const isBreakLine = !lastLine.length
@@ -102,8 +94,8 @@ export class EqualHeightWaterfall {
       shouldWidthPercent < this._itemMinWidthPercent
         ? this._itemMinWidthPercent
         : shouldWidthPercent > this._itemMaxWidthPercent
-        ? this._itemMaxWidthPercent
-        : shouldWidthPercent
+          ? this._itemMaxWidthPercent
+          : shouldWidthPercent
 
     return this._containerWidth * canWidthPercent
   }
@@ -123,10 +115,7 @@ export class EqualHeightWaterfall {
     for (let i = 0; i < list.length; i++) {
       const item = list[i]
       const isBreakLine =
-        this._lastLine.length &&
-        (this._getLineRenderAspectRatioTotal(this._lastLine) + this._getItemAspectRatio(item) >
-          this._breakLineAspectRatioSum ||
-        this._getLineUsedWidth(this._lastLine) >= this._containerWidth)
+        this._lastLine.length && this._getLineUsedWidth(this._lastLine) >= this._containerWidth
       if (isBreakLine) {
         this._lastLine = []
       }
