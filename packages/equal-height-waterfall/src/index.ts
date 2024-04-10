@@ -124,9 +124,9 @@ export class EqualHeightWaterfall {
       const item = list[i]
       const isBreakLine =
         this._lastLine.length &&
-        this._getLineRenderAspectRatioTotal(this._lastLine) + this._getItemAspectRatio(item) >
-          this._breakLineAspectRatioSum &&
-        this._getLineUsedWidth(this._lastLine) >= this._containerWidth
+        (this._getLineRenderAspectRatioTotal(this._lastLine) + this._getItemAspectRatio(item) >
+          this._breakLineAspectRatioSum ||
+        this._getLineUsedWidth(this._lastLine) >= this._containerWidth)
       if (isBreakLine) {
         this._lastLine = []
       }

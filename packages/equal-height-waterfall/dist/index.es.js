@@ -66,7 +66,7 @@ class m {
   add(t) {
     for (let e = 0; e < t.length; e++) {
       const s = t[e];
-      this._lastLine.length && this._getLineRenderAspectRatioTotal(this._lastLine) + this._getItemAspectRatio(s) > this._breakLineAspectRatioSum && this._getLineUsedWidth(this._lastLine) >= this._containerWidth && (this._lastLine = []);
+      this._lastLine.length && (this._getLineRenderAspectRatioTotal(this._lastLine) + this._getItemAspectRatio(s) > this._breakLineAspectRatioSum || this._getLineUsedWidth(this._lastLine) >= this._containerWidth) && (this._lastLine = []);
       const i = this._resizeItem(s, this._lastLine);
       this._lastLine.push(i), this._items.push(i);
     }
