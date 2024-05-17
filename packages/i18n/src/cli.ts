@@ -5,7 +5,7 @@ import { mergeLocales } from "./index";
 
 main();
 
-async function main() {
+function main() {
   const program = new Command();
   program
     .command("generate")
@@ -13,7 +13,7 @@ async function main() {
     .requiredOption("-d, --dist <dist>", "target locales", "locales")
     .description("generate locale files")
     .action(generateAction);
-  await program.parseAsync(process.argv);
+  program.parseAsync(process.argv);
 }
 
 function generateAction(opts: { file: string; dist: string }) {
