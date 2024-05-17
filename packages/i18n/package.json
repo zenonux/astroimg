@@ -2,12 +2,16 @@
   "name": "@astroimg/i18n",
   "version": "1.0.1",
   "main": "./dist/index.js",
+  "bin": {
+    "i18n": "dist/cli.js"
+  },
   "publishConfig": {
     "access": "public"
   },
   "type": "module",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build":"bun build ./src/index.ts --outdir ./dist"
+    "build": "bun run build/index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -16,6 +20,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "commander": "^12.0.0",
     "xlsx": "^0.18.5"
   }
 }
