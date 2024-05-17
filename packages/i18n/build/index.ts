@@ -3,5 +3,11 @@ await Bun.build({
   outdir: "./dist",
   target: "node",
   format: "esm",
-  external: ["commander", "xlsx"],
+  external: [
+    "commander",
+    "xlsx",
+    "yaml",
+    "google-auth-library",
+    "google-spreadsheet",
+  ],
 });
