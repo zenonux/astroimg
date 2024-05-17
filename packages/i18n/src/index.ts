@@ -1,6 +1,7 @@
 import * as XLSX from "xlsx";
 import { writeFileSync } from "node:fs";
 import * as path from "node:path";
+import { download } from "./download";
 
 const { resolve } = path;
 
@@ -11,17 +12,18 @@ interface I18nItem {
   en?: string;
 }
 
-export function mergeLocales(excelPath: string, localesDir: string) {
-  const json = transformExcel2Json(excelPath);
+export async function mergeLocales(id: string, localesDir: string) {
+  const buffer = await download(id);
+  const json = transformExcel2Json(buffer);
   let en = buildLocaleYaml("en", json);
   writeFileSync(resolve(localesDir, "./en.yaml"), en);
   let zh = buildLocaleYaml("zh", json);
   writeFileSync(resolve(localesDir, "./zh-CN.yaml"), zh);
 }
 
-function transformExcel2Json(excelFile: string) {
+function transformExcel2Json(buffer: ArrayBuffer) {
   // 读取工作簿
-  const workbook: XLSX.WorkBook = XLSX.readFile(excelFile);
+  const workbook: XLSX.WorkBook = XLSX.read(buffer);
 
   // 读取第一个工作表
   const sheetName: string = workbook.SheetNames[0];
@@ -76,6 +78,7 @@ function formatLiteral(text?: string) {
   if (!text) {
     return "";
   }
+  text = text.toString();
   text = text
     .replace(/\n/g, "")
     .replace(/\"/g, '\\"')
