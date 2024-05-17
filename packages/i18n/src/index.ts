@@ -1,6 +1,7 @@
 import * as XLSX from "xlsx";
 import { writeFileSync } from "node:fs";
 import * as path from "node:path";
+import * as fs from "node:fs";
 import { download } from "./download";
 
 const { resolve } = path;
@@ -12,8 +13,10 @@ interface I18nItem {
   en?: string;
 }
 
-export async function mergeLocales(id: string, localesDir: string) {
-  const buffer = await download(id);
+async function mergeLocalesByBuffer(
+  buffer: ArrayBuffer | string,
+  localesDir: string
+) {
   const json = transformExcel2Json(buffer);
   let en = buildLocaleYaml("en", json);
   writeFileSync(resolve(localesDir, "./en.yaml"), en);
@@ -21,7 +24,18 @@ export async function mergeLocales(id: string, localesDir: string) {
   writeFileSync(resolve(localesDir, "./zh-CN.yaml"), zh);
 }
 
-function transformExcel2Json(buffer: ArrayBuffer) {
+export async function mergeLocales(input: string, localesDir: string) {
+  let isFile = input.includes(".xlsx");
+  let buffer: string | ArrayBuffer;
+  if (isFile) {
+    buffer = fs.readFileSync(input, "utf-8");
+  } else {
+    buffer = await download(input);
+  }
+  mergeLocalesByBuffer(buffer, localesDir);
+}
+
+function transformExcel2Json(buffer: ArrayBuffer | string) {
   // 读取工作簿
   const workbook: XLSX.WorkBook = XLSX.read(buffer);
 

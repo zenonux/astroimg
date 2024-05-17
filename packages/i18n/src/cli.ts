@@ -9,13 +9,14 @@ function main() {
   const program = new Command();
   program
     .command("generate")
-    .requiredOption("-f, --file <file>", "excel file path", "excel.xlsx")
+    .option("-i, --input <input>", "google sheet id or file", "i18n.xlsx")
+    .option("-f, --file <file>", "google excel file", "")
     .requiredOption("-d, --dist <dist>", "target locales", "locales")
     .description("generate locale files")
     .action(generateAction);
   program.parseAsync(process.argv);
 }
 
-function generateAction(opts: { file: string; dist: string }) {
-  mergeLocales(opts.file, opts.dist);
+function generateAction(opts: { input: string; dist: string }) {
+  mergeLocales(opts.input, opts.dist);
 }

@@ -1,1 +1,8 @@
 # i18n
+
+## env
+
+```bash
+GOOGLE_SERVICE_ACCOUNT_EMAIL=''
+GOOGLE_PRIVATE_KEY=''
+```
