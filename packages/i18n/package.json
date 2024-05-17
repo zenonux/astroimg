@@ -1,0 +1,21 @@
+{
+  "name": "@astroimg/i18n",
+  "version": "1.0.1",
+  "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "scripts": {
+    "build":"bun build ./src/index.ts --outdir ./dist"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}
