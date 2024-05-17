@@ -2,7 +2,9 @@
 
 ## env
 
-```bash
-GOOGLE_SERVICE_ACCOUNT_EMAIL=''
-GOOGLE_PRIVATE_KEY=''
+```yaml
+input:''
+output:''
+google_service_account_email:''
+google_private_key:''
 ```

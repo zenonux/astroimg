@@ -24,13 +24,17 @@ async function mergeLocalesByBuffer(
   writeFileSync(resolve(localesDir, "./zh-CN.yaml"), zh);
 }
 
-export async function mergeLocales(input: string, localesDir: string) {
+export async function mergeLocales(
+  input: string,
+  localesDir: string,
+  opts: { google_service_account_email: string; google_private_key: string }
+) {
   let isFile = input.includes(".xlsx");
   let buffer: string | ArrayBuffer;
   if (isFile) {
     buffer = fs.readFileSync(input, "utf-8");
   } else {
-    buffer = await download(input);
+    buffer = await download(input, opts);
   }
   mergeLocalesByBuffer(buffer, localesDir);
 }

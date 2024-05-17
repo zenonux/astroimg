@@ -1,10 +1,16 @@
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { JWT } from "google-auth-library";
 
-export async function download(id: string) {
+export async function download(
+  id: string,
+  opts: {
+    google_service_account_email: string;
+    google_private_key: string;
+  }
+) {
   const serviceAccountAuth = new JWT({
-    email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    key: process.env.GOOGLE_PRIVATE_KEY,
+    email: opts.google_service_account_email,
+    key: opts.google_private_key,
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 
