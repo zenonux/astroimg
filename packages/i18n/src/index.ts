@@ -86,7 +86,7 @@ function buildLocaleYaml(locale: "zh" | "en", data: I18nItem[]) {
     if (item._comment) {
       jsoncData += `# ${item.key}\n`;
     } else {
-      jsoncData += `${[item.key]}: ${item[locale]}\n`;
+      jsoncData += `${[item.key]}: '${item[locale]}'\n`;
     }
   });
   return jsoncData;
@@ -99,7 +99,7 @@ function formatLiteral(text?: string) {
   text = text.toString();
   text = text
     .replace(/\n/g, "")
-    .replace(/\"/g, '\\"')
+    // .replace(/\"/g, '\\"')
     .replace(/\r/g, "\\n")
     .trim();
   return text

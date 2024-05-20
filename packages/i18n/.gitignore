@@ -175,3 +175,4 @@ out
 
 locales/
 .env.test
+key.json
