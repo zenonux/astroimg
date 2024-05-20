@@ -22,14 +22,15 @@ async function download(id, opts) {
 }
 
 // src/index.ts
-async function mergeLocalesByBuffer(buffer, localesDir) {
-  const json = transformExcel2Json(buffer);
+async function mergeLocalesByBuffer(buffer, localesDir, ignoreKeys) {
+  let json = transformExcel2Json(buffer);
+  json = json.filter((v) => !ignoreKeys.some((k) => k == v.key));
   let en = buildLocaleYaml("en", json);
   writeFileSync(resolve(localesDir, "./en.yaml"), en);
   let zh = buildLocaleYaml("zh", json);
   writeFileSync(resolve(localesDir, "./zh-CN.yaml"), zh);
 }
-async function mergeLocales(input, localesDir, opts) {
+async function mergeLocales(input, localesDir, ignoreKeys, opts) {
   let isFile = input.includes(".xlsx");
   let buffer;
   if (isFile) {
@@ -37,7 +38,7 @@ async function mergeLocales(input, localesDir, opts) {
   } else {
     buffer = await download(input, opts);
   }
-  mergeLocalesByBuffer(buffer, localesDir);
+  mergeLocalesByBuffer(buffer, localesDir, ignoreKeys);
 }
 var transformExcel2Json = function(buffer) {
   const workbook = XLSX.read(buffer);
@@ -82,7 +83,7 @@ var formatLiteral = function(text) {
   }
   text = text.toString();
   text = text.replace(/\n/g, "").replace(/\"/g, '\\"').replace(/\r/g, "\\n").trim();
-  return text.replace(/\$s{\d}/g, (val) => {
+  text = text.replace(/\$s{\d}/g, (val) => {
     let match = val.match(/\d/g);
     let num = match ? Number(match[0]) - 1 : 0;
     return `{${num}}`;
@@ -91,6 +92,8 @@ var formatLiteral = function(text) {
     let num = match ? Number(match[0]) - 1 : 0;
     return `{${num}}`;
   });
+  text = text.replace(/@/g, "{'@'}").replace(/\|/g, "{'|'}").replace(/\$/g, "{'$'}");
+  return text;
 };
 var isValidFieldValue = function(text) {
   if (typeof text === "string") {
@@ -141,8 +144,14 @@ var main = function() {
   program.parseAsync(process.argv);
 };
 var generateAction = function(opts) {
-  const { input, output, google_private_key, google_service_account_email } = readYamlFile(opts.config);
-  mergeLocales(input, output, {
+  const {
+    input,
+    output,
+    ignore_keys,
+    google_private_key,
+    google_service_account_email
+  } = readYamlFile(opts.config);
+  mergeLocales(input, output, ignore_keys, {
     google_private_key,
     google_service_account_email
   });

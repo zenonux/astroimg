@@ -15,9 +15,11 @@ interface I18nItem {
 
 async function mergeLocalesByBuffer(
   buffer: ArrayBuffer | string,
-  localesDir: string
+  localesDir: string,
+  ignoreKeys: string[]
 ) {
-  const json = transformExcel2Json(buffer);
+  let json = transformExcel2Json(buffer);
+  json = json.filter((v) => !ignoreKeys.some((k) => k == v.key));
   let en = buildLocaleYaml("en", json);
   writeFileSync(resolve(localesDir, "./en.yaml"), en);
   let zh = buildLocaleYaml("zh", json);
@@ -27,6 +29,7 @@ async function mergeLocalesByBuffer(
 export async function mergeLocales(
   input: string,
   localesDir: string,
+  ignoreKeys: string[],
   opts: { google_service_account_email: string; google_private_key: string }
 ) {
   let isFile = input.includes(".xlsx");
@@ -36,7 +39,7 @@ export async function mergeLocales(
   } else {
     buffer = await download(input, opts);
   }
-  mergeLocalesByBuffer(buffer, localesDir);
+  mergeLocalesByBuffer(buffer, localesDir, ignoreKeys);
 }
 
 function transformExcel2Json(buffer: ArrayBuffer | string) {
@@ -99,10 +102,11 @@ function formatLiteral(text?: string) {
   text = text.toString();
   text = text
     .replace(/\n/g, "")
+
     .replace(/\"/g, '\\"')
     .replace(/\r/g, "\\n")
     .trim();
-  return text
+  text = text
     .replace(/\$s{\d}/g, (val) => {
       let match = val.match(/\d/g);
       let num = match ? Number(match[0]) - 1 : 0;
@@ -113,6 +117,14 @@ function formatLiteral(text?: string) {
       let num = match ? Number(match[0]) - 1 : 0;
       return `{${num}}`;
     });
+
+  // vue i18n Special Characters
+  text = text
+    .replace(/@/g, "{'@'}")
+    .replace(/\|/g, "{'|'}")
+    .replace(/\$/g, "{'$'}");
+
+  return text;
 }
 
 function isValidFieldValue(text: string) {
