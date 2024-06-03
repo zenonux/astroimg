@@ -9,5 +9,6 @@ await Bun.build({
     "yaml",
     "google-auth-library",
     "google-spreadsheet",
+    "picomatch",
   ],
 });

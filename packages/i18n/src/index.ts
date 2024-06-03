@@ -3,6 +3,7 @@ import { writeFileSync } from "node:fs";
 import * as path from "node:path";
 import * as fs from "node:fs";
 import { download } from "./download";
+import * as pm from "picomatch";
 
 const { resolve } = path;
 
@@ -16,20 +17,25 @@ interface I18nItem {
 async function mergeLocalesByBuffer(
   buffer: ArrayBuffer | string,
   localesDir: string,
-  ignoreKeys: string[]
+  ignore: pm.Glob[]
 ) {
-  let json = transformExcel2Json(buffer);
-  json = json.filter((v) => !ignoreKeys.some((k) => k == v.key));
-  let en = buildLocaleYaml("en", json);
-  writeFileSync(resolve(localesDir, "./en.yaml"), en);
-  let zh = buildLocaleYaml("zh", json);
-  writeFileSync(resolve(localesDir, "./zh-CN.yaml"), zh);
+  try {
+    let json = transformExcel2Json(buffer);
+    json = json.filter((v) => !ignore.some((k) => pm(k)(v.key)));
+    let en = buildLocaleYaml("en", json);
+    writeFileSync(resolve(localesDir, "./en.yaml"), en);
+    let zh = buildLocaleYaml("zh", json);
+    writeFileSync(resolve(localesDir, "./zh-CN.yaml"), zh);
+    console.info("generate i18n locales succeed.");
+  } catch (e) {
+    console.error("generate i18n locales failed.");
+  }
 }
 
 export async function mergeLocales(
   input: string,
   localesDir: string,
-  ignoreKeys: string[],
+  ignore: pm.Glob[],
   opts: { google_service_account_email: string; google_private_key: string }
 ) {
   let isFile = input.includes(".xlsx");
@@ -39,7 +45,7 @@ export async function mergeLocales(
   } else {
     buffer = await download(input, opts);
   }
-  mergeLocalesByBuffer(buffer, localesDir, ignoreKeys);
+  mergeLocalesByBuffer(buffer, localesDir, ignore);
 }
 
 function transformExcel2Json(buffer: ArrayBuffer | string) {
@@ -102,7 +108,6 @@ function formatLiteral(text?: string) {
   text = text.toString();
   text = text
     .replace(/\n/g, "")
-
     .replace(/\"/g, '\\"')
     .replace(/\r/g, "\\n")
     .trim();

@@ -20,12 +20,11 @@ function generateAction(opts: { config: string }) {
   const {
     input,
     output,
-    ignore_keys,
+    ignore,
     google_private_key,
     google_service_account_email,
   } = readYamlFile(opts.config);
-  ignore_keys;
-  mergeLocales(input, output, ignore_keys, {
+  mergeLocales(input, output, ignore, {
     google_private_key,
     google_service_account_email,
   });
