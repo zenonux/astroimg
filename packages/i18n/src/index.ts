@@ -41,10 +41,14 @@ export async function mergeLocales(
   let isFile = input.includes(".xlsx");
   let buffer: string | ArrayBuffer;
   if (isFile) {
+    console.info(`reading ${input}...`);
     buffer = fs.readFileSync(input, "utf-8");
   } else {
+    console.info(`downloading file ${input}...`);
     buffer = await download(input, opts);
+    console.info(`download file ${input} succeed.`);
   }
+  console.info(`generating locales...`);
   mergeLocalesByBuffer(buffer, localesDir, ignore);
 }
 
