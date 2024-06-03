@@ -3,7 +3,7 @@ import { writeFileSync } from "node:fs";
 import * as path from "node:path";
 import * as fs from "node:fs";
 import { download } from "./download";
-import * as pm from "picomatch";
+import pm from "picomatch";
 
 const { resolve } = path;
 
@@ -21,14 +21,19 @@ async function mergeLocalesByBuffer(
 ) {
   try {
     let json = transformExcel2Json(buffer);
-    json = json.filter((v) => !ignore.some((k) => pm(k)(v.key)));
+    json = json.filter(
+      (v) =>
+        !ignore.some((k) => {
+          return pm(k)(v.key);
+        })
+    );
     let en = buildLocaleYaml("en", json);
     writeFileSync(resolve(localesDir, "./en.yaml"), en);
     let zh = buildLocaleYaml("zh", json);
     writeFileSync(resolve(localesDir, "./zh-CN.yaml"), zh);
     console.info("generate i18n locales succeed.");
   } catch (e) {
-    console.error("generate i18n locales failed.");
+    console.error(e);
   }
 }
 
