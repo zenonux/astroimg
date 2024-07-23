@@ -16,6 +16,10 @@ var isYesterday = (date) => {
 var isToday = (date) => {
   return new Date().getTime() - date.getTime() < 864e5;
 };
+var isRealToday = (date) => {
+  const today = new Date();
+  return date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear();
+};
 var isThisYear = (date) => {
   return date.getFullYear() === new Date().getFullYear();
 };
@@ -274,7 +278,7 @@ var message_default = [
 // src/formatTypes/news.ts
 var news_default = [
   {
-    label: "IN_TODAY",
+    label: "IN_REAL_TODAY",
     parse: (diffSeconds, date, locale) => {
       const locales = {
         "zh-CN": "\u4ECA\u5929",
@@ -296,7 +300,7 @@ var news_default = [
   {
     label: "IN_1_YEAR",
     parse: (diffSeconds, date, locale) => {
-      return formatDateShortTime(date);
+      return formatDateShort(date);
     }
   },
   {
@@ -320,6 +324,9 @@ var handlers = {
       return true;
     }
     return false;
+  },
+  IN_REAL_TODAY: (diffSeconds, date) => {
+    return isRealToday(date);
   },
   IN_TODAY: (diffSeconds, date) => {
     return isToday(date);
