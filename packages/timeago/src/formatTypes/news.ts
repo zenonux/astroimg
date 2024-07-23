@@ -1,4 +1,4 @@
-import { formatDateShortTime, formatDateTime, formatTime } from "../utils";
+import { formatDateShort, formatDateTime } from "../utils";
 
 export default [
   {
@@ -24,7 +24,7 @@ export default [
   {
     label: "IN_1_YEAR",
     parse: (diffSeconds: number, date: Date, locale: string) => {
-      return formatDateShortTime(date);
+      return formatDateShort(date);
     },
   },
   {
