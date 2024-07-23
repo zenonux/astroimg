@@ -2,7 +2,7 @@ import { formatDateShort, formatDateTime } from "../utils";
 
 export default [
   {
-    label: "IN_TODAY",
+    label: "IN_REAL_TODAY",
     parse: (diffSeconds: number, date: Date, locale: string) => {
       const locales = {
         "zh-CN": "今天",

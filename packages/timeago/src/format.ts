@@ -4,6 +4,7 @@ import {
   formatDateTime,
   isThisYear,
   isToday,
+  isRealToday,
   isYesterday,
   toDate,
 } from "./utils";
@@ -20,6 +21,9 @@ const handlers = {
       return true;
     }
     return false;
+  },
+  IN_REAL_TODAY: (diffSeconds: number, date: Date) => {
+    return isRealToday(date);
   },
   IN_TODAY: (diffSeconds: number, date: Date) => {
     return isToday(date);
