@@ -4,17 +4,21 @@ export default [
   {
     label: "IN_TODAY",
     parse: (diffSeconds: number, date: Date, locale: string) => {
-      return formatTime(date);
+      const locales = {
+        "zh-CN": "今天",
+        en: "Today",
+      };
+      return locales[locale];
     },
   },
   {
     label: "IN_YESTERDAY",
     parse: (diffSeconds: number, date: Date, locale: string) => {
       const locales = {
-        "zh-CN": "昨天 %s",
-        en: "yday %s",
+        "zh-CN": "昨天",
+        en: "yday",
       };
-      return locales[locale].replace(/%s/gi, formatTime(date));
+      return locales[locale];
     },
   },
   {

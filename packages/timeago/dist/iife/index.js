@@ -272,6 +272,42 @@
     }
   ];
 
+  // src/formatTypes/news.ts
+  var news_default = [
+    {
+      label: "IN_TODAY",
+      parse: (diffSeconds, date, locale) => {
+        const locales = {
+          "zh-CN": "\u4ECA\u5929",
+          en: "Today"
+        };
+        return locales[locale];
+      }
+    },
+    {
+      label: "IN_YESTERDAY",
+      parse: (diffSeconds, date, locale) => {
+        const locales = {
+          "zh-CN": "\u6628\u5929",
+          en: "yday"
+        };
+        return locales[locale];
+      }
+    },
+    {
+      label: "IN_1_YEAR",
+      parse: (diffSeconds, date, locale) => {
+        return formatDateShortTime(date);
+      }
+    },
+    {
+      label: "IN_YEARS",
+      parse: (diffSeconds, date, locale) => {
+        return formatDateTime(date);
+      }
+    }
+  ];
+
   // src/format.ts
   var handlers = {
     IN_5_MIN: (diffSeconds, date) => {
@@ -288,6 +324,12 @@
     },
     IN_TODAY: (diffSeconds, date) => {
       return isToday(date);
+    },
+    IN_1_DAY: (diffSeconds, date) => {
+      if (diffSeconds < 12 * 60 * 60) {
+        return true;
+      }
+      return false;
     },
     IN_YESTERDAY: (diffSeconds, date) => {
       return isYesterday(date);
@@ -323,4 +365,5 @@
   register("COMMENT", comment_default);
   register("CHAT", chat_default);
   register("MESSAGE", message_default);
+  register("NEWS", news_default);
 })();

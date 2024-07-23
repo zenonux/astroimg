@@ -1,6 +1,6 @@
 {
   "name": "@astroimg/timeago",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "description": "timeago like douban & zhihu.",
   "main": "./dist/index.js",
   "module": "./dist/esm/index.js",
