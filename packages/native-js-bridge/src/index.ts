@@ -10,7 +10,7 @@ const registerCallBack = (name: string, func: (res: any) => void) => {
   };
 };
 
-interface NativePayloads {
+export interface NativePayloads {
   action: string;
   params: {
     [key: string]: any;
@@ -19,7 +19,7 @@ interface NativePayloads {
   };
 }
 
-interface NativeResponse {
+export interface NativeResponse {
   errcode: number;
   errmsg?: string;
   data: any;

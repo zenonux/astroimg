@@ -1,3 +1,5 @@
+/// <reference path="./dist/index.d.ts" />
+
 declare global {
   // 客户端向webview注入window.NativeBridge对象
   declare module NativeBridge {
@@ -14,4 +16,4 @@ declare global {
   }
 }
 
-export {}
+export {};

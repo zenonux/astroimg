@@ -12,4 +12,4 @@ interface NativeResponse {
 }
 declare const useCallNative: (payloads: NativePayloads) => Promise<NativeResponse>;
 
-export { useCallNative };
+export { NativePayloads, NativeResponse, useCallNative };
