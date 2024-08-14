@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/zenonux/astroimg#readme",
   "devDependencies": {
+    "@changesets/cli": "^2.27.7",
     "@types/picomatch": "^2.3.3",
     "picomatch": "^4.0.2",
     "typescript": "^5.2.2"
