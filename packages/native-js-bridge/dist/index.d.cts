@@ -2,7 +2,7 @@ interface NativePayloads {
     action: string;
     params: {
         [key: string]: any;
-        callback?: string;
+        callback?: string | boolean;
     };
 }
 interface NativeResponse {

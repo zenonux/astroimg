@@ -1,3 +1,10 @@
+const generateRandomCallbackName = () => {
+  const timestamp = Date.now().toString(16); // 获取当前时间戳并转换为16进制
+  const randomSegment = "xxxxxx".replace(/[x]/g, function () {
+    return ((Math.random() * 16) | 0).toString(16); // 生成随机的16进制数
+  });
+  return timestamp + "-" + randomSegment;
+};
 const registerCallBack = (name: string, func: (res: any) => void) => {
   if (!window.JSBridge) {
     window.JSBridge = {
@@ -10,12 +17,21 @@ const registerCallBack = (name: string, func: (res: any) => void) => {
   };
 };
 
+const unregisterCallBack = (name: string) => {
+  if (!window.JSBridge) {
+    window.JSBridge = {
+      Callback: {},
+    };
+  }
+  delete window.JSBridge.Callback[name];
+};
+
 export interface NativePayloads {
   action: string;
   params: {
     [key: string]: any;
     // web向window注册的全局方法，用于客户端回调。注意：客户端只关心有没有callback参数， 不关心callback的具体值。
-    callback?: string;
+    callback?: string | boolean;
   };
 }
 
@@ -26,7 +42,7 @@ export interface NativeResponse {
 }
 
 export const useCallNative = (
-  payloads: NativePayloads
+  payloads: NativePayloads,
 ): Promise<NativeResponse> => {
   return new Promise((resolve, reject) => {
     if (!window.NativeBridge) {
@@ -34,7 +50,12 @@ export const useCallNative = (
       reject();
     }
     if (payloads.params.callback) {
-      registerCallBack(payloads.params.callback, (res) => {
+      const callbackName =
+        typeof payloads.params.callback === "string"
+          ? payloads.params.callback
+          : generateRandomCallbackName();
+      registerCallBack(callbackName, (res) => {
+        unregisterCallBack(callbackName);
         resolve(res);
       });
       window.NativeBridge.callNative(JSON.stringify(payloads));

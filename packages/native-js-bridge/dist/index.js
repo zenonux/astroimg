@@ -1,4 +1,11 @@
 // src/index.ts
+var generateRandomCallbackName = () => {
+  const timestamp = Date.now().toString(16);
+  const randomSegment = "xxxxxx".replace(/[x]/g, function() {
+    return (Math.random() * 16 | 0).toString(16);
+  });
+  return timestamp + "-" + randomSegment;
+};
 var registerCallBack = (name, func) => {
   if (!window.JSBridge) {
     window.JSBridge = {
@@ -10,6 +17,14 @@ var registerCallBack = (name, func) => {
     return func(res);
   };
 };
+var unregisterCallBack = (name) => {
+  if (!window.JSBridge) {
+    window.JSBridge = {
+      Callback: {}
+    };
+  }
+  delete window.JSBridge.Callback[name];
+};
 var useCallNative = (payloads) => {
   return new Promise((resolve, reject) => {
     if (!window.NativeBridge) {
@@ -17,7 +32,9 @@ var useCallNative = (payloads) => {
       reject();
     }
     if (payloads.params.callback) {
-      registerCallBack(payloads.params.callback, (res) => {
+      const callbackName = typeof payloads.params.callback === "string" ? payloads.params.callback : generateRandomCallbackName();
+      registerCallBack(callbackName, (res) => {
+        unregisterCallBack(callbackName);
         resolve(res);
       });
       window.NativeBridge.callNative(JSON.stringify(payloads));
