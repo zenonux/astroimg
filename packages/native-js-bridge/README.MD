@@ -5,17 +5,17 @@ native js bridge
 ## Install
 
 ```
-npm install @urlcoud/native-js-bridge -S
+npm install @astroimg/native-js-bridge -S
 ```
 
 ## Usage
 
 ```ts
-import { useCallNative } from "@urcloud/native-js-bridge";
+import { useCallNative } from "@astroimg/native-js-bridge";
 let { data, errcode, errmsg } = await useCallNative({
   action: "",
   params: {
-    callback: "getUserInfoCallback",
+    callback: true,
   },
 });
 ```
