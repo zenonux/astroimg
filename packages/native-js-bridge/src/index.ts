@@ -54,6 +54,8 @@ export const useCallNative = (
         typeof payloads.params.callback === "string"
           ? payloads.params.callback
           : generateRandomCallbackName();
+      // 重命名callback
+      payloads.params.callback = callbackName;
       registerCallBack(callbackName, (res) => {
         unregisterCallBack(callbackName);
         resolve(res);
