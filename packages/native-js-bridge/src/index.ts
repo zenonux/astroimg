@@ -3,7 +3,7 @@ const generateRandomCallbackName = () => {
   const randomSegment = "xxxxxx".replace(/[x]/g, function () {
     return ((Math.random() * 16) | 0).toString(16); // 生成随机的16进制数
   });
-  return timestamp + "-" + randomSegment;
+  return "callback_" + randomSegment + timestamp;
 };
 const registerCallBack = (name: string, func: (res: any) => void) => {
   if (!window.JSBridge) {

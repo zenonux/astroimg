@@ -6,7 +6,7 @@
     const randomSegment = "xxxxxx".replace(/[x]/g, function() {
       return (Math.random() * 16 | 0).toString(16);
     });
-    return timestamp + "-" + randomSegment;
+    return "callback_" + randomSegment + timestamp;
   };
   var registerCallBack = (name, func) => {
     if (!window.JSBridge) {
