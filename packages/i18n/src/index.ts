@@ -17,7 +17,7 @@ interface I18nItem {
 async function mergeLocalesByBuffer(
   buffer: ArrayBuffer | string,
   localesDir: string,
-  ignore: pm.Glob[]
+  ignore: pm.Glob[],
 ) {
   try {
     let json = transformExcel2Json(buffer);
@@ -25,12 +25,12 @@ async function mergeLocalesByBuffer(
       (v) =>
         !ignore.some((k) => {
           return pm(k)(v.key);
-        })
+        }),
     );
-    let en = buildLocaleYaml("en", json);
-    writeFileSync(resolve(localesDir, "./en.yaml"), en);
-    let zh = buildLocaleYaml("zh", json);
-    writeFileSync(resolve(localesDir, "./zh-CN.yaml"), zh);
+    let en = buildLocaleJsFile("en", json);
+    writeFileSync(resolve(localesDir, "./en.js"), en);
+    let zh = buildLocaleJsFile("zh", json);
+    writeFileSync(resolve(localesDir, "./zh-CN.js"), zh);
     console.info("generate i18n locales succeed.");
   } catch (e) {
     console.error(e);
@@ -41,7 +41,7 @@ export async function mergeLocales(
   input: string,
   localesDir: string,
   ignore: pm.Glob[],
-  opts: { google_service_account_email: string; google_private_key: string }
+  opts: { google_service_account_email: string; google_private_key: string },
 ) {
   let isFile = input.includes(".xlsx");
   let buffer: string | ArrayBuffer;
@@ -98,16 +98,16 @@ function transformExcel2Json(buffer: ArrayBuffer | string) {
   return filteredData;
 }
 
-function buildLocaleYaml(locale: "zh" | "en", data: I18nItem[]) {
-  let jsoncData: string = "";
+function buildLocaleJsFile(locale: "zh" | "en", data: I18nItem[]) {
+  let jsoncData: string = `export default {\n`;
   data.forEach((item) => {
     if (item._comment) {
-      jsoncData += `# ${item.key}\n`;
+      jsoncData += `  // ${item.key}\n`;
     } else {
-      jsoncData += `${[item.key]}: "${item[locale]}"\n`;
+      jsoncData += `  ${[item.key]}: "${item[locale]}",\n`;
     }
   });
-  return jsoncData;
+  return jsoncData + `}\n`;
 }
 
 function formatLiteral(text?: string) {

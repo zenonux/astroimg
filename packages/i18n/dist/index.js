@@ -27,10 +27,10 @@ async function mergeLocalesByBuffer(buffer, localesDir, ignore) {
     json = json.filter((v) => !ignore.some((k) => {
       return pm(k)(v.key);
     }));
-    let en = buildLocaleYaml("en", json);
-    writeFileSync(resolve(localesDir, "./en.yaml"), en);
-    let zh = buildLocaleYaml("zh", json);
-    writeFileSync(resolve(localesDir, "./zh-CN.yaml"), zh);
+    let en = buildLocaleJsFile("en", json);
+    writeFileSync(resolve(localesDir, "./en.js"), en);
+    let zh = buildLocaleJsFile("zh", json);
+    writeFileSync(resolve(localesDir, "./zh-CN.js"), zh);
     console.info("generate i18n locales succeed.");
   } catch (e) {
     console.error(e);
@@ -76,16 +76,16 @@ var transformExcel2Json = function(buffer) {
   });
   return filteredData;
 };
-var buildLocaleYaml = function(locale, data) {
-  let jsoncData = "";
+var buildLocaleJsFile = function(locale, data) {
+  let jsoncData = `export default {\n`;
   data.forEach((item) => {
     if (item._comment) {
-      jsoncData += `# ${item.key}\n`;
+      jsoncData += `  // ${item.key}\n`;
     } else {
-      jsoncData += `${[item.key]}: "${item[locale]}"\n`;
+      jsoncData += `  ${[item.key]}: "${item[locale]}",\n`;
     }
   });
-  return jsoncData;
+  return jsoncData + `}\n`;
 };
 var formatLiteral = function(text) {
   if (!text) {
