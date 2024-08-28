@@ -29,10 +29,10 @@ async function mergeLocalesByBuffer(buffer, localesDir, ignore) {
     json = json.filter((v) => !ignore.some((k) => {
       return pm(k)(v.key);
     }));
-    let en = buildLocaleJsFile("en", json);
-    writeFileSync(resolve(localesDir, "./en.js"), en);
-    let zh = buildLocaleJsFile("zh", json);
-    writeFileSync(resolve(localesDir, "./zh-CN.js"), zh);
+    let en = buildLocaleTsFile("en", json);
+    writeFileSync(resolve(localesDir, "./en.ts"), en);
+    let zh = buildLocaleTsFile("zh", json);
+    writeFileSync(resolve(localesDir, "./zh-CN.ts"), zh);
     console.info("generate i18n locales succeed.");
   } catch (e) {
     console.error(e);
@@ -78,7 +78,7 @@ var transformExcel2Json = function(buffer) {
   });
   return filteredData;
 };
-var buildLocaleJsFile = function(locale, data) {
+var buildLocaleTsFile = function(locale, data) {
   let jsoncData = `export default {\n`;
   data.forEach((item) => {
     if (item._comment) {
