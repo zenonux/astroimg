@@ -59,8 +59,8 @@ var useCallNative = (payloads) => {
       const callbackName = typeof payloads.params.callback === "string" ? payloads.params.callback : generateRandomCallbackName();
       payloads.params.callback = callbackName;
       registerCallBack(callbackName, (res) => {
-        unregisterCallBack(callbackName);
         resolve(res);
+        unregisterCallBack(callbackName);
       });
       window.NativeBridge.callNative(JSON.stringify(payloads));
     } else {

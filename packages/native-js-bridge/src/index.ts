@@ -57,8 +57,8 @@ export const useCallNative = (
       // 重命名callback
       payloads.params.callback = callbackName;
       registerCallBack(callbackName, (res) => {
-        unregisterCallBack(callbackName);
         resolve(res);
+        unregisterCallBack(callbackName);
       });
       window.NativeBridge.callNative(JSON.stringify(payloads));
     } else {
