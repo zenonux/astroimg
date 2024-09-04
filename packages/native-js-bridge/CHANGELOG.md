@@ -1,5 +1,11 @@
 # @astroimg/native-js-bridge
 
+## 1.1.3
+
+### Patch Changes
+
+- 47f5dad: unregister
+
 ## 1.1.2
 
 ### Patch Changes
