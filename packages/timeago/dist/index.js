@@ -83,6 +83,12 @@ var formatDateTime = (date) => {
 var formatDateShortTime = (date) => {
   return formatDateShort(date) + " " + formatTime(date);
 };
+var formatDaysAgo = (date) => {
+  const currentDate = new Date().getTime();
+  const timeDifference = currentDate - date.getTime();
+  const daysDifference = Math.floor(timeDifference / (1e3 * 60 * 60 * 24));
+  return daysDifference;
+};
 
 // src/formatTypes/default.ts
 var default_default = [
@@ -200,7 +206,7 @@ var comment_default = [
         "zh-CN": "%s\u5929\u524D",
         en: "%sd"
       };
-      return locales[locale].replace(/%s/gi, formatTime(date));
+      return locales[locale].replace(/%s/gi, formatDaysAgo(date));
     }
   },
   {

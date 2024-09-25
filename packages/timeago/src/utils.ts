@@ -67,3 +67,9 @@ export const formatDateTime = (date: Date) => {
 export const formatDateShortTime = (date: Date) => {
   return formatDateShort(date) + " " + formatTime(date);
 };
+export const formatDaysAgo = (date: Date) => {
+  const currentDate = new Date().getTime(); // 获取当前日期
+  const timeDifference = currentDate - date.getTime(); // 计算时间差（以毫秒为单位）
+  const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24)); // 转换为天数
+  return daysDifference;
+};
