@@ -12,8 +12,16 @@ const registerCallBack = (name: string, func: (res: any) => void) => {
     };
   }
   window.JSBridge.Callback[name] = (args: string) => {
-    const res = JSON.parse(args);
-    return func(res);
+    try {
+      const res = JSON.parse(args);
+      return func(res);
+    } catch (e) {
+      return func({
+        errcode: 500,
+        errmsg: `JSON.parse(${args}) failed`,
+        data: null,
+      });
+    }
   };
 };
 
