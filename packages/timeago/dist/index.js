@@ -110,6 +110,7 @@ var default_default = [
         en: "%sm ago"
       };
       let value = Math.floor(diffSeconds / 60);
+      value = value > 0 ? value : 1;
       return locales[locale].replace(/%s/gi, value);
     }
   },
@@ -174,7 +175,7 @@ var comment_default = [
         en: "%sm ago"
       };
       let value = Math.floor(diffSeconds / 60);
-      value = value || 1;
+      value = value > 0 ? value : 1;
       return locales[locale].replace(/%s/gi, value);
     }
   },
