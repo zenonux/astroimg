@@ -1,6 +1,6 @@
 {
   "name": "@astroimg/oss-deploy",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "Deploy static assests to tencent cos.",
   "bin": {
     "oss-deploy": "dist/cli.js"

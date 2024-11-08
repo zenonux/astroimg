@@ -41,15 +41,20 @@ var CosBucketManager = class {
     if (!this._client) {
       return;
     }
-    const res = await this._client.putObject({
-      Bucket: this._options.bucket,
-      Region: this._options.region,
-      Key: prefixPath,
-      Body: import_fs.default.createReadStream(filePath),
-      ...options
-    });
-    console.info(`Upload ${prefixPath} success.`);
-    return res;
+    try {
+      const res = await this._client.putObject({
+        Bucket: this._options.bucket,
+        Region: this._options.region,
+        Key: prefixPath,
+        Body: import_fs.default.createReadStream(filePath),
+        ...options
+      });
+      console.info(`Upload ${prefixPath} success.`);
+      return res;
+    } catch (e) {
+      console.error(`Upload ${prefixPath} failed.`);
+      throw new Error(e);
+    }
   }
   async uploadLocalDirectory(prefix, dirPath, options) {
     dirPath = import_node_path.default.resolve(dirPath);
@@ -58,9 +63,17 @@ var CosBucketManager = class {
       const { fullPath } = entry;
       const relativePath = import_node_path.default.relative(dirPath, fullPath);
       const prefixPath = (prefix + relativePath).replace("\\", "/");
-      input.push(limit(() => this.uploadLocalFile(prefixPath, fullPath, options.cacheControl ? {
-        CacheControl: options.cacheControl
-      } : {})));
+      input.push(
+        limit(
+          () => this.uploadLocalFile(
+            prefixPath,
+            fullPath,
+            options.cacheControl ? {
+              CacheControl: options.cacheControl
+            } : {}
+          )
+        )
+      );
     }
     await Promise.all(input);
   }

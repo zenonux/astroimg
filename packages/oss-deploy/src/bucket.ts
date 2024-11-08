@@ -22,35 +22,53 @@ class CosBucketManager implements BucketManager {
     if (!this._client) {
       return;
     }
-    const res = await this._client.putObject({
-      Bucket: this._options.bucket,
-      Region: this._options.region,
-      Key: prefixPath,
-      Body: fs.createReadStream(filePath),
-      ...options
-    });
-    console.info(`Upload ${prefixPath} success.`);
-    return res;
+    try {
+      const res = await this._client.putObject({
+        Bucket: this._options.bucket,
+        Region: this._options.region,
+        Key: prefixPath,
+        Body: fs.createReadStream(filePath),
+        ...options,
+      });
+      console.info(`Upload ${prefixPath} success.`);
+      return res;
+    } catch (e: any) {
+      console.error(`Upload ${prefixPath} failed.`);
+      throw new Error(e);
+    }
   }
 
-  async uploadLocalDirectory(prefix: string, dirPath: string, options: {
-    filter?: any,
-    cacheControl?: string
-  }) {
+  async uploadLocalDirectory(
+    prefix: string,
+    dirPath: string,
+    options: {
+      filter?: any;
+      cacheControl?: string;
+    }
+  ) {
     dirPath = path.resolve(dirPath);
     const input = [];
     for await (const entry of readdirp(dirPath, options.filter)) {
       const { fullPath } = entry;
       const relativePath = path.relative(dirPath, fullPath);
       const prefixPath = (prefix + relativePath).replace("\\", "/");
-      input.push(limit(() => this.uploadLocalFile(prefixPath, fullPath, options.cacheControl ? {
-        CacheControl: options.cacheControl
-      } : {})));
+      input.push(
+        limit(() =>
+          this.uploadLocalFile(
+            prefixPath,
+            fullPath,
+            options.cacheControl
+              ? {
+                  CacheControl: options.cacheControl,
+                }
+              : {}
+          )
+        )
+      );
     }
     // Only one promise is run at once
     await Promise.all(input);
   }
-
 }
 
 export default class BucketManagerFactory {
