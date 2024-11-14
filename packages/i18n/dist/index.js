@@ -21,22 +21,22 @@ async function download(id, opts) {
 
 // src/index.ts
 import pm from "picomatch";
-async function mergeLocalesByBuffer(buffer, localesDir, ignore) {
+async function mergeLocalesByBuffer(buffer, localesDir, ignore, extension) {
   try {
     let json = transformExcel2Json(buffer);
     json = json.filter((v) => !ignore.some((k) => {
       return pm(k)(v.key);
     }));
     let en = buildLocaleTsFile("en", json);
-    writeFileSync(resolve(localesDir, "./en.ts"), en);
+    writeFileSync(resolve(localesDir, `./en.${extension}`), en);
     let zh = buildLocaleTsFile("zh", json);
-    writeFileSync(resolve(localesDir, "./zh-CN.ts"), zh);
+    writeFileSync(resolve(localesDir, `./zh-CN.${extension}`), zh);
     console.info("generate i18n locales succeed.");
   } catch (e) {
     console.error(e);
   }
 }
-async function mergeLocales(input, localesDir, ignore, opts) {
+async function mergeLocales(input, localesDir, ignore, extension, opts) {
   let isFile = input.includes(".xlsx");
   let buffer;
   if (isFile) {
@@ -48,7 +48,7 @@ async function mergeLocales(input, localesDir, ignore, opts) {
     console.info(`download file ${input} succeed.`);
   }
   console.info(`generating locales...`);
-  mergeLocalesByBuffer(buffer, localesDir, ignore);
+  mergeLocalesByBuffer(buffer, localesDir, ignore, extension);
 }
 var transformExcel2Json = function(buffer) {
   const workbook = XLSX.read(buffer);

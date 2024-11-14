@@ -18,6 +18,7 @@ async function mergeLocalesByBuffer(
   buffer: ArrayBuffer | string,
   localesDir: string,
   ignore: pm.Glob[],
+  extension: "ts" | "js",
 ) {
   try {
     let json = transformExcel2Json(buffer);
@@ -28,9 +29,9 @@ async function mergeLocalesByBuffer(
         }),
     );
     let en = buildLocaleTsFile("en", json);
-    writeFileSync(resolve(localesDir, "./en.ts"), en);
+    writeFileSync(resolve(localesDir, `./en.${extension}`), en);
     let zh = buildLocaleTsFile("zh", json);
-    writeFileSync(resolve(localesDir, "./zh-CN.ts"), zh);
+    writeFileSync(resolve(localesDir, `./zh-CN.${extension}`), zh);
     console.info("generate i18n locales succeed.");
   } catch (e) {
     console.error(e);
@@ -41,6 +42,7 @@ export async function mergeLocales(
   input: string,
   localesDir: string,
   ignore: pm.Glob[],
+  extension: "ts" | "js",
   opts: { google_service_account_email: string; google_private_key: string },
 ) {
   let isFile = input.includes(".xlsx");
@@ -54,7 +56,7 @@ export async function mergeLocales(
     console.info(`download file ${input} succeed.`);
   }
   console.info(`generating locales...`);
-  mergeLocalesByBuffer(buffer, localesDir, ignore);
+  mergeLocalesByBuffer(buffer, localesDir, ignore, extension);
 }
 
 function transformExcel2Json(buffer: ArrayBuffer | string) {

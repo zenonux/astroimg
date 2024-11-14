@@ -23,8 +23,9 @@ function generateAction(opts: { config: string }) {
     ignore,
     google_private_key,
     google_service_account_email,
+    extension,
   } = readYamlFile(opts.config);
-  mergeLocales(input, output, ignore, {
+  mergeLocales(input, output, ignore, extension || "ts", {
     google_private_key,
     google_service_account_email,
   });
