@@ -92,7 +92,7 @@ var formatLiteral = function(text) {
     return "";
   }
   text = text.toString();
-  text = text.replace(/\n/g, "").replace(/\"/g, '\\"').replace(/\r/g, "\\n").trim();
+  text = text.replace(/\n/g, "").replace(/\r/g, "\\n").trim();
   text = text.replace(/\$s{\d}/g, (val) => {
     let match = val.match(/\d/g);
     let num = match ? Number(match[0]) - 1 : 0;

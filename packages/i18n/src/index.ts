@@ -117,11 +117,7 @@ function formatLiteral(text?: string) {
     return "";
   }
   text = text.toString();
-  text = text
-    .replace(/\n/g, "")
-    .replace(/\"/g, '\\"')
-    .replace(/\r/g, "\\n")
-    .trim();
+  text = text.replace(/\n/g, "").replace(/\r/g, "\\n").trim();
   text = text
     .replace(/\$s{\d}/g, (val) => {
       let match = val.match(/\d/g);
