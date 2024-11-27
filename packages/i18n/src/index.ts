@@ -117,7 +117,12 @@ function formatLiteral(text?: string) {
     return "";
   }
   text = text.toString();
-  text = text.replace(/\n/g, "").replace(/\r/g, "\\n").trim();
+  text = text
+    .replace(/\n/g, "")
+    // 只匹配普通的双引号 "，而不匹配已经转义的 \"
+    .replace(/(?<!\\)"/g, '\\"')
+    .replace(/\r/g, "\\n")
+    .trim();
   text = text
     .replace(/\$s{\d}/g, (val) => {
       let match = val.match(/\d/g);

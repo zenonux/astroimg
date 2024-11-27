@@ -7,9 +7,10 @@ test("mergeLocales", async () => {
   let locales = path.resolve("locales");
   const ignore = ["growth_level*"];
   await mergeLocales(
-    "1WhITU4md7oCqupj20zTfNkOm0TIVq_Szh2Ev6mWljNY",
+    "1cWVLXoYocmDRsAtCxsJJrVvjAAa9dVTNsDqJ6fI5_hw",
     locales,
     ignore,
-    key
+    "js",
+    key,
   );
 });
