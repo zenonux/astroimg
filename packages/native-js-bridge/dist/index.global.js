@@ -48,7 +48,15 @@
           resolve(res);
           unregisterCallBack(callbackName);
         });
-        window.NativeBridge.callNative(JSON.stringify(payloads));
+        try {
+          window.NativeBridge.callNative(JSON.stringify(payloads));
+        } catch (e) {
+          resolve({
+            errcode: 500,
+            errmsg: `window.NativeBridge.callNative(${payloads}) failed`,
+            data: null
+          });
+        }
       } else {
         window.NativeBridge.callNative(JSON.stringify(payloads));
         resolve({ errcode: 0, data: null });
