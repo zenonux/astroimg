@@ -16,11 +16,7 @@ const registerCallBack = (name: string, func: (res: any) => void) => {
       const res = JSON.parse(args);
       return func(res);
     } catch (e) {
-      return func({
-        errcode: 500,
-        errmsg: `JSON.parse(${args}) failed`,
-        data: null,
-      });
+      throw new Error(`JSON.parse(${args}) failed`);
     }
   };
 };
@@ -71,11 +67,7 @@ export const useCallNative = (
       try {
         window.NativeBridge.callNative(JSON.stringify(payloads));
       } catch (e) {
-        resolve({
-          errcode: 500,
-          errmsg: `window.NativeBridge.callNative(${payloads}) failed`,
-          data: null,
-        });
+        throw new Error(`window.NativeBridge.callNative(${payloads}) failed`);
       }
     } else {
       window.NativeBridge.callNative(JSON.stringify(payloads));
