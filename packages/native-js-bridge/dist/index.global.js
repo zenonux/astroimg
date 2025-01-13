@@ -47,11 +47,19 @@
         try {
           window.NativeBridge.callNative(JSON.stringify(payloads));
         } catch (e) {
-          throw new Error(`window.NativeBridge.callNative(${payloads}) failed`);
+          throw new Error(
+            `window.NativeBridge.callNative(${JSON.stringify(payloads)}) failed`
+          );
         }
       } else {
-        window.NativeBridge.callNative(JSON.stringify(payloads));
-        resolve({ errcode: 0, data: null });
+        try {
+          window.NativeBridge.callNative(JSON.stringify(payloads));
+          resolve({ errcode: 0, data: null });
+        } catch (e) {
+          throw new Error(
+            `window.NativeBridge.callNative(${JSON.stringify(payloads)}) failed`
+          );
+        }
       }
     });
   };

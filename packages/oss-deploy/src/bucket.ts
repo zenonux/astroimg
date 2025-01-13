@@ -1,7 +1,7 @@
 import { BucketManager, OssOptions } from "./types";
 import fs from "fs";
 import COS from "cos-nodejs-sdk-v5";
-import path from "node:path";
+import path from "path";
 import readdirp from "readdirp";
 import pLimit from "p-limit";
 // 最大3个文件并发上传
