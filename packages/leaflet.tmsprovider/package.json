@@ -1,6 +1,6 @@
 {
-  "name": "@astroimg/leaflet-tms-provider",
-  "version": "1.1.0",
+  "name": "@astroimg/leaflet.tmsprovider",
+  "version": "1.0.0",
   "publishConfig": {
     "access": "public"
   },
