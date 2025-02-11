@@ -212,7 +212,7 @@ export function withTmsProvider(L, opts) {
 
   L.tileLayer.tmsProvider = function (type, options) {
     options = options || {};
-    options.corrdType = getCorrdType(type);
+    options.corrdType = opts.chinaTileAdapter ? getCorrdType(type) : 'wgs84';
     return new L.TileLayer.TmsProvider(type, options);
 
     //获取坐标类型

@@ -290,7 +290,7 @@ function h1(e, n) {
       Subdomains: "0123"
     }
   }, e.tileLayer.tmsProvider = function(r, t) {
-    return t = t || {}, t.corrdType = d(r), new e.TileLayer.TmsProvider(r, t);
+    return t = t || {}, t.corrdType = n.chinaTileAdapter ? d(r) : "wgs84", new e.TileLayer.TmsProvider(r, t);
     function d(a) {
       var c = a.split("."), s = c[0], u = "wgs84";
       switch (s) {
