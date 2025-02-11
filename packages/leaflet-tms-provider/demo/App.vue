@@ -3,11 +3,11 @@
 </template>
 <script setup>
 import OriginL from 'leaflet';
-import TmsProvider from '../src'
+import {withTmsProvider} from '../src'
 import 'leaflet/dist/leaflet.css';
 import { onMounted } from 'vue';
 onMounted(() => {
-  const L = TmsProvider(OriginL,{
+  const L = withTmsProvider(OriginL,{
     locale:'zh_cn'
   })
   const map = L.map('map').setView([39.915, 116.404], 10);

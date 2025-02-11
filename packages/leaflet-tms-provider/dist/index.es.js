@@ -1,114 +1,107 @@
-function T(o, M) {
-  return o.CoordConver = function() {
-    this.bd09_To_gps84 = function(e, r) {
-      var i = this.bd09_To_gcj02(e, r), s = this.gcj02_To_gps84(i.lng, i.lat);
-      return s;
-    }, this.gps84_To_bd09 = function(e, r) {
-      var i = this.gps84_To_gcj02(e, r), s = this.gcj02_To_bd09(i.lng, i.lat);
-      return s;
-    }, this.gps84_To_gcj02 = function(e, r) {
-      var i = g(e - 105, r - 35), s = v(e - 105, r - 35), p = r / 180 * a, l = Math.sin(p);
-      l = 1 - n * l * l;
-      var d = Math.sqrt(l);
-      i = i * 180 / (t * (1 - n) / (l * d) * a), s = s * 180 / (t / d * Math.cos(p) * a);
-      var u = r + i, h = e + s, y = {
-        lng: h,
-        lat: u
-      };
-      return y;
-    }, this.gcj02_To_gps84 = function(e, r) {
-      var i = c(e, r), s = e * 2 - i.lng, p = r * 2 - i.lat, l = {
-        lng: s,
-        lat: p
-      };
-      return l;
-    }, this.gcj02_To_bd09 = function(e, r) {
-      var i = Math.sqrt(e * e + r * r) + 2e-5 * Math.sin(r * m), s = Math.atan2(r, e) + 3e-6 * Math.cos(e * m), p = i * Math.cos(s) + 65e-4, l = i * Math.sin(s) + 6e-3, d = {
-        lng: p,
-        lat: l
-      };
-      return d;
-    }, this.bd09_To_gcj02 = function(e, r) {
-      var i = e - 65e-4, s = r - 6e-3, p = Math.sqrt(i * i + s * s) - 2e-5 * Math.sin(s * m), l = Math.atan2(s, i) - 3e-6 * Math.cos(i * m), d = p * Math.cos(l), u = p * Math.sin(l), h = {
-        lng: d,
-        lat: u
-      };
-      return h;
-    };
-    var a = 3.141592653589793, t = 6378245, n = 0.006693421622965943, m = a * 3e3 / 180;
-    function c(e, r) {
-      var i = g(e - 105, r - 35), s = v(e - 105, r - 35), p = r / 180 * a, l = Math.sin(p);
-      l = 1 - n * l * l;
-      var d = Math.sqrt(l);
-      i = i * 180 / (t * (1 - n) / (l * d) * a), s = s * 180 / (t / d * Math.cos(p) * a);
-      var u = r + i, h = e + s, y = {
-        lng: h,
-        lat: u
-      };
-      return y;
-    }
-    function g(e, r) {
-      var i = -100 + 2 * e + 3 * r + 0.2 * r * r + 0.1 * e * r + 0.2 * Math.sqrt(Math.abs(e));
-      return i += (20 * Math.sin(6 * e * a) + 20 * Math.sin(2 * e * a)) * 2 / 3, i += (20 * Math.sin(r * a) + 40 * Math.sin(r / 3 * a)) * 2 / 3, i += (160 * Math.sin(r / 12 * a) + 320 * Math.sin(r * a / 30)) * 2 / 3, i;
-    }
-    function v(e, r) {
-      var i = 300 + e + 2 * r + 0.1 * e * e + 0.1 * e * r + 0.1 * Math.sqrt(Math.abs(e));
-      return i += (20 * Math.sin(6 * e * a) + 20 * Math.sin(2 * e * a)) * 2 / 3, i += (20 * Math.sin(e * a) + 40 * Math.sin(e / 3 * a)) * 2 / 3, i += (150 * Math.sin(e / 12 * a) + 300 * Math.sin(e / 30 * a)) * 2 / 3, i;
-    }
-  }, o.coordConver = function() {
-    return new o.CoordConver();
-  }, o.GridLayer.include({
-    _setZoomTransform: function(a, t, n) {
-      var m = t;
-      m != null && this.options && (this.options.corrdType == "gcj02" ? m = o.coordConver().gps84_To_gcj02(t.lng, t.lat) : this.options.corrdType == "bd09" && (m = o.coordConver().gps84_To_bd09(t.lng, t.lat)));
-      var c = this._map.getZoomScale(n, a.zoom), g = a.origin.multiplyBy(c).subtract(this._map._getNewPixelOrigin(m, n)).round();
-      o.Browser.any3d ? o.DomUtil.setTransform(a.el, g, c) : o.DomUtil.setPosition(a.el, g);
+const g = (t, s) => {
+  var r = -100 + 2 * t + 3 * s + 0.2 * s * s + 0.1 * t * s + 0.2 * Math.sqrt(Math.abs(t));
+  return r += (20 * Math.sin(6 * t * pi) + 20 * Math.sin(2 * t * pi)) * 2 / 3, r += (20 * Math.sin(s * pi) + 40 * Math.sin(s / 3 * pi)) * 2 / 3, r += (160 * Math.sin(s / 12 * pi) + 320 * Math.sin(s * pi / 30)) * 2 / 3, r;
+}, d = (t, s) => {
+  var r = 300 + t + 2 * s + 0.1 * t * t + 0.1 * t * s + 0.1 * Math.sqrt(Math.abs(t));
+  return r += (20 * Math.sin(6 * t * pi) + 20 * Math.sin(2 * t * pi)) * 2 / 3, r += (20 * Math.sin(t * pi) + 40 * Math.sin(t / 3 * pi)) * 2 / 3, r += (150 * Math.sin(t / 12 * pi) + 300 * Math.sin(t / 30 * pi)) * 2 / 3, r;
+}, y = (t, s) => {
+  var r = g(t - 105, s - 35), e = d(t - 105, s - 35), i = s / 180 * pi, n = Math.sin(i);
+  n = 1 - ee * n * n;
+  var o = Math.sqrt(n);
+  r = r * 180 / (a * (1 - ee) / (n * o) * pi), e = e * 180 / (a / o * Math.cos(i) * pi);
+  var l = s + r, m = t + e, p = {
+    lng: m,
+    lat: l
+  };
+  return p;
+}, u = (t, s) => {
+  var r = t - 65e-4, e = s - 6e-3, i = Math.sqrt(r * r + e * e) - 2e-5 * Math.sin(e * x_pi), n = Math.atan2(e, r) - 3e-6 * Math.cos(r * x_pi), o = i * Math.cos(n), l = i * Math.sin(n), m = {
+    lng: o,
+    lat: l
+  };
+  return m;
+}, h = function(t, s) {
+  var r = Math.sqrt(t * t + s * s) + 2e-5 * Math.sin(s * x_pi), e = Math.atan2(s, t) + 3e-6 * Math.cos(t * x_pi), i = r * Math.cos(e) + 65e-4, n = r * Math.sin(e) + 6e-3, o = {
+    lng: i,
+    lat: n
+  };
+  return o;
+}, c = (t, s) => {
+  var r = g(t - 105, s - 35), e = d(t - 105, s - 35), i = s / 180 * pi, n = Math.sin(i);
+  n = 1 - ee * n * n;
+  var o = Math.sqrt(n);
+  r = r * 180 / (a * (1 - ee) / (n * o) * pi), e = e * 180 / (a / o * Math.cos(i) * pi);
+  var l = s + r, m = t + e, p = {
+    lng: m,
+    lat: l
+  };
+  return p;
+}, M = (t, s) => {
+  var r = y(t, s), e = t * 2 - r.lng, i = s * 2 - r.lat, n = {
+    lng: e,
+    lat: i
+  };
+  return n;
+}, T = () => {
+  var t = u(lng, lat), s = M(t.lng, t.lat);
+  return s;
+}, v = (t, s) => {
+  var r = c(t, s), e = h(r.lng, r.lat);
+  return e;
+};
+function z(t, s) {
+  return t.GridLayer.include({
+    _setZoomTransform: function(r, e, i) {
+      var n = e;
+      n != null && this.options && (this.options.corrdType == "gcj02" ? n = c(e.lng, e.lat) : this.options.corrdType == "bd09" && (n = v(e.lng, e.lat)));
+      var o = this._map.getZoomScale(i, r.zoom), l = r.origin.multiplyBy(o).subtract(this._map._getNewPixelOrigin(n, i)).round();
+      t.Browser.any3d ? t.DomUtil.setTransform(r.el, l, o) : t.DomUtil.setPosition(r.el, l);
     },
-    _getTiledPixelBounds: function(a) {
-      var t = a;
-      t != null && this.options && (this.options.corrdType == "gcj02" ? t = o.coordConver().gps84_To_gcj02(a.lng, a.lat) : this.options.corrdType == "bd09" && (t = o.coordConver().gps84_To_bd09(a.lng, a.lat)));
-      var n = this._map, m = n._animatingZoom ? Math.max(n._animateToZoom, n.getZoom()) : n.getZoom(), c = n.getZoomScale(m, this._tileZoom), g = n.project(t, this._tileZoom).floor(), v = n.getSize().divideBy(c * 2);
-      return new o.Bounds(
-        g.subtract(v),
-        g.add(v)
+    _getTiledPixelBounds: function(r) {
+      var e = r;
+      e != null && this.options && (this.options.corrdType == "gcj02" ? e = c(r.lng, r.lat) : this.options.corrdType == "bd09" && (e = v(r.lng, r.lat)));
+      var i = this._map, n = i._animatingZoom ? Math.max(i._animateToZoom, i.getZoom()) : i.getZoom(), o = i.getZoomScale(n, this._tileZoom), l = i.project(e, this._tileZoom).floor(), m = i.getSize().divideBy(o * 2);
+      return new t.Bounds(
+        l.subtract(m),
+        l.add(m)
       );
     }
-  }), o.Proj && (o.CRS.Baidu = new o.Proj.CRS(
+  }), t.Proj && (t.CRS.Baidu = new t.Proj.CRS(
     "EPSG:900913",
     "+proj=merc +a=6378206 +b=6356584.314245179 +lat_ts=0.0 +lon_0=0.0 +x_0=0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs",
     {
       resolutions: function() {
-        var a = 19, t = [];
-        t[0] = Math.pow(2, 18);
-        for (var n = 1; n < a; n++)
-          t[n] = Math.pow(2, 18 - n);
-        return t;
+        var r = 19, e = [];
+        e[0] = Math.pow(2, 18);
+        for (var i = 1; i < r; i++)
+          e[i] = Math.pow(2, 18 - i);
+        return e;
       }(),
       origin: [0, 0],
-      bounds: o.bounds([20037508342789244e-9, 0], [0, 20037508342789244e-9])
+      bounds: t.bounds([20037508342789244e-9, 0], [0, 20037508342789244e-9])
     }
-  )), o.TileLayer.TmsProvider = o.TileLayer.extend({
-    initialize: function(a, t) {
-      var n = o.TileLayer.TmsProvider.providers;
-      t = t || {};
-      var m = a.split("."), c = m[0], g = m[1], v = m[2], e = n[c][g][v];
-      t.subdomains = n[c].Subdomains, t.key = t.key || n[c].key, "tms" in n[c] && (t.tms = n[c].tms), o.TileLayer.prototype.initialize.call(this, e, t);
+  )), t.TileLayer.TmsProvider = t.TileLayer.extend({
+    initialize: function(r, e) {
+      var i = t.TileLayer.TmsProvider.providers;
+      e = e || {};
+      var n = r.split("."), o = n[0], l = n[1], m = n[2], p = i[o][l][m];
+      e.subdomains = i[o].Subdomains, e.key = e.key || i[o].key, "tms" in i[o] && (e.tms = i[o].tms), t.TileLayer.prototype.initialize.call(this, p, e);
     },
-    getTileUrl: function(a) {
-      var t = {
-        s: this._getSubdomain(a),
-        x: a.x,
-        y: a.y,
+    getTileUrl: function(r) {
+      var e = {
+        s: this._getSubdomain(r),
+        x: r.x,
+        y: r.y,
         z: this._getZoomForUrl(),
-        l: M.locale
+        l: s.locale
       };
       if (this._map && !this._map.options.crs.infinite) {
-        var n = this._globalTileRange.max.y - a.y;
-        this.options.tms && (t.y = n), t["-y"] = n;
+        var i = this._globalTileRange.max.y - r.y;
+        this.options.tms && (e.y = i), e["-y"] = i;
       }
-      return t.sx = t.x >> 4, t.sy = (1 << t.z) - t.y >> 4, o.Util.template(this._url, o.Util.extend(t, this.options));
+      return e.sx = e.x >> 4, e.sy = (1 << e.z) - e.y >> 4, t.Util.template(this._url, t.Util.extend(e, this.options));
     }
-  }), o.TileLayer.TmsProvider.providers = {
+  }), t.TileLayer.TmsProvider.providers = {
     TianDiTu: {
       Normal: {
         Map: "//t{s}.tianditu.gov.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}&tk={key}",
@@ -186,28 +179,32 @@ function T(o, M) {
       },
       Subdomains: "0123"
     }
-  }, o.tileLayer.tmsProvider = function(a, t) {
-    return t = t || {}, t.corrdType = n(a), new o.TileLayer.TmsProvider(a, t);
-    function n(m) {
-      var c = m.split("."), g = c[0], v = "wgs84";
-      switch (g) {
+  }, t.tileLayer.tmsProvider = function(r, e) {
+    return e = e || {}, e.corrdType = i(r), new t.TileLayer.TmsProvider(r, e);
+    function i(n) {
+      var o = n.split("."), l = o[0], m = "wgs84";
+      switch (l) {
         case "Geoq":
         case "GaoDe":
         case "Google":
-          v = "gcj02";
+          m = "gcj02";
           break;
         case "Baidu":
-          v = "bd09";
+          m = "bd09";
           break;
         case "OSM":
         case "TianDiTu":
-          v = "wgs84";
+          m = "wgs84";
           break;
       }
-      return v;
+      return m;
     }
-  }, o;
+  }, t;
 }
 export {
-  T as default
+  T as bd09ToGps84,
+  M as gcj02ToGps84,
+  v as gps84ToBd09,
+  c as gps84ToGcj02,
+  z as withTmsProvider
 };
