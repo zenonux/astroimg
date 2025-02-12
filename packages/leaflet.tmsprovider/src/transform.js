@@ -1,6 +1,6 @@
 
 import { point } from '@turf/helpers';
-import chinaGeoJson from './china.geo.json';
+import mainlandGeoJson from './mainland.geo.json';
 import { booleanPointInPolygon } from '@turf/boolean-point-in-polygon';
 const pi = 3.1415926535897932384626;
 const a = 6378245.0;
@@ -62,9 +62,9 @@ const gcj02ToBd09 = function (x, y) {
 };
 
 
-// 判断某点是否在中国境内
-const isInsideChina = (lon, lat) => {
-  return chinaGeoJson.features.some(feature => {
+// 判断某点是否在中国大陆境内
+const isInsideMainland = (lon, lat) => {
+  return mainlandGeoJson.features.some(feature => {
     const polygon = feature.geometry;
     // 判断点是否在当前多边形内
     return booleanPointInPolygon(point([lon, lat]), polygon);
@@ -75,7 +75,7 @@ const isInsideChina = (lon, lat) => {
 /**84转火星*/
 export const gps84ToGcj02 = (lng, lat) => {
 
-  if (!isInsideChina(lng, lat)) {
+  if (!isInsideMainland(lng, lat)) {
     return { lng, lat };
   }
 
@@ -99,7 +99,7 @@ export const gps84ToGcj02 = (lng, lat) => {
 
 /**84转百度*/
 export const gps84ToBd09 = (lng, lat) => {
-  if (!isInsideChina(lng, lat)) {
+  if (!isInsideMainland(lng, lat)) {
     return { lng, lat };
   }
   var gcj02 = gps84ToGcj02(lng, lat);
