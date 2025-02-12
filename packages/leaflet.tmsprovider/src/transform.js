@@ -1,7 +1,6 @@
-
-import { point } from '@turf/helpers';
-import mainlandGeoJson from './mainland.geo.json';
-import { booleanPointInPolygon } from '@turf/boolean-point-in-polygon';
+import { point } from "@turf/helpers";
+import mainlandGeoJson from "./mainland.geo.json";
+import { booleanPointInPolygon } from "@turf/boolean-point-in-polygon";
 const pi = 3.1415926535897932384626;
 const a = 6378245.0;
 const ee = 0.00669342162296594323;
@@ -47,6 +46,23 @@ const transformLng = (x, y) => {
   return ret;
 };
 
+const transform = (lng, lat) => {
+  var dLat = transformLat(lng - 105.0, lat - 35.0);
+  var dLng = transformLng(lng - 105.0, lat - 35.0);
+  var radLat = (lat / 180.0) * pi;
+  var magic = Math.sin(radLat);
+  magic = 1 - ee * magic * magic;
+  var sqrtMagic = Math.sqrt(magic);
+  dLat = (dLat * 180.0) / (((a * (1 - ee)) / (magic * sqrtMagic)) * pi);
+  dLng = (dLng * 180.0) / ((a / sqrtMagic) * Math.cos(radLat) * pi);
+  var mgLat = lat + dLat;
+  var mgLng = lng + dLng;
+  var newCoord = {
+    lng: mgLng,
+    lat: mgLat,
+  };
+  return newCoord;
+};
 
 /**火星转百度*/
 const gcj02ToBd09 = function (x, y) {
@@ -61,20 +77,30 @@ const gcj02ToBd09 = function (x, y) {
   return newCoord;
 };
 
-
 // 判断某点是否在中国大陆境内
 const isInsideMainland = (lon, lat) => {
-  return mainlandGeoJson.features.some(feature => {
+  return mainlandGeoJson.features.some((feature) => {
     const polygon = feature.geometry;
     // 判断点是否在当前多边形内
     return booleanPointInPolygon(point([lon, lat]), polygon);
   });
+};
 
-}
+// 火星转84
+export const gcj02ToWgs84 = (lng, lat) => {
+  var coord = transform(lng, lat);
+  var lontitude = lng * 2 - coord.lng;
+  var latitude = lat * 2 - coord.lat;
+  var newCoord = {
+    lng: lontitude,
+    lat: latitude,
+  };
+  return newCoord;
+};
+
 
 /**84转火星*/
-export const gps84ToGcj02 = (lng, lat) => {
-
+export const wgs84ToGcj02 = (lng, lat) => {
   if (!isInsideMainland(lng, lat)) {
     return { lng, lat };
   }
@@ -96,13 +122,12 @@ export const gps84ToGcj02 = (lng, lat) => {
   return newCoord;
 };
 
-
 /**84转百度*/
-export const gps84ToBd09 = (lng, lat) => {
+export const wgs84ToBd09 = (lng, lat) => {
   if (!isInsideMainland(lng, lat)) {
     return { lng, lat };
   }
-  var gcj02 = gps84ToGcj02(lng, lat);
+  var gcj02 = wgs84ToGcj02(lng, lat);
   var bd09 = gcj02ToBd09(gcj02.lng, gcj02.lat);
   return bd09;
 };

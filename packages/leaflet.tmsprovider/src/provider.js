@@ -1,6 +1,6 @@
 import {
-  gps84ToGcj02,
-  gps84ToBd09,
+  wgs84ToGcj02,
+  wgs84ToBd09,
 } from "./transform";
 
 export function withTmsProvider(L, opts) {
@@ -9,9 +9,9 @@ export function withTmsProvider(L, opts) {
       var center = _center;
       if (center != undefined && this.options) {
         if (this.options.corrdType == "gcj02") {
-          center = gps84ToGcj02(_center.lng, _center.lat);
+          center = wgs84ToGcj02(_center.lng, _center.lat);
         } else if (this.options.corrdType == "bd09") {
-          center = gps84ToBd09(_center.lng, _center.lat);
+          center = wgs84ToBd09(_center.lng, _center.lat);
         }
       }
       var scale = this._map.getZoomScale(zoom, level.zoom),
@@ -30,9 +30,9 @@ export function withTmsProvider(L, opts) {
       var center = _center;
       if (center != undefined && this.options) {
         if (this.options.corrdType == "gcj02") {
-          center = gps84ToGcj02(_center.lng, _center.lat);
+          center = wgs84ToGcj02(_center.lng, _center.lat);
         } else if (this.options.corrdType == "bd09") {
-          center = gps84ToBd09(_center.lng, _center.lat);
+          center = wgs84ToBd09(_center.lng, _center.lat);
         }
       }
       var map = this._map,
