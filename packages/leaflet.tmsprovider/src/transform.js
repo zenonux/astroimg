@@ -88,6 +88,9 @@ const isInsideMainland = (lon, lat) => {
 
 // 火星转84
 export const gcj02ToWgs84 = (lng, lat) => {
+  if (!isInsideMainland(lng, lat)) {
+    return { lng, lat };
+  }
   var coord = transform(lng, lat);
   var lontitude = lng * 2 - coord.lng;
   var latitude = lat * 2 - coord.lat;
