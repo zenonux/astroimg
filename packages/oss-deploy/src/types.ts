@@ -25,6 +25,7 @@ export type OssOptions = {
 export type TargetOptions = {
   prefix: string;
   cacheControl?: string;
+
 };
 
 export type LocalOptions = {

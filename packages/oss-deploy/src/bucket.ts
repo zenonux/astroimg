@@ -38,6 +38,29 @@ class CosBucketManager implements BucketManager {
     }
   }
 
+  async  checkDirectoryExists(prefix:string) {
+    if (!this._client) {
+      return false;
+    }
+    try {
+      const result = await this._client.getBucket({
+        Bucket: this._options.bucket,
+        Region: this._options.region,
+        Prefix: prefix.endsWith("/") ? prefix : prefix + "/",
+        MaxKeys: 1, // 只取一个对象即可
+      })
+  
+      if (result.Contents.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  }
+  
+
   async uploadLocalDirectory(
     prefix: string,
     dirPath: string,

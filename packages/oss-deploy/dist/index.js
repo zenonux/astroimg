@@ -33,7 +33,7 @@ module.exports = __toCommonJS(src_exports);
 // src/bucket.ts
 var import_fs = __toESM(require("fs"));
 var import_cos_nodejs_sdk_v5 = __toESM(require("cos-nodejs-sdk-v5"));
-var import_node_path = __toESM(require("path"));
+var import_path = __toESM(require("path"));
 var import_readdirp = __toESM(require("readdirp"));
 var import_p_limit = __toESM(require("p-limit"));
 var limit = (0, import_p_limit.default)(3);
@@ -64,12 +64,32 @@ var CosBucketManager = class {
       throw new Error(e);
     }
   }
+  async checkDirectoryExists(prefix) {
+    if (!this._client) {
+      return false;
+    }
+    try {
+      const result = await this._client.getBucket({
+        Bucket: this._options.bucket,
+        Region: this._options.region,
+        Prefix: prefix.endsWith("/") ? prefix : prefix + "/",
+        MaxKeys: 1
+      });
+      if (result.Contents.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  }
   async uploadLocalDirectory(prefix, dirPath, options) {
-    dirPath = import_node_path.default.resolve(dirPath);
+    dirPath = import_path.default.resolve(dirPath);
     const input = [];
     for await (const entry of (0, import_readdirp.default)(dirPath, options.filter)) {
       const { fullPath } = entry;
-      const relativePath = import_node_path.default.relative(dirPath, fullPath);
+      const relativePath = import_path.default.relative(dirPath, fullPath);
       const prefixPath = (prefix + relativePath).replace("\\", "/");
       input.push(
         limit(
@@ -138,6 +158,9 @@ var OssDeploy = class {
   constructor(options) {
     const ossOptions = formatOssOptions(options);
     this._bucket = BucketManagerFactory.create(ossOptions);
+  }
+  checkDirectoryExists(prefix) {
+    return this._bucket.checkDirectoryExists(prefix);
   }
   async uploadAssets(local, target) {
     const { dist, filter } = formatLocalOptions(local);

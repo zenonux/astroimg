@@ -16,6 +16,7 @@ type LocalOptions = {
 declare class OssDeploy {
     private _bucket;
     constructor(options: OssOptions);
+    checkDirectoryExists(prefix: string): Promise<boolean>;
     uploadAssets(local: LocalOptions, target: TargetOptions): Promise<void>;
 }
 
