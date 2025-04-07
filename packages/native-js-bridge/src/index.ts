@@ -50,8 +50,7 @@ export const useCallNative = (
 ): Promise<NativeResponse> => {
   return new Promise((resolve, reject) => {
     if (!window.NativeBridge) {
-      console.warn("Please make sure NativeBridge exist!!!");
-      reject();
+      reject(new Error('Please make sure NativeBridge exist!!!'));
     }
     if (payloads.params.callback) {
       const callbackName =
@@ -67,18 +66,18 @@ export const useCallNative = (
       try {
         window.NativeBridge.callNative(JSON.stringify(payloads));
       } catch (e) {
-        throw new Error(
+        reject(new Error(
           `window.NativeBridge.callNative(${JSON.stringify(payloads)}) failed`,
-        );
+        ));
       }
     } else {
       try {
         window.NativeBridge.callNative(JSON.stringify(payloads));
         resolve({ errcode: 0, data: null });
       } catch (e) {
-        throw new Error(
+        reject(new Error(
           `window.NativeBridge.callNative(${JSON.stringify(payloads)}) failed`,
-        );
+        ));
       }
     }
   });
