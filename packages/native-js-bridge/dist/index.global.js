@@ -34,8 +34,7 @@
   var useCallNative = (payloads) => {
     return new Promise((resolve, reject) => {
       if (!window.NativeBridge) {
-        console.warn("Please make sure NativeBridge exist!!!");
-        reject();
+        reject(new Error("Please make sure NativeBridge exist!!!"));
       }
       if (payloads.params.callback) {
         const callbackName = typeof payloads.params.callback === "string" ? payloads.params.callback : generateRandomCallbackName();
@@ -47,18 +46,18 @@
         try {
           window.NativeBridge.callNative(JSON.stringify(payloads));
         } catch (e) {
-          throw new Error(
+          reject(new Error(
             `window.NativeBridge.callNative(${JSON.stringify(payloads)}) failed`
-          );
+          ));
         }
       } else {
         try {
           window.NativeBridge.callNative(JSON.stringify(payloads));
           resolve({ errcode: 0, data: null });
         } catch (e) {
-          throw new Error(
+          reject(new Error(
             `window.NativeBridge.callNative(${JSON.stringify(payloads)}) failed`
-          );
+          ));
         }
       }
     });
