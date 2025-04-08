@@ -14,6 +14,8 @@ npm install @astroimg/native-js-bridge -S
 import { callNative } from "@astroimg/native-js-bridge";
 let { data, errcode, errmsg } = await callNative({
   action: "",
-  params: {},
+  params: {
+    callback: true,
+  },
 });
 ```
