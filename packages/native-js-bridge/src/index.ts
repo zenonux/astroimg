@@ -5,7 +5,7 @@ const generateRandomCallbackName = () => {
   });
   return "callback_" + randomSegment + timestamp;
 };
-const registerCallBack = (name: string, func: (res: any) => void) => {
+const registerCallback = (name: string, func: (res: any) => void) => {
   if (!window.JSBridge) {
     window.JSBridge = {
       Callback: {},
@@ -21,7 +21,7 @@ const registerCallBack = (name: string, func: (res: any) => void) => {
   };
 };
 
-const unregisterCallBack = (name: string) => {
+const unregisterCallback = (name: string) => {
   if (!window.JSBridge) {
     window.JSBridge = {
       Callback: {},
@@ -59,9 +59,9 @@ export const useCallNative = (
           : generateRandomCallbackName();
       // 重命名callback
       payloads.params.callback = callbackName;
-      registerCallBack(callbackName, (res) => {
+      registerCallback(callbackName, (res) => {
         resolve(res);
-        unregisterCallBack(callbackName);
+        unregisterCallback(callbackName);
       });
       try {
         window.NativeBridge.callNative(JSON.stringify(payloads));
