@@ -45,12 +45,13 @@ export interface NativeResponse {
   data: any;
 }
 
+// 兼容老版本
 export const useCallNative = (
   payloads: NativePayloads,
 ): Promise<NativeResponse> => {
   return new Promise((resolve, reject) => {
     if (!window.NativeBridge) {
-      reject(new Error('Please make sure NativeBridge exist!!!'));
+      reject(new Error("Please make sure NativeBridge exist!!!"));
     }
     if (payloads.params.callback) {
       const callbackName =
@@ -66,19 +67,39 @@ export const useCallNative = (
       try {
         window.NativeBridge.callNative(JSON.stringify(payloads));
       } catch (e) {
-        reject(new Error(
-          `window.NativeBridge.callNative(${JSON.stringify(payloads)}) failed`,
-        ));
+        reject(
+          new Error(
+            `window.NativeBridge.callNative(${JSON.stringify(payloads)}) failed`,
+          ),
+        );
       }
     } else {
       try {
         window.NativeBridge.callNative(JSON.stringify(payloads));
         resolve({ errcode: 0, data: null });
       } catch (e) {
-        reject(new Error(
-          `window.NativeBridge.callNative(${JSON.stringify(payloads)}) failed`,
-        ));
+        reject(
+          new Error(
+            `window.NativeBridge.callNative(${JSON.stringify(payloads)}) failed`,
+          ),
+        );
       }
     }
+  });
+};
+
+export const callNative = (payloads: {
+  action: string;
+  params: {
+    [key: string]: any;
+  };
+  callback?: boolean | string;
+}) => {
+  return useCallNative({
+    action: payloads.action,
+    params: {
+      ...payloads.params,
+      callback: payloads.callback || true,
+    },
   });
 };
