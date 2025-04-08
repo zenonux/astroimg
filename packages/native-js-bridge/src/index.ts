@@ -75,8 +75,8 @@ export const useCallNative = (
       }
     } else {
       try {
-        window.NativeBridge.callNative(JSON.stringify(payloads));
-        resolve({ errcode: 0, data: null });
+       let data= window.NativeBridge.callNative(JSON.stringify(payloads));
+        resolve({ errcode: 0, data });
       } catch (e) {
         reject(
           new Error(
@@ -99,7 +99,7 @@ export const callNative = (payloads: {
     action: payloads.action,
     params: {
       ...payloads.params,
-      callback: payloads.callback || true,
+      callback: payloads.callback,
     },
   });
 };

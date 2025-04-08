@@ -72,8 +72,8 @@ var useCallNative = (payloads) => {
       }
     } else {
       try {
-        window.NativeBridge.callNative(JSON.stringify(payloads));
-        resolve({ errcode: 0, data: null });
+        let data = window.NativeBridge.callNative(JSON.stringify(payloads));
+        resolve({ errcode: 0, data });
       } catch (e) {
         reject(
           new Error(
@@ -88,7 +88,7 @@ var callNative = (payloads) => {
   return useCallNative({
     action: payloads.action,
     params: __spreadProps(__spreadValues({}, payloads.params), {
-      callback: payloads.callback || true
+      callback: payloads.callback
     })
   });
 };
