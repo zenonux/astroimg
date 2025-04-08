@@ -1,4 +1,4 @@
-# native-js-bridge
+# NativeJsBridge
 
 native js bridge
 

@@ -27,9 +27,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zenonux/native-js-bridge"
+    "url": "https://github.com/zenonux/astroimg/tree/main/packages/native-js-bridge"
   },
-  "homepage": "https://github.com/zenonux/native-js-bridge#readme",
+  "homepage": "https://github.com/zenonux/astroimg/tree/main/packages/native-js-bridge#readme",
   "author": "换个头像心好累",
   "license": "MIT"
 }
