@@ -11,12 +11,6 @@ interface NativeResponse {
     data: any;
 }
 declare const useCallNative: (payloads: NativePayloads) => Promise<NativeResponse>;
-declare const callNative: (payloads: {
-    action: string;
-    params: {
-        [key: string]: any;
-    };
-    callback?: boolean | string;
-}) => Promise<NativeResponse>;
+declare const callNative: (payloads: NativePayloads) => Promise<NativeResponse>;
 
 export { NativePayloads, NativeResponse, callNative, useCallNative };

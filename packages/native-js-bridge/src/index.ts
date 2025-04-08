@@ -88,18 +88,4 @@ export const useCallNative = (
   });
 };
 
-export const callNative = (payloads: {
-  action: string;
-  params: {
-    [key: string]: any;
-  };
-  callback?: boolean | string;
-}) => {
-  return useCallNative({
-    action: payloads.action,
-    params: {
-      ...payloads.params,
-      callback: payloads.callback,
-    },
-  });
-};
+export const callNative = useCallNative
