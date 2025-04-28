@@ -14,7 +14,7 @@ google_private_key: ""
 check:
   used:
     dir: ""
-    ignoreDir: []
+    ignoreDirs: []
   i18n:
     dir: ""
     exextensions: []

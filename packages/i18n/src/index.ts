@@ -5,6 +5,8 @@ import * as fs from "node:fs";
 import { download } from "./download";
 import pm from "picomatch";
 
+export {checkI18nKeys} from "./check";
+
 const { resolve } = path;
 
 interface I18nItem {

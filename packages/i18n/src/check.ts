@@ -4,14 +4,14 @@ import { join } from "node:path";
 export async function checkI18nKeys(opts: {
   used: {
     dir: string;
-    ignoreDir: string[];
+    ignoreDirs: string[];
   };
   i18n: {
     dir: string;
     extensions: string[];
   };
 }) {
-  const usedKeys = await getUsedKeys(opts.used.dir, opts.used.ignoreDir);
+  const usedKeys = await getUsedKeys(opts.used.dir, opts.used.ignoreDirs);
   const loadedKeys = await getLoadedKeys(opts.i18n.dir, opts.i18n.extensions);
 
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
