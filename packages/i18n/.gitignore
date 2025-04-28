@@ -176,3 +176,4 @@ out
 locales/
 .env.test
 key.json
+i18n.yaml
