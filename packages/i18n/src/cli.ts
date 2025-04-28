@@ -3,6 +3,7 @@
 import { Command } from "commander";
 import { mergeLocales } from "./index";
 import { readYamlFile } from "./utils";
+import { checkI18nKeys } from "./check";
 
 main();
 
@@ -13,6 +14,13 @@ function main() {
     .requiredOption("-c, --config <file>", "config file", "./i18n.yaml")
     .description("generate locale files")
     .action(generateAction);
+
+  program
+    .command("check")
+    .requiredOption("-c, --config <file>", "config file", "./i18n.yaml")
+    .description("check used i18n keys")
+    .action((config) => checkI18nKeys(config.check));
+
   program.parseAsync(process.argv);
 }
 

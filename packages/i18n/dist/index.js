@@ -1,12 +1,12 @@
 // src/index.ts
 import * as XLSX from "xlsx";
-import {writeFileSync} from "node:fs";
+import { writeFileSync } from "node:fs";
 import * as path from "node:path";
 import * as fs from "node:fs";
 
 // src/download.ts
-import {GoogleSpreadsheet} from "google-spreadsheet";
-import {JWT} from "google-auth-library";
+import { GoogleSpreadsheet } from "google-spreadsheet";
+import { JWT } from "google-auth-library";
 async function download(id, opts) {
   const serviceAccountAuth = new JWT({
     email: opts.google_service_account_email,
@@ -21,6 +21,7 @@ async function download(id, opts) {
 
 // src/index.ts
 import pm from "picomatch";
+var { resolve } = path;
 async function mergeLocalesByBuffer(buffer, localesDir, ignore, extension) {
   try {
     let json = transformExcel2Json(buffer);
@@ -50,7 +51,7 @@ async function mergeLocales(input, localesDir, ignore, extension, opts) {
   console.info(`generating locales...`);
   mergeLocalesByBuffer(buffer, localesDir, ignore, extension);
 }
-var transformExcel2Json = function(buffer) {
+function transformExcel2Json(buffer) {
   const workbook = XLSX.read(buffer);
   const sheetName = workbook.SheetNames[0];
   const worksheet = workbook.Sheets[sheetName];
@@ -75,24 +76,28 @@ var transformExcel2Json = function(buffer) {
     };
   });
   return filteredData;
-};
-var buildLocaleTsFile = function(locale, data) {
-  let jsoncData = `export default {\n`;
+}
+function buildLocaleTsFile(locale, data) {
+  let jsoncData = `export default {
+`;
   data.forEach((item) => {
     if (item._comment) {
-      jsoncData += `  // ${item.key}\n`;
+      jsoncData += `  // ${item.key}
+`;
     } else {
-      jsoncData += `  ${[item.key]}: "${item[locale]}",\n`;
+      jsoncData += `  ${[item.key]}: "${item[locale]}",
+`;
     }
   });
-  return jsoncData + `}\n`;
-};
-var formatLiteral = function(text) {
+  return jsoncData + `}
+`;
+}
+function formatLiteral(text) {
   if (!text) {
     return "";
   }
   text = text.toString();
-  text = text.replace(/\n/g, "").replace(/(?<!\\)"/g, '\\"').replace(/\r/g, "\\n").trim();
+  text = text.replace(/\n/g, "").replace(/(?<!\\)"/g, "\\\"").replace(/\r/g, "\\n").trim();
   text = text.replace(/\$s{\d}/g, (val) => {
     let match = val.match(/\d/g);
     let num = match ? Number(match[0]) - 1 : 0;
@@ -104,14 +109,13 @@ var formatLiteral = function(text) {
   });
   text = text.replace(/@/g, "{'@'}").replace(/\|/g, "{'|'}").replace(/\$/g, "{'$'}");
   return text;
-};
-var isValidFieldValue = function(text) {
+}
+function isValidFieldValue(text) {
   if (typeof text === "string") {
     return text.trim() !== "";
   }
   return text !== null && text !== undefined;
-};
-var { resolve } = path;
+}
 export {
   mergeLocales
 };
