@@ -108,10 +108,20 @@ function buildLocaleTsFile(
   data: I18nItem[],
 ) {
   if (extension == "json") {
-    return data.reduce((acc, item) => {
-        acc += `  "${item.key}": "${item[locale]}",\n`;
-      return acc;
-    }, "{\n") + `}\n`;
+    return (
+      data.reduce((acc, item, index) => {
+        if(!item._comment){
+          acc += `  "${item.key}": "${item[locale]}"`;
+          if (index < data.length - 1) {
+            acc += ",\n"; // 添加逗号，但最后一行不加
+          } else {
+            acc += "\n"; // 最后一行换行
+          }
+          return acc;
+        }
+        return acc
+      }, "{\n") + `}\n`
+    );
   } else {
     let jsoncData: string = `export default {\n`;
     data.forEach((item) => {

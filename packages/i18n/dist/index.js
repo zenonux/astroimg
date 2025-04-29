@@ -5683,9 +5683,18 @@ function transformExcel2Json(buffer) {
 }
 function buildLocaleTsFile(locale, extension, data2) {
   if (extension == "json") {
-    return data2.reduce((acc, item) => {
-      acc += `  "${item.key}": "${item[locale]}",
+    return data2.reduce((acc, item, index) => {
+      if (!item._comment) {
+        acc += `  "${item.key}": "${item[locale]}"`;
+        if (index < data2.length - 1) {
+          acc += `,
 `;
+        } else {
+          acc += `
+`;
+        }
+        return acc;
+      }
       return acc;
     }, `{
 `) + `}
