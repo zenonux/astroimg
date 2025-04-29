@@ -99,7 +99,7 @@ function findMissingKeys(usedKeys: Set<string>, loadedKeys: Set<string>) {
 
 async function getUsedKeys(
   dir: string,
-  usedIgnoreDir: string[],
+  usedIgnoreDirs: string[],
 ): Promise<Set<string>> {
   const regex = /\bt\((['"`])([^'"`]+?)\1\)/g;
   const i18nKeys = new Set<string>();
@@ -109,11 +109,11 @@ async function getUsedKeys(
     const fullPath = join(dir, file);
 
     // Skip unnecessary directories
-    if (shouldSkipDirectory(fullPath, usedIgnoreDir)) continue;
+    if (shouldSkipDirectory(fullPath, usedIgnoreDirs)) continue;
 
     const stats = await fsPromises.stat(fullPath);
     if (stats.isDirectory()) {
-      const nestedKeys = await getUsedKeys(fullPath, usedIgnoreDir);
+      const nestedKeys = await getUsedKeys(fullPath, usedIgnoreDirs);
       nestedKeys.forEach((key) => i18nKeys.add(key));
     } else if (isRelevantFile(file)) {
       const content = await fsPromises.readFile(fullPath, "utf8");
@@ -129,8 +129,8 @@ async function getUsedKeys(
   return i18nKeys;
 }
 
-function shouldSkipDirectory(fullPath: string, shouldSkipDirectory: string[]) {
-  return shouldSkipDirectory.some((dir) => fullPath.includes(dir));
+function shouldSkipDirectory(fullPath: string, skipDirectoryList: string[]) {
+  return skipDirectoryList.some((dir) => fullPath.includes(dir));
 }
 
 function isRelevantFile(file: string) {

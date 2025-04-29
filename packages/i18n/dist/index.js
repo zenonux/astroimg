@@ -87,17 +87,17 @@ function findMissingKeys(usedKeys, loadedKeys) {
   });
   return missingKeys;
 }
-async function getUsedKeys(dir, usedIgnoreDir) {
+async function getUsedKeys(dir, usedIgnoreDirs) {
   const regex = /\bt\((['"`])([^'"`]+?)\1\)/g;
   const i18nKeys = new Set;
   const files = await fsPromises.readdir(dir);
   for (const file of files) {
     const fullPath = join(dir, file);
-    if (shouldSkipDirectory(fullPath, usedIgnoreDir))
+    if (shouldSkipDirectory(fullPath, usedIgnoreDirs))
       continue;
     const stats = await fsPromises.stat(fullPath);
     if (stats.isDirectory()) {
-      const nestedKeys = await getUsedKeys(fullPath, usedIgnoreDir);
+      const nestedKeys = await getUsedKeys(fullPath, usedIgnoreDirs);
       nestedKeys.forEach((key) => i18nKeys.add(key));
     } else if (isRelevantFile(file)) {
       const content = await fsPromises.readFile(fullPath, "utf8");
@@ -110,8 +110,8 @@ async function getUsedKeys(dir, usedIgnoreDir) {
   }
   return i18nKeys;
 }
-function shouldSkipDirectory(fullPath, shouldSkipDirectory2) {
-  return shouldSkipDirectory2.some((dir) => fullPath.includes(dir));
+function shouldSkipDirectory(fullPath, skipDirectoryList) {
+  return skipDirectoryList.some((dir) => fullPath.includes(dir));
 }
 function isRelevantFile(file) {
   return (file.endsWith(".vue") || file.endsWith(".js") || file.endsWith(".ts")) && !file.endsWith(".d.ts");
