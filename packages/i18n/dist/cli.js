@@ -5634,9 +5634,9 @@ async function mergeLocalesByBuffer(buffer, localesDir, ignore2, extension) {
     json = json.filter((v) => !ignore2.some((k) => {
       return pm(k)(v.key);
     }));
-    let en = buildLocaleTsFile("en", json);
+    let en = buildLocaleTsFile("en", extension, json);
     writeFileSync(resolve(localesDir, `./en.${extension}`), en);
-    let zh = buildLocaleTsFile("zh", json);
+    let zh = buildLocaleTsFile("zh", extension, json);
     writeFileSync(resolve(localesDir, `./zh-CN.${extension}`), zh);
     console.info("generate i18n locales succeed.");
   } catch (e) {
@@ -5683,20 +5683,30 @@ function transformExcel2Json(buffer) {
   });
   return filteredData;
 }
-function buildLocaleTsFile(locale, data2) {
-  let jsoncData = `export default {
+function buildLocaleTsFile(locale, extension, data2) {
+  if (extension == "json") {
+    return data2.reduce((acc, item) => {
+      acc += `  "${item.key}": "${item[locale]}",
 `;
-  data2.forEach((item) => {
-    if (item._comment) {
-      jsoncData += `  // ${item.key}
+      return acc;
+    }, `{
+`) + `}
 `;
-    } else {
-      jsoncData += `  ${[item.key]}: "${item[locale]}",
+  } else {
+    let jsoncData = `export default {
 `;
-    }
-  });
-  return jsoncData + `}
+    data2.forEach((item) => {
+      if (item._comment) {
+        jsoncData += `  // ${item.key}
 `;
+      } else {
+        jsoncData += `  ${[item.key]}: "${item[locale]}",
+`;
+      }
+    });
+    return jsoncData + `}
+`;
+  }
 }
 function formatLiteral(text) {
   if (!text) {

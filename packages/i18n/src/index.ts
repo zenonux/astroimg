@@ -5,7 +5,7 @@ import * as fs from "node:fs";
 import { download } from "./download";
 import pm from "picomatch";
 
-export {checkI18nKeys} from "./check";
+export { checkI18nKeys } from "./check";
 
 const { resolve } = path;
 
@@ -20,7 +20,7 @@ async function mergeLocalesByBuffer(
   buffer: ArrayBuffer | string,
   localesDir: string,
   ignore: pm.Glob[],
-  extension: "ts" | "js",
+  extension: "ts" | "js" | "json",
 ) {
   try {
     let json = transformExcel2Json(buffer);
@@ -30,9 +30,9 @@ async function mergeLocalesByBuffer(
           return pm(k)(v.key);
         }),
     );
-    let en = buildLocaleTsFile("en", json);
+    let en = buildLocaleTsFile("en", extension, json);
     writeFileSync(resolve(localesDir, `./en.${extension}`), en);
-    let zh = buildLocaleTsFile("zh", json);
+    let zh = buildLocaleTsFile("zh", extension, json);
     writeFileSync(resolve(localesDir, `./zh-CN.${extension}`), zh);
     console.info("generate i18n locales succeed.");
   } catch (e) {
@@ -44,7 +44,7 @@ export async function mergeLocales(
   input: string,
   localesDir: string,
   ignore: pm.Glob[],
-  extension: "ts" | "js",
+  extension: "ts" | "js" | "json",
   opts: { google_service_account_email: string; google_private_key: string },
 ) {
   let isFile = input.includes(".xlsx");
@@ -102,16 +102,27 @@ function transformExcel2Json(buffer: ArrayBuffer | string) {
   return filteredData;
 }
 
-function buildLocaleTsFile(locale: "zh" | "en", data: I18nItem[]) {
-  let jsoncData: string = `export default {\n`;
-  data.forEach((item) => {
-    if (item._comment) {
-      jsoncData += `  // ${item.key}\n`;
-    } else {
-      jsoncData += `  ${[item.key]}: "${item[locale]}",\n`;
-    }
-  });
-  return jsoncData + `}\n`;
+function buildLocaleTsFile(
+  locale: "zh" | "en",
+  extension: "js" | "ts" | "json",
+  data: I18nItem[],
+) {
+  if (extension == "json") {
+    return data.reduce((acc, item) => {
+        acc += `  "${item.key}": "${item[locale]}",\n`;
+      return acc;
+    }, "{\n") + `}\n`;
+  } else {
+    let jsoncData: string = `export default {\n`;
+    data.forEach((item) => {
+      if (item._comment) {
+        jsoncData += `  // ${item.key}\n`;
+      } else {
+        jsoncData += `  ${[item.key]}: "${item[locale]}",\n`;
+      }
+    });
+    return jsoncData + `}\n`;
+  }
 }
 
 function formatLiteral(text?: string) {
