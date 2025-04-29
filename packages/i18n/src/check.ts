@@ -2,17 +2,12 @@ import { promises as fsPromises } from "fs";
 import { join } from "node:path";
 
 export async function checkI18nKeys(opts: {
-  used: {
-    dir: string;
-    ignoreDirs: string[];
-  };
-  i18n: {
-    dir: string;
-    extensions: string[];
-  };
+  useDir:string;
+  useIgnoreDirs:string[]
+  i18nFiles: string[]
 }) {
-  const usedKeys = await getUsedKeys(opts.used.dir, opts.used.ignoreDirs);
-  const loadedKeys = await getLoadedKeys(opts.i18n.dir, opts.i18n.extensions);
+  const usedKeys = await getUsedKeys(opts.useDir, opts.useIgnoreDirs);
+  const loadedKeys = await getLoadedKeys(opts.i18nFiles);
 
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
 
@@ -21,21 +16,12 @@ export async function checkI18nKeys(opts: {
     throw new Error("Missing i18n keys in translation files");
   }
 }
-async function getLoadedKeys(
-  dir: string,
-  i18nExtension: string[],
-): Promise<Set<string>> {
+async function getLoadedKeys(files: string[]): Promise<Set<string>> {
   const i18nKeys = new Set<string>();
 
-  const files = await fsPromises.readdir(dir);
   for (const file of files) {
-    const fullPath = join(dir, file);
-
-    // Skip unsupported files
-    if (!isSupportedFile(file, i18nExtension)) continue;
-
     try {
-      const content = await fsPromises.readFile(fullPath, "utf8");
+      const content = await fsPromises.readFile(file, "utf8");
 
       let keys: string[] = [];
       if (file.endsWith(".json")) {
@@ -53,16 +39,13 @@ async function getLoadedKeys(
         i18nKeys.add(cleanedKey);
       });
     } catch (error) {
-      throw new Error(`Failed to load or parse file: ${fullPath}`);
+      console.error(`Failed to load or parse file: ${file}`, error);
     }
   }
 
   return i18nKeys;
 }
 
-function isSupportedFile(file: string, i18nExtension: string[]): boolean {
-  return i18nExtension.some((v) => file.endsWith(v));
-}
 
 function extractKeysFromCode(content: string): string[] {
   const keys: string[] = [];

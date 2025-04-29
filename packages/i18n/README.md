@@ -12,10 +12,7 @@ extension: "ts"
 google_service_account_email: ""
 google_private_key: ""
 check:
-  used:
-    dir: ""
-    ignoreDirs: []
-  i18n:
-    dir: ""
-    exextensions: []
+  useDir:
+  useIgnoreDirs:
+  i18nFiles:
 ```

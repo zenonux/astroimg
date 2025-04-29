@@ -28,23 +28,19 @@ import pm from "picomatch";
 import { promises as fsPromises } from "fs";
 import { join } from "node:path";
 async function checkI18nKeys(opts) {
-  const usedKeys = await getUsedKeys(opts.used.dir, opts.used.ignoreDirs);
-  const loadedKeys = await getLoadedKeys(opts.i18n.dir, opts.i18n.extensions);
+  const usedKeys = await getUsedKeys(opts.useDir, opts.useIgnoreDirs);
+  const loadedKeys = await getLoadedKeys(opts.i18nFiles);
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
   if (missingKeys.size > 0) {
     console.error("MISS_KEYS", Array.from(missingKeys));
     throw new Error("Missing i18n keys in translation files");
   }
 }
-async function getLoadedKeys(dir, i18nExtension) {
+async function getLoadedKeys(files) {
   const i18nKeys = new Set;
-  const files = await fsPromises.readdir(dir);
   for (const file of files) {
-    const fullPath = join(dir, file);
-    if (!isSupportedFile(file, i18nExtension))
-      continue;
     try {
-      const content = await fsPromises.readFile(fullPath, "utf8");
+      const content = await fsPromises.readFile(file, "utf8");
       let keys = [];
       if (file.endsWith(".json")) {
         const parsed = JSON.parse(content);
@@ -57,13 +53,10 @@ async function getLoadedKeys(dir, i18nExtension) {
         i18nKeys.add(cleanedKey);
       });
     } catch (error) {
-      throw new Error(`Failed to load or parse file: ${fullPath}`);
+      console.error(`Failed to load or parse file: ${file}`, error);
     }
   }
   return i18nKeys;
-}
-function isSupportedFile(file, i18nExtension) {
-  return i18nExtension.some((v) => file.endsWith(v));
 }
 function extractKeysFromCode(content) {
   const keys = [];
