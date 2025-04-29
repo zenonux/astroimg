@@ -255,8 +255,12 @@ main();
 function main() {
   const program = new Command;
   program.command("generate").requiredOption("-c, --config <file>", "config file", "./i18n.yaml").description("generate locale files").action(generateAction);
-  program.command("check").requiredOption("-c, --config <file>", "config file", "./i18n.yaml").description("check used i18n keys").action((config) => checkI18nKeys(config.check));
+  program.command("check").requiredOption("-c, --config <file>", "config file", "./i18n.yaml").description("check used i18n keys").action(checkAction);
   program.parseAsync(process.argv);
+}
+function checkAction(opts) {
+  const { check } = readYamlFile(opts.config);
+  checkI18nKeys(check);
 }
 function generateAction(opts) {
   const {

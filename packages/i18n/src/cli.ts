@@ -19,9 +19,14 @@ function main() {
     .command("check")
     .requiredOption("-c, --config <file>", "config file", "./i18n.yaml")
     .description("check used i18n keys")
-    .action((config) => checkI18nKeys(config.check));
+    .action(checkAction);
 
   program.parseAsync(process.argv);
+}
+
+function checkAction(opts: { config: string }) {
+  const { check } = readYamlFile(opts.config);
+  checkI18nKeys(check);
 }
 
 function generateAction(opts: { config: string }) {
