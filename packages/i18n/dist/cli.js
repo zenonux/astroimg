@@ -60,7 +60,7 @@ async function getLoadedKeys(files) {
 }
 function extractKeysFromCode(content) {
   const keys = [];
-  const exportDefaultRegex = /export\s+default\s+{([\s\S]*?)}/g;
+  const exportDefaultRegex = /export\s+default\s+{([\s\S]*?)}/;
   const match = exportDefaultRegex.exec(content);
   if (match) {
     const objectContent = match[1];

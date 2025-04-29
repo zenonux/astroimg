@@ -51,7 +51,7 @@ function extractKeysFromCode(content: string): string[] {
   const keys: string[] = [];
 
   // Match `export default { ... }` and extract the object content
-  const exportDefaultRegex = /export\s+default\s+{([\s\S]*?)}/g;
+  const exportDefaultRegex = /export\s+default\s+{([\s\S]*?)}/;
   const match = exportDefaultRegex.exec(content);
 
   if (match) {
