@@ -1,5 +1,7 @@
 import { promises as fsPromises } from "fs";
 import { join } from "node:path";
+import { parse } from 'acorn';
+import * as walk from 'acorn-walk';
 
 export async function checkI18nKeys(opts: {
   useDir:string;
@@ -47,25 +49,29 @@ async function getLoadedKeys(files: string[]): Promise<Set<string>> {
 }
 
 
-function extractKeysFromCode(content: string): string[] {
+function extractKeysFromCode(code: string): string[] {
   const keys: string[] = [];
 
-  // Match `export default { ... }` and extract the object content
-  const exportDefaultRegex = /export\s+default\s+{([\s\S]*?)}/;
-  const match = exportDefaultRegex.exec(content);
+  const ast = parse(code, {
+    ecmaVersion: 'latest',
+    sourceType: 'module'
+  });
 
-  if (match) {
-    const objectContent = match[1];
-
-    // Match keys inside the object (e.g., key: value or "key": value)
-    const keyRegex = /['"`]?([\w-]+)['"`]?\s*:/g;
-    let keyMatch;
-    while ((keyMatch = keyRegex.exec(objectContent)) !== null) {
-      // Clean the key by removing single quotes, double quotes, and spaces
-      const cleanedKey = keyMatch[1].replace(/['"\s]/g, "");
-      keys.push(cleanedKey);
+  walk.simple(ast, {
+    ExportDefaultDeclaration(node: any) {
+      if (node.declaration.type === 'ObjectExpression') {
+        for (const prop of node.declaration.properties) {
+          if (prop.type === 'Property' && !prop.computed) {
+            if (prop.key.type === 'Identifier') {
+              keys.push(prop.key.name);
+            } else if (prop.key.type === 'Literal') {
+              keys.push(String(prop.key.value));
+            }
+          }
+        }
+      }
     }
-  }
+  });
 
   return keys;
 }
