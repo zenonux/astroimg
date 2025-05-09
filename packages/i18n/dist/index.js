@@ -5533,16 +5533,28 @@ base.MethodDefinition = base.PropertyDefinition = base.Property = function(node,
 // src/check.ts
 async function checkI18nKeys(opts) {
   const usedKeys = await getUsedKeys(opts.useDir, opts.useIgnoreDirs);
-  const loadedKeys = await getLoadedKeys(opts.i18nFiles);
+  const loadedKeys = await getLoadedKeys(opts.i18nDir);
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
   if (missingKeys.size > 0) {
-    console.error("MISS_KEYS", Array.from(missingKeys));
+    const tsv = Array.from(missingKeys).join(`
+`);
+    console.log(tsv);
     throw new Error("Missing i18n keys in translation files");
   }
 }
-async function getLoadedKeys(files) {
+async function getFiles(dir) {
+  const entries = await fsPromises.readdir(dir, { withFileTypes: true });
+  const files = await Promise.all(entries.map((entry) => {
+    const fullPath = join(dir, entry.name);
+    return entry.isDirectory() ? getFiles(fullPath) : fullPath;
+  }));
+  return files.flat();
+}
+async function getLoadedKeys(i18nDir) {
   const i18nKeys = new Set;
-  for (const file of files) {
+  const allFiles = await getFiles(i18nDir);
+  const relevantFiles = allFiles.filter((file) => file.endsWith(".json") || file.endsWith(".js") || file.endsWith(".ts"));
+  for (const file of relevantFiles) {
     try {
       const content = await fsPromises.readFile(file, "utf8");
       let keys = [];

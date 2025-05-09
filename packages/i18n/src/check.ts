@@ -1,27 +1,47 @@
 import { promises as fsPromises } from "fs";
 import { join } from "node:path";
-import { parse } from 'acorn';
-import * as walk from 'acorn-walk';
+import { parse } from "acorn";
+import * as walk from "acorn-walk";
 
 export async function checkI18nKeys(opts: {
-  useDir:string;
-  useIgnoreDirs:string[]
-  i18nFiles: string[]
+  useDir: string;
+  useIgnoreDirs: string[];
+  i18nDir: string;
 }) {
   const usedKeys = await getUsedKeys(opts.useDir, opts.useIgnoreDirs);
-  const loadedKeys = await getLoadedKeys(opts.i18nFiles);
+  const loadedKeys = await getLoadedKeys(opts.i18nDir);
 
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
 
   if (missingKeys.size > 0) {
-    console.error("MISS_KEYS", Array.from(missingKeys));
+   // Convert missingKeys to TSV format
+    const tsv = Array.from(missingKeys).join("\n");
+    console.log(tsv);
     throw new Error("Missing i18n keys in translation files");
   }
 }
-async function getLoadedKeys(files: string[]): Promise<Set<string>> {
+
+
+async function getFiles(dir: string): Promise<string[]> {
+  const entries = await fsPromises.readdir(dir, { withFileTypes: true });
+  const files = await Promise.all(
+    entries.map((entry) => {
+      const fullPath = join(dir, entry.name);
+      return entry.isDirectory() ? getFiles(fullPath) : fullPath;
+    }),
+  );
+  return files.flat();
+}
+
+async function getLoadedKeys(i18nDir: string): Promise<Set<string>> {
   const i18nKeys = new Set<string>();
 
-  for (const file of files) {
+  const allFiles = await getFiles(i18nDir);
+  const relevantFiles = allFiles.filter(
+    (file) =>
+      file.endsWith(".json") || file.endsWith(".js") || file.endsWith(".ts"),
+  );
+  for (const file of relevantFiles) {
     try {
       const content = await fsPromises.readFile(file, "utf8");
 
@@ -48,29 +68,28 @@ async function getLoadedKeys(files: string[]): Promise<Set<string>> {
   return i18nKeys;
 }
 
-
 function extractKeysFromCode(code: string): string[] {
   const keys: string[] = [];
 
   const ast = parse(code, {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
+    ecmaVersion: "latest",
+    sourceType: "module",
   });
 
   walk.simple(ast, {
     ExportDefaultDeclaration(node: any) {
-      if (node.declaration.type === 'ObjectExpression') {
+      if (node.declaration.type === "ObjectExpression") {
         for (const prop of node.declaration.properties) {
-          if (prop.type === 'Property' && !prop.computed) {
-            if (prop.key.type === 'Identifier') {
+          if (prop.type === "Property" && !prop.computed) {
+            if (prop.key.type === "Identifier") {
               keys.push(prop.key.name);
-            } else if (prop.key.type === 'Literal') {
+            } else if (prop.key.type === "Literal") {
               keys.push(String(prop.key.value));
             }
           }
         }
       }
-    }
+    },
   });
 
   return keys;

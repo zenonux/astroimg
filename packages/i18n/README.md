@@ -6,13 +6,14 @@
 ## env
 
 ```yaml
-input: ""
-output: ""
-extension: "ts"
-google_service_account_email: ""
-google_private_key: ""
+generate:
+  input: ""
+  output: ""
+  extension: "ts"
+  google_service_account_email: ""
+  google_private_key: ""
 check:
   useDir:
   useIgnoreDirs:
-  i18nFiles:
+  i18nDir:
 ```

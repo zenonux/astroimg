@@ -30,6 +30,7 @@ function checkAction(opts: { config: string }) {
 }
 
 function generateAction(opts: { config: string }) {
+  const {generate}=  readYamlFile(opts.config);
   const {
     input,
     output,
@@ -37,7 +38,7 @@ function generateAction(opts: { config: string }) {
     google_private_key,
     google_service_account_email,
     extension,
-  } = readYamlFile(opts.config);
+  } = generate;
   mergeLocales(input, output, ignore, extension || "ts", {
     google_private_key,
     google_service_account_email,
