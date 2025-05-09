@@ -39,7 +39,7 @@ function generateAction(opts: { config: string }) {
     google_service_account_email,
     extension,
   } = generate;
-  mergeLocales(input, output, ignore, extension || "ts", {
+  mergeLocales(input, output, ignore || [], extension || "ts", {
     google_private_key,
     google_service_account_email,
   });

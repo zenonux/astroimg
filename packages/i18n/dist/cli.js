@@ -5810,7 +5810,7 @@ function generateAction(opts) {
     google_service_account_email,
     extension
   } = generate;
-  mergeLocales(input, output, ignore2, extension || "ts", {
+  mergeLocales(input, output, ignore2 || [], extension || "ts", {
     google_private_key,
     google_service_account_email
   });
