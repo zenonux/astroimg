@@ -5536,8 +5536,7 @@ async function checkI18nKeys(opts) {
   const loadedKeys = await getLoadedKeys(opts.i18nDir);
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
   if (missingKeys.size > 0) {
-    const tsv = Array.from(missingKeys).join(`
-`);
+    const tsv = Array.from(missingKeys).join(",");
     console.log(tsv);
     throw new Error("Missing i18n keys in translation files");
   }
@@ -5719,7 +5718,7 @@ function buildLocaleTsFile(locale, extension, data2) {
         jsoncData += `  // ${item.key}
 `;
       } else {
-        jsoncData += `  ${[item.key]}: "${item[locale]}",
+        jsoncData += `  "${[item.key]}": "${item[locale]}",
 `;
       }
     });

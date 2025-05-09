@@ -14,8 +14,7 @@ export async function checkI18nKeys(opts: {
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
 
   if (missingKeys.size > 0) {
-   // Convert missingKeys to TSV format
-    const tsv = Array.from(missingKeys).join("\n");
+    const tsv = Array.from(missingKeys).join(",");
     console.log(tsv);
     throw new Error("Missing i18n keys in translation files");
   }

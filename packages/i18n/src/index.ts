@@ -128,7 +128,7 @@ function buildLocaleTsFile(
       if (item._comment) {
         jsoncData += `  // ${item.key}\n`;
       } else {
-        jsoncData += `  ${[item.key]}: "${item[locale]}",\n`;
+        jsoncData += `  "${[item.key]}": "${item[locale]}",\n`;
       }
     });
     return jsoncData + `}\n`;
