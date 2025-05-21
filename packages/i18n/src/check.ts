@@ -12,14 +12,20 @@ export async function checkI18nKeys(opts: {
   const loadedKeys = await getLoadedKeys(opts.i18nDir);
 
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
+  const unusedKeys = findUnusedKeys(usedKeys, loadedKeys);
 
-  if (missingKeys.size > 0) {
+  if (unusedKeys.size) {
+    console.log(Array.from(unusedKeys).join(","));
+  }
+
+  if (missingKeys.size) {
     const tsv = Array.from(missingKeys).join(",");
     console.log(tsv);
     throw new Error("Missing i18n keys in translation files");
+  } else {
+    console.info("No missing i18n keys.");
   }
 }
-
 
 async function getFiles(dir: string): Promise<string[]> {
   const entries = await fsPromises.readdir(dir, { withFileTypes: true });
@@ -102,6 +108,16 @@ function findMissingKeys(usedKeys: Set<string>, loadedKeys: Set<string>) {
     }
   });
   return missingKeys;
+}
+
+function findUnusedKeys(usedKeys: Set<string>, loadedKeys: Set<string>) {
+  const unusedKeys = new Set<string>();
+  loadedKeys.forEach((key) => {
+    if (!usedKeys.has(key)) {
+      unusedKeys.add(key);
+    }
+  });
+  return unusedKeys;
 }
 
 async function getUsedKeys(

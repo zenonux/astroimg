@@ -5537,10 +5537,16 @@ async function checkI18nKeys(opts) {
   const usedKeys = await getUsedKeys(opts.useDir, opts.useIgnoreDirs);
   const loadedKeys = await getLoadedKeys(opts.i18nDir);
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
-  if (missingKeys.size > 0) {
+  const unusedKeys = findUnusedKeys(usedKeys, loadedKeys);
+  if (unusedKeys.size) {
+    console.log(Array.from(unusedKeys).join(","));
+  }
+  if (missingKeys.size) {
     const tsv = Array.from(missingKeys).join(",");
     console.log(tsv);
     throw new Error("Missing i18n keys in translation files");
+  } else {
+    console.info("No missing i18n keys.");
   }
 }
 async function getFiles(dir) {
@@ -5606,6 +5612,15 @@ function findMissingKeys(usedKeys, loadedKeys) {
     }
   });
   return missingKeys;
+}
+function findUnusedKeys(usedKeys, loadedKeys) {
+  const unusedKeys = new Set;
+  loadedKeys.forEach((key) => {
+    if (!usedKeys.has(key)) {
+      unusedKeys.add(key);
+    }
+  });
+  return unusedKeys;
 }
 async function getUsedKeys(dir, usedIgnoreDirs) {
   const regex = /\bt\((['"`])([^'"`]+?)\1\)/g;
