@@ -5539,11 +5539,11 @@ async function checkI18nKeys(opts) {
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
   const unusedKeys = findUnusedKeys(usedKeys, loadedKeys);
   if (unusedKeys.size) {
-    console.log(Array.from(unusedKeys).join(","));
+    console.log("unused keys: " + Array.from(unusedKeys).join(","));
   }
   if (missingKeys.size) {
     const tsv = Array.from(missingKeys).join(",");
-    console.log(tsv);
+    console.log("missing keys:" + tsv);
     throw new Error("Missing i18n keys in translation files");
   } else {
     console.info("No missing i18n keys.");
