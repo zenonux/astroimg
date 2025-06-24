@@ -1,55 +1,9 @@
-import {
-  wgs84ToGcj02,
-  wgs84ToBd09,
-} from "./transform";
 
-export function withTmsProvider(L, opts) {
-  L.GridLayer.include({
-    _setZoomTransform: function (level, _center, zoom) {
-      var center = _center;
-      if (center != undefined && this.options) {
-        if (this.options.corrdType == "gcj02") {
-          center = wgs84ToGcj02(_center.lng, _center.lat);
-        } else if (this.options.corrdType == "bd09") {
-          center = wgs84ToBd09(_center.lng, _center.lat);
-        }
-      }
-      var scale = this._map.getZoomScale(zoom, level.zoom),
-        translate = level.origin
-          .multiplyBy(scale)
-          .subtract(this._map._getNewPixelOrigin(center, zoom))
-          .round();
 
-      if (L.Browser.any3d) {
-        L.DomUtil.setTransform(level.el, translate, scale);
-      } else {
-        L.DomUtil.setPosition(level.el, translate);
-      }
-    },
-    _getTiledPixelBounds: function (_center) {
-      var center = _center;
-      if (center != undefined && this.options) {
-        if (this.options.corrdType == "gcj02") {
-          center = wgs84ToGcj02(_center.lng, _center.lat);
-        } else if (this.options.corrdType == "bd09") {
-          center = wgs84ToBd09(_center.lng, _center.lat);
-        }
-      }
-      var map = this._map,
-        mapZoom = map._animatingZoom
-          ? Math.max(map._animateToZoom, map.getZoom())
-          : map.getZoom(),
-        scale = map.getZoomScale(mapZoom, this._tileZoom),
-        pixelCenter = map.project(center, this._tileZoom).floor(),
-        halfSize = map.getSize().divideBy(scale * 2);
-
-      return new L.Bounds(
-        pixelCenter.subtract(halfSize),
-        pixelCenter.add(halfSize),
-      );
-    },
-  });
-
+import withProj from './proj4leaflet';
+import proj4 from 'proj4'
+export  function withTmsProvider(L, opts) {
+  withProj(L,proj4)
   if (L.Proj) {
     L.CRS.Baidu = new L.Proj.CRS(
       "EPSG:900913",
@@ -69,7 +23,6 @@ export function withTmsProvider(L, opts) {
       },
     );
   }
-
   L.TileLayer.TmsProvider = L.TileLayer.extend({
     initialize: function (type, options) {
       // (type, Object)
@@ -185,14 +138,14 @@ export function withTmsProvider(L, opts) {
 
     Baidu: {
       Normal: {
-        Map: "//online{s}.map.bdimg.com/onlinelabel/?qt=tile&x={x}&y={y}&z={z}&styles=pl&scaler=1&p=1",
+        Map: "//maponline{s}.bdimg.com/tile/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&scaler=2&udt=&from=jsapi2_0",
       },
       Satellite: {
         Map: "//shangetu{s}.map.bdimg.com/it/u=x={x};y={y};z={z};v=009;type=sate&fm=46",
         Annotion:
           "//online{s}.map.bdimg.com/tile/?qt=tile&x={x}&y={y}&z={z}&styles=sl&v=020",
       },
-      Subdomains: "0123456789",
+      Subdomains: "012",
       tms: true,
     },
 
@@ -212,30 +165,8 @@ export function withTmsProvider(L, opts) {
 
   L.tileLayer.tmsProvider = function (type, options) {
     options = options || {};
-    options.corrdType = opts.chinaTileAdapter ? getCorrdType(type) : 'wgs84';
+    options.corrdType = 'wgs84';
     return new L.TileLayer.TmsProvider(type, options);
-
-    //获取坐标类型
-    function getCorrdType(type) {
-      var parts = type.split(".");
-      var providerName = parts[0];
-      var zbName = "wgs84";
-      switch (providerName) {
-        case "Geoq":
-        case "GaoDe":
-        case "Google":
-          zbName = "gcj02";
-          break;
-        case "Baidu":
-          zbName = "bd09";
-          break;
-        case "OSM":
-        case "TianDiTu":
-          zbName = "wgs84";
-          break;
-      }
-      return zbName;
-    }
   };
 
   return L;

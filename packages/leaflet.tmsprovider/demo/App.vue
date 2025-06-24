@@ -6,32 +6,17 @@ import OriginL from 'leaflet';
 import { withTmsProvider } from '../src'
 import 'leaflet/dist/leaflet.css';
 import { onMounted } from 'vue';
-onMounted(async () => {
+onMounted(() => {
   const L = withTmsProvider(OriginL, {
     locale: 'zh_cn',
-    chinaTileAdapter: true
   })
-  let location = await getLocation()
-  let lat = location[1]
-  let lng = location[0]
-  const map = L.map('map').setView([lng, lat], 16);
-  L.marker([lng, lat]).addTo(map);
-  console.info('current gps location: ', location.reverse().join(','))
-  L.tileLayer.tmsProvider('GaoDe.Normal.Map', { maxZoom: 18, minZoom: 2 }).addTo(map);
+  const map = L.map('map',{
+    crs: L.CRS.Baidu,
+  }).setView([39.909031, 116.397451], 16);
+  L.tileLayer.tmsProvider('Baidu.Normal.Map', { maxZoom: 18, minZoom: 2 }).addTo(map);
 })
 
-function getLocation() {
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      var latitude = position.coords.latitude;
-      var longitude = position.coords.longitude;
-      resolve([latitude, longitude])
-    }, function (error) {
-      reject(error)
-    });
-  })
 
-}
 </script>
 <style>
 html,
