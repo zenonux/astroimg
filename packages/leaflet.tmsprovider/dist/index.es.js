@@ -4788,7 +4788,7 @@ function j3(t, a) {
         return s;
       }(),
       origin: [0, 0],
-      bounds: t.bounds([20037508342789244e-9, 0], [0, 20037508342789244e-9])
+      bounds: t.bounds([-2003772511268234e-8, -1999461955417086e-8], [2003772511268234e-8, 1999461955417086e-8])
     }
   )), t.TileLayer.TmsProvider = t.TileLayer.extend({
     initialize: function(i, s) {

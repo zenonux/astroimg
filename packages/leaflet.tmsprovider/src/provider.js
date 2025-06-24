@@ -19,7 +19,7 @@ export  function withTmsProvider(L, opts) {
           return res;
         })(),
         origin: [0, 0],
-        bounds: L.bounds([20037508.342789244, 0], [0, 20037508.342789244]),
+        bounds: L.bounds([-20037725.11268234, -19994619.55417086],[20037725.11268234, 19994619.55417086]),
       },
     );
   }
