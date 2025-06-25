@@ -1,27 +1,28 @@
-
-
-import withProj from './proj4leaflet';
-import proj4 from 'proj4'
-export  function withTmsProvider(L, opts) {
-  withProj(L,proj4)
+import withProj from "./proj4leaflet";
+import proj4 from "proj4";
+export function withTmsProvider(L, opts) {
+  withProj(L, proj4);
   if (L.Proj) {
-    L.CRS.Baidu = new L.Proj.CRS(
-      "EPSG:900913",
-      "+proj=merc +a=6378206 +b=6356584.314245179 +lat_ts=0.0 +lon_0=0.0 +x_0=0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs",
-      {
-        resolutions: (function () {
-          var level = 19;
-          var res = [];
-          res[0] = Math.pow(2, 18);
-          for (var i = 1; i < level; i++) {
-            res[i] = Math.pow(2, 18 - i);
-          }
-          return res;
-        })(),
-        origin: [0, 0],
-        bounds: L.bounds([-20037725.11268234, -19994619.55417086],[20037725.11268234, 19994619.55417086]),
+    L.Projection.BaiduMercator = L.Util.extend({}, L.Projection.Mercator, {
+      R: 6378206,
+      R_MINOR: 6356584.314245179,
+      bounds: L.bounds(
+        [-20037725.11268234, -19994619.55417086],
+        [20037725.11268234, 19994619.55417086],
+      ),
+    });
+    L.CRS.Baidu = L.Util.extend({}, L.CRS.Earth, {
+      code: "EPSG:Baidu",
+      projection: L.Projection.BaiduMercator,
+      transformation: new L.Transformation(1, 0.5, -1, 0.5),
+      scale: function (t) {
+        return 1 / Math.pow(2, 18 - t);
       },
-    );
+      zoom: function (t) {
+        return 18 - Math.log(1 / t) / Math.LN2;
+      },
+      wrapLng: void 0,
+    });
   }
   L.TileLayer.TmsProvider = L.TileLayer.extend({
     initialize: function (type, options) {
@@ -39,30 +40,20 @@ export  function withTmsProvider(L, opts) {
       var url = providers[providerName][mapName][mapType];
       options.subdomains = providers[providerName].Subdomains;
       options.key = options.key || providers[providerName].key;
-
-      if ("tms" in providers[providerName]) {
-        options.tms = providers[providerName]["tms"];
-      }
+      options.getUrlArgs = options.key || providers[providerName].getUrlArgs;
 
       L.TileLayer.prototype.initialize.call(this, url, options);
     },
 
     getTileUrl: function (coords) {
+      const { x, y, z } = this.options.getUrlArgs ? this.options.getUrlArgs(coords) : coords;
       var data = {
         s: this._getSubdomain(coords),
-        x: coords.x,
-        y: coords.y,
-        z: this._getZoomForUrl(),
+        x: x,
+        y: y,
+        z: z,
         l: opts.locale,
       };
-      if (this._map && !this._map.options.crs.infinite) {
-        var invertedY = this._globalTileRange.max.y - coords.y;
-        if (this.options.tms) {
-          data["y"] = invertedY;
-        }
-        data["-y"] = invertedY;
-      }
-
       data.sx = data.x >> 4;
       data.sy = ((1 << data.z) - data.y) >> 4;
 
@@ -138,15 +129,17 @@ export  function withTmsProvider(L, opts) {
 
     Baidu: {
       Normal: {
-        Map: "//maponline{s}.bdimg.com/tile/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&scaler=2&udt=&from=jsapi2_0",
+        Map: "//maponline{s}.bdimg.com/tile/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&scaler=2&udt=&from=jsapi3_0",
+      },
+      getUrlArgs: function (t) {
+        return { x: t.x, y: -1 - t.y, z: t.z };
       },
       Satellite: {
         Map: "//shangetu{s}.map.bdimg.com/it/u=x={x};y={y};z={z};v=009;type=sate&fm=46",
         Annotion:
           "//online{s}.map.bdimg.com/tile/?qt=tile&x={x}&y={y}&z={z}&styles=sl&v=020",
       },
-      Subdomains: "012",
-      tms: true,
+      Subdomains: ["0", "1", "2"],
     },
 
     Tencent: {
@@ -165,11 +158,9 @@ export  function withTmsProvider(L, opts) {
 
   L.tileLayer.tmsProvider = function (type, options) {
     options = options || {};
-    options.corrdType = 'wgs84';
+    options.corrdType = "wgs84";
     return new L.TileLayer.TmsProvider(type, options);
   };
 
   return L;
 }
-
-

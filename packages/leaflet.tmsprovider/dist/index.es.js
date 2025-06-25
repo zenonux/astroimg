@@ -4776,40 +4776,41 @@ const E9 = Object.assign(a5, {
 });
 U3(E9);
 function j3(t, a) {
-  return H9(t, E9), t.Proj && (t.CRS.Baidu = new t.Proj.CRS(
-    "EPSG:900913",
-    "+proj=merc +a=6378206 +b=6356584.314245179 +lat_ts=0.0 +lon_0=0.0 +x_0=0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs",
-    {
-      resolutions: function() {
-        var i = 19, s = [];
-        s[0] = Math.pow(2, 18);
-        for (var e = 1; e < i; e++)
-          s[e] = Math.pow(2, 18 - e);
-        return s;
-      }(),
-      origin: [0, 0],
-      bounds: t.bounds([-2003772511268234e-8, -1999461955417086e-8], [2003772511268234e-8, 1999461955417086e-8])
-    }
-  )), t.TileLayer.TmsProvider = t.TileLayer.extend({
+  return H9(t, E9), t.Proj && (t.Projection.BaiduMercator = t.Util.extend({}, t.Projection.Mercator, {
+    R: 6378206,
+    R_MINOR: 6356584314245179e-9,
+    bounds: t.bounds(
+      [-2003772511268234e-8, -1999461955417086e-8],
+      [2003772511268234e-8, 1999461955417086e-8]
+    )
+  }), t.CRS.Baidu = t.Util.extend({}, t.CRS.Earth, {
+    code: "EPSG:Baidu",
+    projection: t.Projection.BaiduMercator,
+    transformation: new t.Transformation(1, 0.5, -1, 0.5),
+    scale: function(i) {
+      return 1 / Math.pow(2, 18 - i);
+    },
+    zoom: function(i) {
+      return 18 - Math.log(1 / i) / Math.LN2;
+    },
+    wrapLng: void 0
+  })), t.TileLayer.TmsProvider = t.TileLayer.extend({
     initialize: function(i, s) {
       var e = t.TileLayer.TmsProvider.providers;
       s = s || {};
       var r = i.split("."), h = r[0], n = r[1], o = r[2], l = e[h][n][o];
-      s.subdomains = e[h].Subdomains, s.key = s.key || e[h].key, "tms" in e[h] && (s.tms = e[h].tms), t.TileLayer.prototype.initialize.call(this, l, s);
+      s.subdomains = e[h].Subdomains, s.key = s.key || e[h].key, s.getUrlArgs = s.key || e[h].getUrlArgs, t.TileLayer.prototype.initialize.call(this, l, s);
     },
     getTileUrl: function(i) {
-      var s = {
+      const { x: s, y: e, z: r } = this.options.getUrlArgs ? this.options.getUrlArgs(i) : i;
+      var h = {
         s: this._getSubdomain(i),
-        x: i.x,
-        y: i.y,
-        z: this._getZoomForUrl(),
+        x: s,
+        y: e,
+        z: r,
         l: a.locale
       };
-      if (this._map && !this._map.options.crs.infinite) {
-        var e = this._globalTileRange.max.y - i.y;
-        this.options.tms && (s.y = e), s["-y"] = e;
-      }
-      return s.sx = s.x >> 4, s.sy = (1 << s.z) - s.y >> 4, t.Util.template(this._url, t.Util.extend(s, this.options));
+      return h.sx = h.x >> 4, h.sy = (1 << h.z) - h.y >> 4, t.Util.template(this._url, t.Util.extend(h, this.options));
     }
   }), t.TileLayer.TmsProvider.providers = {
     TianDiTu: {
@@ -4868,14 +4869,16 @@ function j3(t, a) {
     },
     Baidu: {
       Normal: {
-        Map: "//maponline{s}.bdimg.com/tile/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&scaler=2&udt=&from=jsapi2_0"
+        Map: "//maponline{s}.bdimg.com/tile/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&scaler=2&udt=&from=jsapi3_0"
+      },
+      getUrlArgs: function(i) {
+        return { x: i.x, y: -1 - i.y, z: i.z };
       },
       Satellite: {
         Map: "//shangetu{s}.map.bdimg.com/it/u=x={x};y={y};z={z};v=009;type=sate&fm=46",
         Annotion: "//online{s}.map.bdimg.com/tile/?qt=tile&x={x}&y={y}&z={z}&styles=sl&v=020"
       },
-      Subdomains: "012",
-      tms: !0
+      Subdomains: ["0", "1", "2"]
     },
     Tencent: {
       Normal: {

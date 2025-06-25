@@ -2,21 +2,34 @@
   <div id="map"></div>
 </template>
 <script setup>
-import OriginL from 'leaflet';
-import { withTmsProvider } from '../src'
-import 'leaflet/dist/leaflet.css';
-import { onMounted } from 'vue';
+import OriginL from "leaflet";
+import { withTmsProvider } from "../src";
+import "leaflet/dist/leaflet.css";
+import { onMounted } from "vue";
 onMounted(() => {
   const L = withTmsProvider(OriginL, {
-    locale: 'zh_cn',
-  })
-  const map = L.map('map',{
+    locale: "zh_cn",
+  });
+  const MAX_BOUNDS = [
+    [-80, -176],
+    [84, 178],
+  ];
+  const map = L.map("map", {
     crs: L.CRS.Baidu,
-  }).setView([39.909031, 116.397451], 16);
-  L.tileLayer.tmsProvider('Baidu.Normal.Map', { maxZoom: 18, minZoom: 2 }).addTo(map);
-})
-
-
+    zoom: 13,
+    zoomControl: false,
+    attributionControl: false,
+    center: [31.834912, 117.220102],
+    minZoom: 4,
+    maxZoom: 18,
+    zoomSnap: 0,
+    maxBounds: MAX_BOUNDS,
+    worldCopyJump: false,
+  });
+  L.tileLayer
+    .tmsProvider("Baidu.Normal.Map", { maxZoom: 18, minZoom: 2 })
+    .addTo(map);
+});
 </script>
 <style>
 html,
