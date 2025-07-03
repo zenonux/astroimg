@@ -38,28 +38,23 @@ class CosBucketManager implements BucketManager {
     }
   }
 
-  async  checkDirectoryExists(prefix:string) {
+  async checkDirectoryExists(prefix: string) {
     if (!this._client) {
       return false;
     }
-    try {
-      const result = await this._client.getBucket({
-        Bucket: this._options.bucket,
-        Region: this._options.region,
-        Prefix: prefix.endsWith("/") ? prefix : prefix + "/",
-        MaxKeys: 1, // 只取一个对象即可
-      })
-  
-      if (result.Contents.length > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (err) {
+    const result = await this._client.getBucket({
+      Bucket: this._options.bucket,
+      Region: this._options.region,
+      Prefix: prefix.endsWith("/") ? prefix : prefix + "/",
+      MaxKeys: 1, // 只取一个对象即可
+    });
+
+    if (result.Contents.length > 0) {
+      return true;
+    } else {
       return false;
     }
   }
-  
 
   async uploadLocalDirectory(
     prefix: string,
@@ -67,7 +62,7 @@ class CosBucketManager implements BucketManager {
     options: {
       filter?: any;
       cacheControl?: string;
-    }
+    },
   ) {
     dirPath = path.resolve(dirPath);
     const input = [];
@@ -84,9 +79,9 @@ class CosBucketManager implements BucketManager {
               ? {
                   CacheControl: options.cacheControl,
                 }
-              : {}
-          )
-        )
+              : {},
+          ),
+        ),
       );
     }
     // Only one promise is run at once
