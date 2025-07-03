@@ -15,4 +15,9 @@ export default defineConfig([
     languageOptions: { globals: globals.browser },
   },
   tseslint.configs.recommended,
+  tseslint.config({
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  }),
 ]);
