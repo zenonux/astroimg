@@ -101,8 +101,8 @@ importers:
         specifier: ^9.4.1
         version: 9.5.0
       cos-nodejs-sdk-v5:
-        specifier: ^2.12.5
-        version: 2.14.5
+        specifier: ^2.15.0
+        version: 2.15.1
       p-limit:
         specifier: ^3.1.0
         version: 3.1.0
@@ -1672,10 +1672,9 @@ packages:
   core-util-is@1.0.2:
     resolution: {integrity: sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==}
 
-  cos-nodejs-sdk-v5@2.14.5:
-    resolution: {integrity: sha512-kRVLFHxpZYIz9SwqDRBfRrSN7FzFJXodNzJKtLdS1OhnRz1ekNN3JnCkScYYF/l12isML5ajwqnD6nPgvrI6Pw==}
+  cos-nodejs-sdk-v5@2.15.1:
+    resolution: {integrity: sha512-eBfqnuffe1qlIHbCep8eQgXa6Fq44cDjgCv6A2pyB/DAnKxY15DE6vU92Zc55v2t60EGcDapaTQY6DWVauGMRQ==}
     engines: {node: '>= 6'}
-    deprecated: v2.14.5 has been deprecated,please use a newer version instead
 
   crc-32@1.2.2:
     resolution: {integrity: sha512-ROmzCKrTnOwybPcJApAA6WBWij23HVfGVNKqqrZpuyZOHqK2CwHSvpGuyt/UNNvaIjEd8X5IFGp4Mh+Ie1IHJQ==}
@@ -2075,8 +2074,8 @@ packages:
   fast-uri@3.0.1:
     resolution: {integrity: sha512-MWipKbbYiYI0UC7cl8m/i/IWTqfC8YXsqjzybjddLsFjStroQzsHXkc73JutMvBiXmOvapk+axIl79ig5t55Bw==}
 
-  fast-xml-parser@4.4.1:
-    resolution: {integrity: sha512-xkjOecfnKGkSsOwtZ5Pz7Us/T6mrbPQrq0nh+aCO5V9nk5NLWmasAHumTKjiPJPWANe+kAZ84Jc8ooJkzZ88Sw==}
+  fast-xml-parser@4.2.5:
+    resolution: {integrity: sha512-B9/wizE4WngqQftFPmdaMYlXoJlJOYxGQOanC77fq9k8+Z0v5dDSVh+3glErdIROP//s/jgb7ZuxKfB8nVyo0g==}
     hasBin: true
 
   fastq@1.17.1:
@@ -5116,10 +5115,10 @@ snapshots:
 
   core-util-is@1.0.2: {}
 
-  cos-nodejs-sdk-v5@2.14.5:
+  cos-nodejs-sdk-v5@2.15.1:
     dependencies:
       conf: 9.0.2
-      fast-xml-parser: 4.4.1
+      fast-xml-parser: 4.2.5
       mime-types: 2.1.35
       request: 2.88.2
 
@@ -5545,7 +5544,7 @@ snapshots:
 
   fast-uri@3.0.1: {}
 
-  fast-xml-parser@4.4.1:
+  fast-xml-parser@4.2.5:
     dependencies:
       strnum: 1.0.5
 
