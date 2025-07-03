@@ -1,5 +1,5 @@
 import { exec } from "child_process";
-// @ts-ignore
+// @ts-expect-error no dts
 import { expect, test } from "bun:test";
 import { promisify } from "util";
 import path from "path";
