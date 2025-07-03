@@ -1,6 +1,6 @@
 {
   "name": "@astroimg/oss-deploy",
-  "version": "1.9.5",
+  "version": "1.10.0",
   "description": "Deploy static assests to tencent cos.",
   "bin": {
     "oss-deploy": "dist/cli.js"
@@ -23,7 +23,8 @@
   "dependencies": {
     "commander": "^9.4.1",
     "cos-nodejs-sdk-v5": "^2.15.0",
-    "p-limit": "^3.1.0",
+    "p-queue": "^8.1.0",
+    "p-retry": "^6.2.1",
     "readdirp": "^3.6.0",
     "yaml": "^2.1.1"
   },

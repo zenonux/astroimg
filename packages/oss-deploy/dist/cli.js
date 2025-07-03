@@ -277,8 +277,11 @@ var import_fs = __toESM(require("fs"));
 var import_cos_nodejs_sdk_v5 = __toESM(require("cos-nodejs-sdk-v5"));
 var import_path = __toESM(require("path"));
 var import_readdirp = __toESM(require("readdirp"));
-var import_p_limit = __toESM(require("p-limit"));
-var limit = (0, import_p_limit.default)(3);
+var import_p_queue = __toESM(require("p-queue"));
+var import_p_retry = __toESM(require("p-retry"));
+var queue = new import_p_queue.default({
+    concurrency: 3
+});
 var CosBucketManager = /*#__PURE__*/ function() {
     function CosBucketManager(options) {
         _class_call_check(this, CosBucketManager);
@@ -346,7 +349,7 @@ var CosBucketManager = /*#__PURE__*/ function() {
             value: function checkDirectoryExists(prefix) {
                 var _this = this;
                 return _async_to_generator(function() {
-                    var result, err;
+                    var result;
                     return _ts_generator(this, function(_state) {
                         switch(_state.label){
                             case 0:
@@ -356,14 +359,6 @@ var CosBucketManager = /*#__PURE__*/ function() {
                                         false
                                     ];
                                 }
-                                _state.label = 1;
-                            case 1:
-                                _state.trys.push([
-                                    1,
-                                    3,
-                                    ,
-                                    4
-                                ]);
                                 return [
                                     4,
                                     _this._client.getBucket({
@@ -373,7 +368,7 @@ var CosBucketManager = /*#__PURE__*/ function() {
                                         MaxKeys: 1
                                     })
                                 ];
-                            case 2:
+                            case 1:
                                 result = _state.sent();
                                 if (result.Contents.length > 0) {
                                     return [
@@ -387,17 +382,6 @@ var CosBucketManager = /*#__PURE__*/ function() {
                                     ];
                                 }
                                 return [
-                                    3,
-                                    4
-                                ];
-                            case 3:
-                                err = _state.sent();
-                                return [
-                                    2,
-                                    false
-                                ];
-                            case 4:
-                                return [
                                     2
                                 ];
                         }
@@ -410,12 +394,11 @@ var CosBucketManager = /*#__PURE__*/ function() {
             value: function uploadLocalDirectory(prefix, dirPath, options) {
                 var _this = this;
                 return _async_to_generator(function() {
-                    var input, _iteratorAbruptCompletion, _didIteratorError, _iteratorError, _loop, _iterator, _step, err;
+                    var _iteratorAbruptCompletion, _didIteratorError, _iteratorError, _loop, _iterator, _step, err;
                     return _ts_generator(this, function(_state) {
                         switch(_state.label){
                             case 0:
                                 dirPath = import_path.default.resolve(dirPath);
-                                input = [];
                                 _iteratorAbruptCompletion = false, _didIteratorError = false;
                                 _state.label = 1;
                             case 1:
@@ -431,11 +414,16 @@ var CosBucketManager = /*#__PURE__*/ function() {
                                     var fullPath = entry.fullPath;
                                     var relativePath = import_path.default.relative(dirPath, fullPath);
                                     var prefixPath = (prefix + relativePath).replace("\\", "/");
-                                    input.push(limit(function() {
+                                    var task = (0, import_p_retry.default)(function() {
                                         return _this.uploadLocalFile(prefixPath, fullPath, options.cacheControl ? {
                                             CacheControl: options.cacheControl
                                         } : {});
-                                    }));
+                                    }, {
+                                        retries: 1
+                                    });
+                                    queue.add(function() {
+                                        return task;
+                                    });
                                 };
                                 _iterator = _async_iterator((0, import_readdirp.default)(dirPath, options.filter));
                                 _state.label = 2;
@@ -507,7 +495,7 @@ var CosBucketManager = /*#__PURE__*/ function() {
                             case 12:
                                 return [
                                     4,
-                                    Promise.all(input)
+                                    queue.onIdle()
                                 ];
                             case 13:
                                 _state.sent();

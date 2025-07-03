@@ -3,10 +3,11 @@ import fs from "fs";
 import COS from "cos-nodejs-sdk-v5";
 import path from "path";
 import readdirp from "readdirp";
-import pLimit from "p-limit";
-// 最大3个文件并发上传
-const limit = pLimit(3);
+import PQueue from "p-queue";
+import pRetry from "p-retry";
 
+// 最大3个文件并发上传
+const queue = new PQueue({ concurrency: 3 });
 class CosBucketManager implements BucketManager {
   private _client?;
   private _options;
@@ -65,13 +66,12 @@ class CosBucketManager implements BucketManager {
     },
   ) {
     dirPath = path.resolve(dirPath);
-    const input = [];
     for await (const entry of readdirp(dirPath, options.filter)) {
       const { fullPath } = entry;
       const relativePath = path.relative(dirPath, fullPath);
       const prefixPath = (prefix + relativePath).replace("\\", "/");
-      input.push(
-        limit(() =>
+      const task = pRetry(
+        () =>
           this.uploadLocalFile(
             prefixPath,
             fullPath,
@@ -81,11 +81,13 @@ class CosBucketManager implements BucketManager {
                 }
               : {},
           ),
-        ),
+        {
+          retries: 1,
+        },
       );
+      queue.add(() => task);
     }
-    // Only one promise is run at once
-    await Promise.all(input);
+    await queue.onIdle();
   }
 }
 
