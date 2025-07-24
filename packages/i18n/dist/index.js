@@ -5532,7 +5532,12 @@ base.MethodDefinition = base.PropertyDefinition = base.Property = function(node,
 
 // src/check.ts
 async function loadUsedRemoteKeys(url) {
-  let apiResponse = await fetch(url);
+  let apiResponse = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
   const { data: data2 } = await apiResponse.json();
   let items = data2.items || [];
   return items;

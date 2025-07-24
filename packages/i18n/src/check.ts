@@ -4,7 +4,12 @@ import { parse } from "acorn";
 import * as walk from "acorn-walk";
 
 async function loadUsedRemoteKeys(url: string): Promise<string[]> {
-  let apiResponse = await fetch(url);
+  let apiResponse = await fetch(url, {
+    method: "POST", 
+    headers: {
+      "Content-Type": "application/json", 
+    },
+  });
   const { data } = await apiResponse.json();
   let items = data.items || [];
   return items;
