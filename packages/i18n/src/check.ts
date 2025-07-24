@@ -3,24 +3,36 @@ import { join } from "node:path";
 import { parse } from "acorn";
 import * as walk from "acorn-walk";
 
+async function loadUsedRemoteKeys(url: string): Promise<string[]> {
+  let apiResponse = await fetch(url);
+  const { data } = await apiResponse.json();
+  let items = data.items || [];
+  return items;
+}
+
 export async function checkI18nKeys(opts: {
+  useDynamicKeysApi: string;
   useDir: string;
   useIgnoreDirs: string[];
   i18nDir: string;
 }) {
-  const usedKeys = await getUsedKeys(opts.useDir, opts.useIgnoreDirs);
-  const loadedKeys = await getLoadedKeys(opts.i18nDir);
+  let usedKeys = await getUsedKeys(opts.useDir, opts.useIgnoreDirs);
+  const usedDynamicKeys = await loadUsedRemoteKeys(opts.useDynamicKeysApi);
+  usedDynamicKeys.forEach((v) => {
+    usedKeys.add(v);
+  });
 
+  const loadedKeys = await getLoadedKeys(opts.i18nDir);
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
   const unusedKeys = findUnusedKeys(usedKeys, loadedKeys);
 
   if (unusedKeys.size) {
-    console.log('unused keys: ' + Array.from(unusedKeys).join(","));
+    console.log("unused keys: " + Array.from(unusedKeys).join(","));
   }
 
   if (missingKeys.size) {
     const tsv = Array.from(missingKeys).join(",");
-    console.log('missing keys:' + tsv);
+    console.log("missing keys:" + tsv);
     throw new Error("Missing i18n keys in translation files");
   } else {
     console.info("No missing i18n keys.");
@@ -124,7 +136,8 @@ async function getUsedKeys(
   dir: string,
   usedIgnoreDirs: string[],
 ): Promise<Set<string>> {
-  const regex = /\bt\((['"`])([^'"`]+?)\1\)/g;
+  // 忽略动态key，只分析静态key
+  const regex = /\bt\(\s*(['"])([^'"`]+?)\1\s*\)/g;
   const i18nKeys = new Set<string>();
 
   const files = await fsPromises.readdir(dir);

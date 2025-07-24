@@ -14,6 +14,7 @@ generate:
   google_private_key: ""
 check:
   useDir:
+  useDynamicKeysApi:
   useIgnoreDirs:
   i18nDir:
 ```

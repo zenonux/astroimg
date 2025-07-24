@@ -5531,8 +5531,18 @@ base.MethodDefinition = base.PropertyDefinition = base.Property = function(node,
 };
 
 // src/check.ts
+async function loadUsedRemoteKeys(url) {
+  let apiResponse = await fetch(url);
+  const { data: data2 } = await apiResponse.json();
+  let items = data2.items || [];
+  return items;
+}
 async function checkI18nKeys(opts) {
-  const usedKeys = await getUsedKeys(opts.useDir, opts.useIgnoreDirs);
+  let usedKeys = await getUsedKeys(opts.useDir, opts.useIgnoreDirs);
+  const usedDynamicKeys = await loadUsedRemoteKeys(opts.useDynamicKeysApi);
+  usedDynamicKeys.forEach((v) => {
+    usedKeys.add(v);
+  });
   const loadedKeys = await getLoadedKeys(opts.i18nDir);
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
   const unusedKeys = findUnusedKeys(usedKeys, loadedKeys);
@@ -5621,7 +5631,7 @@ function findUnusedKeys(usedKeys, loadedKeys) {
   return unusedKeys;
 }
 async function getUsedKeys(dir, usedIgnoreDirs) {
-  const regex = /\bt\((['"`])([^'"`]+?)\1\)/g;
+  const regex = /\bt\(\s*(['"])([^'"`]+?)\1\s*\)/g;
   const i18nKeys = new Set;
   const files = await fsPromises.readdir(dir);
   for (const file of files) {
