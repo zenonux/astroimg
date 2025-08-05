@@ -4,6 +4,7 @@ import * as path from "node:path";
 import * as fs from "node:fs";
 import { download } from "./download";
 import pm from "picomatch";
+import chalk from 'chalk';
 
 export { checkI18nKeys } from "./check";
 
@@ -34,7 +35,7 @@ async function mergeLocalesByBuffer(
     writeFileSync(resolve(localesDir, `./en.${extension}`), en);
     let zh = buildLocaleTsFile("zh", extension, json);
     writeFileSync(resolve(localesDir, `./zh-CN.${extension}`), zh);
-    console.info("generate i18n locales succeed.");
+    console.log(chalk.green('🎉 i18n generation successful!'));
   } catch (e) {
     console.error(e);
   }
@@ -53,11 +54,11 @@ export async function mergeLocales(
     console.info(`reading ${input}...`);
     buffer = fs.readFileSync(input, "utf-8");
   } else {
-    console.info(`downloading file ${input}...`);
+    console.log(chalk.blue('📥 Downloading file: ') + chalk.gray(input));
     buffer = await download(input, opts);
-    console.info(`download file ${input} succeed.`);
+    console.log(chalk.green('✅ Download complete!'));
   }
-  console.info(`generating locales...`);
+  console.log(chalk.cyan('🌐 Generating i18n locale files...'));
   mergeLocalesByBuffer(buffer, localesDir, ignore, extension);
 }
 

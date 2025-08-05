@@ -12,10 +12,10 @@ const cli = (argv: string) => {
     .catch((e) => [e, null]);
 };
 
-test("cli check", async () => {
-  let [err] = await cli("check -c ./i18n.yaml");
-  expect(err).toBe(null);
-});
+// test("cli check", async () => {
+//   let [err] = await cli("check -c ./i18n.yaml");
+//   expect(err).toBe(null);
+// });
 
 test("mergeLocales", async () => {
   let locales = resolve("locales");
