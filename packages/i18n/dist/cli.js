@@ -6123,7 +6123,7 @@ function findUnusedKeys(usedKeys, loadedKeys) {
   return unusedKeys;
 }
 async function getUsedKeys(dir, usedIgnoreDirs) {
-  const regex = /\bt\(\s*(['"])([^'"`]+?)\1\s*\)/g;
+  const regex = /\bt\s*\(\s*(['"])([\s\S]*?)\1/g;
   const i18nKeys = new Set;
   const files = await fsPromises.readdir(dir);
   for (const file of files) {

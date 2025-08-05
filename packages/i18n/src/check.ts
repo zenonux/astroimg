@@ -142,7 +142,7 @@ async function getUsedKeys(
   usedIgnoreDirs: string[],
 ): Promise<Set<string>> {
   // 忽略动态key，只分析静态key
-  const regex = /\bt\(\s*(['"])([^'"`]+?)\1\s*\)/g;
+  const regex = /\bt\s*\(\s*(['"])([\s\S]*?)\1/g;
   const i18nKeys = new Set<string>();
 
   const files = await fsPromises.readdir(dir);
