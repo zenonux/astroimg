@@ -1,6 +1,6 @@
 {
   "name": "@astroimg/i18n",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "main": "./dist/index.js",
   "bin": {
     "i18n": "dist/cli.js"

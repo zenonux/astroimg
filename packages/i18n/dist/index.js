@@ -6038,14 +6038,13 @@ async function checkI18nKeys(opts) {
   const missingKeys = findMissingKeys(usedKeys, loadedKeys);
   const unusedKeys = findUnusedKeys(usedKeys, loadedKeys);
   if (unusedKeys.size) {
-    console.log("unused keys: " + Array.from(unusedKeys).join(","));
+    printKeyList("Unused i18n keys", unusedKeys);
   }
   if (missingKeys.size) {
-    const tsv = Array.from(missingKeys).join(",");
-    console.log("missing keys:" + tsv);
-    throw new Error("Missing i18n keys in translation files");
+    printKeyList("Missing i18n keys", missingKeys);
+    throw new Error(source_default.red("❌ Missing i18n keys in translation files"));
   } else {
-    console.info("No missing i18n keys.");
+    console.log(source_default.green("✅ No missing i18n keys."));
   }
 }
 async function getFiles(dir) {
@@ -6149,6 +6148,17 @@ function shouldSkipDirectory(fullPath, skipDirectoryList) {
 }
 function isRelevantFile(file) {
   return (file.endsWith(".vue") || file.endsWith(".js") || file.endsWith(".ts")) && !file.endsWith(".d.ts");
+}
+function printKeyList(title, keySetOrList) {
+  const keys = Array.isArray(keySetOrList) ? keySetOrList : Array.from(keySetOrList);
+  if (keys.length === 0) {
+    console.log(source_default.green(`${title}: ✅ None`));
+    return;
+  }
+  console.log(source_default.yellow(`${title} (${keys.length}):`));
+  keys.forEach((key, idx) => {
+    console.log(source_default.cyan(`  ${idx + 1}. ${key}`));
+  });
 }
 
 // src/index.ts

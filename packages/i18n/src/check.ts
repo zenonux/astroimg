@@ -2,6 +2,7 @@ import { promises as fsPromises } from "fs";
 import { join } from "node:path";
 import { parse } from "acorn";
 import * as walk from "acorn-walk";
+import chalk from 'chalk';
 
 async function loadUsedRemoteKeys(url: string): Promise<string[]> {
   let apiResponse = await fetch(url, {
@@ -32,15 +33,14 @@ export async function checkI18nKeys(opts: {
   const unusedKeys = findUnusedKeys(usedKeys, loadedKeys);
 
   if (unusedKeys.size) {
-    console.log("unused keys: " + Array.from(unusedKeys).join(","));
+    printKeyList("Unused i18n keys", unusedKeys);
   }
 
   if (missingKeys.size) {
-    const tsv = Array.from(missingKeys).join(",");
-    console.log("missing keys:" + tsv);
-    throw new Error("Missing i18n keys in translation files");
+    printKeyList("Missing i18n keys", missingKeys);
+    throw new Error(chalk.red("❌ Missing i18n keys in translation files"));
   } else {
-    console.info("No missing i18n keys.");
+    console.log(chalk.green('✅ No missing i18n keys.'));
   }
 }
 
@@ -124,7 +124,7 @@ function findMissingKeys(usedKeys: Set<string>, loadedKeys: Set<string>) {
       missingKeys.add(key);
     }
   });
-  return missingKeys;
+  return missingKeys as Set<string>;
 }
 
 function findUnusedKeys(usedKeys: Set<string>, loadedKeys: Set<string>) {
@@ -179,4 +179,18 @@ function isRelevantFile(file: string) {
     (file.endsWith(".vue") || file.endsWith(".js") || file.endsWith(".ts")) &&
     !file.endsWith(".d.ts")
   );
+}
+
+
+function printKeyList(title:string, keySetOrList:Set<string>) {
+  const keys = Array.isArray(keySetOrList) ? keySetOrList : Array.from(keySetOrList);
+  if (keys.length === 0) {
+    console.log(chalk.green(`${title}: ✅ None`));
+    return;
+  }
+
+  console.log(chalk.yellow(`${title} (${keys.length}):`));
+  keys.forEach((key, idx) => {
+    console.log(chalk.cyan(`  ${idx + 1}. ${key}`));
+  });
 }
