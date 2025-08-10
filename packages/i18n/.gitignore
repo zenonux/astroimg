@@ -173,7 +173,6 @@ out
 # Finder (MacOS) folder config
 .DS_Store
 
-locales/
+demo/
 .env.test
-key.json
 i18n.yaml
