@@ -1,6 +1,6 @@
 // src/vite.ts
 import { exec } from "child_process";
-function viteI18nGenerateApi(route, command) {
+function ViteI18nGeneratePlugin(route, command) {
   return {
     name: "i18n-generate",
     configureServer(server) {
@@ -26,5 +26,5 @@ function viteI18nGenerateApi(route, command) {
   };
 }
 export {
-  viteI18nGenerateApi
+  ViteI18nGeneratePlugin
 };

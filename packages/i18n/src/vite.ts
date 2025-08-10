@@ -1,7 +1,7 @@
 import { exec } from "child_process";
 import type { Connect } from "vite";
 
-export function viteI18nGenerateApi(route: string, command: string) {
+export function ViteI18nGeneratePlugin(route: string, command: string) {
   return {
     name: "i18n-generate",
     configureServer(server: { middlewares: Connect.Server }) {
