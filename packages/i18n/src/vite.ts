@@ -1,21 +1,22 @@
-import { exec } from "child_process";
+import { exec, type ExecOptions } from "child_process";
 import type { Connect } from "vite";
 
-export function ViteI18nGeneratePlugin(route: string, command: string) {
+export function ViteI18nGeneratePlugin(
+  route: string,
+  command: string,
+  options?: ExecOptions,
+) {
   return {
     name: "i18n-generate",
     configureServer(server: { middlewares: Connect.Server }) {
       server.middlewares.use(route, (req, res, next) => {
+        let execOptions = options || {};
         if (req.method !== "GET") {
           res.statusCode = 405; // 方法不允许
           res.end("Method Not Allowed");
           return;
         }
-        exec(`${command}`,  {
-          env: {
-            ...process.env,
-          },
-        },(error) => {
+        exec(`${command}`, execOptions, (error) => {
           if (error) {
             res.statusCode = 500;
             res.setHeader("Content-Type", "application/json");

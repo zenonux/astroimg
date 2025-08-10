@@ -1,5 +1,5 @@
-import type { Plugin } from 'vite';
-
+import type { Plugin } from "vite";
+import { type ExecOptions } from "child_process";
 declare function ViteI18nGeneratePlugin(
   /**
    * 监听的请求路径，比如 '/i18n-generate'，必须以 `/` 开头
@@ -9,6 +9,6 @@ declare function ViteI18nGeneratePlugin(
   /**
    * 要执行的命令字符串，比如 'npm run i18n:generate'
    */
-  command: string
+  command: string,
+  options?: ExecOptions,
 ): Plugin;
-
