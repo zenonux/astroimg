@@ -41,7 +41,7 @@ async function mergeLocalesByBuffer(
   }
 }
 
-export async function mergeLocales(
+export async function generateI18n(
   input: string,
   localesDir: string,
   ignore: pm.Glob[],

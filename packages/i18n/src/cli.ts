@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 import { Command } from "commander";
-import { mergeLocales } from "./index";
+import { generateI18n } from "./index";
 import { readYamlFile } from "./utils";
 import { checkI18nKeys } from "./check";
 
@@ -39,7 +39,7 @@ function generateAction(opts: { config: string }) {
     google_service_account_email,
     extension,
   } = generate;
-  mergeLocales(input, output, ignore || [], extension || "ts", {
+  generateI18n(input, output, ignore || [], extension || "ts", {
     google_private_key,
     google_service_account_email,
   });
