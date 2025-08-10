@@ -1,5 +1,5 @@
 await Bun.build({
-  entrypoints: ["./src/index.ts", "./src/cli.ts"],
+  entrypoints: ["./src/index.ts", "./src/cli.ts","./src/vite.ts"],
   outdir: "./dist",
   target: "node",
   format: "esm",
@@ -10,5 +10,6 @@ await Bun.build({
     "google-auth-library",
     "google-spreadsheet",
     "picomatch",
+    "vue-i18n-extract"
   ],
 });
