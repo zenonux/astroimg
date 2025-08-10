@@ -1,17 +1,16 @@
 // src/vite.ts
 import { exec } from "child_process";
-function ViteI18nGeneratePlugin(route, command, options) {
+function ViteI18nGeneratePlugin(route, command) {
   return {
     name: "i18n-generate",
     configureServer(server) {
       server.middlewares.use(route, (req, res, next) => {
-        let execOptions = options || {};
         if (req.method !== "GET") {
           res.statusCode = 405;
           res.end("Method Not Allowed");
           return;
         }
-        exec(`${command}`, execOptions, (error) => {
+        exec(`${command}`, (error) => {
           if (error) {
             res.statusCode = 500;
             res.setHeader("Content-Type", "application/json");
