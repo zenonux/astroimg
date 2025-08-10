@@ -10,7 +10,11 @@ function ViteI18nGeneratePlugin(route, command) {
           res.end("Method Not Allowed");
           return;
         }
-        exec(`${command}`, (error) => {
+        exec(`${command}`, {
+          env: {
+            ...process.env
+          }
+        }, (error) => {
           if (error) {
             res.statusCode = 500;
             res.setHeader("Content-Type", "application/json");

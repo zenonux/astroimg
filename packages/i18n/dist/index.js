@@ -555,7 +555,7 @@ async function mergeLocalesByBuffer(buffer, localesDir, ignore, extension) {
     console.error(e);
   }
 }
-async function mergeLocales(input, localesDir, ignore, extension, opts) {
+async function generateI18n(input, localesDir, ignore, extension, opts) {
   let isFile = input.includes(".xlsx");
   let buffer;
   if (isFile) {
@@ -654,6 +654,6 @@ function isValidFieldValue(text) {
   return text !== null && text !== undefined;
 }
 export {
-  mergeLocales,
+  generateI18n,
   checkI18nKeys
 };

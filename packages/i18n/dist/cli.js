@@ -557,7 +557,7 @@ async function mergeLocalesByBuffer(buffer, localesDir, ignore, extension) {
     console.error(e);
   }
 }
-async function mergeLocales(input, localesDir, ignore, extension, opts) {
+async function generateI18n(input, localesDir, ignore, extension, opts) {
   let isFile = input.includes(".xlsx");
   let buffer;
   if (isFile) {
@@ -712,7 +712,7 @@ function generateAction(opts) {
     google_service_account_email,
     extension
   } = generate;
-  mergeLocales(input, output, ignore || [], extension || "ts", {
+  generateI18n(input, output, ignore || [], extension || "ts", {
     google_private_key,
     google_service_account_email
   });
