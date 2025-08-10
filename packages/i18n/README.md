@@ -13,8 +13,9 @@ generate:
   google_service_account_email: ""
   google_private_key: ""
 check:
-  useDir:
-  useDynamicKeysApi:
-  useIgnoreDirs:
-  i18nDir:
+  usedGlob:
+  i18nGlob:
+  excludeKeysRequest:
+    url:
+    method:
 ```
