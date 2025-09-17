@@ -18,11 +18,16 @@ const router = createRouter({
 })
 
 initAnalytics({
-  channelName: 'h5',
-  project: 'astroimg',
+  project: 'test',
   pageLeave: {
     isCollectUrl() {
       return true
+    },
+    urlPropertyMap() {
+      return {
+        page_id: '',
+        page_type: '',
+      }
     },
   },
   sensorsConfig: {
