@@ -120,7 +120,7 @@ function PageLeave() {
 (PageLeave.prototype.pageEndHandler = function () {
   if (!0 !== this.page_hidden_status) {
     let e = this.getPageLeaveProperties();
-    (!1 === this.page_show_status && delete e.event_duration,
+    (!1 === this.page_show_status && delete e[this.option.event_duration],
     (this.page_show_status = !1),
     (this.page_hidden_status = !0),
     this.isCollectUrl(this.url) && this.sd.track(this.option.event_name_leave, Object.assign(e, this.option.urlPropertyMap(this.url))),
@@ -209,7 +209,7 @@ function PageLeave() {
 (PageLeave.prototype.saveHeartBeatData = function (e) {
   let t = this.getPageLeaveProperties()
   let a = new Date();
-  ((t.$time = a), e === 'is_first_heartbeat' && (t.event_duration = 3.14))
+  ((t.$time = a), e === 'is_first_heartbeat' && (t[this.option.event_duration] = 3.14))
   let i = this.sd.kit.buildData({
     type: 'track',
     event: this.option.event_name_leave,
@@ -260,7 +260,7 @@ function PageLeave() {
     $viewport_position: a,
   }
   return (
-    e !== 0 && (i.event_duration = e),
+    e !== 0 && (i[this.option.event_duration] = e),
     (i = this._.extend(i, this.option.custom_props))
   )
 }))
