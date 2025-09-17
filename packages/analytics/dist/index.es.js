@@ -6609,8 +6609,8 @@ const ec = {
   mounted(e, t) {
     const r = () => {
       const i = Qu();
-      (Array.isArray(t.value) ? t.value : [t.value]).forEach(({ event: a, params: l }) => {
-        a && i.track(a, l || {});
+      (Array.isArray(t.value) ? t.value : [t.value]).forEach(({ event: a, params: l, trigger: u }) => {
+        !a || u !== void 0 && !u || i.track(a, l || {});
       });
     };
     e.addEventListener("click", r), e.__trackClick__ = r;

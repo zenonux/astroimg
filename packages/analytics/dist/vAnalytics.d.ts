@@ -1,5 +1,6 @@
 import { Directive } from 'vue';
 interface TrackBinding {
+    trigger?: boolean;
     event: string;
     params?: Record<string, any>;
 }
