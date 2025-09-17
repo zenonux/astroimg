@@ -6607,17 +6607,19 @@ let ca = ua;
 ca.DEFAULT_SEND_TYPE = "image";
 const ec = {
   mounted(e, t) {
-    const r = () => {
-      const i = Qu();
-      (Array.isArray(t.value) ? t.value : [t.value]).forEach(({ event: a, params: l, trigger: u }) => {
-        !a || u !== void 0 && !u || i.track(a, l || {});
+    const r = Array.isArray(t.value) ? t.value : [t.value];
+    e.dataset.analytics = JSON.stringify(r);
+    const i = () => {
+      const n = Qu();
+      r.forEach(({ event: a, params: l, trigger: u }) => {
+        !a || u !== void 0 && !u || n.track(a, l || {});
       });
     };
-    e.addEventListener("click", r), e.__trackClick__ = r;
+    e.addEventListener("click", i), e.__trackClick__ = i;
   },
   unmounted(e) {
     const t = e.__trackClick__;
-    t && (e.removeEventListener("click", t), delete e.__trackClick__);
+    t && (e.removeEventListener("click", t), delete e.__trackClick__), delete e.dataset.analytics;
   }
 }, Br = ca;
 function da(e, t) {

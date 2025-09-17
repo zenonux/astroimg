@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import { initAnalytics } from '../src'
+import { initAnalytics, vAnalytics } from '../src'
 import App from './App.vue'
 
 const router = createRouter({
@@ -41,4 +41,6 @@ initAnalytics({
     },
   },
 })
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+app.directive('anal', vAnalytics)
+app.use(router).mount('#app')
