@@ -10,7 +10,6 @@ interface TrackBinding {
 export const vAnalytics: Directive<HTMLElement, TrackBinding> = {
   mounted(el, binding) {
     const events = Array.isArray(binding.value) ? binding.value : [binding.value]
-    el.dataset.analytics = JSON.stringify(events)
     const handleClick = () => {
       const analytics = getAnalytics()
       events.forEach(({ event, params, trigger }) => {
@@ -32,6 +31,5 @@ export const vAnalytics: Directive<HTMLElement, TrackBinding> = {
       el.removeEventListener('click', handler)
       delete (el as any).__trackClick__
     }
-    delete el.dataset.analytics
   },
 }

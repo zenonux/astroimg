@@ -6607,9 +6607,7 @@ let ca = ua;
 ca.DEFAULT_SEND_TYPE = "image";
 const ec = {
   mounted(e, t) {
-    const r = Array.isArray(t.value) ? t.value : [t.value];
-    e.dataset.analytics = JSON.stringify(r);
-    const i = () => {
+    const r = Array.isArray(t.value) ? t.value : [t.value], i = () => {
       const n = Qu();
       r.forEach(({ event: a, params: l, trigger: u }) => {
         !a || u !== void 0 && !u || n.track(a, l || {});
@@ -6619,7 +6617,7 @@ const ec = {
   },
   unmounted(e) {
     const t = e.__trackClick__;
-    t && (e.removeEventListener("click", t), delete e.__trackClick__), delete e.dataset.analytics;
+    t && (e.removeEventListener("click", t), delete e.__trackClick__);
   }
 }, Br = ca;
 function da(e, t) {
