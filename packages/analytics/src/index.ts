@@ -17,7 +17,6 @@ function prefixKeys<T extends Record<string, any>>(obj: T, prefix: string): Reco
   ) as Record<string, T[keyof T]>
 }
 
-// 包含 track + 其他任意方法
 export type AnalyticsInstance<E extends string, P extends Record<E, any>> = {
   track: (event: E, params: P[E]) => void
   setProfile: (params: Record<string, any>) => void
@@ -28,26 +27,9 @@ class Analytics<E extends string, P extends Record<E, any>> {
   public sensors: any
   private options: AnalyticsOptions
 
-  // 使用箭头函数，避免 this 隐式类型问题
-  track: (event: E, params: P[E]) => void
-  setProfile: (params: Record<string, any>) => void
-  registerPage: (params: Record<string, any>) => void
-
   constructor(sensors: any, options: AnalyticsOptions) {
     this.sensors = sensors
     this.options = options
-
-    // 默认 track 实现
-    this.track = (event, params) => {
-      this.sensors.track(`${this.options.project}_${event}`, params || {})
-    }
-
-    this.registerPage = (params: any) => {
-      this.sensors.registerPage(prefixKeys(params || {}, `${this.options.project}_`))
-    }
-    this.setProfile = (params: any) => {
-      this.sensors.setProfile(prefixKeys(params || {}, `${this.options.project}_`))
-    }
 
     // 返回 Proxy 代理 sensors
     return new Proxy(this, {
@@ -60,6 +42,18 @@ class Analytics<E extends string, P extends Record<E, any>> {
         }
       },
     })
+  }
+
+  track(event: E, params: P[E]) {
+    this.sensors.track(`${this.options.project}_${event}`, params || {})
+  }
+
+  registerPage(params: Record<string, any>) {
+    this.sensors.registerPage(prefixKeys(params || {}, `${this.options.project}_`))
+  }
+
+  setProfile(params: Record<string, any>) {
+    this.sensors.setProfile(prefixKeys(params || {}, `${this.options.project}_`))
   }
 }
 
