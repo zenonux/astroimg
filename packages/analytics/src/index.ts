@@ -1,7 +1,5 @@
+import sensors from '../libs/sensorsdata.es6'
 import pageleave from '../libs/pageleave.es6'
-import sensorsdata from '../libs/sensorsdata.es6'
-
-const sensors = sensorsdata as any
 
 export interface AnalyticsOptions<E extends string, P extends Record<E, any>> {
   project: string
