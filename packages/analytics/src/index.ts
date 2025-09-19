@@ -32,6 +32,7 @@ function withKeyPrefix<T extends Record<string, any>>(
 export type AnalyticsInstance<E extends string, P extends Record<E, any>> = {
   track: (event: E, params: P[E]) => void
   setProfile: (params: Record<string, any>) => void
+  registerPage: (params: Record<string, any>) => void
 } & Record<string, any>
 
 class Analytics<E extends string, P extends Record<E, any>> {
@@ -41,6 +42,7 @@ class Analytics<E extends string, P extends Record<E, any>> {
   // 使用箭头函数，避免 this 隐式类型问题
   track: (event: E, params: P[E]) => void
   setProfile: (params: Record<string, any>) => void
+  registerPage: (params: Record<string, any>) => void
 
   constructor(sensors: any, options: AnalyticsOptions<E, P>) {
     this.sensors = sensors
@@ -51,6 +53,9 @@ class Analytics<E extends string, P extends Record<E, any>> {
       this.sensors.track(`${this.options.project}_${event}`, params || {})
     }
 
+    this.registerPage = (params: any) => {
+      this.sensors.registerPage(withKeyPrefix(params || {}, `${this.options.project}_`))
+    }
     this.setProfile = (params: any) => {
       this.sensors.setProfile(withKeyPrefix(params || {}, `${this.options.project}_`))
     }
