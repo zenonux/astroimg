@@ -2,7 +2,6 @@ import type { Directive } from 'vue'
 import { getAnalytics } from './index'
 
 interface TrackBinding {
-  trigger?: boolean
   event: string
   params?: Record<string, any>
 }
@@ -12,8 +11,8 @@ export const vAnalytics: Directive<HTMLElement, TrackBinding> = {
     const events = Array.isArray(binding.value) ? binding.value : [binding.value]
     const handleClick = () => {
       const analytics = getAnalytics()
-      events.forEach(({ event, params, trigger }) => {
-        if (!event || (trigger !== undefined && !trigger)) {
+      events.forEach(({ event, params }) => {
+        if (!event) {
           return
         }
         analytics.track(event, params || {})
