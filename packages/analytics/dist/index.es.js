@@ -6605,10 +6605,10 @@ try {
 }
 let da = ca;
 da.DEFAULT_SEND_TYPE = "image";
-const ec = {
+const Qu = {
   mounted(e, t) {
     const r = Array.isArray(t.value) ? t.value : [t.value], i = () => {
-      const n = Qu();
+      const n = Gu();
       r.forEach(({ event: a, params: l, trigger: u }) => {
         !a || u !== void 0 && !u || n.track(a, l || {});
       });
@@ -6620,18 +6620,12 @@ const ec = {
     t && (e.removeEventListener("click", t), delete e.__trackClick__);
   }
 }, Br = da;
-function Zu(e, t) {
+function en(e, t) {
   return Object.fromEntries(
     Object.entries(e).map(([r, i]) => [`${t}${r}`, i])
   );
 }
-function en(e, t) {
-  return (...r) => {
-    const i = e(...r);
-    return Zu(i, t);
-  };
-}
-class Gu {
+class Zu {
   constructor(t, r) {
     return this.sensors = t, this.options = r, this.track = (i, n) => {
       this.sensors.track(`${this.options.project}_${i}`, n || {});
@@ -6652,24 +6646,24 @@ class Gu {
   }
 }
 let _r = null;
-function tc(e) {
+function ec(e) {
   Br.use(va, {
     event_duration: "page_duration",
-    event_name_view: `${e.project}__page_view`,
-    event_name_leave: `${e.project}__page_leave`,
+    event_name_view: `${e.project}_page_view`,
+    event_name_leave: `${e.project}_page_leave`,
     urlPropertyMap: e.pageLeave.urlPropertyMap,
     isCollectUrl: e.pageLeave.isCollectUrl
   }), Br.init({ ...e.sensorsConfig });
-  const t = new Gu(Br, e);
+  const t = new Zu(Br, e);
   return e.createTracker && (t.track = e.createTracker(t.track)), _r = t, _r;
 }
-function Qu() {
+function Gu() {
   if (!_r)
     throw new Error("Analytics not initialized");
   return _r;
 }
 export {
-  Qu as getAnalytics,
-  tc as initAnalytics,
-  ec as vAnalytics
+  Gu as getAnalytics,
+  ec as initAnalytics,
+  Qu as vAnalytics
 };

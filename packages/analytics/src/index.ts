@@ -18,15 +18,6 @@ function prefixKeys<T extends Record<string, any>>(obj: T, prefix: string): Reco
     Object.entries(obj).map(([key, value]) => [`${prefix}${key}`, value]),
   ) as Record<string, T[keyof T]>
 }
-function withKeyPrefix<T extends Record<string, any>>(
-  fn: (...args: any[]) => T,
-  prefix: string,
-): (...args: any[]) => Record<string, T[keyof T]> {
-  return (...args) => {
-    const result = fn(...args)
-    return prefixKeys(result, prefix)
-  }
-}
 
 // 包含 track + 其他任意方法
 export type AnalyticsInstance<E extends string, P extends Record<E, any>> = {
@@ -54,10 +45,10 @@ class Analytics<E extends string, P extends Record<E, any>> {
     }
 
     this.registerPage = (params: any) => {
-      this.sensors.registerPage(withKeyPrefix(params || {}, `${this.options.project}_`))
+      this.sensors.registerPage(prefixKeys(params || {}, `${this.options.project}_`))
     }
     this.setProfile = (params: any) => {
-      this.sensors.setProfile(withKeyPrefix(params || {}, `${this.options.project}_`))
+      this.sensors.setProfile(prefixKeys(params || {}, `${this.options.project}_`))
     }
 
     // 返回 Proxy 代理 sensors
@@ -79,8 +70,8 @@ let analytics: AnalyticsInstance<any, any> | null = null
 export function initAnalytics<E extends string, P extends Record<E, any>>(options: AnalyticsOptions<E, P>) {
   sensors.use(pageleave, {
     event_duration: `page_duration`,
-    event_name_view: `${options.project}__page_view`,
-    event_name_leave: `${options.project}__page_leave`,
+    event_name_view: `${options.project}_page_view`,
+    event_name_leave: `${options.project}_page_leave`,
     urlPropertyMap: options.pageLeave.urlPropertyMap,
     isCollectUrl: options.pageLeave.isCollectUrl,
   })
