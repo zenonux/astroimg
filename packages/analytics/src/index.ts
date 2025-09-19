@@ -13,9 +13,25 @@ export interface AnalyticsOptions<E extends string, P extends Record<E, any>> {
   sensorsConfig: any
 }
 
+function prefixKeys<T extends Record<string, any>>(obj: T, prefix: string): Record<string, T[keyof T]> {
+  return Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => [`${prefix}${key}`, value]),
+  ) as Record<string, T[keyof T]>
+}
+function withKeyPrefix<T extends Record<string, any>>(
+  fn: (...args: any[]) => T,
+  prefix: string,
+): (...args: any[]) => Record<string, T[keyof T]> {
+  return (...args) => {
+    const result = fn(...args)
+    return prefixKeys(result, prefix)
+  }
+}
+
 // 包含 track + 其他任意方法
 export type AnalyticsInstance<E extends string, P extends Record<E, any>> = {
   track: (event: E, params: P[E]) => void
+  setProfile: (params: Record<string, any>) => void
 } & Record<string, any>
 
 class Analytics<E extends string, P extends Record<E, any>> {
@@ -24,6 +40,7 @@ class Analytics<E extends string, P extends Record<E, any>> {
 
   // 使用箭头函数，避免 this 隐式类型问题
   track: (event: E, params: P[E]) => void
+  setProfile: (params: Record<string, any>) => void
 
   constructor(sensors: any, options: AnalyticsOptions<E, P>) {
     this.sensors = sensors
@@ -31,7 +48,11 @@ class Analytics<E extends string, P extends Record<E, any>> {
 
     // 默认 track 实现
     this.track = (event, params) => {
-      this.sensors.track(`${this.options.project}__${event}`, params || {})
+      this.sensors.track(`${this.options.project}_${event}`, params || {})
+    }
+
+    this.setProfile = (params: any) => {
+      this.sensors.setProfile(withKeyPrefix(params || {}, `${this.options.project}_`))
     }
 
     // 返回 Proxy 代理 sensors
