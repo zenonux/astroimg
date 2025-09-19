@@ -15,7 +15,7 @@ s.DEFAULT_SEND_TYPE = "image", (function() {
     let b = u.Number || t.Number, w = u.String || t.String, L = u.Object || t.Object, P = u.Date || t.Date, we = u.SyntaxError || t.SyntaxError, J = u.TypeError || t.TypeError, Oe = u.Math || t.Math, nt = u.JSON || t.JSON;
     if (typeof nt == "object" && nt)
       return p.stringify = nt.stringify, p.parse = nt.parse, p.runInContext = l, p;
-    let pe, ui = L.prototype, Fe = ui.toString, Vt = ui.hasOwnProperty;
+    let pe, ui = L.prototype, Ce = ui.toString, Vt = ui.hasOwnProperty;
     function Xe(ge, te) {
       try {
         ge();
@@ -47,7 +47,7 @@ s.DEFAULT_SEND_TYPE = "image", (function() {
             return 1;
           }).toJSON = H, Xe(
             () => {
-              x = f(0) === "0" && f(new b()) === "0" && f(new w()) == '""' && f(Fe) === pe && f(pe) === pe && f() === pe && f(H) === "1" && f([H]) == "[1]" && f([pe]) == "[null]" && f(null) == "null" && f([pe, Fe, null]) == "[null,null,null]" && f({ a: [H, !0, !1, null, `\0\b
+              x = f(0) === "0" && f(new b()) === "0" && f(new w()) == '""' && f(Ce) === pe && f(pe) === pe && f() === pe && f(H) === "1" && f([H]) == "[1]" && f([pe]) == "[null]" && f(null) == "null" && f([pe, Ce, null]) == "[null,null,null]" && f({ a: [H, !0, !1, null, `\0\b
 \f\r	`] }) == Ee && f(null, H) === "1" && f([1, 2], null, 1) == `[
  1,
  2
@@ -88,9 +88,9 @@ s.DEFAULT_SEND_TYPE = "image", (function() {
         }).prototype.valueOf = 0, x = new Ee())
           Vt.call(x, E) && N++;
         return Ee = x = null, N ? te = function(U, O) {
-          let _, S, C = Fe.call(U) == "[object Function]";
+          let _, S, F = Ce.call(U) == "[object Function]";
           for (_ in U)
-            C && _ == "prototype" || !Vt.call(U, _) || (S = _ === "constructor") || O(_);
+            F && _ == "prototype" || !Vt.call(U, _) || (S = _ === "constructor") || O(_);
           (S || Vt.call(U, _ = "constructor")) && O(_);
         } : (x = [
           "valueOf",
@@ -101,9 +101,9 @@ s.DEFAULT_SEND_TYPE = "image", (function() {
           "hasOwnProperty",
           "constructor"
         ], te = function(U, O) {
-          let _, S, C = Fe.call(U) == "[object Function]", R = !C && typeof U.constructor != "function" && e[typeof U.hasOwnProperty] && U.hasOwnProperty || Vt;
+          let _, S, F = Ce.call(U) == "[object Function]", R = !F && typeof U.constructor != "function" && e[typeof U.hasOwnProperty] && U.hasOwnProperty || Vt;
           for (_ in U)
-            C && _ == "prototype" || !R.call(U, _) || O(_);
+            F && _ == "prototype" || !R.call(U, _) || O(_);
           for (S = x.length; _ = x[--S]; ) R.call(U, _) && O(_);
         }), te(f, H);
       };
@@ -119,23 +119,23 @@ s.DEFAULT_SEND_TYPE = "image", (function() {
         }, H = function(x, E) {
           return `000000${E || 0}`.slice(-x);
         }, Ee = function(x) {
-          let E, N, U, O, _, S, C, R, v;
+          let E, N, U, O, _, S, F, R, v;
           if (Te)
             E = function(y) {
-              N = y.getUTCFullYear(), U = y.getUTCMonth(), O = y.getUTCDate(), S = y.getUTCHours(), C = y.getUTCMinutes(), R = y.getUTCSeconds(), v = y.getUTCMilliseconds();
+              N = y.getUTCFullYear(), U = y.getUTCMonth(), O = y.getUTCDate(), S = y.getUTCHours(), F = y.getUTCMinutes(), R = y.getUTCSeconds(), v = y.getUTCMilliseconds();
             };
           else {
-            let y = Oe.floor, F = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334], fe = function(Se, ue) {
-              return F[ue] + 365 * (Se - 1970) + y((Se - 1969 + (ue = +(ue > 1))) / 4) - y((Se - 1901 + ue) / 100) + y((Se - 1601 + ue) / 400);
+            let y = Oe.floor, C = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334], fe = function(Se, ue) {
+              return C[ue] + 365 * (Se - 1970) + y((Se - 1969 + (ue = +(ue > 1))) / 4) - y((Se - 1901 + ue) / 100) + y((Se - 1601 + ue) / 400);
             };
             E = function(Se) {
               for (O = y(Se / 864e5), N = y(O / 365.2425) + 1970 - 1; fe(N + 1, 0) <= O; N++) ;
               for (U = y((O - fe(N, 0)) / 30.42); fe(N, U + 1) <= O; U++) ;
-              O = 1 + O - fe(N, U), S = y((_ = (Se % 864e5 + 864e5) % 864e5) / 36e5) % 24, C = y(_ / 6e4) % 60, R = y(_ / 1e3) % 60, v = _ % 1e3;
+              O = 1 + O - fe(N, U), S = y((_ = (Se % 864e5 + 864e5) % 864e5) / 36e5) % 24, F = y(_ / 6e4) % 60, R = y(_ / 1e3) % 60, v = _ % 1e3;
             };
           }
           return (Ee = function(y) {
-            return y > -1 / 0 && y < 1 / 0 ? (E(y), y = `${N <= 0 || N >= 1e4 ? (N < 0 ? "-" : "+") + H(6, N < 0 ? -N : N) : H(4, N)}-${H(2, U + 1)}-${H(2, O)}T${H(2, S)}:${H(2, C)}:${H(2, R)}.${H(3, v)}Z`, N = U = O = S = C = R = v = null) : y = null, y;
+            return y > -1 / 0 && y < 1 / 0 ? (E(y), y = `${N <= 0 || N >= 1e4 ? (N < 0 ? "-" : "+") + H(6, N < 0 ? -N : N) : H(4, N)}-${H(2, U + 1)}-${H(2, O)}T${H(2, S)}:${H(2, F)}:${H(2, R)}.${H(3, v)}Z`, N = U = O = S = F = R = v = null) : y = null, y;
           })(x);
         };
         if (Y("json-stringify") && !Y("date-serialization")) {
@@ -154,37 +154,37 @@ s.DEFAULT_SEND_TYPE = "image", (function() {
             return f[_] || `\\u00${H(2, _.toString(16))}`;
           }, E = /[\x00-\x1F\x22\x5C]/g, N = function(O) {
             return E.lastIndex = 0, `"${E.test(O) ? O.replace(E, x) : O}"`;
-          }, U = function(O, _, S, C, R, v, y) {
-            let F, fe, Se, ue, hr, Wt, Ft, mr, yr;
+          }, U = function(O, _, S, F, R, v, y) {
+            let C, fe, Se, ue, hr, Wt, Ct, mr, yr;
             if (Xe(() => {
-              F = _[O];
-            }), typeof F == "object" && F && (F.getUTCFullYear && Fe.call(F) == "[object Date]" && F.toJSON === P.prototype.toJSON ? F = Ee(F) : typeof F.toJSON == "function" && (F = F.toJSON(O))), S && (F = S.call(_, O, F)), F == pe)
-              return F === pe ? F : "null";
-            switch ((fe = typeof F) == "object" && (Se = Fe.call(F)), Se || fe) {
+              C = _[O];
+            }), typeof C == "object" && C && (C.getUTCFullYear && Ce.call(C) == "[object Date]" && C.toJSON === P.prototype.toJSON ? C = Ee(C) : typeof C.toJSON == "function" && (C = C.toJSON(O))), S && (C = S.call(_, O, C)), C == pe)
+              return C === pe ? C : "null";
+            switch ((fe = typeof C) == "object" && (Se = Ce.call(C)), Se || fe) {
               case "boolean":
               case "[object Boolean]":
-                return `${F}`;
+                return `${C}`;
               case "number":
               case "[object Number]":
-                return F > -1 / 0 && F < 1 / 0 ? `${F}` : "null";
+                return C > -1 / 0 && C < 1 / 0 ? `${C}` : "null";
               case "string":
               case "[object String]":
-                return N(`${F}`);
+                return N(`${C}`);
             }
-            if (typeof F == "object") {
-              for (Ft = y.length; Ft--; )
-                if (y[Ft] === F)
+            if (typeof C == "object") {
+              for (Ct = y.length; Ct--; )
+                if (y[Ct] === C)
                   throw J();
-              if (y.push(F), ue = [], mr = v, v += R, Se == "[object Array]") {
-                for (Wt = 0, Ft = F.length; Wt < Ft; Wt++)
-                  hr = U(Wt, F, S, C, R, v, y), ue.push(hr === pe ? "null" : hr);
+              if (y.push(C), ue = [], mr = v, v += R, Se == "[object Array]") {
+                for (Wt = 0, Ct = C.length; Wt < Ct; Wt++)
+                  hr = U(Wt, C, S, F, R, v, y), ue.push(hr === pe ? "null" : hr);
                 yr = ue.length ? R ? `[
 ${v}${ue.join(`,
 ${v}`)}
 ${mr}]` : `[${ue.join(",")}]` : "[]";
               } else
-                te(C || F, (di) => {
-                  let pi = U(di, F, S, C, R, v, y);
+                te(F || C, (di) => {
+                  let pi = U(di, C, S, F, R, v, y);
                   pi !== pe && ue.push(`${N(di)}:${R ? " " : ""}${pi}`);
                 }), yr = ue.length ? R ? `{
 ${v}${ue.join(`,
@@ -194,23 +194,23 @@ ${mr}}` : `{${ue.join(",")}}` : "{}";
             }
           };
           p.stringify = function(O, _, S) {
-            let C, R, v, y;
+            let F, R, v, y;
             if (e[typeof _] && _) {
-              if ((y = Fe.call(_)) == "[object Function]")
+              if ((y = Ce.call(_)) == "[object Function]")
                 R = _;
               else if (y == "[object Array]") {
                 v = {};
-                for (var F, fe = 0, Se = _.length; fe < Se; )
-                  F = _[fe++], (y = Fe.call(F)) != "[object String]" && y != "[object Number]" || (v[F] = 1);
+                for (var C, fe = 0, Se = _.length; fe < Se; )
+                  C = _[fe++], (y = Ce.call(C)) != "[object String]" && y != "[object Number]" || (v[C] = 1);
               }
             }
             if (S)
-              if ((y = Fe.call(S)) == "[object Number]") {
+              if ((y = Ce.call(S)) == "[object Number]") {
                 if ((S -= S % 1) > 0)
-                  for (S > 10 && (S = 10), C = ""; C.length < S; ) C += " ";
+                  for (S > 10 && (S = 10), F = ""; F.length < S; ) F += " ";
               } else
-                y == "[object String]" && (C = S.length <= 10 ? S : S.slice(0, 10));
-            return U("", ((F = {})[""] = O, F), R, v, C, "", []);
+                y == "[object String]" && (F = S.length <= 10 ? S : S.slice(0, 10));
+            return U("", ((C = {})[""] = O, C), R, v, F, "", []);
           };
         }
       }
@@ -228,7 +228,7 @@ ${mr}}` : `{${ue.join(",")}}` : "{}";
         }, E = function() {
           throw f = H = null, we();
         }, N = function() {
-          for (var _, S, C, R, v, y = H, F = y.length; f < F; )
+          for (var _, S, F, R, v, y = H, C = y.length; f < C; )
             switch (v = y.charCodeAt(f)) {
               case 9:
               case 10:
@@ -244,7 +244,7 @@ ${mr}}` : `{${ue.join(",")}}` : "{}";
               case 44:
                 return _ = ge ? y.charAt(f) : y[f], f++, _;
               case 34:
-                for (_ = "@", f++; f < F; )
+                for (_ = "@", f++; f < C; )
                   if ((v = y.charCodeAt(f)) < 32)
                     E();
                   else if (v == 92)
@@ -260,7 +260,7 @@ ${mr}}` : `{${ue.join(",")}}` : "{}";
                         _ += x[v], f++;
                         break;
                       case 117:
-                        for (S = ++f, C = f + 4; f < C; f++)
+                        for (S = ++f, F = f + 4; f < F; f++)
                           (v = y.charCodeAt(f)) >= 48 && v <= 57 || v >= 97 && v <= 102 || v >= 65 && v <= 70 || E();
                         _ += Ee(`0x${y.slice(S, f)}`);
                         break;
@@ -279,14 +279,14 @@ ${mr}}` : `{${ue.join(",")}}` : "{}";
                 E();
               default:
                 if (S = f, v == 45 && (R = !0, v = y.charCodeAt(++f)), v >= 48 && v <= 57) {
-                  for (v == 48 && (v = y.charCodeAt(f + 1)) >= 48 && v <= 57 && E(), R = !1; f < F && (v = y.charCodeAt(f)) >= 48 && v <= 57; f++) ;
+                  for (v == 48 && (v = y.charCodeAt(f + 1)) >= 48 && v <= 57 && E(), R = !1; f < C && (v = y.charCodeAt(f)) >= 48 && v <= 57; f++) ;
                   if (y.charCodeAt(f) == 46) {
-                    for (C = ++f; C < F && !((v = y.charCodeAt(C)) < 48 || v > 57); C++) ;
-                    C == f && E(), f = C;
+                    for (F = ++f; F < C && !((v = y.charCodeAt(F)) < 48 || v > 57); F++) ;
+                    F == f && E(), f = F;
                   }
                   if ((v = y.charCodeAt(f)) == 101 || v == 69) {
-                    for ((v = y.charCodeAt(++f)) != 43 && v != 45 || f++, C = f; C < F && !((v = y.charCodeAt(C)) < 48 || v > 57); C++) ;
-                    C == f && E(), f = C;
+                    for ((v = y.charCodeAt(++f)) != 43 && v != 45 || f++, F = f; F < C && !((v = y.charCodeAt(F)) < 48 || v > 57); F++) ;
+                    F == f && E(), f = F;
                   }
                   return +y.slice(S, f);
                 }
@@ -302,41 +302,41 @@ ${mr}}` : `{${ue.join(",")}}` : "{}";
             }
           return "$";
         }, U = function(_) {
-          let S, C;
+          let S, F;
           if (_ == "$" && E(), typeof _ == "string") {
             if ((ge ? _.charAt(0) : _[0]) == "@")
               return _.slice(1);
             if (_ == "[") {
               for (S = []; (_ = N()) != "]"; )
-                C ? _ == "," ? (_ = N()) == "]" && E() : E() : C = !0, _ == "," && E(), S.push(U(_));
+                F ? _ == "," ? (_ = N()) == "]" && E() : E() : F = !0, _ == "," && E(), S.push(U(_));
               return S;
             }
             if (_ == "{") {
               for (S = {}; (_ = N()) != "}"; )
-                C ? _ == "," ? (_ = N()) == "}" && E() : E() : C = !0, _ != "," && typeof _ == "string" && (ge ? _.charAt(0) : _[0]) == "@" && N() == ":" || E(), S[_.slice(1)] = U(N());
+                F ? _ == "," ? (_ = N()) == "}" && E() : E() : F = !0, _ != "," && typeof _ == "string" && (ge ? _.charAt(0) : _[0]) == "@" && N() == ":" || E(), S[_.slice(1)] = U(N());
               return S;
             }
             E();
           }
           return _;
-        }, O = function(_, S, C) {
-          let R = ci(_, S, C);
+        }, O = function(_, S, F) {
+          let R = ci(_, S, F);
           R === pe ? delete _[S] : _[S] = R;
         };
-        var ci = function(_, S, C) {
+        var ci = function(_, S, F) {
           let R, v = _[S];
           if (typeof v == "object" && v)
-            if (Fe.call(v) == "[object Array]")
-              for (R = v.length; R--; ) O(Fe, te, v);
+            if (Ce.call(v) == "[object Array]")
+              for (R = v.length; R--; ) O(Ce, te, v);
             else
               te(v, (y) => {
-                O(v, y, C);
+                O(v, y, F);
               });
-          return C.call(_, S, v);
+          return F.call(_, S, v);
         };
         p.parse = function(_, S) {
-          let C, R;
-          return f = 0, H = `${_}`, C = U(N()), N() != "$" && E(), f = H = null, S && Fe.call(S) == "[object Function]" ? ci(((R = {})[""] = C, R), "", S) : C;
+          let F, R;
+          return f = 0, H = `${_}`, F = U(N()), N() != "$" && E(), f = H = null, S && Ce.call(S) == "[object Function]" ? ci(((R = {})[""] = F, R), "", S) : F;
         };
       }
     }
@@ -494,7 +494,7 @@ function ar(e) {
 function g(e) {
   return Object.prototype.toString.call(e) == "[object String]";
 }
-function Ce(e) {
+function Fe(e) {
   return e.replace(/^\s+|\s+$/g, "");
 }
 function Kr(e) {
@@ -550,7 +550,7 @@ function Ve(e) {
       }
     }));
   else {
-    if (g(e) || (e = String(e)), e = Ce(e), /^https?:\/\/.+/.test(e) === !1)
+    if (g(e) || (e = String(e)), e = Fe(e), /^https?:\/\/.+/.test(e) === !1)
       return void ee.log("Invalid URL");
     let i = Kr(e);
     r.hash = i._values.Fragment, r.host = i._values.Host ? i._values.Host + (i._values.Port ? `:${i._values.Port}` : "") : "", r.href = i._values.URL, r.password = i._values.Password, r.pathname = i._values.Path, r.port = i._values.Port, r.search = i._values.QueryString ? `?${i._values.QueryString}` : "", r.username = i._values.Username, r.hostname = i._values.Hostname, r.protocol = i._values.Protocol ? `${i._values.Protocol}:` : "", r.origin = i._values.Origin ? i._values.Origin + (i._values.Port ? `:${i._values.Port}` : "") : "", r.searchParams = function() {
@@ -1010,7 +1010,7 @@ function on(e) {
     for (let r in t) t[r] !== void 0 && e[r] === void 0 && (e[r] = t[r]);
   }), e;
 }
-function Ct(e) {
+function Ft(e) {
   let t = e;
   try {
     t = decodeURI(e);
@@ -1089,7 +1089,7 @@ function Yt(e) {
     try {
       a = function(u, p) {
         let b;
-        if ((u = Ce(u)) === "body")
+        if ((u = Fe(u)) === "body")
           return document.getElementsByTagName("body")[0];
         if (u.indexOf("#") === 0)
           u = u.slice(1), b = document.getElementById(u);
@@ -1121,7 +1121,7 @@ function Yt(e) {
 }
 function dn(e, t) {
   let r = "", i = "";
-  return e.textContent ? r = Ce(e.textContent) : e.innerText && (r = Ce(e.innerText)), r && (r = r.replace(/[\r\n]/g, " ").replace(/ +/g, " ").substring(0, 255)), i = r || "", t !== "input" && t !== "INPUT" || (i = e.value || ""), i;
+  return e.textContent ? r = Fe(e.textContent) : e.innerText && (r = Fe(e.innerText)), r && (r = r.replace(/[\r\n]/g, " ").replace(/ +/g, " ").substring(0, 255)), i = r || "", t !== "input" && t !== "INPUT" || (i = e.value || ""), i;
 }
 function Re(e, t) {
   t && typeof t == "string" || (t = "hostname解析异常");
@@ -1170,10 +1170,10 @@ function zr() {
   return (e = r.match(/ qq\/([\d.]+)/)) ? t.qqBuildinBrowser = Number(e[1].split(".")[0]) : (e = r.match(/mqqbrowser\/([\d.]+)/)) ? t.qqBrowser = Number(e[1].split(".")[0]) : (e = r.match(/opera.([\d.]+)/)) ? t.opera = Number(e[1].split(".")[0]) : (e = r.match(/msie ([\d.]+)/)) ? t.ie = Number(e[1].split(".")[0]) : (e = r.match(/edge.([\d.]+)/)) ? t.edge = Number(e[1].split(".")[0]) : (e = r.match(/firefox\/([\d.]+)/)) ? t.firefox = Number(e[1].split(".")[0]) : (e = r.match(/chrome\/([\d.]+)/)) ? t.chrome = Number(e[1].split(".")[0]) : (e = r.match(/version\/([\d.]+).*safari/)) ? t.safari = Number(e[1].match(/^\d*.\d*/)) : (e = r.match(/trident\/([\d.]+)/)) && (t.ie = 11), t;
 }
 function oe(e) {
-  return g(e) ? Ct(e = Ce(e)) : Ct(location.href);
+  return g(e) ? Ft(e = Fe(e)) : Ft(location.href);
 }
 function gt(e) {
-  return g(e) ? Ct(e = Ce(e)) : Ct(location.pathname);
+  return g(e) ? Ft(e = Fe(e)) : Ft(location.pathname);
 }
 function jr(e, t) {
   return e.hasAttribute ? e.hasAttribute(t) : e.attributes ? !(!e.attributes[t] || !e.attributes[t].specified) : void 0;
@@ -1435,12 +1435,12 @@ function Gt(e) {
     (t = e[n]) in i || (i[t] = !0, r.push(t));
   return r;
 }
-let Ca = { "+": "-", "/": "_", "=": "." }, Fa = { "-": "+", _: "/", ".": "=" }, Ea = {
+let Fa = { "+": "-", "/": "_", "=": "." }, Ca = { "-": "+", _: "/", ".": "=" }, Ea = {
   encode(e) {
-    return e.replace(/[+/=]/g, (t) => Ca[t]);
+    return e.replace(/[+/=]/g, (t) => Fa[t]);
   },
   decode(e) {
-    return e.replace(/[-_.]/g, (t) => Fa[t]);
+    return e.replace(/[-_.]/g, (t) => Ca[t]);
   },
   trim(e) {
     return e.replace(/[.=]{1,2}$/, "");
@@ -1473,7 +1473,7 @@ let Da = {
   bindReady: pa,
   cookie: st,
   coverExtend: on,
-  decodeURI: Ct,
+  decodeURI: Ft,
   decodeURIComponent: Ke,
   dfmapping: ga,
   each: D,
@@ -1538,7 +1538,7 @@ let Da = {
   strToUnicode: Sa,
   throttle: ka,
   toArray: $a,
-  trim: Ce,
+  trim: Fe,
   unique: Gt,
   urlParse: Kr,
   urlSafeBase64: Ea,
@@ -1632,9 +1632,9 @@ function Gr(e) {
   switch (typeof t) {
     case "function":
       var r = t();
-      return r === "" || Ce(r) === "" ? "url解析失败" : r.includes(".") ? r : "url解析失败";
+      return r === "" || Fe(r) === "" ? "url解析失败" : r.includes(".") ? r : "url解析失败";
     case "string":
-      return t === "" || Ce(t) === "" ? "url解析失败" : t.includes(".") ? t : "url解析失败";
+      return t === "" || Fe(t) === "" ? "url解析失败" : t.includes(".") ? t : "url解析失败";
     default:
       var i = Wr(
         null,
@@ -1670,7 +1670,7 @@ let je = {
     return e = e || "sajssdk_2015_cookie_access_test", t = t || "1", st.isSupport(e, t, 0, null, h.is_secure_cookie);
   }
 };
-function Cn(e, t) {
+function Fn(e, t) {
   let r = "";
   if (h.cross_subdomain === !1) {
     try {
@@ -1687,7 +1687,7 @@ function Cn(e, t) {
   return r;
 }
 function or() {
-  return je.isSupport() ? je.get("sensorsdata_is_new_user") !== null || je.get(Cn("new_user")) !== null : lr.get(lr.getNewUserFlagMemoryKey("new_user")) !== null;
+  return je.isSupport() ? je.get("sensorsdata_is_new_user") !== null || je.get(Fn("new_user")) !== null : lr.get(lr.getNewUserFlagMemoryKey("new_user")) !== null;
 }
 je.getNewUser = or;
 var lr = {
@@ -1729,7 +1729,7 @@ let Rt = {
         s: 59 - e.getSeconds()
       };
       je.isSupport() ? je.set(
-        Cn("new_user"),
+        Fn("new_user"),
         "1",
         `${3600 * t.h + 60 * t.m + t.s}s`
       ) : lr.set(
@@ -1788,10 +1788,10 @@ let Jt = {
     return this.data.id ? this.data.id : (this.data.id = En(), this.data.id);
   },
   type() {
-    return this.data.type ? this.data.type : (this.data.type = Fn(), this.data.type);
+    return this.data.type ? this.data.type : (this.data.type = Cn(), this.data.type);
   }
 };
-function Fn() {
+function Cn() {
   let e = xt(document.referrer);
   if (se(e) || !e.eqid) {
     let t = xt(location.href);
@@ -1804,7 +1804,7 @@ function En() {
   return se(e) || !e.eqid ? rt().replace(/-/g, "") : e.eqid;
 }
 function Ze(e, t) {
-  return g(e = e || document.referrer) ? ((e = Ct(e = Ce(e))).indexOf("https://www.baidu.com/") !== 0 || t || (e = e.split("?")[0]), g(e = e.slice(0, h.max_referrer_string_length)) ? e : "") : `取值异常_referrer异常_${String(e)}`;
+  return g(e = e || document.referrer) ? ((e = Ft(e = Fe(e))).indexOf("https://www.baidu.com/") !== 0 || t || (e = e.split("?")[0]), g(e = e.slice(0, h.max_referrer_string_length)) ? e : "") : `取值异常_referrer异常_${String(e)}`;
 }
 function ur(e) {
   if ((e = e || document.referrer) === "")
@@ -2049,7 +2049,7 @@ function ti(e) {
   return et.protocol.ajax(e.url), an(e);
 }
 function Nn(e, t) {
-  if (typeof e == "string" && (e = Ce(e)) && (e.slice(0, 3) === "://" ? e = location.protocol.slice(0, -1) + e : e.slice(0, 2) === "//" ? e = location.protocol + e : e.slice(0, 4) !== "http" && (e = "")), j(e) && e.length)
+  if (typeof e == "string" && (e = Fe(e)) && (e.slice(0, 3) === "://" ? e = location.protocol.slice(0, -1) + e : e.slice(0, 2) === "//" ? e = location.protocol + e : e.slice(0, 4) !== "http" && (e = "")), j(e) && e.length)
     for (let r = 0; r < e.length; r++)
       /sa\.gif[^/]*$/.test(e[r]) || (e[r] = e[r].replace(/\/sa$/, "/sa.gif").replace(/(\/sa)(\?[^/]+)$/, "/sa.gif$2"));
   else
@@ -2314,7 +2314,7 @@ let ja = {
   getCurrentDomain: Gr,
   isBaiduTraffic: Ht,
   getReferrerEqid: En,
-  getReferrerEqidType: Fn,
+  getReferrerEqidType: Cn,
   getBaiduKeyword: Jt,
   isReferralTraffic: ur,
   getKeywordFromReferrer: It,
@@ -2526,7 +2526,7 @@ let V = {
     return !!g(e);
   },
   emptyString(e) {
-    return !(!g(e) || Ce(e).length === 0);
+    return !(!g(e) || Fe(e).length === 0);
   },
   regexTest(e) {
     return !(!g(e) || !this.regName.test(e));
@@ -2799,7 +2799,7 @@ var Z = {
     return r;
   },
   isDiv(e) {
-    return !(e.element_path && Ce(e.element_path.split(">").pop()).slice(0, 3) !== "div");
+    return !(e.element_path && Fe(e.element_path.split(">").pop()).slice(0, 3) !== "div");
   },
   configIsMatchNew(e, t) {
     if (g(e.$element_selector) && g(t.element_selector)) {
@@ -4158,7 +4158,7 @@ function Vn(e, t) {
 function $s(e, t) {
   return $("loginWithKey is deprecated !!!"), typeof t == "number" && (t = String(t)), typeof e == "number" && (e = String(e)), !!q({ loginIdKey: e }) && (Ut.LOGIN === e ? (Vn(t), !1) : void Jn({ id: t, callback: null, name: e }, ai));
 }
-function Cs(e) {
+function Fs(e) {
   let t = c.getFirstId();
   if (t)
     if (c.set("first_id", ""), e === !0) {
@@ -4170,7 +4170,7 @@ function Cs(e) {
     $identity_cookie_id: c._state.identities.$identity_cookie_id
   }), c.set("history_login_id", { name: "", value: "" });
 }
-function Fs() {
+function Cs() {
   let e, t, r = {
     $is_first_day: or(),
     $is_first_time: Rt.is_page_first_visited,
@@ -4223,8 +4223,8 @@ let Es = {
   registerSessionOnce: ks,
   login: Vn,
   loginWithKey: $s,
-  logout: Cs,
-  getPresetProperties: Fs,
+  logout: Fs,
+  getPresetProperties: Cs,
   readyState: Qa,
   debug: et,
   on: Tn,
@@ -4985,12 +4985,12 @@ let ao = {
   setAmpId(e) {
     this.sd._.cookie.set("sensors_amp_id", e);
   }
-}, so = no(ao, "Amp", "sdkReady"), We = window.SensorsData_App_Visual_Bridge, oo = We && We.sensorsdata_visualized_mode, Ci = We && We.sensorsdata_visualized_alert_info, Fi = We && We.sensorsdata_hover_web_nodes;
+}, so = no(ao, "Amp", "sdkReady"), We = window.SensorsData_App_Visual_Bridge, oo = We && We.sensorsdata_visualized_mode, Fi = We && We.sensorsdata_visualized_alert_info, Ci = We && We.sensorsdata_hover_web_nodes;
 function lo(e) {
-  return Ci && Ci.call(We, JSON.stringify(e));
+  return Fi && Fi.call(We, JSON.stringify(e));
 }
 function Ei(e) {
-  return oo.call(We) && Fi && Fi.call(We, JSON.stringify(e));
+  return oo.call(We) && Ci && Ci.call(We, JSON.stringify(e));
 }
 function uo(e, t) {
   return t && typeof t[e.callType] == "function" && t[e.callType]();
@@ -5122,11 +5122,11 @@ function $o(e, t, r) {
 let ta = {
   init(e) {
     at = (G = e) && G._, Pe = G && G.log || console && console.log || function() {
-    }, Co();
+    }, Fo();
   },
   handleCommand: Eo
 };
-function Co() {
+function Fo() {
   if (Pe("ObsoleteBridge---test---init---"), he = window.SensorsData_APP_JS_Bridge, vt = he && he.sensorsdata_track, lt = he && he.sensorsdata_verify, Dt = he && he.sensorsdata_visual_verify, Pe(
     "ObsoleteBridge-",
     G.bridge.activeBridge,
@@ -5144,13 +5144,13 @@ function Co() {
       platform: "android",
       verify_success: e ? "success" : "fail"
     }, G.para.app_js_bridge ? (G.registerInterceptor("sendDataStage", {
-      send: { priority: 80, entry: Fo }
+      send: { priority: 80, entry: Co }
     }), Pe("Android obsolete bridge inits succeed.")) : Pe(
       "app_js_bridge is not configured, data will not be sent by android obsolete bridge."
     );
   }
 }
-function Fo(e, t) {
+function Co(e, t) {
   if (Pe("ObsoleteBridge---senddata"), G.para.app_js_bridge.is_mui || e.data.type === "item_set" || e.data.type === "item_delete")
     return e;
   let r = e.callback;
@@ -5175,7 +5175,7 @@ function Eo(e) {
   let t = e.callType;
   return t in $r.commands ? (Pe("ObsoleteBridge---", t, $r.commands), $r.commands[t](e, he)) : he && at.isFunction(he.sensorsdata_js_call_app) ? (Pe("ObsoleteBridge---handleCommadn-abridge"), he.sensorsdata_js_call_app(JSON.stringify(e))) : void 0;
 }
-let _e, ke, Cr, Fr, ji = $o(
+let _e, ke, Fr, Cr, ji = $o(
   ta,
   "AndroidObsoleteBridge",
   "sdkAfterInitPara"
@@ -5217,10 +5217,10 @@ var $e = {
   init(e, t) {
     if (ke || !e)
       return !1;
-    Fr = (t = t || {}).cookie_name || "sensorsdata2015jssdkchannel", ke = e;
+    Cr = (t = t || {}).cookie_name || "sensorsdata2015jssdkchannel", ke = e;
     let r = this;
     (function() {
-      if (_e = ke._, Cr = ke.store, !_e.localStorage.isSupport())
+      if (_e = ke._, Fr = ke.store, !_e.localStorage.isSupport())
         return !1;
       r.eventList.init(), r.addLatestChannelUrl(), r.addIsChannelCallbackEvent();
     })();
@@ -5254,12 +5254,12 @@ var $e = {
   },
   cookie: {
     getChannel() {
-      let e = ke.kit.userDecryptIfNeeded(_e.cookie.get(Fr));
+      let e = ke.kit.userDecryptIfNeeded(_e.cookie.get(Cr));
       return e = _e.safeJSONParse(e), !(!_e.isObject(e) || !e.prop) && e.prop;
     },
     saveChannel(e) {
       let r = JSON.stringify({ prop: e });
-      ke.para.encrypt_cookie && (r = ke.kit.userEncrypt(r)), _e.cookie.set(Fr, r);
+      ke.para.encrypt_cookie && (r = ke.kit.userEncrypt(r)), _e.cookie.set(Cr, r);
     }
   },
   channelLinkHandler() {
@@ -5281,7 +5281,7 @@ var $e = {
     get() {
       let e = {};
       try {
-        e = Cr.readObjectVal("sawebjssdkchannel");
+        e = Fr.readObjectVal("sawebjssdkchannel");
       } catch (t) {
         ke.log(t);
       }
@@ -5295,7 +5295,7 @@ var $e = {
         latest_event_initial_time: $e.latest_event_initial_time,
         eventList: $e.event_list
       };
-      Cr.saveObjectVal("sawebjssdkchannel", e);
+      Fr.saveObjectVal("sawebjssdkchannel", e);
     },
     reset() {
       $e.event_list = [], $e.latest_event_initial_time = (/* @__PURE__ */ new Date()).getTime(), this.save();
@@ -5881,7 +5881,7 @@ function $l(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (Cl(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (Fl(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -5891,7 +5891,7 @@ function $l(e, t, r) {
   }
   return e;
 }
-function Cl(e, t, r) {
+function Fl(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -5903,7 +5903,7 @@ function Cl(e, t, r) {
     i("error", arguments);
   };
 }
-function Fl(e, t, r) {
+function Cl(e, t, r) {
   return $l(e, t, r), e.plugin_version = kl, e;
 }
 let bt, sa, Bt = window.console && window.console.log || function() {
@@ -5927,7 +5927,7 @@ let Dl = {
       "RegisterPropertyPageHeight 插件初始化失败,当前主sdk不支持 RegisterPropertyPageHeight 插件，请升级主sdk"
     );
   }
-}, Pl = Fl(
+}, Pl = Cl(
   Dl,
   "RegisterPropertyPageHeight",
   "sdkReady"
@@ -6301,7 +6301,7 @@ function ku(e, t) {
 function $u() {
   xe.para.send_type !== "ajax" || Qe.isSupportCors() || (xe.para.send_type = xe.DEFAULT_SEND_TYPE);
 }
-function Cu() {
+function Fu() {
   xe.on("sdkInitPara", () => {
     $u();
   }), xe.on("sdkAfterInitPara", () => {
@@ -6310,12 +6310,12 @@ function Cu() {
     });
   });
 }
-let Ne, wt, Fu = {
+let Ne, wt, Cu = {
   plugin_name: "AjaxSender",
   init(e) {
-    Qe = (xe = e)._, Cu();
+    Qe = (xe = e)._, Fu();
   }
-}, Vi = Su(Fu), Eu = "1.27.11";
+}, Vi = Su(Cu), Eu = "1.27.11";
 function Du(e, t, r) {
   return e.plugin_version = Eu, e;
 }
@@ -6466,17 +6466,19 @@ let ca = ua;
 ca.DEFAULT_SEND_TYPE = "image";
 const qu = {
   mounted(e, t) {
-    const r = Array.isArray(t.value) ? t.value : [t.value], i = () => {
-      const n = Mu();
-      r.forEach(({ event: a, params: l, trigger: u }) => {
-        !a || u !== void 0 && !u || n.track(a, l || {});
-      });
-    };
-    e.addEventListener("click", i), e.__trackClick__ = i;
+    const r = Array.isArray(t.value) ? t.value : [t.value], i = Mu(), n = [];
+    r.forEach(({ event: a, params: l, trigger: u }) => {
+      if (a && (u = u || "click", u === "click" || !u)) {
+        const p = () => {
+          i.track(a, l || {});
+        };
+        e.addEventListener("click", p, !0), n.push(() => e.removeEventListener("click", p, !0));
+      }
+    }), e.__trackHandlers__ = n;
   },
   unmounted(e) {
-    const t = e.__trackClick__;
-    t && (e.removeEventListener("click", t), delete e.__trackClick__);
+    const t = e.__trackHandlers__;
+    t && (t.forEach((r) => r()), delete e.__trackHandlers__);
   }
 }, Ar = ca;
 function Qi(e, t) {
