@@ -1,9 +1,9 @@
-import sensors from '../libs/sensorsdata.es6'
+import sensorsdata from '../libs/sensorsdata.es6'
 import pageleave from '../libs/pageleave.es6'
 
-export interface AnalyticsOptions<E extends string, P extends Record<E, any>> {
+const sensors: any = sensorsdata
+export interface AnalyticsOptions {
   project: string
-  createTracker?: (track: (event: E, params: P[E]) => void) => (event: E, params: P[E]) => void
   pageLeave: {
     urlPropertyMap: (url: string) => { page_type: string, page_id: string }
     isCollectUrl: (url: string) => boolean
@@ -26,14 +26,14 @@ export type AnalyticsInstance<E extends string, P extends Record<E, any>> = {
 
 class Analytics<E extends string, P extends Record<E, any>> {
   public sensors: any
-  private options: AnalyticsOptions<E, P>
+  private options: AnalyticsOptions
 
   // 使用箭头函数，避免 this 隐式类型问题
   track: (event: E, params: P[E]) => void
   setProfile: (params: Record<string, any>) => void
   registerPage: (params: Record<string, any>) => void
 
-  constructor(sensors: any, options: AnalyticsOptions<E, P>) {
+  constructor(sensors: any, options: AnalyticsOptions) {
     this.sensors = sensors
     this.options = options
 
@@ -65,7 +65,7 @@ class Analytics<E extends string, P extends Record<E, any>> {
 
 let analytics: AnalyticsInstance<any, any> | null = null
 
-export function initAnalytics<E extends string, P extends Record<E, any>>(options: AnalyticsOptions<E, P>) {
+export function initAnalytics<E extends string, P extends Record<E, any>>(options: AnalyticsOptions) {
   sensors.use(pageleave, {
     event_duration: `page_duration`,
     event_name_view: `${options.project}_page_view`,
@@ -76,11 +76,6 @@ export function initAnalytics<E extends string, P extends Record<E, any>>(option
   sensors.init({ ...options.sensorsConfig })
 
   const ins = new Analytics<E, P>(sensors, options)
-
-  if (options.createTracker) {
-    ins.track = options.createTracker(ins.track)
-  }
-
   analytics = ins
   return analytics as AnalyticsInstance<E, P>
 }
