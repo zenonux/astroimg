@@ -2,6 +2,9 @@
 
 wrapper for sensors sdk.
 
+- 修改内置pageleave插件
+- 增加pageview事件
+
 ## Install
 
 ```bash

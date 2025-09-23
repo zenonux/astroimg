@@ -88,14 +88,14 @@ function now() {
                     && r(_) === g
                     && r(g) === g
                     && r() === g
-                      && r(s) === '1'
-                        && r([s]) == '[1]'
-                        && r([g]) == '[null]'
-                      && r(null) == 'null'
-                      && r([g, _, null]) == '[null,null,null]'
-                      && r({ a: [s, !0, !1, null, '\0\b\n\f\r\t'] }) == o
-                      && r(null, s) === '1'
-                      && r([1, 2], null, 1) == '[\n 1,\n 2\n]'
+                    && r(s) === '1'
+                    && r([s]) == '[1]'
+                    && r([g]) == '[null]'
+                    && r(null) == 'null'
+                    && r([g, _, null]) == '[null,null,null]'
+                    && r({ a: [s, !0, !1, null, '\0\b\n\f\r\t'] }) == o
+                    && r(null, s) === '1'
+                    && r([1, 2], null, 1) == '[\n 1,\n 2\n]'
               },
               () => {
                 d = !1
@@ -117,13 +117,13 @@ function now() {
                   c = !u('"\t"')
                 }),
                 c
-                  && m(() => {
-                      c = u('01') !== 1
-                    }),
+                && m(() => {
+                  c = u('01') !== 1
+                }),
                 c
-                  && m(() => {
-                      c = u('1.') !== 1
-                    })))
+                && m(() => {
+                  c = u('1.') !== 1
+                })))
               },
               () => {
                 c = !1
@@ -4140,12 +4140,12 @@ function strip_sa_properties(e, t) {
           || n === '$option'
           || a
           || (sdWarn(
-              '\u60A8\u7684\u6570\u636E-',
-              n,
-              r,
-              '-\u683C\u5F0F\u4E0D\u6EE1\u8DB3\u8981\u6C42\uFF0C\u6211\u4EEC\u5DF2\u7ECF\u5C06\u5176\u5220\u9664',
-            ),
-            delete e[n])
+            '\u60A8\u7684\u6570\u636E-',
+            n,
+            r,
+            '-\u683C\u5F0F\u4E0D\u6EE1\u8DB3\u8981\u6C42\uFF0C\u6211\u4EEC\u5DF2\u7ECF\u5C06\u5176\u5220\u9664',
+          ),
+          delete e[n])
         }
       }),
       e)
@@ -4638,8 +4638,8 @@ let vapph5CustomProp = {
             if (
               isObject(t)
               && t.url_host === a.host
-                && t.url_path === a.pathname
-                && t.h5
+              && t.url_path === a.pathname
+              && t.h5
             ) {
               let r = e.getProp(t)
               isObject(r) && (n = extend(n, r))
@@ -9048,12 +9048,13 @@ function PageLeave() {
   (this.page_hidden_status = !1))
 }),
 (PageLeave.prototype.pageStartHandler = function () {
-    let e = this.getPageLeaveProperties();
+  let e = this.getPageLeaveProperties();
   ((this.start_time = +new Date()),
   !0 == !document.hidden
     ? (this.page_show_status = !0)
     : (this.page_show_status = !1),
   (this.url = location.href),
+  delete e[this.option.event_duration],
   this.isCollectUrl(this.url) && this.sd.track(this.option.event_name_view, Object.assign(e, this.option.urlPropertyMap(this.url))),
   (this.title = document.title))
 }),
@@ -9191,6 +9192,8 @@ function PageLeave() {
       || (document.body && document.body.scrollTop)
       || 0
   r = Math.round(r) || 0
+
+  let presetProps = this.sd.getPresetProperties()
   let n = {
     $title: this.title,
     $url: this._.getURL(this.url),
@@ -9198,6 +9201,16 @@ function PageLeave() {
     $referrer_host: t ? this._.getHostname(t) : '',
     $referrer: t,
     $viewport_position: r,
+    $utm_source: presetProps.$utm_source,
+    $utm_medium: presetProps.$utm_medium,
+    $utm_term: presetProps.$utm_term,
+    $utm_content: presetProps.$utm_content,
+    $utm_campaign: presetProps.$utm_campaign,
+    $latest_utm_source: presetProps.$latest_utm_source,
+    $latest_utm_medium: presetProps.$latest_utm_medium,
+    $latest_utm_term: presetProps.$latest_utm_term,
+    $latest_utm_content: presetProps.$latest_utm_content,
+    $latest_utm_campaign: presetProps.$latest_utm_campaign,
   }
   return (
     e !== 0 && (n[this.option.event_duration] = e),

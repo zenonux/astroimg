@@ -17,7 +17,7 @@ const router = createRouter({
   ],
 })
 
-initAnalytics({
+const analytics = initAnalytics({
   project: 'test',
   pageLeave: {
     isCollectUrl() {
@@ -41,6 +41,7 @@ initAnalytics({
     },
   },
 })
+console.log(analytics.getPresetProperties())
 const app = createApp(App)
 app.directive('anal', vAnalytics)
 app.use(router).mount('#app')
