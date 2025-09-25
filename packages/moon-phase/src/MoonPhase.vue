@@ -94,10 +94,11 @@ function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
     grad.addColorStop(0, 'rgba(0,0,0,1)')   // 暗面最深
     grad.addColorStop(1, 'rgba(0,0,0,0.6)')   // 亮面透明
     ctxValue.fillStyle = grad
-    ctxValue.fill(path)     // 暗面最深
 
     const angle = moonOrient + (isUpMoon ? 180 : 0)
     ctxValue.rotate((angle * Math.PI) / 180)
+
+    ctxValue.fill(path)     // 暗面最深
   })
 }
 
