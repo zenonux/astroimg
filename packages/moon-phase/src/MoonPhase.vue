@@ -146,7 +146,6 @@ function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
   });
 }
 
-// 绘制底图
 function drawMoon(process: number, moonOrient: number, isUpMoon: boolean) {
   if (!ctx.value) return;
   const ctxValue = ctx.value;
