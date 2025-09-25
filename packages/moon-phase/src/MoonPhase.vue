@@ -95,9 +95,15 @@ function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
   withContext(() => {
     initData();
     refreshDataNew(process);
+
     ctxValue.translate(center.value.x, center.value.y);
+
     const angle = moonOrient + (isUpMoon ? 180 : 0);
     ctxValue.rotate((angle * Math.PI) / 180);
+
+    // 设置模糊滤镜
+    ctxValue.filter = `blur(${props.size / 100}px)`;
+
     const path = new Path2D();
     path.moveTo(mDataNew.value[0], mDataNew.value[1]);
     path.bezierCurveTo(
@@ -133,6 +139,7 @@ function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
       mDataNew.value[1],
     );
 
+
     const grad = ctxValue.createLinearGradient(
       -radius.value,
       0,
@@ -142,7 +149,9 @@ function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
     grad.addColorStop(0, "rgba(0,0,0,1)"); // 暗面最深
     grad.addColorStop(1, "rgba(0,0,0,0.6)"); // 亮面透明
     ctxValue.fillStyle = grad;
-    ctxValue.fill(path); // 暗面最深
+
+
+    ctxValue.fill(path);
   });
 }
 
