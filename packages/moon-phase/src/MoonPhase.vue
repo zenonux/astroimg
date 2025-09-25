@@ -88,8 +88,14 @@ function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
     path.bezierCurveTo(mCtrlNew.value[4], mCtrlNew.value[5], mCtrlNew.value[6], mCtrlNew.value[7], mDataNew.value[4], mDataNew.value[5])
     path.bezierCurveTo(mCtrlNew.value[8], mCtrlNew.value[9], mCtrlNew.value[10], mCtrlNew.value[11], mDataNew.value[6], mDataNew.value[7])
     path.bezierCurveTo(mCtrlNew.value[12], mCtrlNew.value[13], mCtrlNew.value[14], mCtrlNew.value[15], mDataNew.value[0], mDataNew.value[1])
-    ctx.value.fillStyle = 'rgba(0,0,0,0.7)'
-    ctx.value.fill(path)
+
+    const grad = ctx.value.createLinearGradient(-radius.value, 0, radius.value, 0)
+    grad.addColorStop(0, 'rgba(0,0,0,1)')   // 暗面最深
+    grad.addColorStop(1, 'rgba(0,0,0,0.6)')   // 亮面透明
+    ctx.value.fillStyle = grad
+    ctx.value.fill(path)     // 暗面最深
+
+
   })
 }
 
