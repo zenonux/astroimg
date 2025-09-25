@@ -144,9 +144,10 @@ function draw(process: number, moonOrient: number, isUpMoon: boolean,) {
     mDataNew.value[1],
   )
 
-  const gradient = ctx.value.createLinearGradient(-radius.value, 0, radius.value, 0)
-  gradient.addColorStop(0, 'rgba(0,0,0,.6)')
-  gradient.addColorStop(1, 'rgba(0,0,0,1)')
+  const gradient = ctx.value.createLinearGradient(-radius.value, 0, radius.value, 0);
+  gradient.addColorStop(0, 'rgba(0,0,0,0)');
+  gradient.addColorStop(1 - process, 'rgba(0,0,0,0.6)');
+  gradient.addColorStop(1, 'rgba(0,0,0,0.9)');
   ctx.value.fillStyle = gradient
   ctx.value.fill(path)
 
