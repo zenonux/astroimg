@@ -9,14 +9,10 @@ interface Props {
   isUpMoon: boolean // 上旬/月亮阴影方向
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  size: 200,
-})
-
+const props = withDefaults(defineProps<Props>(), { size: 200 })
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const ctx = ref<CanvasRenderingContext2D | null>(null)
 
-// 数据点和控制点
 const mData = ref<number[]>(Array.from<number>({ length: 8 }).fill(0))
 const mCtrl = ref<number[]>(Array.from<number>({ length: 16 }).fill(0))
 const mDataNew = ref<number[]>(Array.from<number>({ length: 8 }).fill(0))
@@ -25,36 +21,35 @@ const C = 0.552284749831
 
 const center = ref({ x: props.size! / 2, y: props.size! / 2 })
 const radius = ref(props.size! / 2)
-
-// 底图
 const texture = ref<HTMLImageElement | null>(null)
 
-// 初始化数据点和控制点
+// 封装 save/restore
+function withContext(fn: () => void) {
+  if (!ctx.value) return
+  ctx.value.save()
+  try {
+    fn()
+  } finally {
+    ctx.value.restore()
+  }
+}
+
 function initData() {
   const r = radius.value
   mData.value = [0, r, r, 0, 0, -r, -r, 0]
   const diff = r * C
   mCtrl.value = [
-    mData.value[0] + diff,
-    mData.value[1],
-    mData.value[2],
-    mData.value[3] + diff,
-    mData.value[2],
-    mData.value[3] - diff,
-    mData.value[4] + diff,
-    mData.value[5],
-    mData.value[4] - diff,
-    mData.value[5],
-    mData.value[6],
-    mData.value[7] - diff,
-    mData.value[6],
-    mData.value[7] + diff,
-    mData.value[0] - diff,
-    mData.value[1],
+    mData.value[0] + diff, mData.value[1],
+    mData.value[2], mData.value[3] + diff,
+    mData.value[2], mData.value[3] - diff,
+    mData.value[4] + diff, mData.value[5],
+    mData.value[4] - diff, mData.value[5],
+    mData.value[6], mData.value[7] - diff,
+    mData.value[6], mData.value[7] + diff,
+    mData.value[0] - diff, mData.value[1],
   ]
 }
 
-// 更新变形数据
 function refreshDataNew(process: number) {
   mDataNew.value[0] = mData.value[0]
   mDataNew.value[1] = mData.value[1]
@@ -79,81 +74,40 @@ function refreshDataNew(process: number) {
   }
 }
 
-// 绘制底图 + 阴影圆 + 旋转
-function draw(process: number, moonOrient: number, isUpMoon: boolean,) {
-  if (!ctx.value)
-    return
-  initData()
-  refreshDataNew(process)
+// 绘制阴影
+function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
+  if (!ctx.value) return
+  withContext(() => {
+    ctx.value.translate(center.value.x, center.value.y)
+    const angle = moonOrient + (isUpMoon ? 180 : 0)
+    ctx.value.rotate((angle * Math.PI) / 180)
 
-  ctx.value.clearRect(0, 0, props.size, props.size)
-  ctx.value.save()
-  ctx.value.translate(center.value.x, center.value.y)
-
-  // 计算旋转角度
-  let angle = moonOrient ?? 0
-  if (isUpMoon) {
-    angle += 180
-  }
-  ctx.value.rotate((angle * Math.PI) / 180)
-
-  // 绘制底图
-  if (texture.value) {
-    ctx.value.drawImage(
-      texture.value,
-      -radius.value,
-      -radius.value,
-      radius.value * 2,
-      radius.value * 2,
-    )
-  }
-
-  // 绘制阴影/渐变圆
-  const path = new Path2D()
-  path.moveTo(mDataNew.value[0], mDataNew.value[1])
-  path.bezierCurveTo(
-    mCtrlNew.value[0],
-    mCtrlNew.value[1],
-    mCtrlNew.value[2],
-    mCtrlNew.value[3],
-    mDataNew.value[2],
-    mDataNew.value[3],
-  )
-  path.bezierCurveTo(
-    mCtrlNew.value[4],
-    mCtrlNew.value[5],
-    mCtrlNew.value[6],
-    mCtrlNew.value[7],
-    mDataNew.value[4],
-    mDataNew.value[5],
-  )
-  path.bezierCurveTo(
-    mCtrlNew.value[8],
-    mCtrlNew.value[9],
-    mCtrlNew.value[10],
-    mCtrlNew.value[11],
-    mDataNew.value[6],
-    mDataNew.value[7],
-  )
-  path.bezierCurveTo(
-    mCtrlNew.value[12],
-    mCtrlNew.value[13],
-    mCtrlNew.value[14],
-    mCtrlNew.value[15],
-    mDataNew.value[0],
-    mDataNew.value[1],
-  )
-
-  const gradient = ctx.value.createLinearGradient(-radius.value, 0, radius.value, 0);
-  gradient.addColorStop(1 - process, 'rgba(0,0,0,0.6)');
-  gradient.addColorStop(1, 'rgba(0,0,0,0.9)');
-  ctx.value.fillStyle = gradient
-  ctx.value.fill(path)
-
-  ctx.value.restore()
+    const path = new Path2D()
+    path.moveTo(mDataNew.value[0], mDataNew.value[1])
+    path.bezierCurveTo(mCtrlNew.value[0], mCtrlNew.value[1], mCtrlNew.value[2], mCtrlNew.value[3], mDataNew.value[2], mDataNew.value[3])
+    path.bezierCurveTo(mCtrlNew.value[4], mCtrlNew.value[5], mCtrlNew.value[6], mCtrlNew.value[7], mDataNew.value[4], mDataNew.value[5])
+    path.bezierCurveTo(mCtrlNew.value[8], mCtrlNew.value[9], mCtrlNew.value[10], mCtrlNew.value[11], mDataNew.value[6], mDataNew.value[7])
+    path.bezierCurveTo(mCtrlNew.value[12], mCtrlNew.value[13], mCtrlNew.value[14], mCtrlNew.value[15], mDataNew.value[0], mDataNew.value[1])
+    ctx.value.fillStyle = 'rgba(0,0,0,0.7)'
+    ctx.value.fill(path)
+  })
 }
 
-// 加载底图
+// 绘制底图
+function drawMoon(process: number, moonOrient: number, isUpMoon: boolean) {
+  if (!ctx.value) return
+  ctx.value.clearRect(0, 0, props.size!, props.size!)
+
+  // 底图
+  withContext(() => {
+    if (texture.value) {
+      ctx.value.drawImage(texture.value, 0, 0, props.size!, props.size!)
+    }
+  })
+
+  drawShadow(process, moonOrient, isUpMoon)
+}
+
 function loadTexture(url: string) {
   return new Promise<HTMLImageElement>((resolve, reject) => {
     const img = new Image()
@@ -165,21 +119,23 @@ function loadTexture(url: string) {
 }
 
 onMounted(async () => {
-  if (!canvasRef.value) {
-    return
-  }
+  if (!canvasRef.value) return
   ctx.value = canvasRef.value.getContext('2d')
   texture.value = await loadTexture(props.textureUrl)
-  const process = 1 - props.illumination;
-  draw(process, props.moonOrient, props.isUpMoon,)
+  const process = 1 - props.illumination
+  initData()
+  refreshDataNew(process)
+  drawMoon(process, props.moonOrient, props.isUpMoon)
 })
 
 watch(
   () => [props.illumination, props.moonOrient, props.isUpMoon] as [number, number, boolean],
   ([illumination, moonOrient, isUpMoon]) => {
-    const process = 1 - illumination;
-    draw(process, moonOrient, isUpMoon)
-  },
+    const process = 1 - illumination
+    initData()
+    refreshDataNew(process)
+    drawMoon(process, moonOrient, isUpMoon)
+  }
 )
 </script>
 
