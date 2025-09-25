@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {watch, onMounted, ref } from 'vue'
+import { watch, onMounted, ref } from 'vue'
 
 interface Props {
   size?: number
-  process: number
+  illumination: number
   textureUrl: string
   moonOrient: number // 月亮方向角度（0-360）
   isUpMoon: boolean // 上旬/月亮阴影方向
@@ -18,8 +18,8 @@ const ctx = ref<CanvasRenderingContext2D | null>(null)
 
 // 数据点和控制点
 const mData = ref<number[]>(Array.from<number>({ length: 8 }).fill(0))
-const mDataNew = ref<number[]>(Array.from<number>({ length: 8 }).fill(0))
 const mCtrl = ref<number[]>(Array.from<number>({ length: 16 }).fill(0))
+const mDataNew = ref<number[]>(Array.from<number>({ length: 8 }).fill(0))
 const mCtrlNew = ref<number[]>(Array.from<number>({ length: 16 }).fill(0))
 const C = 0.552284749831
 
@@ -30,7 +30,7 @@ const radius = ref(props.size! / 2)
 const texture = ref<HTMLImageElement | null>(null)
 
 // 初始化数据点和控制点
-function initData(process: number) {
+function initData() {
   const r = radius.value
   mData.value = [0, r, r, 0, 0, -r, -r, 0]
   const diff = r * C
@@ -52,7 +52,6 @@ function initData(process: number) {
     mData.value[0] - diff,
     mData.value[1],
   ]
-  refreshDataNew(process)
 }
 
 // 更新变形数据
@@ -81,11 +80,13 @@ function refreshDataNew(process: number) {
 }
 
 // 绘制底图 + 阴影圆 + 旋转
-function draw( moonOrient: number,isUpMoon: boolean,) {
+function draw(process: number, moonOrient: number, isUpMoon: boolean,) {
   if (!ctx.value)
     return
+  initData()
+  refreshDataNew(process)
 
-  ctx.value.clearRect(0, 0, props.size!, props.size!)
+  ctx.value.clearRect(0, 0, props.size, props.size)
   ctx.value.save()
   ctx.value.translate(center.value.x, center.value.y)
 
@@ -146,7 +147,7 @@ function draw( moonOrient: number,isUpMoon: boolean,) {
   const gradient = ctx.value.createLinearGradient(
     -radius.value,
     0,
-    radius.value * props.process!,
+    radius.value * process,
     0,
   )
   gradient.addColorStop(0, 'rgba(0,0,0,1)')
@@ -174,15 +175,15 @@ onMounted(async () => {
   }
   ctx.value = canvasRef.value.getContext('2d')
   texture.value = await loadTexture(props.textureUrl)
-  initData(props.process)
-  draw( props.moonOrient,props.isUpMoon,)
+  const process = 1 - props.illumination;
+  draw(process, props.moonOrient, props.isUpMoon,)
 })
 
 watch(
-  () => [props.process, props.moonOrient, props.isUpMoon] as [number, number, boolean],
-  ([process, moonOrient, isUpMoon]) => {
-    initData(process)
-    draw(moonOrient, isUpMoon)
+  () => [props.illumination, props.moonOrient, props.isUpMoon] as [number, number, boolean],
+  ([illumination, moonOrient, isUpMoon]) => {
+    const process = 1 - illumination;
+    draw(process, moonOrient, isUpMoon)
   },
 )
 </script>
