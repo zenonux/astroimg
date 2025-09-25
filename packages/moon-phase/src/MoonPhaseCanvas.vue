@@ -103,7 +103,7 @@ function drawShadow( process: number, moonOrient: number, isUpMoon: boolean) {
     ctxValue.rotate((angle * Math.PI) / 180);
 
     // 设置模糊滤镜
-    ctxValue.filter = `blur(${radius.value / 50}px)`;
+    ctxValue.filter = `blur(${props.size / 100 * dpr}px)`;
 
     const path = new Path2D();
     path.moveTo(mDataNew.value[0], mDataNew.value[1]);
