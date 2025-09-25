@@ -75,9 +75,11 @@ function refreshDataNew(process: number) {
 }
 
 // 绘制阴影
-function drawShadow( moonOrient: number, isUpMoon: boolean) {
+function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
   if (!ctx.value) return
   const ctxValue = ctx.value;
+  initData()
+  refreshDataNew(process)
   withContext(() => {
     ctxValue.translate(center.value.x, center.value.y)
     const angle = moonOrient + (isUpMoon ? 180 : 0)
@@ -100,11 +102,10 @@ function drawShadow( moonOrient: number, isUpMoon: boolean) {
 }
 
 // 绘制底图
-function drawMoon(process:number, moonOrient: number, isUpMoon: boolean) {
+function drawMoon(process: number, moonOrient: number, isUpMoon: boolean) {
   if (!ctx.value) return
   const ctxValue = ctx.value;
-  initData()
-  refreshDataNew(process)
+
   ctxValue.clearRect(0, 0, props.size!, props.size!)
 
   // 底图
@@ -114,7 +115,8 @@ function drawMoon(process:number, moonOrient: number, isUpMoon: boolean) {
     }
   })
 
-  drawShadow(moonOrient, isUpMoon)
+  // 阴影
+  drawShadow(process, moonOrient, isUpMoon)
 }
 
 function loadTexture(url: string) {
@@ -132,14 +134,14 @@ onMounted(async () => {
   ctx.value = canvasRef.value.getContext('2d')
   texture.value = await loadTexture(props.textureUrl)
   const process = 1 - props.illumination
-  drawMoon(process,props.moonOrient, props.isUpMoon)
+  drawMoon(process, props.moonOrient, props.isUpMoon)
 })
 
 watch(
   () => [props.illumination, props.moonOrient, props.isUpMoon] as [number, number, boolean],
   ([illumination, moonOrient, isUpMoon]) => {
     const process = 1 - illumination
-    drawMoon(process,moonOrient, isUpMoon)
+    drawMoon(process, moonOrient, isUpMoon)
   }
 )
 </script>
