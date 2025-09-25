@@ -82,8 +82,6 @@ function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
   refreshDataNew(process)
   withContext(() => {
     ctxValue.translate(center.value.x, center.value.y)
-    const angle = moonOrient + (isUpMoon ? 180 : 0)
-    ctxValue.rotate((angle * Math.PI) / 180)
 
     const path = new Path2D()
     path.moveTo(mDataNew.value[0], mDataNew.value[1])
@@ -98,6 +96,8 @@ function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
     ctxValue.fillStyle = grad
     ctxValue.fill(path)     // 暗面最深
 
+    const angle = moonOrient + (isUpMoon ? 180 : 0)
+    ctxValue.rotate((angle * Math.PI) / 180)
   })
 }
 
