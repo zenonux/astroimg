@@ -20,8 +20,8 @@ const mDataNew = ref<number[]>(Array.from<number>({ length: 8 }).fill(0));
 const mCtrlNew = ref<number[]>(Array.from<number>({ length: 16 }).fill(0));
 const C = 0.552284749831;
 
-const center = ref({ x: props.size  / 2, y: props.size  / 2 });
-const radius = ref(props.size  / 2);
+const center = ref({ x: props.size / 2, y: props.size / 2 });
+const radius = ref(props.size / 2);
 const texture = ref<HTMLImageElement | null>(null);
 
 // 封装 save/restore
@@ -89,7 +89,7 @@ function refreshDataNew(process: number) {
 }
 
 // 绘制阴影
-function drawShadow( process: number, moonOrient: number, isUpMoon: boolean) {
+function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
   if (!ctx.value) return;
   const ctxValue = ctx.value;
 
@@ -103,7 +103,7 @@ function drawShadow( process: number, moonOrient: number, isUpMoon: boolean) {
     ctxValue.rotate((angle * Math.PI) / 180);
 
     // 设置模糊滤镜
-    ctxValue.filter = `blur(${props.size / 100 * dpr}px)`;
+    ctxValue.filter = `blur(${(props.size / 100) * dpr}px)`;
 
     const path = new Path2D();
     path.moveTo(mDataNew.value[0], mDataNew.value[1]);
@@ -140,7 +140,6 @@ function drawShadow( process: number, moonOrient: number, isUpMoon: boolean) {
       mDataNew.value[1],
     );
 
-
     const grad = ctxValue.createLinearGradient(
       -radius.value,
       0,
@@ -150,7 +149,6 @@ function drawShadow( process: number, moonOrient: number, isUpMoon: boolean) {
     grad.addColorStop(0, "rgba(0,0,0,1)"); // 暗面最深
     grad.addColorStop(1, "rgba(0,0,0,0.6)"); // 亮面透明
     ctxValue.fillStyle = grad;
-
 
     ctxValue.fill(path);
   });
@@ -164,11 +162,9 @@ function drawMoon(process: number, moonOrient: number, isUpMoon: boolean) {
   ctxValue.clearRect(0, 0, size, size);
 
   // 底图
-  withContext(() => {
-    if (texture.value) {
-      ctxValue.drawImage(texture.value, 0, 0, size, size);
-    }
-  });
+  if (texture.value) {
+    ctxValue.drawImage(texture.value, 0, 0, size, size);
+  }
 
   // 阴影
   drawShadow(process, moonOrient, isUpMoon);
@@ -184,7 +180,6 @@ function loadTexture(url: string) {
   });
 }
 
-
 onMounted(async () => {
   if (!canvasRef.value) return;
   ctx.value = canvasRef.value.getContext("2d");
@@ -192,8 +187,8 @@ onMounted(async () => {
   const canvas = canvasRef.value;
   canvas.width = props.size! * dpr;
   canvas.height = props.size! * dpr;
-  canvas.style.width = props.size! + 'px';
-  canvas.style.height = props.size! + 'px';
+  canvas.style.width = props.size! + "px";
+  canvas.style.height = props.size! + "px";
   ctx.value?.scale(dpr, dpr);
 
   texture.value = await loadTexture(props.textureUrl);
@@ -216,5 +211,5 @@ watch(
 </script>
 
 <template>
-  <canvas ref="canvasRef"  />
+  <canvas ref="canvasRef" />
 </template>
