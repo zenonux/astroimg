@@ -1,6 +1,6 @@
 <template>
-  <MoonPhase :illumination=".1" :moon-orient="20" :size="200" :is-up-moon="false" texture-url="https://cdn-assets.astroimg.com/www.astroimg.com/images/weather/moon.webp" />
+  <MoonPhaseCanvas :illumination=".1" :moon-orient="20" :size="200" :is-up-moon="false" texture-url="https://cdn-assets.astroimg.com/www.astroimg.com/images/weather/moon.webp" />
 </template>
 <script setup lang="ts">
-import MoonPhase from '../src/MoonPhase.vue';
+import MoonPhaseCanvas from '../src/MoonPhaseCanvas.vue';
 </script>

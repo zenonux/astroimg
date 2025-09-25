@@ -1,4 +1,4 @@
-import MoonPhase from './MoonPhase.vue'
+import MoonPhaseCanvas from './MoonPhaseCanvas.vue'
 
 // 获取 当前 UTC 时间对应的儒略日
 function getJD_UTC(date: Date = new Date()): number {
@@ -21,15 +21,19 @@ function getJD_UTC(date: Date = new Date()): number {
   const A = Math.floor(year / 100)
   const B = 2 - A + Math.floor(A / 4)
 
-  const JD = Math.floor(365.25 * (year + 4716))
-    + Math.floor(30.6001 * (month + 1))
-    + day + dayFraction + B - 1524.5
+  const JD
+    = Math.floor(365.25 * (year + 4716))
+      + Math.floor(30.6001 * (month + 1))
+      + day
+      + dayFraction
+      + B
+      - 1524.5
 
   return JD
 }
 function getMoonDay() {
   const totalMoonMonth = (getJD_UTC() - 2451550.09765) / 29.530588853
-  return ((totalMoonMonth - Math.floor(totalMoonMonth)) * 29.530588853) + 0.28
+  return (totalMoonMonth - Math.floor(totalMoonMonth)) * 29.530588853 + 0.28
 }
 function isUpMoon(moonDay: number) {
   return moonDay > 15
@@ -71,4 +75,10 @@ function getMoonPhaseType(moonDay: number) {
   }
 }
 
-export { getMoonDay, getMoonPhaseType, isUpMoon, MoonPhase, MoonPhaseType }
+export {
+  getMoonDay,
+  getMoonPhaseType,
+  isUpMoon,
+  MoonPhaseCanvas,
+  MoonPhaseType,
+}
