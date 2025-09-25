@@ -20,8 +20,8 @@ const mDataNew = ref<number[]>(Array.from<number>({ length: 8 }).fill(0));
 const mCtrlNew = ref<number[]>(Array.from<number>({ length: 16 }).fill(0));
 const C = 0.552284749831;
 
-const center = ref({ x: props.size * dpr / 2, y: props.size * dpr / 2 });
-const radius = ref(props.size * dpr / 2);
+const center = ref({ x: props.size  / 2, y: props.size  / 2 });
+const radius = ref(props.size  / 2);
 const texture = ref<HTMLImageElement | null>(null);
 
 // 封装 save/restore
@@ -159,7 +159,7 @@ function drawShadow( process: number, moonOrient: number, isUpMoon: boolean) {
 function drawMoon(process: number, moonOrient: number, isUpMoon: boolean) {
   if (!ctx.value) return;
   const ctxValue = ctx.value;
-  const size = props.size! * dpr;
+  const size = props.size;
 
   ctxValue.clearRect(0, 0, size, size);
 
@@ -194,6 +194,8 @@ onMounted(async () => {
   canvas.height = props.size! * dpr;
   canvas.style.width = props.size! + 'px';
   canvas.style.height = props.size! + 'px';
+  ctx.value?.scale(dpr, dpr);
+
   texture.value = await loadTexture(props.textureUrl);
   const process = 1 - props.illumination;
   drawMoon(process, props.moonOrient, props.isUpMoon);
