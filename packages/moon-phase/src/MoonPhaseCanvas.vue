@@ -10,6 +10,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), { size: 200 });
+const dpr = window.devicePixelRatio || 1;
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const ctx = ref<CanvasRenderingContext2D | null>(null);
 
@@ -19,8 +20,8 @@ const mDataNew = ref<number[]>(Array.from<number>({ length: 8 }).fill(0));
 const mCtrlNew = ref<number[]>(Array.from<number>({ length: 16 }).fill(0));
 const C = 0.552284749831;
 
-const center = ref({ x: props.size! / 2, y: props.size! / 2 });
-const radius = ref(props.size! / 2);
+const center = ref({ x: props.size * dpr / 2, y: props.size * dpr / 2 });
+const radius = ref(props.size * dpr / 2);
 const texture = ref<HTMLImageElement | null>(null);
 
 // 封装 save/restore
@@ -88,7 +89,7 @@ function refreshDataNew(process: number) {
 }
 
 // 绘制阴影
-function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
+function drawShadow( process: number, moonOrient: number, isUpMoon: boolean) {
   if (!ctx.value) return;
   const ctxValue = ctx.value;
 
@@ -102,7 +103,7 @@ function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
     ctxValue.rotate((angle * Math.PI) / 180);
 
     // 设置模糊滤镜
-    ctxValue.filter = `blur(${props.size / 100}px)`;
+    ctxValue.filter = `blur(${radius.value / 50}px)`;
 
     const path = new Path2D();
     path.moveTo(mDataNew.value[0], mDataNew.value[1]);
@@ -158,13 +159,14 @@ function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
 function drawMoon(process: number, moonOrient: number, isUpMoon: boolean) {
   if (!ctx.value) return;
   const ctxValue = ctx.value;
+  const size = props.size! * dpr;
 
-  ctxValue.clearRect(0, 0, props.size!, props.size!);
+  ctxValue.clearRect(0, 0, size, size);
 
   // 底图
   withContext(() => {
     if (texture.value) {
-      ctxValue.drawImage(texture.value, 0, 0, props.size!, props.size!);
+      ctxValue.drawImage(texture.value, 0, 0, size, size);
     }
   });
 
@@ -182,9 +184,16 @@ function loadTexture(url: string) {
   });
 }
 
+
 onMounted(async () => {
   if (!canvasRef.value) return;
   ctx.value = canvasRef.value.getContext("2d");
+
+  const canvas = canvasRef.value;
+  canvas.width = props.size! * dpr;
+  canvas.height = props.size! * dpr;
+  canvas.style.width = props.size! + 'px';
+  canvas.style.height = props.size! + 'px';
   texture.value = await loadTexture(props.textureUrl);
   const process = 1 - props.illumination;
   drawMoon(process, props.moonOrient, props.isUpMoon);
@@ -205,5 +214,5 @@ watch(
 </script>
 
 <template>
-  <canvas ref="canvasRef" :width="size" :height="size" />
+  <canvas ref="canvasRef"  />
 </template>
