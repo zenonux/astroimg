@@ -14,5 +14,5 @@ pnpm add @astroimg/moon-phase
 
 ```js
 import { MoonPhaseCanvas } from "@astroimg/moon-phase";
-<MoonPhaseCanvas :illumination=".1" :moon-orient="20" :size="200" :is-up-moon="false" texture-url="" />
+<MoonPhaseCanvas :illumination=".2" :moon-orient="20" :size="200" :is-up-moon="false" texture-url="" />
 ```

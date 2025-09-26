@@ -146,8 +146,8 @@ function drawShadow(process: number, moonOrient: number, isUpMoon: boolean) {
       radius.value,
       0,
     );
-    grad.addColorStop(0, "rgba(0,0,0,1)"); // 暗面最深
-    grad.addColorStop(1, "rgba(0,0,0,0.6)"); // 亮面透明
+    grad.addColorStop(0, "rgba(0,0,0,.9)"); // 暗面最深
+    grad.addColorStop(1, "rgba(0,0,0,0.3)"); // 亮面透明
     ctxValue.fillStyle = grad;
 
     ctxValue.fill(path);
