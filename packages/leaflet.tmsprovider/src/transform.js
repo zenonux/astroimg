@@ -66,7 +66,7 @@ function transform(lng, lat) {
 }
 
 /** 火星转百度 */
-function gcj02ToBd09(x, y) {
+export function gcj02ToBd09(x, y) {
   let z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi)
   let theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi)
   let bd_lng = z * Math.cos(theta) + 0.0065
@@ -76,6 +76,25 @@ function gcj02ToBd09(x, y) {
     lat: bd_lat,
   }
   return newCoord
+}
+
+/** 百度坐标 BD-09 -> 火星坐标 GCJ-02 */
+export function bd09ToGcj02(bdLng, bdLat) {
+  const x_pi = (Math.PI * 3000.0) / 180.0
+  const x = bdLng - 0.0065
+  const y = bdLat - 0.006
+  const z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * x_pi)
+  const theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * x_pi)
+  const ggLng = z * Math.cos(theta)
+  const ggLat = z * Math.sin(theta)
+  return { lng: ggLng, lat: ggLat }
+}
+
+/** 百度坐标 BD-09 -> WGS84 */
+export function bd09ToWgs84(bdLng, bdLat) {
+  const gcj = bd09ToGcj02(bdLng, bdLat)
+  const wgs = gcj02ToWgs84(gcj.lng, gcj.lat)
+  return wgs
 }
 
 // 判断某点是否在中国大陆境内

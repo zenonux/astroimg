@@ -112,7 +112,7 @@ function N9(t) {
     t("EPSG:" + (32600 + a), "+proj=utm +zone=" + a + " +datum=WGS84 +units=m"), t("EPSG:" + (32700 + a), "+proj=utm +zone=" + a + " +south +datum=WGS84 +units=m");
   t.WGS84 = t["EPSG:4326"], t["EPSG:3785"] = t["EPSG:3857"], t.GOOGLE = t["EPSG:3857"], t["EPSG:900913"] = t["EPSG:3857"], t["EPSG:102113"] = t["EPSG:3857"];
 }
-var h0 = 1, o0 = 2, M0 = 3, A9 = 4, n1 = 5, G1 = 6378137, C9 = 6356752314e-3, b1 = 0.0066943799901413165, x0 = 484813681109536e-20, v = Math.PI / 2, p9 = 0.16666666666666666, I9 = 0.04722222222222222, R9 = 0.022156084656084655, S = 1e-10, L = 0.017453292519943295, V = 57.29577951308232, C = Math.PI / 4, C0 = Math.PI * 2, T = 3.14159265359, W = {};
+var h0 = 1, o0 = 2, d0 = 3, A9 = 4, n1 = 5, G1 = 6378137, C9 = 6356752314e-3, b1 = 0.0066943799901413165, x0 = 484813681109536e-20, v = Math.PI / 2, p9 = 0.16666666666666666, I9 = 0.04722222222222222, R9 = 0.022156084656084655, w = 1e-10, L = 0.017453292519943295, V = 57.29577951308232, C = Math.PI / 4, C0 = Math.PI * 2, T = 3.14159265359, W = {};
 W.greenwich = 0;
 W.lisbon = -9.131906111111;
 W.paris = 2.337229166667;
@@ -664,9 +664,9 @@ function _0(t, a) {
       return a1(a, i, t);
   }
 }
-var B9 = 0.017453292519943295;
+var j9 = 0.017453292519943295;
 function J(t) {
-  return t * B9;
+  return t * j9;
 }
 function a9(t) {
   const a = (t.projName || "").toLowerCase().replace(/_/g, " ");
@@ -741,7 +741,7 @@ function Q0(t, a = {}) {
       }
   }), a.latitude_of_false_origin !== void 0 && (a.lat0 = a.latitude_of_false_origin), a.longitude_of_false_origin !== void 0 && (a.long0 = a.longitude_of_false_origin), a.latitude_of_standard_parallel !== void 0 && (a.lat0 = a.latitude_of_standard_parallel, a.lat1 = a.latitude_of_standard_parallel), a.latitude_of_1st_standard_parallel !== void 0 && (a.lat1 = a.latitude_of_1st_standard_parallel), a.latitude_of_2nd_standard_parallel !== void 0 && (a.lat2 = a.latitude_of_2nd_standard_parallel), a.latitude_of_projection_centre !== void 0 && (a.lat0 = a.latitude_of_projection_centre), a.longitude_of_projection_centre !== void 0 && (a.longc = a.longitude_of_projection_centre), a.easting_at_false_origin !== void 0 && (a.x0 = a.easting_at_false_origin), a.northing_at_false_origin !== void 0 && (a.y0 = a.northing_at_false_origin), a.latitude_of_natural_origin !== void 0 && (a.lat0 = a.latitude_of_natural_origin), a.longitude_of_natural_origin !== void 0 && (a.long0 = a.longitude_of_natural_origin), a.longitude_of_origin !== void 0 && (a.long0 = a.longitude_of_origin), a.false_easting !== void 0 && (a.x0 = a.false_easting), a.easting_at_projection_centre && (a.x0 = a.easting_at_projection_centre), a.false_northing !== void 0 && (a.y0 = a.false_northing), a.northing_at_projection_centre && (a.y0 = a.northing_at_projection_centre), a.standard_parallel_1 !== void 0 && (a.lat1 = a.standard_parallel_1), a.standard_parallel_2 !== void 0 && (a.lat2 = a.standard_parallel_2), a.scale_factor_at_natural_origin !== void 0 && (a.k0 = a.scale_factor_at_natural_origin), a.scale_factor_at_projection_centre !== void 0 && (a.k0 = a.scale_factor_at_projection_centre), a.scale_factor_on_pseudo_standard_parallel !== void 0 && (a.k0 = a.scale_factor_on_pseudo_standard_parallel), a.azimuth !== void 0 && (a.alpha = a.azimuth), a.azimuth_at_projection_centre !== void 0 && (a.alpha = a.azimuth_at_projection_centre), a.angle_from_rectified_to_skew_grid && (a.rectified_grid_angle = a.angle_from_rectified_to_skew_grid), a9(a), a);
 }
-var j9 = [
+var B9 = [
   "PROJECTEDCRS",
   "PROJCRS",
   "GEOGCS",
@@ -761,7 +761,7 @@ function H9(t, a) {
 function i9(t) {
   for (var a = Object.keys(t), i = 0, s = a.length; i < s; ++i) {
     var e = a[i];
-    j9.indexOf(e) !== -1 && W9(t[e]), typeof t[e] == "object" && i9(t[e]);
+    B9.indexOf(e) !== -1 && W9(t[e]), typeof t[e] == "object" && i9(t[e]);
   }
 }
 function W9(t) {
@@ -919,7 +919,7 @@ function Z(t, a, i) {
 function T0(t) {
   return t < 0 ? -1 : 1;
 }
-function w(t) {
+function S(t) {
   return Math.abs(t) <= T ? t : t - T0(t) * C0;
 }
 function X(t, a, i) {
@@ -941,13 +941,13 @@ function i2(t) {
   if (i * V > 90 && i * V < -90 && a * V > 180 && a * V < -180)
     return null;
   var s, e;
-  if (Math.abs(Math.abs(i) - v) <= S)
+  if (Math.abs(Math.abs(i) - v) <= w)
     return null;
   if (this.sphere)
-    s = this.x0 + this.a * this.k0 * w(a - this.long0), e = this.y0 + this.a * this.k0 * Math.log(Math.tan(C + 0.5 * i));
+    s = this.x0 + this.a * this.k0 * S(a - this.long0), e = this.y0 + this.a * this.k0 * Math.log(Math.tan(C + 0.5 * i));
   else {
     var r = Math.sin(i), h = X(this.e, i, r);
-    s = this.x0 + this.a * this.k0 * w(a - this.long0), e = this.y0 - this.a * this.k0 * Math.log(h);
+    s = this.x0 + this.a * this.k0 * S(a - this.long0), e = this.y0 - this.a * this.k0 * Math.log(h);
   }
   return t.x = s, t.y = e, t;
 }
@@ -960,7 +960,7 @@ function s2(t) {
     if (e = I0(this.e, r), e === -9999)
       return null;
   }
-  return s = w(this.long0 + a / (this.a * this.k0)), t.x = s, t.y = e, t;
+  return s = S(this.long0 + a / (this.a * this.k0)), t.x = s, t.y = e, t;
 }
 var e2 = ["Mercator", "Popular Visualisation Pseudo Mercator", "Mercator_1SP", "Mercator_Auxiliary_Sphere", "Mercator_Variant_A", "merc"];
 const r2 = {
@@ -1240,12 +1240,12 @@ function g2(t, a, i, s) {
     ep2: o
   };
 }
-function d2(t, a, i, s, e) {
+function M2(t, a, i, s, e) {
   if (!t) {
     var r = s0(r9, s);
     r || (r = u2), t = r.a, a = r.b, i = r.rf;
   }
-  return i && !a && (a = (1 - 1 / i) * t), (i === 0 || Math.abs(t - a) < S) && (e = !0, a = t), {
+  return i && !a && (a = (1 - 1 / i) * t), (i === 0 || Math.abs(t - a) < w) && (e = !0, a = t), {
     a: t,
     b: a,
     rf: i,
@@ -2523,37 +2523,37 @@ var $0 = {
     towgs84: "589,76,480"
   }
 };
-for (var M2 in $0) {
-  var i1 = $0[M2];
+for (var d2 in $0) {
+  var i1 = $0[d2];
   i1.datumName && ($0[i1.datumName] = i1);
 }
 function m2(t, a, i, s, e, r, h) {
   var n = {};
-  return t === void 0 || t === "none" ? n.datum_type = n1 : n.datum_type = A9, a && (n.datum_params = a.map(parseFloat), (n.datum_params[0] !== 0 || n.datum_params[1] !== 0 || n.datum_params[2] !== 0) && (n.datum_type = h0), n.datum_params.length > 3 && (n.datum_params[3] !== 0 || n.datum_params[4] !== 0 || n.datum_params[5] !== 0 || n.datum_params[6] !== 0) && (n.datum_type = o0, n.datum_params[3] *= x0, n.datum_params[4] *= x0, n.datum_params[5] *= x0, n.datum_params[6] = n.datum_params[6] / 1e6 + 1)), h && (n.datum_type = M0, n.grids = h), n.a = i, n.b = s, n.es = e, n.ep2 = r, n;
+  return t === void 0 || t === "none" ? n.datum_type = n1 : n.datum_type = A9, a && (n.datum_params = a.map(parseFloat), (n.datum_params[0] !== 0 || n.datum_params[1] !== 0 || n.datum_params[2] !== 0) && (n.datum_type = h0), n.datum_params.length > 3 && (n.datum_params[3] !== 0 || n.datum_params[4] !== 0 || n.datum_params[5] !== 0 || n.datum_params[6] !== 0) && (n.datum_type = o0, n.datum_params[3] *= x0, n.datum_params[4] *= x0, n.datum_params[5] *= x0, n.datum_params[6] = n.datum_params[6] / 1e6 + 1)), h && (n.datum_type = d0, n.grids = h), n.a = i, n.b = s, n.es = e, n.ep2 = r, n;
 }
-var d1 = {};
+var M1 = {};
 function v2(t, a, i) {
-  return a instanceof ArrayBuffer ? y2(t, a, i) : { ready: S2(t, a) };
+  return a instanceof ArrayBuffer ? y2(t, a, i) : { ready: w2(t, a) };
 }
 function y2(t, a, i) {
   var s = !0;
   i !== void 0 && i.includeErrorFields === !1 && (s = !1);
   var e = new DataView(a), r = P2(e), h = x2(e, r), n = G2(e, h, r, s), o = { header: h, subgrids: n };
-  return d1[t] = o, o;
+  return M1[t] = o, o;
 }
-async function S2(t, a) {
+async function w2(t, a) {
   for (var i = [], s = await a.getImageCount(), e = s - 1; e >= 0; e--) {
-    var r = await a.getImage(e), h = await r.readRasters(), n = h, o = [r.getWidth(), r.getHeight()], l = r.getBoundingBox().map(T1), _ = [r.fileDirectory.ModelPixelScale[0], r.fileDirectory.ModelPixelScale[1]].map(T1), c = l[0] + (o[0] - 1) * _[0], f = l[3] - (o[1] - 1) * _[1], u = n[0], g = n[1], d = [];
+    var r = await a.getImage(e), h = await r.readRasters(), n = h, o = [r.getWidth(), r.getHeight()], l = r.getBoundingBox().map(T1), _ = [r.fileDirectory.ModelPixelScale[0], r.fileDirectory.ModelPixelScale[1]].map(T1), c = l[0] + (o[0] - 1) * _[0], f = l[3] - (o[1] - 1) * _[1], u = n[0], g = n[1], M = [];
     for (let y = o[1] - 1; y >= 0; y--)
       for (let E = o[0] - 1; E >= 0; E--) {
-        var M = y * o[0] + E;
-        d.push([-a0(g[M]), a0(u[M])]);
+        var d = y * o[0] + E;
+        M.push([-a0(g[d]), a0(u[d])]);
       }
     i.push({
       del: _,
       lim: o,
       ll: [-c, f],
-      cvs: d
+      cvs: M
     });
   }
   var m = {
@@ -2562,9 +2562,9 @@ async function S2(t, a) {
     },
     subgrids: i
   };
-  return d1[t] = m, m;
+  return M1[t] = m, m;
 }
-function w2(t) {
+function S2(t) {
   if (t === void 0)
     return null;
   var a = t.split(",");
@@ -2577,7 +2577,7 @@ function E2(t) {
   return a && (t = t.slice(1)), t === "null" ? { name: "null", mandatory: !a, grid: null, isNull: !0 } : {
     name: t,
     mandatory: !a,
-    grid: d1[t] || null,
+    grid: M1[t] || null,
     isNull: !1
   };
 }
@@ -2677,7 +2677,7 @@ function K(t, a) {
     e && (i.datum_params = i.datum_params || (e.towgs84 ? e.towgs84.split(",") : null), i.ellps = e.ellipse, i.datumName = e.datumName ? e.datumName : i.datumCode);
   }
   i.k0 = i.k0 || 1, i.axis = i.axis || "enu", i.ellps = i.ellps || "wgs84", i.lat1 = i.lat1 || i.lat0;
-  var r = d2(i.a, i.b, i.rf, i.ellps, i.sphere), h = g2(r.a, r.b, r.rf, i.R_A), n = w2(i.nadgrids), o = i.datum || m2(
+  var r = M2(i.a, i.b, i.rf, i.ellps, i.sphere), h = g2(r.a, r.b, r.rf, i.R_A), n = S2(i.nadgrids), o = i.datum || m2(
     i.datumCode,
     i.datum_params,
     r.a,
@@ -2712,7 +2712,7 @@ function n9(t, a, i) {
   };
 }
 function h9(t, a, i, s) {
-  var e = 1e-12, r = e * e, h = 30, n, o, l, _, c, f, u, g, d, M, m, y, E, P = t.x, x = t.y, G = t.z ? t.z : 0, b, N, A;
+  var e = 1e-12, r = e * e, h = 30, n, o, l, _, c, f, u, g, M, d, m, y, E, P = t.x, x = t.y, G = t.z ? t.z : 0, b, N, A;
   if (n = Math.sqrt(P * P + x * x), o = Math.sqrt(P * P + x * x + G * G), n / i < e) {
     if (b = 0, o / i < e)
       return N = v, A = -s, {
@@ -2722,11 +2722,11 @@ function h9(t, a, i, s) {
       };
   } else
     b = Math.atan2(x, P);
-  l = G / o, _ = n / o, c = 1 / Math.sqrt(1 - a * (2 - a) * _ * _), g = _ * (1 - a) * c, d = l * c, E = 0;
+  l = G / o, _ = n / o, c = 1 / Math.sqrt(1 - a * (2 - a) * _ * _), g = _ * (1 - a) * c, M = l * c, E = 0;
   do
-    E++, u = i / Math.sqrt(1 - a * d * d), A = n * g + G * d - u * (1 - a * d * d), f = a * u / (u + A), c = 1 / Math.sqrt(1 - f * (2 - f) * _ * _), M = _ * (1 - f) * c, m = l * c, y = m * g - M * d, g = M, d = m;
+    E++, u = i / Math.sqrt(1 - a * M * M), A = n * g + G * M - u * (1 - a * M * M), f = a * u / (u + A), c = 1 / Math.sqrt(1 - f * (2 - f) * _ * _), d = _ * (1 - f) * c, m = l * c, y = m * g - d * M, g = d, M = m;
   while (y * y > r && E < h);
-  return N = Math.atan(m / Math.abs(M)), {
+  return N = Math.atan(m / Math.abs(d)), {
     x: b,
     y: N,
     z: A
@@ -2771,16 +2771,16 @@ function R2(t, a, i) {
   if (C2(t, a) || t.datum_type === n1 || a.datum_type === n1)
     return i;
   var s = t.a, e = t.es;
-  if (t.datum_type === M0) {
+  if (t.datum_type === d0) {
     var r = O1(t, !1, i);
     if (r !== 0)
       return;
     s = G1, e = b1;
   }
   var h = a.a, n = a.b, o = a.es;
-  if (a.datum_type === M0 && (h = G1, n = C9, o = b1), e === o && s === h && !D0(t.datum_type) && !D0(a.datum_type))
+  if (a.datum_type === d0 && (h = G1, n = C9, o = b1), e === o && s === h && !D0(t.datum_type) && !D0(a.datum_type))
     return i;
-  if (i = n9(i, e, s), D0(t.datum_type) && (i = p2(i, t.datum_type, t.datum_params)), D0(a.datum_type) && (i = I2(i, a.datum_type, a.datum_params)), i = h9(i, o, h, n), a.datum_type === M0) {
+  if (i = n9(i, e, s), D0(t.datum_type) && (i = p2(i, t.datum_type, t.datum_params)), D0(a.datum_type) && (i = I2(i, a.datum_type, a.datum_params)), i = h9(i, o, h, n), a.datum_type === d0) {
     var l = O1(a, !0, i);
     if (l !== 0)
       return;
@@ -2804,8 +2804,8 @@ function O1(t, a, i) {
         continue;
       }
       for (var o = n.grid.subgrids, l = 0, _ = o.length; l < _; l++) {
-        var c = o[l], f = (Math.abs(c.del[1]) + Math.abs(c.del[0])) / 1e4, u = c.ll[0] - f, g = c.ll[1] - f, d = c.ll[0] + (c.lim[0] - 1) * c.del[0] + f, M = c.ll[1] + (c.lim[1] - 1) * c.del[1] + f;
-        if (!(g > s.y || u > s.x || M < s.y || d < s.x) && (e = T2(s, a, c), !isNaN(e.x)))
+        var c = o[l], f = (Math.abs(c.del[1]) + Math.abs(c.del[0])) / 1e4, u = c.ll[0] - f, g = c.ll[1] - f, M = c.ll[0] + (c.lim[0] - 1) * c.del[0] + f, d = c.ll[1] + (c.lim[1] - 1) * c.del[1] + f;
+        if (!(g > s.y || u > s.x || d < s.y || M < s.x) && (e = T2(s, a, c), !isNaN(e.x)))
           break t;
       }
     }
@@ -2816,7 +2816,7 @@ function T2(t, a, i) {
   if (isNaN(t.x))
     return s;
   var e = { x: t.x, y: t.y };
-  e.x -= i.ll[0], e.y -= i.ll[1], e.x = w(e.x - Math.PI) + Math.PI;
+  e.x -= i.ll[0], e.y -= i.ll[1], e.x = S(e.x - Math.PI) + Math.PI;
   var r = q1(e, i);
   if (a) {
     if (isNaN(r.x))
@@ -2832,7 +2832,7 @@ function T2(t, a, i) {
     } while (h-- && Math.abs(o.x) > n && Math.abs(o.y) > n);
     if (h < 0)
       return console.log("Inverse grid shift iterator failed to converge."), s;
-    s.x = w(r.x + i.ll[0]), s.y = r.y + i.ll[1];
+    s.x = S(r.x + i.ll[0]), s.y = r.y + i.ll[1];
   } else
     isNaN(r.x) || (s.x = t.x + r.x, s.y = t.y + r.y);
   return s;
@@ -2899,7 +2899,7 @@ function L1(t) {
     throw new TypeError("coordinates must be finite numbers");
 }
 function q2(t, a) {
-  return (t.datum.datum_type === h0 || t.datum.datum_type === o0 || t.datum.datum_type === M0) && a.datumCode !== "WGS84" || (a.datum.datum_type === h0 || a.datum.datum_type === o0 || a.datum.datum_type === M0) && t.datumCode !== "WGS84";
+  return (t.datum.datum_type === h0 || t.datum.datum_type === o0 || t.datum.datum_type === d0) && a.datumCode !== "WGS84" || (a.datum.datum_type === h0 || a.datum.datum_type === o0 || a.datum.datum_type === d0) && t.datumCode !== "WGS84";
 }
 function J0(t, a, i, s) {
   var e;
@@ -2998,7 +2998,7 @@ function k2(t, a, i) {
     }
   }, r && (h.oProj = e), h);
 }
-var D1 = 6, l9 = "AJSAJS", f9 = "AFAFAF", g0 = 65, j = 73, Q = 79, w0 = 86, E0 = 90;
+var D1 = 6, l9 = "AJSAJS", f9 = "AFAFAF", g0 = 65, B = 73, Q = 79, S0 = 86, E0 = 90;
 const L2 = {
   forward: c9,
   inverse: z2,
@@ -3011,11 +3011,11 @@ function c9(t, a) {
   }), a);
 }
 function z2(t) {
-  var a = M1(g9(t.toUpperCase()));
+  var a = d1(g9(t.toUpperCase()));
   return a.lat && a.lon ? [a.lon, a.lat, a.lon, a.lat] : [a.left, a.bottom, a.right, a.top];
 }
 function _9(t) {
-  var a = M1(g9(t.toUpperCase()));
+  var a = d1(g9(t.toUpperCase()));
   return a.lat && a.lon ? [a.lon, a.lat] : [(a.left + a.right) / 2, (a.top + a.bottom) / 2];
 }
 function e1(t) {
@@ -3025,29 +3025,29 @@ function U1(t) {
   return 180 * (t / Math.PI);
 }
 function D2(t) {
-  var a = t.lat, i = t.lon, s = 6378137, e = 669438e-8, r = 0.9996, h, n, o, l, _, c, f, u = e1(a), g = e1(i), d, M;
-  M = Math.floor((i + 180) / 6) + 1, i === 180 && (M = 60), a >= 56 && a < 64 && i >= 3 && i < 12 && (M = 32), a >= 72 && a < 84 && (i >= 0 && i < 9 ? M = 31 : i >= 9 && i < 21 ? M = 33 : i >= 21 && i < 33 ? M = 35 : i >= 33 && i < 42 && (M = 37)), h = (M - 1) * 6 - 180 + 3, d = e1(h), n = e / (1 - e), o = s / Math.sqrt(1 - e * Math.sin(u) * Math.sin(u)), l = Math.tan(u) * Math.tan(u), _ = n * Math.cos(u) * Math.cos(u), c = Math.cos(u) * (g - d), f = s * ((1 - e / 4 - 3 * e * e / 64 - 5 * e * e * e / 256) * u - (3 * e / 8 + 3 * e * e / 32 + 45 * e * e * e / 1024) * Math.sin(2 * u) + (15 * e * e / 256 + 45 * e * e * e / 1024) * Math.sin(4 * u) - 35 * e * e * e / 3072 * Math.sin(6 * u));
+  var a = t.lat, i = t.lon, s = 6378137, e = 669438e-8, r = 0.9996, h, n, o, l, _, c, f, u = e1(a), g = e1(i), M, d;
+  d = Math.floor((i + 180) / 6) + 1, i === 180 && (d = 60), a >= 56 && a < 64 && i >= 3 && i < 12 && (d = 32), a >= 72 && a < 84 && (i >= 0 && i < 9 ? d = 31 : i >= 9 && i < 21 ? d = 33 : i >= 21 && i < 33 ? d = 35 : i >= 33 && i < 42 && (d = 37)), h = (d - 1) * 6 - 180 + 3, M = e1(h), n = e / (1 - e), o = s / Math.sqrt(1 - e * Math.sin(u) * Math.sin(u)), l = Math.tan(u) * Math.tan(u), _ = n * Math.cos(u) * Math.cos(u), c = Math.cos(u) * (g - M), f = s * ((1 - e / 4 - 3 * e * e / 64 - 5 * e * e * e / 256) * u - (3 * e / 8 + 3 * e * e / 32 + 45 * e * e * e / 1024) * Math.sin(2 * u) + (15 * e * e / 256 + 45 * e * e * e / 1024) * Math.sin(4 * u) - 35 * e * e * e / 3072 * Math.sin(6 * u));
   var m = r * o * (c + (1 - l + _) * c * c * c / 6 + (5 - 18 * l + l * l + 72 * _ - 58 * n) * c * c * c * c * c / 120) + 5e5, y = r * (f + o * Math.tan(u) * (c * c / 2 + (5 - l + 9 * _ + 4 * _ * _) * c * c * c * c / 24 + (61 - 58 * l + l * l + 600 * _ - 330 * n) * c * c * c * c * c * c / 720));
   return a < 0 && (y += 1e7), {
     northing: Math.round(y),
     easting: Math.round(m),
-    zoneNumber: M,
+    zoneNumber: d,
     zoneLetter: U2(a)
   };
 }
-function M1(t) {
+function d1(t) {
   var a = t.northing, i = t.easting, s = t.zoneLetter, e = t.zoneNumber;
   if (e < 0 || e > 60)
     return null;
-  var r = 0.9996, h = 6378137, n = 669438e-8, o, l = (1 - Math.sqrt(1 - n)) / (1 + Math.sqrt(1 - n)), _, c, f, u, g, d, M, m, y, E = i - 5e5, P = a;
-  s < "N" && (P -= 1e7), M = (e - 1) * 6 - 180 + 3, o = n / (1 - n), d = P / r, m = d / (h * (1 - n / 4 - 3 * n * n / 64 - 5 * n * n * n / 256)), y = m + (3 * l / 2 - 27 * l * l * l / 32) * Math.sin(2 * m) + (21 * l * l / 16 - 55 * l * l * l * l / 32) * Math.sin(4 * m) + 151 * l * l * l / 96 * Math.sin(6 * m), _ = h / Math.sqrt(1 - n * Math.sin(y) * Math.sin(y)), c = Math.tan(y) * Math.tan(y), f = o * Math.cos(y) * Math.cos(y), u = h * (1 - n) / Math.pow(1 - n * Math.sin(y) * Math.sin(y), 1.5), g = E / (_ * r);
+  var r = 0.9996, h = 6378137, n = 669438e-8, o, l = (1 - Math.sqrt(1 - n)) / (1 + Math.sqrt(1 - n)), _, c, f, u, g, M, d, m, y, E = i - 5e5, P = a;
+  s < "N" && (P -= 1e7), d = (e - 1) * 6 - 180 + 3, o = n / (1 - n), M = P / r, m = M / (h * (1 - n / 4 - 3 * n * n / 64 - 5 * n * n * n / 256)), y = m + (3 * l / 2 - 27 * l * l * l / 32) * Math.sin(2 * m) + (21 * l * l / 16 - 55 * l * l * l * l / 32) * Math.sin(4 * m) + 151 * l * l * l / 96 * Math.sin(6 * m), _ = h / Math.sqrt(1 - n * Math.sin(y) * Math.sin(y)), c = Math.tan(y) * Math.tan(y), f = o * Math.cos(y) * Math.cos(y), u = h * (1 - n) / Math.pow(1 - n * Math.sin(y) * Math.sin(y), 1.5), g = E / (_ * r);
   var x = y - _ * Math.tan(y) / u * (g * g / 2 - (5 + 3 * c + 10 * f - 4 * f * f - 9 * o) * g * g * g * g / 24 + (61 + 90 * c + 298 * f + 45 * c * c - 252 * o - 3 * f * f) * g * g * g * g * g * g / 720);
   x = U1(x);
   var G = (g - (1 + 2 * c + f) * g * g * g / 6 + (5 - 2 * f + 28 * c - 3 * f * f + 8 * o + 24 * c * c) * g * g * g * g * g / 120) / Math.cos(y);
-  G = M + U1(G);
+  G = d + U1(G);
   var b;
   if (t.accuracy) {
-    var N = M1({
+    var N = d1({
       northing: t.northing + t.accuracy,
       easting: t.easting + t.accuracy,
       zoneLetter: t.zoneLetter,
@@ -3076,15 +3076,15 @@ function F2(t, a) {
 }
 function $2(t, a, i) {
   var s = u9(i), e = Math.floor(t / 1e5), r = Math.floor(a / 1e5) % 20;
-  return B2(e, r, s);
+  return j2(e, r, s);
 }
 function u9(t) {
   var a = t % D1;
   return a === 0 && (a = D1), a;
 }
-function B2(t, a, i) {
+function j2(t, a, i) {
   var s = i - 1, e = l9.charCodeAt(s), r = f9.charCodeAt(s), h = e + t - 1, n = r + a, o = !1;
-  h > E0 && (h = h - E0 + g0 - 1, o = !0), (h === j || e < j && h > j || (h > j || e < j) && o) && h++, (h === Q || e < Q && h > Q || (h > Q || e < Q) && o) && (h++, h === j && h++), h > E0 && (h = h - E0 + g0 - 1), n > w0 ? (n = n - w0 + g0 - 1, o = !0) : o = !1, (n === j || r < j && n > j || (n > j || r < j) && o) && n++, (n === Q || r < Q && n > Q || (n > Q || r < Q) && o) && (n++, n === j && n++), n > w0 && (n = n - w0 + g0 - 1);
+  h > E0 && (h = h - E0 + g0 - 1, o = !0), (h === B || e < B && h > B || (h > B || e < B) && o) && h++, (h === Q || e < Q && h > Q || (h > Q || e < Q) && o) && (h++, h === B && h++), h > E0 && (h = h - E0 + g0 - 1), n > S0 ? (n = n - S0 + g0 - 1, o = !0) : o = !1, (n === B || r < B && n > B || (n > B || r < B) && o) && n++, (n === Q || r < Q && n > Q || (n > Q || r < Q) && o) && (n++, n === B && n++), n > S0 && (n = n - S0 + g0 - 1);
   var l = String.fromCharCode(h) + String.fromCharCode(n);
   return l;
 }
@@ -3103,7 +3103,7 @@ function g9(t) {
   if (n <= "A" || n === "B" || n === "Y" || n >= "Z" || n === "I" || n === "O")
     throw "MGRSPoint zone letter " + n + " not handled: " + t;
   i = t.substring(r, r += 2);
-  for (var o = u9(h), l = j2(i.charAt(0), o), _ = H2(i.charAt(1), o); _ < W2(n); )
+  for (var o = u9(h), l = B2(i.charAt(0), o), _ = H2(i.charAt(1), o); _ < W2(n); )
     _ += 2e6;
   var c = a - r;
   if (c % 2 !== 0)
@@ -3111,18 +3111,18 @@ function g9(t) {
 of digits after the zone letter and two 100km letters - front 
 half for easting meters, second half for 
 northing meters` + t;
-  var f = c / 2, u = 0, g = 0, d, M, m, y, E;
-  return f > 0 && (d = 1e5 / Math.pow(10, f), M = t.substring(r, r + f), u = parseFloat(M) * d, m = t.substring(r + f), g = parseFloat(m) * d), y = u + l, E = g + _, {
+  var f = c / 2, u = 0, g = 0, M, d, m, y, E;
+  return f > 0 && (M = 1e5 / Math.pow(10, f), d = t.substring(r, r + f), u = parseFloat(d) * M, m = t.substring(r + f), g = parseFloat(m) * M), y = u + l, E = g + _, {
     easting: y,
     northing: E,
     zoneLetter: n,
     zoneNumber: h,
-    accuracy: d
+    accuracy: M
   };
 }
-function j2(t, a) {
+function B2(t, a) {
   for (var i = l9.charCodeAt(a - 1), s = 1e5, e = !1; i !== t.charCodeAt(0); ) {
-    if (i++, i === j && i++, i === Q && i++, i > E0) {
+    if (i++, i === B && i++, i === Q && i++, i > E0) {
       if (e)
         throw "Bad character: " + t;
       i = g0, e = !0;
@@ -3135,7 +3135,7 @@ function H2(t, a) {
   if (t > "V")
     throw "MGRSPoint given invalid Northing " + t;
   for (var i = f9.charCodeAt(a - 1), s = 0, e = !1; i !== t.charCodeAt(0); ) {
-    if (i++, i === j && i++, i === Q && i++, i > w0) {
+    if (i++, i === B && i++, i === Q && i++, i > S0) {
       if (e)
         throw "Bad character: " + t;
       i = g0, e = !0;
@@ -3234,10 +3234,10 @@ v0.fromMGRS = function(t) {
 v0.prototype.toMGRS = function(t) {
   return c9([this.x, this.y], t);
 };
-var Q2 = 1, J2 = 0.25, F1 = 0.046875, $1 = 0.01953125, B1 = 0.01068115234375, X2 = 0.75, K2 = 0.46875, V2 = 0.013020833333333334, Z2 = 0.007120768229166667, Y2 = 0.3645833333333333, t5 = 0.005696614583333333, a5 = 0.3076171875;
+var Q2 = 1, J2 = 0.25, F1 = 0.046875, $1 = 0.01953125, j1 = 0.01068115234375, X2 = 0.75, K2 = 0.46875, V2 = 0.013020833333333334, Z2 = 0.007120768229166667, Y2 = 0.3645833333333333, t5 = 0.005696614583333333, a5 = 0.3076171875;
 function m1(t) {
   var a = [];
-  a[0] = Q2 - t * (J2 + t * (F1 + t * ($1 + t * B1))), a[1] = t * (X2 - t * (F1 + t * ($1 + t * B1)));
+  a[0] = Q2 - t * (J2 + t * (F1 + t * ($1 + t * j1))), a[1] = t * (X2 - t * (F1 + t * ($1 + t * j1)));
   var i = t * t;
   return a[2] = i * (K2 - t * (V2 + t * Z2)), i *= t, a[3] = i * (Y2 - t * t5), a[4] = i * t * a5, a;
 }
@@ -3248,7 +3248,7 @@ var i5 = 20;
 function v1(t, a, i) {
   for (var s = 1 / (1 - a), e = t, r = i5; r; --r) {
     var h = Math.sin(e), n = 1 - a * h * h;
-    if (n = (y0(e, h, Math.cos(e), i) - t) * (n * Math.sqrt(n)) * s, e -= n, Math.abs(n) < S)
+    if (n = (y0(e, h, Math.cos(e), i) - t) * (n * Math.sqrt(n)) * s, e -= n, Math.abs(n) < w)
       return e;
   }
   return e;
@@ -3257,18 +3257,18 @@ function s5() {
   this.x0 = this.x0 !== void 0 ? this.x0 : 0, this.y0 = this.y0 !== void 0 ? this.y0 : 0, this.long0 = this.long0 !== void 0 ? this.long0 : 0, this.lat0 = this.lat0 !== void 0 ? this.lat0 : 0, this.es && (this.en = m1(this.es), this.ml0 = y0(this.lat0, Math.sin(this.lat0), Math.cos(this.lat0), this.en));
 }
 function e5(t) {
-  var a = t.x, i = t.y, s = w(a - this.long0), e, r, h, n = Math.sin(i), o = Math.cos(i);
+  var a = t.x, i = t.y, s = S(a - this.long0), e, r, h, n = Math.sin(i), o = Math.cos(i);
   if (this.es) {
-    var _ = o * s, c = Math.pow(_, 2), f = this.ep2 * Math.pow(o, 2), u = Math.pow(f, 2), g = Math.abs(o) > S ? Math.tan(i) : 0, d = Math.pow(g, 2), M = Math.pow(d, 2);
+    var _ = o * s, c = Math.pow(_, 2), f = this.ep2 * Math.pow(o, 2), u = Math.pow(f, 2), g = Math.abs(o) > w ? Math.tan(i) : 0, M = Math.pow(g, 2), d = Math.pow(M, 2);
     e = 1 - this.es * Math.pow(n, 2), _ = _ / Math.sqrt(e);
     var m = y0(i, n, o, this.en);
-    r = this.a * (this.k0 * _ * (1 + c / 6 * (1 - d + f + c / 20 * (5 - 18 * d + M + 14 * f - 58 * d * f + c / 42 * (61 + 179 * M - M * d - 479 * d))))) + this.x0, h = this.a * (this.k0 * (m - this.ml0 + n * s * _ / 2 * (1 + c / 12 * (5 - d + 9 * f + 4 * u + c / 30 * (61 + M - 58 * d + 270 * f - 330 * d * f + c / 56 * (1385 + 543 * M - M * d - 3111 * d)))))) + this.y0;
+    r = this.a * (this.k0 * _ * (1 + c / 6 * (1 - M + f + c / 20 * (5 - 18 * M + d + 14 * f - 58 * M * f + c / 42 * (61 + 179 * d - d * M - 479 * M))))) + this.x0, h = this.a * (this.k0 * (m - this.ml0 + n * s * _ / 2 * (1 + c / 12 * (5 - M + 9 * f + 4 * u + c / 30 * (61 + d - 58 * M + 270 * f - 330 * M * f + c / 56 * (1385 + 543 * d - d * M - 3111 * M)))))) + this.y0;
   } else {
     var l = o * Math.sin(s);
-    if (Math.abs(Math.abs(l) - 1) < S)
+    if (Math.abs(Math.abs(l) - 1) < w)
       return 93;
     if (r = 0.5 * this.a * this.k0 * Math.log((1 + l) / (1 - l)) + this.x0, h = o * Math.cos(s) / Math.sqrt(1 - Math.pow(l, 2)), l = Math.abs(h), l >= 1) {
-      if (l - 1 > S)
+      if (l - 1 > w)
         return 93;
       h = 0;
     } else
@@ -3281,26 +3281,26 @@ function r5(t) {
   var a, i, s, e, r = (t.x - this.x0) * (1 / this.a), h = (t.y - this.y0) * (1 / this.a);
   if (this.es)
     if (a = this.ml0 + h / this.k0, i = v1(a, this.es, this.en), Math.abs(i) < v) {
-      var c = Math.sin(i), f = Math.cos(i), u = Math.abs(f) > S ? Math.tan(i) : 0, g = this.ep2 * Math.pow(f, 2), d = Math.pow(g, 2), M = Math.pow(u, 2), m = Math.pow(M, 2);
+      var c = Math.sin(i), f = Math.cos(i), u = Math.abs(f) > w ? Math.tan(i) : 0, g = this.ep2 * Math.pow(f, 2), M = Math.pow(g, 2), d = Math.pow(u, 2), m = Math.pow(d, 2);
       a = 1 - this.es * Math.pow(c, 2);
       var y = r * Math.sqrt(a) / this.k0, E = Math.pow(y, 2);
-      a = a * u, s = i - a * E / (1 - this.es) * 0.5 * (1 - E / 12 * (5 + 3 * M - 9 * g * M + g - 4 * d - E / 30 * (61 + 90 * M - 252 * g * M + 45 * m + 46 * g - E / 56 * (1385 + 3633 * M + 4095 * m + 1574 * m * M)))), e = w(this.long0 + y * (1 - E / 6 * (1 + 2 * M + g - E / 20 * (5 + 28 * M + 24 * m + 8 * g * M + 6 * g - E / 42 * (61 + 662 * M + 1320 * m + 720 * m * M)))) / f);
+      a = a * u, s = i - a * E / (1 - this.es) * 0.5 * (1 - E / 12 * (5 + 3 * d - 9 * g * d + g - 4 * M - E / 30 * (61 + 90 * d - 252 * g * d + 45 * m + 46 * g - E / 56 * (1385 + 3633 * d + 4095 * m + 1574 * m * d)))), e = S(this.long0 + y * (1 - E / 6 * (1 + 2 * d + g - E / 20 * (5 + 28 * d + 24 * m + 8 * g * d + 6 * g - E / 42 * (61 + 662 * d + 1320 * m + 720 * m * d)))) / f);
     } else
       s = v * T0(h), e = 0;
   else {
     var n = Math.exp(r / this.k0), o = 0.5 * (n - 1 / n), l = this.lat0 + h / this.k0, _ = Math.cos(l);
-    a = Math.sqrt((1 - Math.pow(_, 2)) / (1 + Math.pow(o, 2))), s = Math.asin(a), h < 0 && (s = -s), o === 0 && _ === 0 ? e = 0 : e = w(Math.atan2(o, _) + this.long0);
+    a = Math.sqrt((1 - Math.pow(_, 2)) / (1 + Math.pow(o, 2))), s = Math.asin(a), h < 0 && (s = -s), o === 0 && _ === 0 ? e = 0 : e = S(Math.atan2(o, _) + this.long0);
   }
   return t.x = e, t.y = s, t;
 }
 var n5 = ["Fast_Transverse_Mercator", "Fast Transverse Mercator"];
-const B0 = {
+const j0 = {
   init: s5,
   forward: e5,
   inverse: r5,
   names: n5
 };
-function d9(t) {
+function M9(t) {
   var a = Math.exp(t);
   return a = (a - 1 / a) / 2, a;
 }
@@ -3331,26 +3331,26 @@ function f5(t) {
   var a = Math.exp(t);
   return a = (a + 1 / a) / 2, a;
 }
-function M9(t, a, i) {
-  for (var s = Math.sin(a), e = Math.cos(a), r = d9(i), h = f5(i), n = 2 * e * h, o = -2 * s * r, l = t.length - 1, _ = t[l], c = 0, f = 0, u = 0, g, d; --l >= 0; )
-    g = f, d = c, f = _, c = u, _ = -g + n * f - o * c + t[l], u = -d + o * f + n * c;
+function d9(t, a, i) {
+  for (var s = Math.sin(a), e = Math.cos(a), r = M9(i), h = f5(i), n = 2 * e * h, o = -2 * s * r, l = t.length - 1, _ = t[l], c = 0, f = 0, u = 0, g, M; --l >= 0; )
+    g = f, M = c, f = _, c = u, _ = -g + n * f - o * c + t[l], u = -M + o * f + n * c;
   return n = s * h, o = e * r, [n * _ - o * u, n * u + o * _];
 }
 function c5() {
   if (!this.approx && (isNaN(this.es) || this.es <= 0))
     throw new Error('Incorrect elliptical usage. Try using the +approx option in the proj string, or PROJECTION["Fast_Transverse_Mercator"] in the WKT.');
-  this.approx && (B0.init.apply(this), this.forward = B0.forward, this.inverse = B0.inverse), this.x0 = this.x0 !== void 0 ? this.x0 : 0, this.y0 = this.y0 !== void 0 ? this.y0 : 0, this.long0 = this.long0 !== void 0 ? this.long0 : 0, this.lat0 = this.lat0 !== void 0 ? this.lat0 : 0, this.cgb = [], this.cbg = [], this.utg = [], this.gtu = [];
+  this.approx && (j0.init.apply(this), this.forward = j0.forward, this.inverse = j0.inverse), this.x0 = this.x0 !== void 0 ? this.x0 : 0, this.y0 = this.y0 !== void 0 ? this.y0 : 0, this.long0 = this.long0 !== void 0 ? this.long0 : 0, this.lat0 = this.lat0 !== void 0 ? this.lat0 : 0, this.cgb = [], this.cbg = [], this.utg = [], this.gtu = [];
   var t = this.es / (1 + Math.sqrt(1 - this.es)), a = t / (2 - t), i = a;
   this.cgb[0] = a * (2 + a * (-2 / 3 + a * (-2 + a * (116 / 45 + a * (26 / 45 + a * (-2854 / 675)))))), this.cbg[0] = a * (-2 + a * (2 / 3 + a * (4 / 3 + a * (-82 / 45 + a * (32 / 45 + a * (4642 / 4725)))))), i = i * a, this.cgb[1] = i * (7 / 3 + a * (-8 / 5 + a * (-227 / 45 + a * (2704 / 315 + a * (2323 / 945))))), this.cbg[1] = i * (5 / 3 + a * (-16 / 15 + a * (-13 / 9 + a * (904 / 315 + a * (-1522 / 945))))), i = i * a, this.cgb[2] = i * (56 / 15 + a * (-136 / 35 + a * (-1262 / 105 + a * (73814 / 2835)))), this.cbg[2] = i * (-26 / 15 + a * (34 / 21 + a * (8 / 5 + a * (-12686 / 2835)))), i = i * a, this.cgb[3] = i * (4279 / 630 + a * (-332 / 35 + a * (-399572 / 14175))), this.cbg[3] = i * (1237 / 630 + a * (-12 / 5 + a * (-24832 / 14175))), i = i * a, this.cgb[4] = i * (4174 / 315 + a * (-144838 / 6237)), this.cbg[4] = i * (-734 / 315 + a * (109598 / 31185)), i = i * a, this.cgb[5] = i * (601676 / 22275), this.cbg[5] = i * (444337 / 155925), i = Math.pow(a, 2), this.Qn = this.k0 / (1 + a) * (1 + i * (1 / 4 + i * (1 / 64 + i / 256))), this.utg[0] = a * (-0.5 + a * (2 / 3 + a * (-37 / 96 + a * (1 / 360 + a * (81 / 512 + a * (-96199 / 604800)))))), this.gtu[0] = a * (0.5 + a * (-2 / 3 + a * (5 / 16 + a * (41 / 180 + a * (-127 / 288 + a * (7891 / 37800)))))), this.utg[1] = i * (-1 / 48 + a * (-1 / 15 + a * (437 / 1440 + a * (-46 / 105 + a * (1118711 / 3870720))))), this.gtu[1] = i * (13 / 48 + a * (-3 / 5 + a * (557 / 1440 + a * (281 / 630 + a * (-1983433 / 1935360))))), i = i * a, this.utg[2] = i * (-17 / 480 + a * (37 / 840 + a * (209 / 4480 + a * (-5569 / 90720)))), this.gtu[2] = i * (61 / 240 + a * (-103 / 140 + a * (15061 / 26880 + a * (167603 / 181440)))), i = i * a, this.utg[3] = i * (-4397 / 161280 + a * (11 / 504 + a * (830251 / 7257600))), this.gtu[3] = i * (49561 / 161280 + a * (-179 / 168 + a * (6601661 / 7257600))), i = i * a, this.utg[4] = i * (-4583 / 161280 + a * (108847 / 3991680)), this.gtu[4] = i * (34729 / 80640 + a * (-3418889 / 1995840)), i = i * a, this.utg[5] = i * (-20648693 / 638668800), this.gtu[5] = i * (212378941 / 319334400);
   var s = y1(this.cbg, this.lat0);
   this.Zb = -this.Qn * (s + l5(this.gtu, 2 * s));
 }
 function _5(t) {
-  var a = w(t.x - this.long0), i = t.y;
+  var a = S(t.x - this.long0), i = t.y;
   i = y1(this.cbg, i);
   var s = Math.sin(i), e = Math.cos(i), r = Math.sin(a), h = Math.cos(a);
   i = Math.atan2(s, h * e), a = Math.atan2(r * e, H(s, e * h)), a = o5(Math.tan(a));
-  var n = M9(this.gtu, 2 * i, 2 * a);
+  var n = d9(this.gtu, 2 * i, 2 * a);
   i = i + n[0], a = a + n[1];
   var o, l;
   return Math.abs(a) <= 2.623395162778 ? (o = this.a * (this.Qn * a) + this.x0, l = this.a * (this.Qn * i + this.Zb) + this.y0) : (o = 1 / 0, l = 1 / 0), t.x = o, t.y = l, t;
@@ -3360,71 +3360,71 @@ function u5(t) {
   i = (i - this.Zb) / this.Qn, a = a / this.Qn;
   var s, e;
   if (Math.abs(a) <= 2.623395162778) {
-    var r = M9(this.utg, 2 * i, 2 * a);
-    i = i + r[0], a = a + r[1], a = Math.atan(d9(a));
+    var r = d9(this.utg, 2 * i, 2 * a);
+    i = i + r[0], a = a + r[1], a = Math.atan(M9(a));
     var h = Math.sin(i), n = Math.cos(i), o = Math.sin(a), l = Math.cos(a);
-    i = Math.atan2(h * l, H(o, l * n)), a = Math.atan2(o, l * n), s = w(a + this.long0), e = y1(this.cgb, i);
+    i = Math.atan2(h * l, H(o, l * n)), a = Math.atan2(o, l * n), s = S(a + this.long0), e = y1(this.cgb, i);
   } else
     s = 1 / 0, e = 1 / 0;
   return t.x = s, t.y = e, t;
 }
 var g5 = ["Extended_Transverse_Mercator", "Extended Transverse Mercator", "etmerc", "Transverse_Mercator", "Transverse Mercator", "Gauss Kruger", "Gauss_Kruger", "tmerc"];
-const j0 = {
+const B0 = {
   init: c5,
   forward: _5,
   inverse: u5,
   names: g5
 };
-function d5(t, a) {
+function M5(t, a) {
   if (t === void 0) {
-    if (t = Math.floor((w(a) + Math.PI) * 30 / Math.PI) + 1, t < 0)
+    if (t = Math.floor((S(a) + Math.PI) * 30 / Math.PI) + 1, t < 0)
       return 0;
     if (t > 60)
       return 60;
   }
   return t;
 }
-var M5 = "etmerc";
+var d5 = "etmerc";
 function m5() {
-  var t = d5(this.zone, this.long0);
+  var t = M5(this.zone, this.long0);
   if (t === void 0)
     throw new Error("unknown utm zone");
-  this.lat0 = 0, this.long0 = (6 * Math.abs(t) - 183) * L, this.x0 = 5e5, this.y0 = this.utmSouth ? 1e7 : 0, this.k0 = 0.9996, j0.init.apply(this), this.forward = j0.forward, this.inverse = j0.inverse;
+  this.lat0 = 0, this.long0 = (6 * Math.abs(t) - 183) * L, this.x0 = 5e5, this.y0 = this.utmSouth ? 1e7 : 0, this.k0 = 0.9996, B0.init.apply(this), this.forward = B0.forward, this.inverse = B0.inverse;
 }
 var v5 = ["Universal Transverse Mercator System", "utm"];
 const y5 = {
   init: m5,
   names: v5,
-  dependsOn: M5
+  dependsOn: d5
 };
-function S1(t, a) {
+function w1(t, a) {
   return Math.pow((1 - t) / (1 + t), a);
 }
-var S5 = 20;
-function w5() {
+var w5 = 20;
+function S5() {
   var t = Math.sin(this.lat0), a = Math.cos(this.lat0);
-  a *= a, this.rc = Math.sqrt(1 - this.es) / (1 - this.es * t * t), this.C = Math.sqrt(1 + this.es * a * a / (1 - this.es)), this.phic0 = Math.asin(t / this.C), this.ratexp = 0.5 * this.C * this.e, this.K = Math.tan(0.5 * this.phic0 + C) / (Math.pow(Math.tan(0.5 * this.lat0 + C), this.C) * S1(this.e * t, this.ratexp));
+  a *= a, this.rc = Math.sqrt(1 - this.es) / (1 - this.es * t * t), this.C = Math.sqrt(1 + this.es * a * a / (1 - this.es)), this.phic0 = Math.asin(t / this.C), this.ratexp = 0.5 * this.C * this.e, this.K = Math.tan(0.5 * this.phic0 + C) / (Math.pow(Math.tan(0.5 * this.lat0 + C), this.C) * w1(this.e * t, this.ratexp));
 }
 function E5(t) {
   var a = t.x, i = t.y;
-  return t.y = 2 * Math.atan(this.K * Math.pow(Math.tan(0.5 * i + C), this.C) * S1(this.e * Math.sin(i), this.ratexp)) - v, t.x = this.C * a, t;
+  return t.y = 2 * Math.atan(this.K * Math.pow(Math.tan(0.5 * i + C), this.C) * w1(this.e * Math.sin(i), this.ratexp)) - v, t.x = this.C * a, t;
 }
 function P5(t) {
-  for (var a = 1e-14, i = t.x / this.C, s = t.y, e = Math.pow(Math.tan(0.5 * s + C) / this.K, 1 / this.C), r = S5; r > 0 && (s = 2 * Math.atan(e * S1(this.e * Math.sin(t.y), -0.5 * this.e)) - v, !(Math.abs(s - t.y) < a)); --r)
+  for (var a = 1e-14, i = t.x / this.C, s = t.y, e = Math.pow(Math.tan(0.5 * s + C) / this.K, 1 / this.C), r = w5; r > 0 && (s = 2 * Math.atan(e * w1(this.e * Math.sin(t.y), -0.5 * this.e)) - v, !(Math.abs(s - t.y) < a)); --r)
     t.y = s;
   return r ? (t.x = i, t.y = s, t) : null;
 }
-const w1 = {
-  init: w5,
+const S1 = {
+  init: S5,
   forward: E5,
   inverse: P5
 };
 function x5() {
-  w1.init.apply(this), this.rc && (this.sinc0 = Math.sin(this.phic0), this.cosc0 = Math.cos(this.phic0), this.R2 = 2 * this.rc, this.title || (this.title = "Oblique Stereographic Alternative"));
+  S1.init.apply(this), this.rc && (this.sinc0 = Math.sin(this.phic0), this.cosc0 = Math.cos(this.phic0), this.R2 = 2 * this.rc, this.title || (this.title = "Oblique Stereographic Alternative"));
 }
 function G5(t) {
   var a, i, s, e;
-  return t.x = w(t.x - this.long0), w1.forward.apply(this, [t]), a = Math.sin(t.y), i = Math.cos(t.y), s = Math.cos(t.x), e = this.k0 * this.R2 / (1 + this.sinc0 * a + this.cosc0 * i * s), t.x = e * i * Math.sin(t.x), t.y = e * (this.cosc0 * a - this.sinc0 * i * s), t.x = this.a * t.x + this.x0, t.y = this.a * t.y + this.y0, t;
+  return t.x = S(t.x - this.long0), S1.forward.apply(this, [t]), a = Math.sin(t.y), i = Math.cos(t.y), s = Math.cos(t.x), e = this.k0 * this.R2 / (1 + this.sinc0 * a + this.cosc0 * i * s), t.x = e * i * Math.sin(t.x), t.y = e * (this.cosc0 * a - this.sinc0 * i * s), t.x = this.a * t.x + this.x0, t.y = this.a * t.y + this.y0, t;
 }
 function b5(t) {
   var a, i, s, e, r;
@@ -3433,7 +3433,7 @@ function b5(t) {
     a = Math.sin(h), i = Math.cos(h), e = Math.asin(i * this.sinc0 + t.y * a * this.cosc0 / r), s = Math.atan2(t.x * a, r * this.cosc0 * i - t.y * this.sinc0 * a);
   } else
     e = this.phic0, s = 0;
-  return t.x = s, t.y = e, w1.inverse.apply(this, [t]), t.x = w(t.x + this.long0), t;
+  return t.x = s, t.y = e, S1.inverse.apply(this, [t]), t.x = S(t.x + this.long0), t;
 }
 var N5 = ["Stereographic_North_Pole", "Oblique_Stereographic", "sterea", "Oblique Stereographic Alternative", "Double_Stereographic"];
 const A5 = {
@@ -3446,24 +3446,24 @@ function E1(t, a, i) {
   return a *= i, Math.tan(0.5 * (v + t)) * Math.pow((1 - a) / (1 + a), 0.5 * i);
 }
 function C5() {
-  this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, this.lat0 = this.lat0 || 0, this.long0 = this.long0 || 0, this.coslat0 = Math.cos(this.lat0), this.sinlat0 = Math.sin(this.lat0), this.sphere ? this.k0 === 1 && !isNaN(this.lat_ts) && Math.abs(this.coslat0) <= S && (this.k0 = 0.5 * (1 + T0(this.lat0) * Math.sin(this.lat_ts))) : (Math.abs(this.coslat0) <= S && (this.lat0 > 0 ? this.con = 1 : this.con = -1), this.cons = Math.sqrt(Math.pow(1 + this.e, 1 + this.e) * Math.pow(1 - this.e, 1 - this.e)), this.k0 === 1 && !isNaN(this.lat_ts) && Math.abs(this.coslat0) <= S && Math.abs(Math.cos(this.lat_ts)) > S && (this.k0 = 0.5 * this.cons * Z(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)) / X(this.e, this.con * this.lat_ts, this.con * Math.sin(this.lat_ts))), this.ms1 = Z(this.e, this.sinlat0, this.coslat0), this.X0 = 2 * Math.atan(E1(this.lat0, this.sinlat0, this.e)) - v, this.cosX0 = Math.cos(this.X0), this.sinX0 = Math.sin(this.X0));
+  this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, this.lat0 = this.lat0 || 0, this.long0 = this.long0 || 0, this.coslat0 = Math.cos(this.lat0), this.sinlat0 = Math.sin(this.lat0), this.sphere ? this.k0 === 1 && !isNaN(this.lat_ts) && Math.abs(this.coslat0) <= w && (this.k0 = 0.5 * (1 + T0(this.lat0) * Math.sin(this.lat_ts))) : (Math.abs(this.coslat0) <= w && (this.lat0 > 0 ? this.con = 1 : this.con = -1), this.cons = Math.sqrt(Math.pow(1 + this.e, 1 + this.e) * Math.pow(1 - this.e, 1 - this.e)), this.k0 === 1 && !isNaN(this.lat_ts) && Math.abs(this.coslat0) <= w && Math.abs(Math.cos(this.lat_ts)) > w && (this.k0 = 0.5 * this.cons * Z(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)) / X(this.e, this.con * this.lat_ts, this.con * Math.sin(this.lat_ts))), this.ms1 = Z(this.e, this.sinlat0, this.coslat0), this.X0 = 2 * Math.atan(E1(this.lat0, this.sinlat0, this.e)) - v, this.cosX0 = Math.cos(this.X0), this.sinX0 = Math.sin(this.X0));
 }
 function p5(t) {
-  var a = t.x, i = t.y, s = Math.sin(i), e = Math.cos(i), r, h, n, o, l, _, c = w(a - this.long0);
-  return Math.abs(Math.abs(a - this.long0) - Math.PI) <= S && Math.abs(i + this.lat0) <= S ? (t.x = NaN, t.y = NaN, t) : this.sphere ? (r = 2 * this.k0 / (1 + this.sinlat0 * s + this.coslat0 * e * Math.cos(c)), t.x = this.a * r * e * Math.sin(c) + this.x0, t.y = this.a * r * (this.coslat0 * s - this.sinlat0 * e * Math.cos(c)) + this.y0, t) : (h = 2 * Math.atan(E1(i, s, this.e)) - v, o = Math.cos(h), n = Math.sin(h), Math.abs(this.coslat0) <= S ? (l = X(this.e, i * this.con, this.con * s), _ = 2 * this.a * this.k0 * l / this.cons, t.x = this.x0 + _ * Math.sin(a - this.long0), t.y = this.y0 - this.con * _ * Math.cos(a - this.long0), t) : (Math.abs(this.sinlat0) < S ? (r = 2 * this.a * this.k0 / (1 + o * Math.cos(c)), t.y = r * n) : (r = 2 * this.a * this.k0 * this.ms1 / (this.cosX0 * (1 + this.sinX0 * n + this.cosX0 * o * Math.cos(c))), t.y = r * (this.cosX0 * n - this.sinX0 * o * Math.cos(c)) + this.y0), t.x = r * o * Math.sin(c) + this.x0, t));
+  var a = t.x, i = t.y, s = Math.sin(i), e = Math.cos(i), r, h, n, o, l, _, c = S(a - this.long0);
+  return Math.abs(Math.abs(a - this.long0) - Math.PI) <= w && Math.abs(i + this.lat0) <= w ? (t.x = NaN, t.y = NaN, t) : this.sphere ? (r = 2 * this.k0 / (1 + this.sinlat0 * s + this.coslat0 * e * Math.cos(c)), t.x = this.a * r * e * Math.sin(c) + this.x0, t.y = this.a * r * (this.coslat0 * s - this.sinlat0 * e * Math.cos(c)) + this.y0, t) : (h = 2 * Math.atan(E1(i, s, this.e)) - v, o = Math.cos(h), n = Math.sin(h), Math.abs(this.coslat0) <= w ? (l = X(this.e, i * this.con, this.con * s), _ = 2 * this.a * this.k0 * l / this.cons, t.x = this.x0 + _ * Math.sin(a - this.long0), t.y = this.y0 - this.con * _ * Math.cos(a - this.long0), t) : (Math.abs(this.sinlat0) < w ? (r = 2 * this.a * this.k0 / (1 + o * Math.cos(c)), t.y = r * n) : (r = 2 * this.a * this.k0 * this.ms1 / (this.cosX0 * (1 + this.sinX0 * n + this.cosX0 * o * Math.cos(c))), t.y = r * (this.cosX0 * n - this.sinX0 * o * Math.cos(c)) + this.y0), t.x = r * o * Math.sin(c) + this.x0, t));
 }
 function I5(t) {
   t.x -= this.x0, t.y -= this.y0;
   var a, i, s, e, r, h = Math.sqrt(t.x * t.x + t.y * t.y);
   if (this.sphere) {
     var n = 2 * Math.atan(h / (2 * this.a * this.k0));
-    return a = this.long0, i = this.lat0, h <= S ? (t.x = a, t.y = i, t) : (i = Math.asin(Math.cos(n) * this.sinlat0 + t.y * Math.sin(n) * this.coslat0 / h), Math.abs(this.coslat0) < S ? this.lat0 > 0 ? a = w(this.long0 + Math.atan2(t.x, -1 * t.y)) : a = w(this.long0 + Math.atan2(t.x, t.y)) : a = w(this.long0 + Math.atan2(t.x * Math.sin(n), h * this.coslat0 * Math.cos(n) - t.y * this.sinlat0 * Math.sin(n))), t.x = a, t.y = i, t);
-  } else if (Math.abs(this.coslat0) <= S) {
-    if (h <= S)
+    return a = this.long0, i = this.lat0, h <= w ? (t.x = a, t.y = i, t) : (i = Math.asin(Math.cos(n) * this.sinlat0 + t.y * Math.sin(n) * this.coslat0 / h), Math.abs(this.coslat0) < w ? this.lat0 > 0 ? a = S(this.long0 + Math.atan2(t.x, -1 * t.y)) : a = S(this.long0 + Math.atan2(t.x, t.y)) : a = S(this.long0 + Math.atan2(t.x * Math.sin(n), h * this.coslat0 * Math.cos(n) - t.y * this.sinlat0 * Math.sin(n))), t.x = a, t.y = i, t);
+  } else if (Math.abs(this.coslat0) <= w) {
+    if (h <= w)
       return i = this.lat0, a = this.long0, t.x = a, t.y = i, t;
-    t.x *= this.con, t.y *= this.con, s = h * this.cons / (2 * this.a * this.k0), i = this.con * I0(this.e, s), a = this.con * w(this.con * this.long0 + Math.atan2(t.x, -1 * t.y));
+    t.x *= this.con, t.y *= this.con, s = h * this.cons / (2 * this.a * this.k0), i = this.con * I0(this.e, s), a = this.con * S(this.con * this.long0 + Math.atan2(t.x, -1 * t.y));
   } else
-    e = 2 * Math.atan(h * this.cosX0 / (2 * this.a * this.k0 * this.ms1)), a = this.long0, h <= S ? r = this.X0 : (r = Math.asin(Math.cos(e) * this.sinX0 + t.y * Math.sin(e) * this.cosX0 / h), a = w(this.long0 + Math.atan2(t.x * Math.sin(e), h * this.cosX0 * Math.cos(e) - t.y * this.sinX0 * Math.sin(e)))), i = -1 * I0(this.e, Math.tan(0.5 * (v + r)));
+    e = 2 * Math.atan(h * this.cosX0 / (2 * this.a * this.k0 * this.ms1)), a = this.long0, h <= w ? r = this.X0 : (r = Math.asin(Math.cos(e) * this.sinX0 + t.y * Math.sin(e) * this.cosX0 / h), a = S(this.long0 + Math.atan2(t.x * Math.sin(e), h * this.cosX0 * Math.cos(e) - t.y * this.sinX0 * Math.sin(e)))), i = -1 * I0(this.e, Math.tan(0.5 * (v + r)));
   return t.x = a, t.y = i, t;
 }
 var R5 = ["stere", "Stereographic_South_Pole", "Polar_Stereographic_variant_A", "Polar_Stereographic_variant_B", "Polar_Stereographic"];
@@ -3507,22 +3507,22 @@ function D5(t) {
   return "no_uoff" in t || "no_off" in t || a.indexOf(i) !== -1 || a.indexOf(e9(i)) !== -1;
 }
 function U5() {
-  var t, a, i, s, e, r, h, n, o, l, _ = 0, c, f = 0, u = 0, g = 0, d = 0, M = 0, m = 0;
+  var t, a, i, s, e, r, h, n, o, l, _ = 0, c, f = 0, u = 0, g = 0, M = 0, d = 0, m = 0;
   this.no_off = D5(this), this.no_rot = "no_rot" in this;
   var y = !1;
   "alpha" in this && (y = !0);
   var E = !1;
   if ("rectified_grid_angle" in this && (E = !0), y && (m = this.alpha), E && (_ = this.rectified_grid_angle), y || E)
     f = this.longc;
-  else if (u = this.long1, d = this.lat1, g = this.long2, M = this.lat2, Math.abs(d - M) <= c0 || (t = Math.abs(d)) <= c0 || Math.abs(t - v) <= c0 || Math.abs(Math.abs(this.lat0) - v) <= c0 || Math.abs(Math.abs(M) - v) <= c0)
+  else if (u = this.long1, M = this.lat1, g = this.long2, d = this.lat2, Math.abs(M - d) <= c0 || (t = Math.abs(M)) <= c0 || Math.abs(t - v) <= c0 || Math.abs(Math.abs(this.lat0) - v) <= c0 || Math.abs(Math.abs(d) - v) <= c0)
     throw new Error();
   var P = 1 - this.es;
-  a = Math.sqrt(P), Math.abs(this.lat0) > S ? (n = Math.sin(this.lat0), i = Math.cos(this.lat0), t = 1 - this.es * n * n, this.B = i * i, this.B = Math.sqrt(1 + this.es * this.B * this.B / P), this.A = this.B * this.k0 * a / t, s = this.B * a / (i * Math.sqrt(t)), e = s * s - 1, e <= 0 ? e = 0 : (e = Math.sqrt(e), this.lat0 < 0 && (e = -e)), this.E = e += s, this.E *= Math.pow(X(this.e, this.lat0, n), this.B)) : (this.B = 1 / a, this.A = this.k0, this.E = s = e = 1), y || E ? (y ? (c = Math.asin(Math.sin(m) / s), E || (_ = m)) : (c = _, m = Math.asin(s * Math.sin(c))), this.lam0 = f - Math.asin(0.5 * (e - 1 / e) * Math.tan(c)) / this.B) : (r = Math.pow(X(this.e, d, Math.sin(d)), this.B), h = Math.pow(X(this.e, M, Math.sin(M)), this.B), e = this.E / r, o = (h - r) / (h + r), l = this.E * this.E, l = (l - h * r) / (l + h * r), t = u - g, t < -Math.PI ? g -= C0 : t > Math.PI && (g += C0), this.lam0 = w(0.5 * (u + g) - Math.atan(l * Math.tan(0.5 * this.B * (u - g)) / o) / this.B), c = Math.atan(2 * Math.sin(this.B * w(u - this.lam0)) / (e - 1 / e)), _ = m = Math.asin(s * Math.sin(c))), this.singam = Math.sin(c), this.cosgam = Math.cos(c), this.sinrot = Math.sin(_), this.cosrot = Math.cos(_), this.rB = 1 / this.B, this.ArB = this.A * this.rB, this.BrA = 1 / this.ArB, this.no_off ? this.u_0 = 0 : (this.u_0 = Math.abs(this.ArB * Math.atan(Math.sqrt(s * s - 1) / Math.cos(m))), this.lat0 < 0 && (this.u_0 = -this.u_0)), e = 0.5 * c, this.v_pole_n = this.ArB * Math.log(Math.tan(C - e)), this.v_pole_s = this.ArB * Math.log(Math.tan(C + e));
+  a = Math.sqrt(P), Math.abs(this.lat0) > w ? (n = Math.sin(this.lat0), i = Math.cos(this.lat0), t = 1 - this.es * n * n, this.B = i * i, this.B = Math.sqrt(1 + this.es * this.B * this.B / P), this.A = this.B * this.k0 * a / t, s = this.B * a / (i * Math.sqrt(t)), e = s * s - 1, e <= 0 ? e = 0 : (e = Math.sqrt(e), this.lat0 < 0 && (e = -e)), this.E = e += s, this.E *= Math.pow(X(this.e, this.lat0, n), this.B)) : (this.B = 1 / a, this.A = this.k0, this.E = s = e = 1), y || E ? (y ? (c = Math.asin(Math.sin(m) / s), E || (_ = m)) : (c = _, m = Math.asin(s * Math.sin(c))), this.lam0 = f - Math.asin(0.5 * (e - 1 / e) * Math.tan(c)) / this.B) : (r = Math.pow(X(this.e, M, Math.sin(M)), this.B), h = Math.pow(X(this.e, d, Math.sin(d)), this.B), e = this.E / r, o = (h - r) / (h + r), l = this.E * this.E, l = (l - h * r) / (l + h * r), t = u - g, t < -Math.PI ? g -= C0 : t > Math.PI && (g += C0), this.lam0 = S(0.5 * (u + g) - Math.atan(l * Math.tan(0.5 * this.B * (u - g)) / o) / this.B), c = Math.atan(2 * Math.sin(this.B * S(u - this.lam0)) / (e - 1 / e)), _ = m = Math.asin(s * Math.sin(c))), this.singam = Math.sin(c), this.cosgam = Math.cos(c), this.sinrot = Math.sin(_), this.cosrot = Math.cos(_), this.rB = 1 / this.B, this.ArB = this.A * this.rB, this.BrA = 1 / this.ArB, this.no_off ? this.u_0 = 0 : (this.u_0 = Math.abs(this.ArB * Math.atan(Math.sqrt(s * s - 1) / Math.cos(m))), this.lat0 < 0 && (this.u_0 = -this.u_0)), e = 0.5 * c, this.v_pole_n = this.ArB * Math.log(Math.tan(C - e)), this.v_pole_s = this.ArB * Math.log(Math.tan(C + e));
 }
 function F5(t) {
   var a = {}, i, s, e, r, h, n, o, l;
-  if (t.x = t.x - this.lam0, Math.abs(Math.abs(t.y) - v) > S) {
-    if (h = this.E / Math.pow(X(this.e, t.y, Math.sin(t.y)), this.B), n = 1 / h, i = 0.5 * (h - n), s = 0.5 * (h + n), r = Math.sin(this.B * t.x), e = (i * this.singam - r * this.cosgam) / s, Math.abs(Math.abs(e) - 1) < S)
+  if (t.x = t.x - this.lam0, Math.abs(Math.abs(t.y) - v) > w) {
+    if (h = this.E / Math.pow(X(this.e, t.y, Math.sin(t.y)), this.B), n = 1 / h, i = 0.5 * (h - n), s = 0.5 * (h + n), r = Math.sin(this.B * t.x), e = (i * this.singam - r * this.cosgam) / s, Math.abs(Math.abs(e) - 1) < w)
       throw new Error();
     l = 0.5 * this.ArB * Math.log((1 - e) / (1 + e)), n = Math.cos(this.B * t.x), Math.abs(n) < c0 ? o = this.A * t.x : o = this.ArB * Math.atan2(i * this.cosgam + r * this.singam, n);
   } else
@@ -3531,7 +3531,7 @@ function F5(t) {
 }
 function $5(t) {
   var a, i, s, e, r, h, n, o = {};
-  if (t.x = (t.x - this.x0) * (1 / this.a), t.y = (t.y - this.y0) * (1 / this.a), this.no_rot ? (i = t.y, a = t.x) : (i = t.x * this.cosrot - t.y * this.sinrot, a = t.y * this.cosrot + t.x * this.sinrot + this.u_0), s = Math.exp(-this.BrA * i), e = 0.5 * (s - 1 / s), r = 0.5 * (s + 1 / s), h = Math.sin(this.BrA * a), n = (h * this.cosgam + e * this.singam) / r, Math.abs(Math.abs(n) - 1) < S)
+  if (t.x = (t.x - this.x0) * (1 / this.a), t.y = (t.y - this.y0) * (1 / this.a), this.no_rot ? (i = t.y, a = t.x) : (i = t.x * this.cosrot - t.y * this.sinrot, a = t.y * this.cosrot + t.x * this.sinrot + this.u_0), s = Math.exp(-this.BrA * i), e = 0.5 * (s - 1 / s), r = 0.5 * (s + 1 / s), h = Math.sin(this.BrA * a), n = (h * this.cosgam + e * this.singam) / r, Math.abs(Math.abs(n) - 1) < w)
     o.x = 0, o.y = n < 0 ? -v : v;
   else {
     if (o.y = this.E / Math.sqrt((1 + n) / (1 - n)), o.y = I0(this.e, Math.pow(o.y, 1 / this.B)), o.y === 1 / 0)
@@ -3540,33 +3540,33 @@ function $5(t) {
   }
   return o.x += this.lam0, o;
 }
-var B5 = ["Hotine_Oblique_Mercator", "Hotine Oblique Mercator", "Hotine_Oblique_Mercator_variant_A", "Hotine_Oblique_Mercator_Variant_B", "Hotine_Oblique_Mercator_Azimuth_Natural_Origin", "Hotine_Oblique_Mercator_Two_Point_Natural_Origin", "Hotine_Oblique_Mercator_Azimuth_Center", "Oblique_Mercator", "omerc"];
-const j5 = {
+var j5 = ["Hotine_Oblique_Mercator", "Hotine Oblique Mercator", "Hotine_Oblique_Mercator_variant_A", "Hotine_Oblique_Mercator_Variant_B", "Hotine_Oblique_Mercator_Azimuth_Natural_Origin", "Hotine_Oblique_Mercator_Two_Point_Natural_Origin", "Hotine_Oblique_Mercator_Azimuth_Center", "Oblique_Mercator", "omerc"];
+const B5 = {
   init: U5,
   forward: F5,
   inverse: $5,
-  names: B5
+  names: j5
 };
 function H5() {
-  if (this.lat2 || (this.lat2 = this.lat1), this.k0 || (this.k0 = 1), this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, !(Math.abs(this.lat1 + this.lat2) < S)) {
+  if (this.lat2 || (this.lat2 = this.lat1), this.k0 || (this.k0 = 1), this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, !(Math.abs(this.lat1 + this.lat2) < w)) {
     var t = this.b / this.a;
     this.e = Math.sqrt(1 - t * t);
-    var a = Math.sin(this.lat1), i = Math.cos(this.lat1), s = Z(this.e, a, i), e = X(this.e, this.lat1, a), r = Math.sin(this.lat2), h = Math.cos(this.lat2), n = Z(this.e, r, h), o = X(this.e, this.lat2, r), l = Math.abs(Math.abs(this.lat0) - v) < S ? 0 : X(this.e, this.lat0, Math.sin(this.lat0));
-    Math.abs(this.lat1 - this.lat2) > S ? this.ns = Math.log(s / n) / Math.log(e / o) : this.ns = a, isNaN(this.ns) && (this.ns = a), this.f0 = s / (this.ns * Math.pow(e, this.ns)), this.rh = this.a * this.f0 * Math.pow(l, this.ns), this.title || (this.title = "Lambert Conformal Conic");
+    var a = Math.sin(this.lat1), i = Math.cos(this.lat1), s = Z(this.e, a, i), e = X(this.e, this.lat1, a), r = Math.sin(this.lat2), h = Math.cos(this.lat2), n = Z(this.e, r, h), o = X(this.e, this.lat2, r), l = Math.abs(Math.abs(this.lat0) - v) < w ? 0 : X(this.e, this.lat0, Math.sin(this.lat0));
+    Math.abs(this.lat1 - this.lat2) > w ? this.ns = Math.log(s / n) / Math.log(e / o) : this.ns = a, isNaN(this.ns) && (this.ns = a), this.f0 = s / (this.ns * Math.pow(e, this.ns)), this.rh = this.a * this.f0 * Math.pow(l, this.ns), this.title || (this.title = "Lambert Conformal Conic");
   }
 }
 function W5(t) {
   var a = t.x, i = t.y;
-  Math.abs(2 * Math.abs(i) - Math.PI) <= S && (i = T0(i) * (v - 2 * S));
+  Math.abs(2 * Math.abs(i) - Math.PI) <= w && (i = T0(i) * (v - 2 * w));
   var s = Math.abs(Math.abs(i) - v), e, r;
-  if (s > S)
+  if (s > w)
     e = X(this.e, i, Math.sin(i)), r = this.a * this.f0 * Math.pow(e, this.ns);
   else {
     if (s = i * this.ns, s <= 0)
       return null;
     r = 0;
   }
-  var h = this.ns * w(a - this.long0);
+  var h = this.ns * S(a - this.long0);
   return t.x = this.k0 * (r * Math.sin(h)) + this.x0, t.y = this.k0 * (this.rh - r * Math.cos(h)) + this.y0, t;
 }
 function Q5(t) {
@@ -3578,7 +3578,7 @@ function Q5(t) {
       return null;
   } else
     e = -v;
-  return r = w(o / this.ns + this.long0), t.x = r, t.y = e, t;
+  return r = S(o / this.ns + this.long0), t.x = r, t.y = e, t;
 }
 var J5 = [
   "Lambert Tangential Conformal Conic Projection",
@@ -3599,7 +3599,7 @@ function K5() {
   this.a = 6377397155e-3, this.es = 0.006674372230614, this.e = Math.sqrt(this.es), this.lat0 || (this.lat0 = 0.863937979737193), this.long0 || (this.long0 = 0.7417649320975901 - 0.308341501185665), this.k0 || (this.k0 = 0.9999), this.s45 = 0.785398163397448, this.s90 = 2 * this.s45, this.fi0 = this.lat0, this.e2 = this.es, this.e = Math.sqrt(this.e2), this.alfa = Math.sqrt(1 + this.e2 * Math.pow(Math.cos(this.fi0), 4) / (1 - this.e2)), this.uq = 1.04216856380474, this.u0 = Math.asin(Math.sin(this.fi0) / this.alfa), this.g = Math.pow((1 + this.e * Math.sin(this.fi0)) / (1 - this.e * Math.sin(this.fi0)), this.alfa * this.e / 2), this.k = Math.tan(this.u0 / 2 + this.s45) / Math.pow(Math.tan(this.fi0 / 2 + this.s45), this.alfa) * this.g, this.k1 = this.k0, this.n0 = this.a * Math.sqrt(1 - this.e2) / (1 - this.e2 * Math.pow(Math.sin(this.fi0), 2)), this.s0 = 1.37008346281555, this.n = Math.sin(this.s0), this.ro0 = this.k1 * this.n0 / Math.tan(this.s0), this.ad = this.s90 - this.uq;
 }
 function V5(t) {
-  var a, i, s, e, r, h, n, o = t.x, l = t.y, _ = w(o - this.long0);
+  var a, i, s, e, r, h, n, o = t.x, l = t.y, _ = S(o - this.long0);
   return a = Math.pow((1 + this.e * Math.sin(l)) / (1 - this.e * Math.sin(l)), this.alfa * this.e / 2), i = 2 * (Math.atan(this.k * Math.pow(Math.tan(l / 2 + this.s45), this.alfa) / a) - this.s45), s = -_ * this.alfa, e = Math.asin(Math.cos(this.ad) * Math.sin(i) + Math.sin(this.ad) * Math.cos(i) * Math.cos(s)), r = Math.asin(Math.cos(i) * Math.sin(s) / Math.cos(e)), h = this.n * r, n = this.ro0 * Math.pow(Math.tan(this.s0 / 2 + this.s45), this.n) / Math.pow(Math.tan(e / 2 + this.s45), this.n), t.y = n * Math.cos(h) / 1, t.x = n * Math.sin(h) / 1, this.czech || (t.y *= -1, t.x *= -1), t;
 }
 function Z5(t) {
@@ -3618,7 +3618,7 @@ const t4 = {
   inverse: Z5,
   names: Y5
 };
-function B(t, a, i, s, e) {
+function j(t, a, i, s, e) {
   return t * e - a * Math.sin(2 * e) + i * Math.sin(4 * e) - s * Math.sin(6 * e);
 }
 function O0(t) {
@@ -3649,14 +3649,14 @@ function X0(t, a, i, s, e) {
   return NaN;
 }
 function a4() {
-  this.sphere || (this.e0 = O0(this.es), this.e1 = q0(this.es), this.e2 = k0(this.es), this.e3 = L0(this.es), this.ml0 = this.a * B(this.e0, this.e1, this.e2, this.e3, this.lat0));
+  this.sphere || (this.e0 = O0(this.es), this.e1 = q0(this.es), this.e2 = k0(this.es), this.e3 = L0(this.es), this.ml0 = this.a * j(this.e0, this.e1, this.e2, this.e3, this.lat0));
 }
 function i4(t) {
   var a, i, s = t.x, e = t.y;
-  if (s = w(s - this.long0), this.sphere)
+  if (s = S(s - this.long0), this.sphere)
     a = this.a * Math.asin(Math.cos(e) * Math.sin(s)), i = this.a * (Math.atan2(Math.tan(e), Math.cos(s)) - this.lat0);
   else {
-    var r = Math.sin(e), h = Math.cos(e), n = P1(this.a, this.e, r), o = Math.tan(e) * Math.tan(e), l = s * Math.cos(e), _ = l * l, c = this.es * h * h / (1 - this.es), f = this.a * B(this.e0, this.e1, this.e2, this.e3, e);
+    var r = Math.sin(e), h = Math.cos(e), n = P1(this.a, this.e, r), o = Math.tan(e) * Math.tan(e), l = s * Math.cos(e), _ = l * l, c = this.es * h * h / (1 - this.es), f = this.a * j(this.e0, this.e1, this.e2, this.e3, e);
     a = n * l * (1 - _ * o * (1 / 6 - (8 - o + 8 * c) * _ / 120)), i = f - this.ml0 + n * r / h * _ * (0.5 + (5 - o + 6 * c) * _ / 24);
   }
   return t.x = a + this.x0, t.y = i + this.y0, t;
@@ -3669,12 +3669,12 @@ function s4(t) {
     s = Math.asin(Math.sin(r) * Math.cos(a)), e = Math.atan2(Math.tan(a), Math.cos(r));
   } else {
     var h = this.ml0 / this.a + i, n = X0(h, this.e0, this.e1, this.e2, this.e3);
-    if (Math.abs(Math.abs(n) - v) <= S)
+    if (Math.abs(Math.abs(n) - v) <= w)
       return t.x = this.long0, t.y = v, i < 0 && (t.y *= -1), t;
     var o = P1(this.a, this.e, Math.sin(n)), l = o * o * o / this.a / this.a * (1 - this.es), _ = Math.pow(Math.tan(n), 2), c = a * this.a / o, f = c * c;
     s = n - o * Math.tan(n) / l * c * c * (0.5 - (1 + 3 * _) * c * c / 24), e = c * (1 - f * (_ / 3 + (1 + 3 * _) * _ * f / 15)) / Math.cos(n);
   }
-  return t.x = w(e + this.long0), t.y = r0(s), t;
+  return t.x = S(e + this.long0), t.y = r0(s), t;
 }
 var e4 = ["Cassini", "Cassini_Soldner", "cass"];
 const r4 = {
@@ -3690,9 +3690,9 @@ function i0(t, a) {
 var f1 = 1, c1 = 2, _1 = 3, H0 = 4;
 function n4() {
   var t = Math.abs(this.lat0);
-  if (Math.abs(t - v) < S ? this.mode = this.lat0 < 0 ? f1 : c1 : Math.abs(t) < S ? this.mode = _1 : this.mode = H0, this.es > 0) {
+  if (Math.abs(t - v) < w ? this.mode = this.lat0 < 0 ? f1 : c1 : Math.abs(t) < w ? this.mode = _1 : this.mode = H0, this.es > 0) {
     var a;
-    switch (this.qp = i0(this.e, 1), this.mmf = 0.5 / (1 - this.es), this.apa = d4(this.es), this.mode) {
+    switch (this.qp = i0(this.e, 1), this.mmf = 0.5 / (1 - this.es), this.apa = M4(this.es), this.mode) {
       case c1:
         this.dd = 1;
         break;
@@ -3711,13 +3711,13 @@ function n4() {
 }
 function h4(t) {
   var a, i, s, e, r, h, n, o, l, _, c = t.x, f = t.y;
-  if (c = w(c - this.long0), this.sphere) {
+  if (c = S(c - this.long0), this.sphere) {
     if (r = Math.sin(f), _ = Math.cos(f), s = Math.cos(c), this.mode === this.OBLIQ || this.mode === this.EQUIT) {
-      if (i = this.mode === this.EQUIT ? 1 + _ * s : 1 + this.sinph0 * r + this.cosph0 * _ * s, i <= S)
+      if (i = this.mode === this.EQUIT ? 1 + _ * s : 1 + this.sinph0 * r + this.cosph0 * _ * s, i <= w)
         return null;
       i = Math.sqrt(2 / i), a = i * _ * Math.sin(c), i *= this.mode === this.EQUIT ? r : this.cosph0 * r - this.sinph0 * _ * s;
     } else if (this.mode === this.N_POLE || this.mode === this.S_POLE) {
-      if (this.mode === this.N_POLE && (s = -s), Math.abs(f + this.lat0) < S)
+      if (this.mode === this.N_POLE && (s = -s), Math.abs(f + this.lat0) < w)
         return null;
       i = C - f * 0.5, i = 2 * (this.mode === this.S_POLE ? Math.cos(i) : Math.sin(i)), a = i * Math.sin(c), i *= s;
     }
@@ -3736,7 +3736,7 @@ function h4(t) {
         l = f - v, h = this.qp + h;
         break;
     }
-    if (Math.abs(l) < S)
+    if (Math.abs(l) < w)
       return null;
     switch (this.mode) {
       case this.OBLIQ:
@@ -3760,10 +3760,10 @@ function o4(t) {
       return null;
     switch (e = 2 * Math.asin(e), (this.mode === this.OBLIQ || this.mode === this.EQUIT) && (f = Math.sin(e), _ = Math.cos(e)), this.mode) {
       case this.EQUIT:
-        e = Math.abs(c) <= S ? 0 : Math.asin(i * f / c), a *= f, i = _ * c;
+        e = Math.abs(c) <= w ? 0 : Math.asin(i * f / c), a *= f, i = _ * c;
         break;
       case this.OBLIQ:
-        e = Math.abs(c) <= S ? this.lat0 : Math.asin(_ * this.sinph0 + i * f * this.cosph0 / c), a *= f * this.cosph0, i = (_ - Math.sin(e) * this.sinph0) * c;
+        e = Math.abs(c) <= w ? this.lat0 : Math.asin(_ * this.sinph0 + i * f * this.cosph0 / c), a *= f * this.cosph0, i = (_ - Math.sin(e) * this.sinph0) * c;
         break;
       case this.N_POLE:
         i = -i, e = v - e;
@@ -3775,7 +3775,7 @@ function o4(t) {
     s = i === 0 && (this.mode === this.EQUIT || this.mode === this.OBLIQ) ? 0 : Math.atan2(a, i);
   } else {
     if (l = 0, this.mode === this.OBLIQ || this.mode === this.EQUIT) {
-      if (a /= this.dd, i *= this.dd, o = Math.sqrt(a * a + i * i), o < S)
+      if (a /= this.dd, i *= this.dd, o = Math.sqrt(a * a + i * i), o < w)
         return t.x = this.long0, t.y = this.lat0, t;
       h = 2 * Math.asin(0.5 * o / this.rq), r = Math.cos(h), a *= h = Math.sin(h), this.mode === this.OBLIQ ? (l = r * this.sinb1 + i * h * this.cosb1 / o, n = this.qp * l, i = o * this.cosb1 * r - i * this.sinb1 * h) : (l = i * h / o, n = this.qp * l, i = o * r);
     } else if (this.mode === this.N_POLE || this.mode === this.S_POLE) {
@@ -3783,16 +3783,16 @@ function o4(t) {
         return t.x = this.long0, t.y = this.lat0, t;
       l = 1 - n / this.qp, this.mode === this.S_POLE && (l = -l);
     }
-    s = Math.atan2(a, i), e = M4(Math.asin(l), this.apa);
+    s = Math.atan2(a, i), e = d4(Math.asin(l), this.apa);
   }
-  return t.x = w(this.long0 + s), t.y = e, t;
+  return t.x = S(this.long0 + s), t.y = e, t;
 }
 var l4 = 0.3333333333333333, f4 = 0.17222222222222222, c4 = 0.10257936507936508, _4 = 0.06388888888888888, u4 = 0.0664021164021164, g4 = 0.016415012942191543;
-function d4(t) {
+function M4(t) {
   var a, i = [];
   return i[0] = t * l4, a = t * t, i[0] += a * f4, i[1] = a * _4, a *= t, i[0] += a * c4, i[1] += a * u4, i[2] = a * g4, i;
 }
-function M4(t, a) {
+function d4(t, a) {
   var i = t + t;
   return t + a[0] * Math.sin(i) + a[1] * Math.sin(i + i) + a[2] * Math.sin(i + i + i);
 }
@@ -3811,21 +3811,21 @@ function e0(t) {
   return Math.abs(t) > 1 && (t = t > 1 ? 1 : -1), Math.asin(t);
 }
 function y4() {
-  Math.abs(this.lat1 + this.lat2) < S || (this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e3 = Math.sqrt(this.es), this.sin_po = Math.sin(this.lat1), this.cos_po = Math.cos(this.lat1), this.t1 = this.sin_po, this.con = this.sin_po, this.ms1 = Z(this.e3, this.sin_po, this.cos_po), this.qs1 = i0(this.e3, this.sin_po), this.sin_po = Math.sin(this.lat2), this.cos_po = Math.cos(this.lat2), this.t2 = this.sin_po, this.ms2 = Z(this.e3, this.sin_po, this.cos_po), this.qs2 = i0(this.e3, this.sin_po), this.sin_po = Math.sin(this.lat0), this.cos_po = Math.cos(this.lat0), this.t3 = this.sin_po, this.qs0 = i0(this.e3, this.sin_po), Math.abs(this.lat1 - this.lat2) > S ? this.ns0 = (this.ms1 * this.ms1 - this.ms2 * this.ms2) / (this.qs2 - this.qs1) : this.ns0 = this.con, this.c = this.ms1 * this.ms1 + this.ns0 * this.qs1, this.rh = this.a * Math.sqrt(this.c - this.ns0 * this.qs0) / this.ns0);
-}
-function S4(t) {
-  var a = t.x, i = t.y;
-  this.sin_phi = Math.sin(i), this.cos_phi = Math.cos(i);
-  var s = i0(this.e3, this.sin_phi), e = this.a * Math.sqrt(this.c - this.ns0 * s) / this.ns0, r = this.ns0 * w(a - this.long0), h = e * Math.sin(r) + this.x0, n = this.rh - e * Math.cos(r) + this.y0;
-  return t.x = h, t.y = n, t;
+  Math.abs(this.lat1 + this.lat2) < w || (this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e3 = Math.sqrt(this.es), this.sin_po = Math.sin(this.lat1), this.cos_po = Math.cos(this.lat1), this.t1 = this.sin_po, this.con = this.sin_po, this.ms1 = Z(this.e3, this.sin_po, this.cos_po), this.qs1 = i0(this.e3, this.sin_po), this.sin_po = Math.sin(this.lat2), this.cos_po = Math.cos(this.lat2), this.t2 = this.sin_po, this.ms2 = Z(this.e3, this.sin_po, this.cos_po), this.qs2 = i0(this.e3, this.sin_po), this.sin_po = Math.sin(this.lat0), this.cos_po = Math.cos(this.lat0), this.t3 = this.sin_po, this.qs0 = i0(this.e3, this.sin_po), Math.abs(this.lat1 - this.lat2) > w ? this.ns0 = (this.ms1 * this.ms1 - this.ms2 * this.ms2) / (this.qs2 - this.qs1) : this.ns0 = this.con, this.c = this.ms1 * this.ms1 + this.ns0 * this.qs1, this.rh = this.a * Math.sqrt(this.c - this.ns0 * this.qs0) / this.ns0);
 }
 function w4(t) {
+  var a = t.x, i = t.y;
+  this.sin_phi = Math.sin(i), this.cos_phi = Math.cos(i);
+  var s = i0(this.e3, this.sin_phi), e = this.a * Math.sqrt(this.c - this.ns0 * s) / this.ns0, r = this.ns0 * S(a - this.long0), h = e * Math.sin(r) + this.x0, n = this.rh - e * Math.cos(r) + this.y0;
+  return t.x = h, t.y = n, t;
+}
+function S4(t) {
   var a, i, s, e, r, h;
-  return t.x -= this.x0, t.y = this.rh - t.y + this.y0, this.ns0 >= 0 ? (a = Math.sqrt(t.x * t.x + t.y * t.y), s = 1) : (a = -Math.sqrt(t.x * t.x + t.y * t.y), s = -1), e = 0, a !== 0 && (e = Math.atan2(s * t.x, s * t.y)), s = a * this.ns0 / this.a, this.sphere ? h = Math.asin((this.c - s * s) / (2 * this.ns0)) : (i = (this.c - s * s) / this.ns0, h = this.phi1z(this.e3, i)), r = w(e / this.ns0 + this.long0), t.x = r, t.y = h, t;
+  return t.x -= this.x0, t.y = this.rh - t.y + this.y0, this.ns0 >= 0 ? (a = Math.sqrt(t.x * t.x + t.y * t.y), s = 1) : (a = -Math.sqrt(t.x * t.x + t.y * t.y), s = -1), e = 0, a !== 0 && (e = Math.atan2(s * t.x, s * t.y)), s = a * this.ns0 / this.a, this.sphere ? h = Math.asin((this.c - s * s) / (2 * this.ns0)) : (i = (this.c - s * s) / this.ns0, h = this.phi1z(this.e3, i)), r = S(e / this.ns0 + this.long0), t.x = r, t.y = h, t;
 }
 function E4(t, a) {
   var i, s, e, r, h, n = e0(0.5 * a);
-  if (t < S)
+  if (t < w)
     return n;
   for (var o = t * t, l = 1; l <= 25; l++)
     if (i = Math.sin(n), s = Math.cos(n), e = t * i, r = 1 - e * e, h = 0.5 * r * r / s * (a / (1 - o) - i / r + 0.5 / t * Math.log((1 - e) / (1 + e))), n = n + h, Math.abs(h) <= 1e-7)
@@ -3835,8 +3835,8 @@ function E4(t, a) {
 var P4 = ["Albers_Conic_Equal_Area", "Albers_Equal_Area", "Albers", "aea"];
 const x4 = {
   init: y4,
-  forward: S4,
-  inverse: w4,
+  forward: w4,
+  inverse: S4,
   names: P4,
   phi1z: E4
 };
@@ -3845,11 +3845,11 @@ function G4() {
 }
 function b4(t) {
   var a, i, s, e, r, h, n, o, l = t.x, _ = t.y;
-  return s = w(l - this.long0), a = Math.sin(_), i = Math.cos(_), e = Math.cos(s), h = this.sin_p14 * a + this.cos_p14 * i * e, r = 1, h > 0 || Math.abs(h) <= S ? (n = this.x0 + this.a * r * i * Math.sin(s) / h, o = this.y0 + this.a * r * (this.cos_p14 * a - this.sin_p14 * i * e) / h) : (n = this.x0 + this.infinity_dist * i * Math.sin(s), o = this.y0 + this.infinity_dist * (this.cos_p14 * a - this.sin_p14 * i * e)), t.x = n, t.y = o, t;
+  return s = S(l - this.long0), a = Math.sin(_), i = Math.cos(_), e = Math.cos(s), h = this.sin_p14 * a + this.cos_p14 * i * e, r = 1, h > 0 || Math.abs(h) <= w ? (n = this.x0 + this.a * r * i * Math.sin(s) / h, o = this.y0 + this.a * r * (this.cos_p14 * a - this.sin_p14 * i * e) / h) : (n = this.x0 + this.infinity_dist * i * Math.sin(s), o = this.y0 + this.infinity_dist * (this.cos_p14 * a - this.sin_p14 * i * e)), t.x = n, t.y = o, t;
 }
 function N4(t) {
   var a, i, s, e, r, h;
-  return t.x = (t.x - this.x0) / this.a, t.y = (t.y - this.y0) / this.a, t.x /= this.k0, t.y /= this.k0, (a = Math.sqrt(t.x * t.x + t.y * t.y)) ? (e = Math.atan2(a, this.rc), i = Math.sin(e), s = Math.cos(e), h = e0(s * this.sin_p14 + t.y * i * this.cos_p14 / a), r = Math.atan2(t.x * i, a * this.cos_p14 * s - t.y * this.sin_p14 * i), r = w(this.long0 + r)) : (h = this.phic0, r = 0), t.x = r, t.y = h, t;
+  return t.x = (t.x - this.x0) / this.a, t.y = (t.y - this.y0) / this.a, t.x /= this.k0, t.y /= this.k0, (a = Math.sqrt(t.x * t.x + t.y * t.y)) ? (e = Math.atan2(a, this.rc), i = Math.sin(e), s = Math.cos(e), h = e0(s * this.sin_p14 + t.y * i * this.cos_p14 / a), r = Math.atan2(t.x * i, a * this.cos_p14 * s - t.y * this.sin_p14 * i), r = S(this.long0 + r)) : (h = this.phic0, r = 0), t.x = r, t.y = h, t;
 }
 var A4 = ["gnom"];
 const C4 = {
@@ -3871,7 +3871,7 @@ function I4() {
   this.sphere || (this.k0 = Z(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)));
 }
 function R4(t) {
-  var a = t.x, i = t.y, s, e, r = w(a - this.long0);
+  var a = t.x, i = t.y, s, e, r = S(a - this.long0);
   if (this.sphere)
     s = this.x0 + this.a * r * Math.cos(this.lat_ts), e = this.y0 + this.a * Math.sin(i) / Math.cos(this.lat_ts);
   else {
@@ -3883,7 +3883,7 @@ function R4(t) {
 function T4(t) {
   t.x -= this.x0, t.y -= this.y0;
   var a, i;
-  return this.sphere ? (a = w(this.long0 + t.x / this.a / Math.cos(this.lat_ts)), i = Math.asin(t.y / this.a * Math.cos(this.lat_ts))) : (i = p4(this.e, 2 * t.y * this.k0 / this.a), a = w(this.long0 + t.x / (this.a * this.k0))), t.x = a, t.y = i, t;
+  return this.sphere ? (a = S(this.long0 + t.x / this.a / Math.cos(this.lat_ts)), i = Math.asin(t.y / this.a * Math.cos(this.lat_ts))) : (i = p4(this.e, 2 * t.y * this.k0 / this.a), a = S(this.long0 + t.x / (this.a * this.k0))), t.x = a, t.y = i, t;
 }
 var O4 = ["cea"];
 const q4 = {
@@ -3896,12 +3896,12 @@ function k4() {
   this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, this.lat0 = this.lat0 || 0, this.long0 = this.long0 || 0, this.lat_ts = this.lat_ts || 0, this.title = this.title || "Equidistant Cylindrical (Plate Carre)", this.rc = Math.cos(this.lat_ts);
 }
 function L4(t) {
-  var a = t.x, i = t.y, s = w(a - this.long0), e = r0(i - this.lat0);
+  var a = t.x, i = t.y, s = S(a - this.long0), e = r0(i - this.lat0);
   return t.x = this.x0 + this.a * s * this.rc, t.y = this.y0 + this.a * e, t;
 }
 function z4(t) {
   var a = t.x, i = t.y;
-  return t.x = w(this.long0 + (a - this.x0) / (this.a * this.rc)), t.y = r0(this.lat0 + (i - this.y0) / this.a), t;
+  return t.x = S(this.long0 + (a - this.x0) / (this.a * this.rc)), t.y = r0(this.lat0 + (i - this.y0) / this.a), t;
 }
 var D4 = ["Equirectangular", "Equidistant_Cylindrical", "Equidistant_Cylindrical_Spherical", "eqc"];
 const U4 = {
@@ -3910,57 +3910,57 @@ const U4 = {
   inverse: z4,
   names: D4
 };
-var j1 = 20;
+var B1 = 20;
 function F4() {
-  this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e = Math.sqrt(this.es), this.e0 = O0(this.es), this.e1 = q0(this.es), this.e2 = k0(this.es), this.e3 = L0(this.es), this.ml0 = this.a * B(this.e0, this.e1, this.e2, this.e3, this.lat0);
+  this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e = Math.sqrt(this.es), this.e0 = O0(this.es), this.e1 = q0(this.es), this.e2 = k0(this.es), this.e3 = L0(this.es), this.ml0 = this.a * j(this.e0, this.e1, this.e2, this.e3, this.lat0);
 }
 function $4(t) {
-  var a = t.x, i = t.y, s, e, r, h = w(a - this.long0);
+  var a = t.x, i = t.y, s, e, r, h = S(a - this.long0);
   if (r = h * Math.sin(i), this.sphere)
-    Math.abs(i) <= S ? (s = this.a * h, e = -1 * this.a * this.lat0) : (s = this.a * Math.sin(r) / Math.tan(i), e = this.a * (r0(i - this.lat0) + (1 - Math.cos(r)) / Math.tan(i)));
-  else if (Math.abs(i) <= S)
+    Math.abs(i) <= w ? (s = this.a * h, e = -1 * this.a * this.lat0) : (s = this.a * Math.sin(r) / Math.tan(i), e = this.a * (r0(i - this.lat0) + (1 - Math.cos(r)) / Math.tan(i)));
+  else if (Math.abs(i) <= w)
     s = this.a * h, e = -1 * this.ml0;
   else {
     var n = P1(this.a, this.e, Math.sin(i)) / Math.tan(i);
-    s = n * Math.sin(r), e = this.a * B(this.e0, this.e1, this.e2, this.e3, i) - this.ml0 + n * (1 - Math.cos(r));
+    s = n * Math.sin(r), e = this.a * j(this.e0, this.e1, this.e2, this.e3, i) - this.ml0 + n * (1 - Math.cos(r));
   }
   return t.x = s + this.x0, t.y = e + this.y0, t;
 }
-function B4(t) {
+function j4(t) {
   var a, i, s, e, r, h, n, o, l;
   if (s = t.x - this.x0, e = t.y - this.y0, this.sphere)
-    if (Math.abs(e + this.a * this.lat0) <= S)
-      a = w(s / this.a + this.long0), i = 0;
+    if (Math.abs(e + this.a * this.lat0) <= w)
+      a = S(s / this.a + this.long0), i = 0;
     else {
       h = this.lat0 + e / this.a, n = s * s / this.a / this.a + h * h, o = h;
       var _;
-      for (r = j1; r; --r)
-        if (_ = Math.tan(o), l = -1 * (h * (o * _ + 1) - o - 0.5 * (o * o + n) * _) / ((o - h) / _ - 1), o += l, Math.abs(l) <= S) {
+      for (r = B1; r; --r)
+        if (_ = Math.tan(o), l = -1 * (h * (o * _ + 1) - o - 0.5 * (o * o + n) * _) / ((o - h) / _ - 1), o += l, Math.abs(l) <= w) {
           i = o;
           break;
         }
-      a = w(this.long0 + Math.asin(s * Math.tan(o) / this.a) / Math.sin(i));
+      a = S(this.long0 + Math.asin(s * Math.tan(o) / this.a) / Math.sin(i));
     }
-  else if (Math.abs(e + this.ml0) <= S)
-    i = 0, a = w(this.long0 + s / this.a);
+  else if (Math.abs(e + this.ml0) <= w)
+    i = 0, a = S(this.long0 + s / this.a);
   else {
     h = (this.ml0 + e) / this.a, n = s * s / this.a / this.a + h * h, o = h;
-    var c, f, u, g, d;
-    for (r = j1; r; --r)
-      if (d = this.e * Math.sin(o), c = Math.sqrt(1 - d * d) * Math.tan(o), f = this.a * B(this.e0, this.e1, this.e2, this.e3, o), u = this.e0 - 2 * this.e1 * Math.cos(2 * o) + 4 * this.e2 * Math.cos(4 * o) - 6 * this.e3 * Math.cos(6 * o), g = f / this.a, l = (h * (c * g + 1) - g - 0.5 * c * (g * g + n)) / (this.es * Math.sin(2 * o) * (g * g + n - 2 * h * g) / (4 * c) + (h - g) * (c * u - 2 / Math.sin(2 * o)) - u), o -= l, Math.abs(l) <= S) {
+    var c, f, u, g, M;
+    for (r = B1; r; --r)
+      if (M = this.e * Math.sin(o), c = Math.sqrt(1 - M * M) * Math.tan(o), f = this.a * j(this.e0, this.e1, this.e2, this.e3, o), u = this.e0 - 2 * this.e1 * Math.cos(2 * o) + 4 * this.e2 * Math.cos(4 * o) - 6 * this.e3 * Math.cos(6 * o), g = f / this.a, l = (h * (c * g + 1) - g - 0.5 * c * (g * g + n)) / (this.es * Math.sin(2 * o) * (g * g + n - 2 * h * g) / (4 * c) + (h - g) * (c * u - 2 / Math.sin(2 * o)) - u), o -= l, Math.abs(l) <= w) {
         i = o;
         break;
       }
-    c = Math.sqrt(1 - this.es * Math.pow(Math.sin(i), 2)) * Math.tan(i), a = w(this.long0 + Math.asin(s * c / this.a) / Math.sin(i));
+    c = Math.sqrt(1 - this.es * Math.pow(Math.sin(i), 2)) * Math.tan(i), a = S(this.long0 + Math.asin(s * c / this.a) / Math.sin(i));
   }
   return t.x = a, t.y = i, t;
 }
-var j4 = ["Polyconic", "American_Polyconic", "poly"];
+var B4 = ["Polyconic", "American_Polyconic", "poly"];
 const H4 = {
   init: F4,
   forward: $4,
-  inverse: B4,
-  names: j4
+  inverse: j4,
+  names: B4
 };
 function W4() {
   this.A = [], this.A[1] = 0.6399175073, this.A[2] = -0.1358797613, this.A[3] = 0.063294409, this.A[4] = -0.02526853, this.A[5] = 0.0117879, this.A[6] = -55161e-7, this.A[7] = 26906e-7, this.A[8] = -1333e-6, this.A[9] = 67e-5, this.A[10] = -34e-5, this.B_re = [], this.B_im = [], this.B_re[1] = 0.7557853228, this.B_im[1] = 0, this.B_re[2] = 0.249204646, this.B_im[2] = 3371507e-9, this.B_re[3] = -1541739e-9, this.B_im[3] = 0.04105856, this.B_re[4] = -0.10162907, this.B_im[4] = 0.01727609, this.B_re[5] = -0.26623489, this.B_im[5] = -0.36249218, this.B_re[6] = -0.6870983, this.B_im[6] = -1.1651967, this.C_re = [], this.C_im = [], this.C_re[1] = 1.3231270439, this.C_im[1] = 0, this.C_re[2] = -0.577245789, this.C_im[2] = -7809598e-9, this.C_re[3] = 0.508307513, this.C_im[3] = -0.112208952, this.C_re[4] = -0.15094762, this.C_im[4] = 0.18200602, this.C_re[5] = 1.01418179, this.C_im[5] = 1.64497696, this.C_re[6] = 1.9660549, this.C_im[6] = 2.5127645, this.D = [], this.D[1] = 1.5627014243, this.D[2] = 0.5185406398, this.D[3] = -0.03333098, this.D[4] = -0.1052906, this.D[5] = -0.0368594, this.D[6] = 7317e-6, this.D[7] = 0.0122, this.D[8] = 394e-5, this.D[9] = -13e-4;
@@ -3969,23 +3969,23 @@ function Q4(t) {
   var a, i = t.x, s = t.y, e = s - this.lat0, r = i - this.long0, h = e / x0 * 1e-5, n = r, o = 1, l = 0;
   for (a = 1; a <= 10; a++)
     o = o * h, l = l + this.A[a] * o;
-  var _ = l, c = n, f = 1, u = 0, g, d, M = 0, m = 0;
+  var _ = l, c = n, f = 1, u = 0, g, M, d = 0, m = 0;
   for (a = 1; a <= 6; a++)
-    g = f * _ - u * c, d = u * _ + f * c, f = g, u = d, M = M + this.B_re[a] * f - this.B_im[a] * u, m = m + this.B_im[a] * f + this.B_re[a] * u;
-  return t.x = m * this.a + this.x0, t.y = M * this.a + this.y0, t;
+    g = f * _ - u * c, M = u * _ + f * c, f = g, u = M, d = d + this.B_re[a] * f - this.B_im[a] * u, m = m + this.B_im[a] * f + this.B_re[a] * u;
+  return t.x = m * this.a + this.x0, t.y = d * this.a + this.y0, t;
 }
 function J4(t) {
   var a, i = t.x, s = t.y, e = i - this.x0, r = s - this.y0, h = r / this.a, n = e / this.a, o = 1, l = 0, _, c, f = 0, u = 0;
   for (a = 1; a <= 6; a++)
     _ = o * h - l * n, c = l * h + o * n, o = _, l = c, f = f + this.C_re[a] * o - this.C_im[a] * l, u = u + this.C_im[a] * o + this.C_re[a] * l;
   for (var g = 0; g < this.iterations; g++) {
-    var d = f, M = u, m, y, E = h, P = n;
+    var M = f, d = u, m, y, E = h, P = n;
     for (a = 2; a <= 6; a++)
-      m = d * f - M * u, y = M * f + d * u, d = m, M = y, E = E + (a - 1) * (this.B_re[a] * d - this.B_im[a] * M), P = P + (a - 1) * (this.B_im[a] * d + this.B_re[a] * M);
-    d = 1, M = 0;
+      m = M * f - d * u, y = d * f + M * u, M = m, d = y, E = E + (a - 1) * (this.B_re[a] * M - this.B_im[a] * d), P = P + (a - 1) * (this.B_im[a] * M + this.B_re[a] * d);
+    M = 1, d = 0;
     var x = this.B_re[1], G = this.B_im[1];
     for (a = 2; a <= 6; a++)
-      m = d * f - M * u, y = M * f + d * u, d = m, M = y, x = x + a * (this.B_re[a] * d - this.B_im[a] * M), G = G + a * (this.B_im[a] * d + this.B_re[a] * M);
+      m = M * f - d * u, y = d * f + M * u, M = m, d = y, x = x + a * (this.B_re[a] * M - this.B_im[a] * d), G = G + a * (this.B_im[a] * M + this.B_re[a] * d);
     var b = x * x + G * G;
     f = (E * x + P * G) / b, u = (P * x - E * G) / b;
   }
@@ -4005,12 +4005,12 @@ const K4 = {
 function V4() {
 }
 function Z4(t) {
-  var a = t.x, i = t.y, s = w(a - this.long0), e = this.x0 + this.a * s, r = this.y0 + this.a * Math.log(Math.tan(Math.PI / 4 + i / 2.5)) * 1.25;
+  var a = t.x, i = t.y, s = S(a - this.long0), e = this.x0 + this.a * s, r = this.y0 + this.a * Math.log(Math.tan(Math.PI / 4 + i / 2.5)) * 1.25;
   return t.x = e, t.y = r, t;
 }
 function Y4(t) {
   t.x -= this.x0, t.y -= this.y0;
-  var a = w(this.long0 + t.x / this.a), i = 2.5 * (Math.atan(Math.exp(0.8 * t.y / this.a)) - Math.PI / 4);
+  var a = S(this.long0 + t.x / this.a), i = 2.5 * (Math.atan(Math.exp(0.8 * t.y / this.a)) - Math.PI / 4);
   return t.x = a, t.y = i, t;
 }
 var t7 = ["Miller_Cylindrical", "mill"];
@@ -4026,13 +4026,13 @@ function s7() {
 }
 function e7(t) {
   var a, i, s = t.x, e = t.y;
-  if (s = w(s - this.long0), this.sphere) {
+  if (s = S(s - this.long0), this.sphere) {
     if (!this.m)
       e = this.n !== 1 ? Math.asin(this.n * Math.sin(e)) : e;
     else
       for (var r = this.n * Math.sin(e), h = i7; h; --h) {
         var n = (this.m * e + Math.sin(e) - r) / (this.m + Math.cos(e));
-        if (e -= n, Math.abs(n) < S)
+        if (e -= n, Math.abs(n) < w)
           break;
       }
     a = this.a * this.C_x * s * (this.m + Math.cos(e)), i = this.a * this.C_y * e;
@@ -4044,7 +4044,7 @@ function e7(t) {
 }
 function r7(t) {
   var a, i, s, e;
-  return t.x -= this.x0, s = t.x / this.a, t.y -= this.y0, a = t.y / this.a, this.sphere ? (a /= this.C_y, s = s / (this.C_x * (this.m + Math.cos(a))), this.m ? a = e0((this.m * a + Math.sin(a)) / this.n) : this.n !== 1 && (a = e0(Math.sin(a) / this.n)), s = w(s + this.long0), a = r0(a)) : (a = v1(t.y / this.a, this.es, this.en), e = Math.abs(a), e < v ? (e = Math.sin(a), i = this.long0 + t.x * Math.sqrt(1 - this.es * e * e) / (this.a * Math.cos(a)), s = w(i)) : e - S < v && (s = this.long0)), t.x = s, t.y = a, t;
+  return t.x -= this.x0, s = t.x / this.a, t.y -= this.y0, a = t.y / this.a, this.sphere ? (a /= this.C_y, s = s / (this.C_x * (this.m + Math.cos(a))), this.m ? a = e0((this.m * a + Math.sin(a)) / this.n) : this.n !== 1 && (a = e0(Math.sin(a) / this.n)), s = S(s + this.long0), a = r0(a)) : (a = v1(t.y / this.a, this.es, this.en), e = Math.abs(a), e < v ? (e = Math.sin(a), i = this.long0 + t.x * Math.sqrt(1 - this.es * e * e) / (this.a * Math.cos(a)), s = S(i)) : e - w < v && (s = this.long0)), t.x = s, t.y = a, t;
 }
 var n7 = ["Sinusoidal", "sinu"];
 const h7 = {
@@ -4056,19 +4056,19 @@ const h7 = {
 function o7() {
 }
 function l7(t) {
-  for (var a = t.x, i = t.y, s = w(a - this.long0), e = i, r = Math.PI * Math.sin(i); ; ) {
+  for (var a = t.x, i = t.y, s = S(a - this.long0), e = i, r = Math.PI * Math.sin(i); ; ) {
     var h = -(e + Math.sin(e) - r) / (1 + Math.cos(e));
-    if (e += h, Math.abs(h) < S)
+    if (e += h, Math.abs(h) < w)
       break;
   }
-  e /= 2, Math.PI / 2 - Math.abs(i) < S && (s = 0);
+  e /= 2, Math.PI / 2 - Math.abs(i) < w && (s = 0);
   var n = 0.900316316158 * this.a * s * Math.cos(e) + this.x0, o = 1.4142135623731 * this.a * Math.sin(e) + this.y0;
   return t.x = n, t.y = o, t;
 }
 function f7(t) {
   var a, i;
   t.x -= this.x0, t.y -= this.y0, i = t.y / (1.4142135623731 * this.a), Math.abs(i) > 0.999999999999 && (i = 0.999999999999), a = Math.asin(i);
-  var s = w(this.long0 + t.x / (0.900316316158 * this.a * Math.cos(a)));
+  var s = S(this.long0 + t.x / (0.900316316158 * this.a * Math.cos(a)));
   s < -Math.PI && (s = -Math.PI), s > Math.PI && (s = Math.PI), i = (2 * a + Math.sin(2 * a)) / Math.PI, Math.abs(i) > 1 && (i = 1);
   var e = Math.asin(i);
   return t.x = s, t.y = e, t;
@@ -4081,77 +4081,77 @@ const _7 = {
   names: c7
 };
 function u7() {
-  Math.abs(this.lat1 + this.lat2) < S || (this.lat2 = this.lat2 || this.lat1, this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e = Math.sqrt(this.es), this.e0 = O0(this.es), this.e1 = q0(this.es), this.e2 = k0(this.es), this.e3 = L0(this.es), this.sin_phi = Math.sin(this.lat1), this.cos_phi = Math.cos(this.lat1), this.ms1 = Z(this.e, this.sin_phi, this.cos_phi), this.ml1 = B(this.e0, this.e1, this.e2, this.e3, this.lat1), Math.abs(this.lat1 - this.lat2) < S ? this.ns = this.sin_phi : (this.sin_phi = Math.sin(this.lat2), this.cos_phi = Math.cos(this.lat2), this.ms2 = Z(this.e, this.sin_phi, this.cos_phi), this.ml2 = B(this.e0, this.e1, this.e2, this.e3, this.lat2), this.ns = (this.ms1 - this.ms2) / (this.ml2 - this.ml1)), this.g = this.ml1 + this.ms1 / this.ns, this.ml0 = B(this.e0, this.e1, this.e2, this.e3, this.lat0), this.rh = this.a * (this.g - this.ml0));
+  Math.abs(this.lat1 + this.lat2) < w || (this.lat2 = this.lat2 || this.lat1, this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e = Math.sqrt(this.es), this.e0 = O0(this.es), this.e1 = q0(this.es), this.e2 = k0(this.es), this.e3 = L0(this.es), this.sin_phi = Math.sin(this.lat1), this.cos_phi = Math.cos(this.lat1), this.ms1 = Z(this.e, this.sin_phi, this.cos_phi), this.ml1 = j(this.e0, this.e1, this.e2, this.e3, this.lat1), Math.abs(this.lat1 - this.lat2) < w ? this.ns = this.sin_phi : (this.sin_phi = Math.sin(this.lat2), this.cos_phi = Math.cos(this.lat2), this.ms2 = Z(this.e, this.sin_phi, this.cos_phi), this.ml2 = j(this.e0, this.e1, this.e2, this.e3, this.lat2), this.ns = (this.ms1 - this.ms2) / (this.ml2 - this.ml1)), this.g = this.ml1 + this.ms1 / this.ns, this.ml0 = j(this.e0, this.e1, this.e2, this.e3, this.lat0), this.rh = this.a * (this.g - this.ml0));
 }
 function g7(t) {
   var a = t.x, i = t.y, s;
   if (this.sphere)
     s = this.a * (this.g - i);
   else {
-    var e = B(this.e0, this.e1, this.e2, this.e3, i);
+    var e = j(this.e0, this.e1, this.e2, this.e3, i);
     s = this.a * (this.g - e);
   }
-  var r = this.ns * w(a - this.long0), h = this.x0 + s * Math.sin(r), n = this.y0 + this.rh - s * Math.cos(r);
+  var r = this.ns * S(a - this.long0), h = this.x0 + s * Math.sin(r), n = this.y0 + this.rh - s * Math.cos(r);
   return t.x = h, t.y = n, t;
 }
-function d7(t) {
+function M7(t) {
   t.x -= this.x0, t.y = this.rh - t.y + this.y0;
   var a, i, s, e;
   this.ns >= 0 ? (i = Math.sqrt(t.x * t.x + t.y * t.y), a = 1) : (i = -Math.sqrt(t.x * t.x + t.y * t.y), a = -1);
   var r = 0;
   if (i !== 0 && (r = Math.atan2(a * t.x, a * t.y)), this.sphere)
-    return e = w(this.long0 + r / this.ns), s = r0(this.g - i / this.a), t.x = e, t.y = s, t;
+    return e = S(this.long0 + r / this.ns), s = r0(this.g - i / this.a), t.x = e, t.y = s, t;
   var h = this.g - i / this.a;
-  return s = X0(h, this.e0, this.e1, this.e2, this.e3), e = w(this.long0 + r / this.ns), t.x = e, t.y = s, t;
+  return s = X0(h, this.e0, this.e1, this.e2, this.e3), e = S(this.long0 + r / this.ns), t.x = e, t.y = s, t;
 }
-var M7 = ["Equidistant_Conic", "eqdc"];
+var d7 = ["Equidistant_Conic", "eqdc"];
 const m7 = {
   init: u7,
   forward: g7,
-  inverse: d7,
-  names: M7
+  inverse: M7,
+  names: d7
 };
 function v7() {
   this.R = this.a;
 }
 function y7(t) {
-  var a = t.x, i = t.y, s = w(a - this.long0), e, r;
-  Math.abs(i) <= S && (e = this.x0 + this.R * s, r = this.y0);
+  var a = t.x, i = t.y, s = S(a - this.long0), e, r;
+  Math.abs(i) <= w && (e = this.x0 + this.R * s, r = this.y0);
   var h = e0(2 * Math.abs(i / Math.PI));
-  (Math.abs(s) <= S || Math.abs(Math.abs(i) - v) <= S) && (e = this.x0, i >= 0 ? r = this.y0 + Math.PI * this.R * Math.tan(0.5 * h) : r = this.y0 + Math.PI * this.R * -Math.tan(0.5 * h));
-  var n = 0.5 * Math.abs(Math.PI / s - s / Math.PI), o = n * n, l = Math.sin(h), _ = Math.cos(h), c = _ / (l + _ - 1), f = c * c, u = c * (2 / l - 1), g = u * u, d = Math.PI * this.R * (n * (c - g) + Math.sqrt(o * (c - g) * (c - g) - (g + o) * (f - g))) / (g + o);
-  s < 0 && (d = -d), e = this.x0 + d;
-  var M = o + c;
-  return d = Math.PI * this.R * (u * M - n * Math.sqrt((g + o) * (o + 1) - M * M)) / (g + o), i >= 0 ? r = this.y0 + d : r = this.y0 - d, t.x = e, t.y = r, t;
+  (Math.abs(s) <= w || Math.abs(Math.abs(i) - v) <= w) && (e = this.x0, i >= 0 ? r = this.y0 + Math.PI * this.R * Math.tan(0.5 * h) : r = this.y0 + Math.PI * this.R * -Math.tan(0.5 * h));
+  var n = 0.5 * Math.abs(Math.PI / s - s / Math.PI), o = n * n, l = Math.sin(h), _ = Math.cos(h), c = _ / (l + _ - 1), f = c * c, u = c * (2 / l - 1), g = u * u, M = Math.PI * this.R * (n * (c - g) + Math.sqrt(o * (c - g) * (c - g) - (g + o) * (f - g))) / (g + o);
+  s < 0 && (M = -M), e = this.x0 + M;
+  var d = o + c;
+  return M = Math.PI * this.R * (u * d - n * Math.sqrt((g + o) * (o + 1) - d * d)) / (g + o), i >= 0 ? r = this.y0 + M : r = this.y0 - M, t.x = e, t.y = r, t;
 }
-function S7(t) {
+function w7(t) {
   var a, i, s, e, r, h, n, o, l, _, c, f, u;
-  return t.x -= this.x0, t.y -= this.y0, c = Math.PI * this.R, s = t.x / c, e = t.y / c, r = s * s + e * e, h = -Math.abs(e) * (1 + r), n = h - 2 * e * e + s * s, o = -2 * h + 1 + 2 * e * e + r * r, u = e * e / o + (2 * n * n * n / o / o / o - 9 * h * n / o / o) / 27, l = (h - n * n / 3 / o) / o, _ = 2 * Math.sqrt(-l / 3), c = 3 * u / l / _, Math.abs(c) > 1 && (c >= 0 ? c = 1 : c = -1), f = Math.acos(c) / 3, t.y >= 0 ? i = (-_ * Math.cos(f + Math.PI / 3) - n / 3 / o) * Math.PI : i = -(-_ * Math.cos(f + Math.PI / 3) - n / 3 / o) * Math.PI, Math.abs(s) < S ? a = this.long0 : a = w(this.long0 + Math.PI * (r - 1 + Math.sqrt(1 + 2 * (s * s - e * e) + r * r)) / 2 / s), t.x = a, t.y = i, t;
+  return t.x -= this.x0, t.y -= this.y0, c = Math.PI * this.R, s = t.x / c, e = t.y / c, r = s * s + e * e, h = -Math.abs(e) * (1 + r), n = h - 2 * e * e + s * s, o = -2 * h + 1 + 2 * e * e + r * r, u = e * e / o + (2 * n * n * n / o / o / o - 9 * h * n / o / o) / 27, l = (h - n * n / 3 / o) / o, _ = 2 * Math.sqrt(-l / 3), c = 3 * u / l / _, Math.abs(c) > 1 && (c >= 0 ? c = 1 : c = -1), f = Math.acos(c) / 3, t.y >= 0 ? i = (-_ * Math.cos(f + Math.PI / 3) - n / 3 / o) * Math.PI : i = -(-_ * Math.cos(f + Math.PI / 3) - n / 3 / o) * Math.PI, Math.abs(s) < w ? a = this.long0 : a = S(this.long0 + Math.PI * (r - 1 + Math.sqrt(1 + 2 * (s * s - e * e) + r * r)) / 2 / s), t.x = a, t.y = i, t;
 }
-var w7 = ["Van_der_Grinten_I", "VanDerGrinten", "Van_der_Grinten", "vandg"];
+var S7 = ["Van_der_Grinten_I", "VanDerGrinten", "Van_der_Grinten", "vandg"];
 const E7 = {
   init: v7,
   forward: y7,
-  inverse: S7,
-  names: w7
+  inverse: w7,
+  names: S7
 };
 function P7(t, a, i, s, e, r) {
   const h = s - a, n = Math.atan((1 - r) * Math.tan(t)), o = Math.atan((1 - r) * Math.tan(i)), l = Math.sin(n), _ = Math.cos(n), c = Math.sin(o), f = Math.cos(o);
-  let u = h, g, d = 100, M, m, y, E, P, x, G, b, N, A, O, I, k, z;
+  let u = h, g, M = 100, d, m, y, E, P, x, G, b, N, A, O, I, k, z;
   do {
-    if (M = Math.sin(u), m = Math.cos(u), y = Math.sqrt(
-      f * M * (f * M) + (_ * c - l * f * m) * (_ * c - l * f * m)
+    if (d = Math.sin(u), m = Math.cos(u), y = Math.sqrt(
+      f * d * (f * d) + (_ * c - l * f * m) * (_ * c - l * f * m)
     ), y === 0)
       return { azi1: 0, s12: 0 };
-    E = l * c + _ * f * m, P = Math.atan2(y, E), x = _ * f * M / y, G = 1 - x * x, b = G !== 0 ? E - 2 * l * c / G : 0, N = r / 16 * G * (4 + r * (4 - 3 * G)), g = u, u = h + (1 - N) * r * x * (P + N * y * (b + N * E * (-1 + 2 * b * b)));
-  } while (Math.abs(u - g) > 1e-12 && --d > 0);
-  return d === 0 ? { azi1: NaN, s12: NaN } : (A = G * (e * e - e * (1 - r) * (e * (1 - r))) / (e * (1 - r) * (e * (1 - r))), O = 1 + A / 16384 * (4096 + A * (-768 + A * (320 - 175 * A))), I = A / 1024 * (256 + A * (-128 + A * (74 - 47 * A))), k = I * y * (b + I / 4 * (E * (-1 + 2 * b * b) - I / 6 * b * (-3 + 4 * y * y) * (-3 + 4 * b * b))), z = e * (1 - r) * O * (P - k), { azi1: Math.atan2(f * M, _ * c - l * f * m), s12: z });
+    E = l * c + _ * f * m, P = Math.atan2(y, E), x = _ * f * d / y, G = 1 - x * x, b = G !== 0 ? E - 2 * l * c / G : 0, N = r / 16 * G * (4 + r * (4 - 3 * G)), g = u, u = h + (1 - N) * r * x * (P + N * y * (b + N * E * (-1 + 2 * b * b)));
+  } while (Math.abs(u - g) > 1e-12 && --M > 0);
+  return M === 0 ? { azi1: NaN, s12: NaN } : (A = G * (e * e - e * (1 - r) * (e * (1 - r))) / (e * (1 - r) * (e * (1 - r))), O = 1 + A / 16384 * (4096 + A * (-768 + A * (320 - 175 * A))), I = A / 1024 * (256 + A * (-128 + A * (74 - 47 * A))), k = I * y * (b + I / 4 * (E * (-1 + 2 * b * b) - I / 6 * b * (-3 + 4 * y * y) * (-3 + 4 * b * b))), z = e * (1 - r) * O * (P - k), { azi1: Math.atan2(f * d, _ * c - l * f * m), s12: z });
 }
 function x7(t, a, i, s, e, r) {
-  const h = Math.atan((1 - r) * Math.tan(t)), n = Math.sin(h), o = Math.cos(h), l = Math.sin(i), _ = Math.cos(i), c = Math.atan2(n, o * _), f = o * l, u = 1 - f * f, g = u * (e * e - e * (1 - r) * (e * (1 - r))) / (e * (1 - r) * (e * (1 - r))), d = 1 + g / 16384 * (4096 + g * (-768 + g * (320 - 175 * g))), M = g / 1024 * (256 + g * (-128 + g * (74 - 47 * g)));
-  let m = s / (e * (1 - r) * d), y, E = 100, P, x, G, b;
+  const h = Math.atan((1 - r) * Math.tan(t)), n = Math.sin(h), o = Math.cos(h), l = Math.sin(i), _ = Math.cos(i), c = Math.atan2(n, o * _), f = o * l, u = 1 - f * f, g = u * (e * e - e * (1 - r) * (e * (1 - r))) / (e * (1 - r) * (e * (1 - r))), M = 1 + g / 16384 * (4096 + g * (-768 + g * (320 - 175 * g))), d = g / 1024 * (256 + g * (-128 + g * (74 - 47 * g)));
+  let m = s / (e * (1 - r) * M), y, E = 100, P, x, G, b;
   do
-    P = Math.cos(2 * c + m), x = Math.sin(m), G = Math.cos(m), b = M * x * (P + M / 4 * (G * (-1 + 2 * P * P) - M / 6 * P * (-3 + 4 * x * x) * (-3 + 4 * P * P))), y = m, m = s / (e * (1 - r) * d) + b;
+    P = Math.cos(2 * c + m), x = Math.sin(m), G = Math.cos(m), b = d * x * (P + d / 4 * (G * (-1 + 2 * P * P) - d / 6 * P * (-3 + 4 * x * x) * (-3 + 4 * P * P))), y = m, m = s / (e * (1 - r) * M) + b;
   while (Math.abs(m - y) > 1e-12 && --E > 0);
   if (E === 0)
     return { lat2: NaN, lon2: NaN };
@@ -4168,13 +4168,13 @@ function G7() {
   this.sin_p12 = Math.sin(this.lat0), this.cos_p12 = Math.cos(this.lat0), this.f = this.es / (1 + Math.sqrt(1 - this.es));
 }
 function b7(t) {
-  var a = t.x, i = t.y, s = Math.sin(t.y), e = Math.cos(t.y), r = w(a - this.long0), h, n, o, l, _, c, f, u, g, d, M;
-  return this.sphere ? Math.abs(this.sin_p12 - 1) <= S ? (t.x = this.x0 + this.a * (v - i) * Math.sin(r), t.y = this.y0 - this.a * (v - i) * Math.cos(r), t) : Math.abs(this.sin_p12 + 1) <= S ? (t.x = this.x0 + this.a * (v + i) * Math.sin(r), t.y = this.y0 + this.a * (v + i) * Math.cos(r), t) : (g = this.sin_p12 * s + this.cos_p12 * e * Math.cos(r), f = Math.acos(g), u = f ? f / Math.sin(f) : 1, t.x = this.x0 + this.a * u * e * Math.sin(r), t.y = this.y0 + this.a * u * (this.cos_p12 * s - this.sin_p12 * e * Math.cos(r)), t) : (h = O0(this.es), n = q0(this.es), o = k0(this.es), l = L0(this.es), Math.abs(this.sin_p12 - 1) <= S ? (_ = this.a * B(h, n, o, l, v), c = this.a * B(h, n, o, l, i), t.x = this.x0 + (_ - c) * Math.sin(r), t.y = this.y0 - (_ - c) * Math.cos(r), t) : Math.abs(this.sin_p12 + 1) <= S ? (_ = this.a * B(h, n, o, l, v), c = this.a * B(h, n, o, l, i), t.x = this.x0 + (_ + c) * Math.sin(r), t.y = this.y0 + (_ + c) * Math.cos(r), t) : Math.abs(a) < S && Math.abs(i - this.lat0) < S ? (t.x = t.y = 0, t) : (d = P7(this.lat0, this.long0, i, a, this.a, this.f), M = d.azi1, t.x = d.s12 * Math.sin(M), t.y = d.s12 * Math.cos(M), t));
+  var a = t.x, i = t.y, s = Math.sin(t.y), e = Math.cos(t.y), r = S(a - this.long0), h, n, o, l, _, c, f, u, g, M, d;
+  return this.sphere ? Math.abs(this.sin_p12 - 1) <= w ? (t.x = this.x0 + this.a * (v - i) * Math.sin(r), t.y = this.y0 - this.a * (v - i) * Math.cos(r), t) : Math.abs(this.sin_p12 + 1) <= w ? (t.x = this.x0 + this.a * (v + i) * Math.sin(r), t.y = this.y0 + this.a * (v + i) * Math.cos(r), t) : (g = this.sin_p12 * s + this.cos_p12 * e * Math.cos(r), f = Math.acos(g), u = f ? f / Math.sin(f) : 1, t.x = this.x0 + this.a * u * e * Math.sin(r), t.y = this.y0 + this.a * u * (this.cos_p12 * s - this.sin_p12 * e * Math.cos(r)), t) : (h = O0(this.es), n = q0(this.es), o = k0(this.es), l = L0(this.es), Math.abs(this.sin_p12 - 1) <= w ? (_ = this.a * j(h, n, o, l, v), c = this.a * j(h, n, o, l, i), t.x = this.x0 + (_ - c) * Math.sin(r), t.y = this.y0 - (_ - c) * Math.cos(r), t) : Math.abs(this.sin_p12 + 1) <= w ? (_ = this.a * j(h, n, o, l, v), c = this.a * j(h, n, o, l, i), t.x = this.x0 + (_ + c) * Math.sin(r), t.y = this.y0 + (_ + c) * Math.cos(r), t) : Math.abs(a) < w && Math.abs(i - this.lat0) < w ? (t.x = t.y = 0, t) : (M = P7(this.lat0, this.long0, i, a, this.a, this.f), d = M.azi1, t.x = M.s12 * Math.sin(d), t.y = M.s12 * Math.cos(d), t));
 }
 function N7(t) {
   t.x -= this.x0, t.y -= this.y0;
-  var a, i, s, e, r, h, n, o, l, _, c, f, u, g, d, M;
-  return this.sphere ? (a = Math.sqrt(t.x * t.x + t.y * t.y), a > 2 * v * this.a ? void 0 : (i = a / this.a, s = Math.sin(i), e = Math.cos(i), r = this.long0, Math.abs(a) <= S ? h = this.lat0 : (h = e0(e * this.sin_p12 + t.y * s * this.cos_p12 / a), n = Math.abs(this.lat0) - v, Math.abs(n) <= S ? this.lat0 >= 0 ? r = w(this.long0 + Math.atan2(t.x, -t.y)) : r = w(this.long0 - Math.atan2(-t.x, t.y)) : r = w(this.long0 + Math.atan2(t.x * s, a * this.cos_p12 * e - t.y * this.sin_p12 * s))), t.x = r, t.y = h, t)) : (o = O0(this.es), l = q0(this.es), _ = k0(this.es), c = L0(this.es), Math.abs(this.sin_p12 - 1) <= S ? (f = this.a * B(o, l, _, c, v), a = Math.sqrt(t.x * t.x + t.y * t.y), u = f - a, h = X0(u / this.a, o, l, _, c), r = w(this.long0 + Math.atan2(t.x, -1 * t.y)), t.x = r, t.y = h, t) : Math.abs(this.sin_p12 + 1) <= S ? (f = this.a * B(o, l, _, c, v), a = Math.sqrt(t.x * t.x + t.y * t.y), u = a - f, h = X0(u / this.a, o, l, _, c), r = w(this.long0 + Math.atan2(t.x, t.y)), t.x = r, t.y = h, t) : (g = Math.atan2(t.x, t.y), d = Math.sqrt(t.x * t.x + t.y * t.y), M = x7(this.lat0, this.long0, g, d, this.a, this.f), t.x = M.lon2, t.y = M.lat2, t));
+  var a, i, s, e, r, h, n, o, l, _, c, f, u, g, M, d;
+  return this.sphere ? (a = Math.sqrt(t.x * t.x + t.y * t.y), a > 2 * v * this.a ? void 0 : (i = a / this.a, s = Math.sin(i), e = Math.cos(i), r = this.long0, Math.abs(a) <= w ? h = this.lat0 : (h = e0(e * this.sin_p12 + t.y * s * this.cos_p12 / a), n = Math.abs(this.lat0) - v, Math.abs(n) <= w ? this.lat0 >= 0 ? r = S(this.long0 + Math.atan2(t.x, -t.y)) : r = S(this.long0 - Math.atan2(-t.x, t.y)) : r = S(this.long0 + Math.atan2(t.x * s, a * this.cos_p12 * e - t.y * this.sin_p12 * s))), t.x = r, t.y = h, t)) : (o = O0(this.es), l = q0(this.es), _ = k0(this.es), c = L0(this.es), Math.abs(this.sin_p12 - 1) <= w ? (f = this.a * j(o, l, _, c, v), a = Math.sqrt(t.x * t.x + t.y * t.y), u = f - a, h = X0(u / this.a, o, l, _, c), r = S(this.long0 + Math.atan2(t.x, -1 * t.y)), t.x = r, t.y = h, t) : Math.abs(this.sin_p12 + 1) <= w ? (f = this.a * j(o, l, _, c, v), a = Math.sqrt(t.x * t.x + t.y * t.y), u = a - f, h = X0(u / this.a, o, l, _, c), r = S(this.long0 + Math.atan2(t.x, t.y)), t.x = r, t.y = h, t) : (g = Math.atan2(t.x, t.y), M = Math.sqrt(t.x * t.x + t.y * t.y), d = x7(this.lat0, this.long0, g, M, this.a, this.f), t.x = d.lon2, t.y = d.lat2, t));
 }
 var A7 = ["Azimuthal_Equidistant", "aeqd"];
 const C7 = {
@@ -4188,11 +4188,11 @@ function p7() {
 }
 function I7(t) {
   var a, i, s, e, r, h, n, o, l = t.x, _ = t.y;
-  return s = w(l - this.long0), a = Math.sin(_), i = Math.cos(_), e = Math.cos(s), h = this.sin_p14 * a + this.cos_p14 * i * e, r = 1, (h > 0 || Math.abs(h) <= S) && (n = this.a * r * i * Math.sin(s), o = this.y0 + this.a * r * (this.cos_p14 * a - this.sin_p14 * i * e)), t.x = n, t.y = o, t;
+  return s = S(l - this.long0), a = Math.sin(_), i = Math.cos(_), e = Math.cos(s), h = this.sin_p14 * a + this.cos_p14 * i * e, r = 1, (h > 0 || Math.abs(h) <= w) && (n = this.a * r * i * Math.sin(s), o = this.y0 + this.a * r * (this.cos_p14 * a - this.sin_p14 * i * e)), t.x = n, t.y = o, t;
 }
 function R7(t) {
   var a, i, s, e, r, h, n;
-  return t.x -= this.x0, t.y -= this.y0, a = Math.sqrt(t.x * t.x + t.y * t.y), i = e0(a / this.a), s = Math.sin(i), e = Math.cos(i), h = this.long0, Math.abs(a) <= S ? (n = this.lat0, t.x = h, t.y = n, t) : (n = e0(e * this.sin_p14 + t.y * s * this.cos_p14 / a), r = Math.abs(this.lat0) - v, Math.abs(r) <= S ? (this.lat0 >= 0 ? h = w(this.long0 + Math.atan2(t.x, -t.y)) : h = w(this.long0 - Math.atan2(-t.x, t.y)), t.x = h, t.y = n, t) : (h = w(this.long0 + Math.atan2(t.x * s, a * this.cos_p14 * e - t.y * this.sin_p14 * s)), t.x = h, t.y = n, t));
+  return t.x -= this.x0, t.y -= this.y0, a = Math.sqrt(t.x * t.x + t.y * t.y), i = e0(a / this.a), s = Math.sin(i), e = Math.cos(i), h = this.long0, Math.abs(a) <= w ? (n = this.lat0, t.x = h, t.y = n, t) : (n = e0(e * this.sin_p14 + t.y * s * this.cos_p14 / a), r = Math.abs(this.lat0) - v, Math.abs(r) <= w ? (this.lat0 >= 0 ? h = S(this.long0 + Math.atan2(t.x, -t.y)) : h = S(this.long0 - Math.atan2(-t.x, t.y)), t.x = h, t.y = n, t) : (h = S(this.long0 + Math.atan2(t.x * s, a * this.cos_p14 * e - t.y * this.sin_p14 * s)), t.x = h, t.y = n, t));
 }
 var T7 = ["ortho"];
 const O7 = {
@@ -4224,8 +4224,8 @@ function k7(t) {
   else if (this.face === R.BOTTOM)
     r = v + i, s >= C && s <= v + C ? (o.value = p.AREA_0, e = -s + v) : s < C && s >= -C ? (o.value = p.AREA_1, e = -s) : s < -C && s >= -(v + C) ? (o.value = p.AREA_2, e = -s - v) : (o.value = p.AREA_3, e = s > 0 ? -s + T : -s - T);
   else {
-    var l, _, c, f, u, g, d;
-    this.face === R.RIGHT ? s = m0(s, +v) : this.face === R.BACK ? s = m0(s, +T) : this.face === R.LEFT && (s = m0(s, -v)), f = Math.sin(i), u = Math.cos(i), g = Math.sin(s), d = Math.cos(s), l = u * d, _ = u * g, c = f, this.face === R.FRONT ? (r = Math.acos(l), e = F0(r, c, _, o)) : this.face === R.RIGHT ? (r = Math.acos(_), e = F0(r, c, -l, o)) : this.face === R.BACK ? (r = Math.acos(-l), e = F0(r, c, -_, o)) : this.face === R.LEFT ? (r = Math.acos(-_), e = F0(r, c, l, o)) : (r = e = 0, o.value = p.AREA_0);
+    var l, _, c, f, u, g, M;
+    this.face === R.RIGHT ? s = m0(s, +v) : this.face === R.BACK ? s = m0(s, +T) : this.face === R.LEFT && (s = m0(s, -v)), f = Math.sin(i), u = Math.cos(i), g = Math.sin(s), M = Math.cos(s), l = u * M, _ = u * g, c = f, this.face === R.FRONT ? (r = Math.acos(l), e = F0(r, c, _, o)) : this.face === R.RIGHT ? (r = Math.acos(_), e = F0(r, c, -l, o)) : this.face === R.BACK ? (r = Math.acos(-l), e = F0(r, c, -_, o)) : this.face === R.LEFT ? (r = Math.acos(-_), e = F0(r, c, l, o)) : (r = e = 0, o.value = p.AREA_0);
   }
   return n = Math.atan(12 / T * (e + Math.acos(Math.sin(e) * Math.cos(C)) - v)), h = Math.sqrt((1 - Math.cos(r)) / (Math.cos(n) * Math.cos(n)) / (1 - Math.cos(Math.atan(1 / Math.cos(e))))), o.value === p.AREA_1 ? n += v : o.value === p.AREA_2 ? n += T : o.value === p.AREA_3 && (n += 1.5 * T), a.x = h * Math.cos(n), a.y = h * Math.sin(n), a.x = a.x * this.a + this.x0, a.y = a.y * this.a + this.y0, t.x = a.x, t.y = a.y, t;
 }
@@ -4240,14 +4240,14 @@ function L7(t) {
     f = o, _ = f * f, _ >= 1 ? g = 0 : g = Math.sqrt(1 - _) * Math.sin(n), _ += g * g, _ >= 1 ? u = 0 : u = Math.sqrt(1 - _), c.value === p.AREA_1 ? (_ = u, u = -g, g = _) : c.value === p.AREA_2 ? (u = -u, g = -g) : c.value === p.AREA_3 && (_ = u, u = g, g = -_), this.face === R.RIGHT ? (_ = f, f = -u, u = _) : this.face === R.BACK ? (f = -f, u = -u) : this.face === R.LEFT && (_ = f, f = u, u = -_), a.phi = Math.acos(-g) - v, a.lam = Math.atan2(u, f), this.face === R.RIGHT ? a.lam = m0(a.lam, -v) : this.face === R.BACK ? a.lam = m0(a.lam, -T) : this.face === R.LEFT && (a.lam = m0(a.lam, +v));
   }
   if (this.es !== 0) {
-    var d, M, m;
-    d = a.phi < 0 ? 1 : 0, M = Math.tan(a.phi), m = this.b / Math.sqrt(M * M + this.one_minus_f_squared), a.phi = Math.atan(Math.sqrt(this.a * this.a - m * m) / (this.one_minus_f * m)), d && (a.phi = -a.phi);
+    var M, d, m;
+    M = a.phi < 0 ? 1 : 0, d = Math.tan(a.phi), m = this.b / Math.sqrt(d * d + this.one_minus_f_squared), a.phi = Math.atan(Math.sqrt(this.a * this.a - m * m) / (this.one_minus_f * m)), M && (a.phi = -a.phi);
   }
   return a.lam += this.long0, t.x = a.lam, t.y = a.phi, t;
 }
 function F0(t, a, i, s) {
   var e;
-  return t < S ? (s.value = p.AREA_0, e = 0) : (e = Math.atan2(a, i), Math.abs(e) <= C ? s.value = p.AREA_0 : e > C && e <= v + C ? (s.value = p.AREA_1, e -= v) : e > v + C || e <= -(v + C) ? (s.value = p.AREA_2, e = e >= 0 ? e - T : e + T) : (s.value = p.AREA_3, e += v)), e;
+  return t < w ? (s.value = p.AREA_0, e = 0) : (e = Math.atan2(a, i), Math.abs(e) <= C ? s.value = p.AREA_0 : e > C && e <= v + C ? (s.value = p.AREA_1, e -= v) : e > v + C || e <= -(v + C) ? (s.value = p.AREA_2, e = e >= 0 ? e - T : e + T) : (s.value = p.AREA_3, e += v)), e;
 }
 function m0(t, a) {
   var i = t + a;
@@ -4300,7 +4300,7 @@ var u1 = [
   [0.9394, 840947e-8, -192841e-9, -42106e-10],
   [0.9761, 616527e-8, -256e-6, -42106e-10],
   [1, 328947e-8, -319159e-9, -42106e-10]
-], m9 = 0.8487, v9 = 1.3523, y9 = V / 5, U7 = 1 / y9, d0 = 18, K0 = function(t, a) {
+], m9 = 0.8487, v9 = 1.3523, y9 = V / 5, U7 = 1 / y9, M0 = 18, K0 = function(t, a) {
   return t[0] + a * (t[1] + a * (t[2] + a * t[3]));
 }, F7 = function(t, a) {
   return t[1] + a * (2 * t[2] + a * 3 * t[3]);
@@ -4313,12 +4313,12 @@ function $7(t, a, i, s) {
   }
   return e;
 }
-function B7() {
+function j7() {
   this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, this.long0 = this.long0 || 0, this.es = 0, this.title = this.title || "Robinson";
 }
-function j7(t) {
-  var a = w(t.x - this.long0), i = Math.abs(t.y), s = Math.floor(i * y9);
-  s < 0 ? s = 0 : s >= d0 && (s = d0 - 1), i = V * (i - U7 * s);
+function B7(t) {
+  var a = S(t.x - this.long0), i = Math.abs(t.y), s = Math.floor(i * y9);
+  s < 0 ? s = 0 : s >= M0 && (s = M0 - 1), i = V * (i - U7 * s);
   var e = {
     x: K0(u1[s], i) * a,
     y: K0(P0[s], i)
@@ -4331,10 +4331,10 @@ function H7(t) {
     y: Math.abs(t.y - this.y0) / (this.a * v9)
   };
   if (a.y >= 1)
-    a.x /= u1[d0][0], a.y = t.y < 0 ? -v : v;
+    a.x /= u1[M0][0], a.y = t.y < 0 ? -v : v;
   else {
-    var i = Math.floor(a.y * d0);
-    for (i < 0 ? i = 0 : i >= d0 && (i = d0 - 1); ; )
+    var i = Math.floor(a.y * M0);
+    for (i < 0 ? i = 0 : i >= M0 && (i = M0 - 1); ; )
       if (P0[i][0] > a.y)
         --i;
       else if (P0[i + 1][0] <= a.y)
@@ -4344,14 +4344,14 @@ function H7(t) {
     var s = P0[i], e = 5 * (a.y - s[0]) / (P0[i + 1][0] - s[0]);
     e = $7(function(r) {
       return (K0(s, r) - a.y) / F7(s, r);
-    }, e, S, 100), a.x /= K0(u1[i], e), a.y = (5 * i + e) * L, t.y < 0 && (a.y = -a.y);
+    }, e, w, 100), a.x /= K0(u1[i], e), a.y = (5 * i + e) * L, t.y < 0 && (a.y = -a.y);
   }
-  return a.x = w(a.x + this.long0), a;
+  return a.x = S(a.x + this.long0), a;
 }
 var W7 = ["Robinson", "robin"];
 const Q7 = {
-  init: B7,
-  forward: j7,
+  init: j7,
+  forward: B7,
   inverse: H7,
   names: W7
 };
@@ -4378,7 +4378,7 @@ var U = {
   S_POLE: 1,
   EQUIT: 2,
   OBLIQ: 3
-}, S0 = {
+}, w0 = {
   h: { def: 1e5, num: !0 },
   // default is Karman line, no default in PROJ.7
   azi: { def: 0, num: !0, degrees: !0 },
@@ -4391,16 +4391,16 @@ var U = {
   // default is Equator, conversion to rad is automatic
 };
 function Y7() {
-  if (Object.keys(S0).forEach((function(i) {
+  if (Object.keys(w0).forEach((function(i) {
     if (typeof this[i] > "u")
-      this[i] = S0[i].def;
+      this[i] = w0[i].def;
     else {
-      if (S0[i].num && isNaN(this[i]))
+      if (w0[i].num && isNaN(this[i]))
         throw new Error("Invalid parameter value, must be numeric " + i + " = " + this[i]);
-      S0[i].num && (this[i] = parseFloat(this[i]));
+      w0[i].num && (this[i] = parseFloat(this[i]));
     }
-    S0[i].degrees && (this[i] = this[i] * L);
-  }).bind(this)), Math.abs(Math.abs(this.lat0) - v) < S ? this.mode = this.lat0 < 0 ? U.S_POLE : U.N_POLE : Math.abs(this.lat0) < S ? this.mode = U.EQUIT : (this.mode = U.OBLIQ, this.sinph0 = Math.sin(this.lat0), this.cosph0 = Math.cos(this.lat0)), this.pn1 = this.h / this.a, this.pn1 <= 0 || this.pn1 > 1e10)
+    w0[i].degrees && (this[i] = this[i] * L);
+  }).bind(this)), Math.abs(Math.abs(this.lat0) - v) < w ? this.mode = this.lat0 < 0 ? U.S_POLE : U.N_POLE : Math.abs(this.lat0) < w ? this.mode = U.EQUIT : (this.mode = U.OBLIQ, this.sinph0 = Math.sin(this.lat0), this.cosph0 = Math.cos(this.lat0)), this.pn1 = this.h / this.a, this.pn1 <= 0 || this.pn1 > 1e10)
     throw new Error("Invalid height");
   this.p = 1 + this.pn1, this.rp = 1 / this.p, this.h1 = 1 / this.pn1, this.pfact = (this.p + 1) * this.h1, this.es = 0;
   var t = this.tilt, a = this.azi;
@@ -4445,7 +4445,7 @@ function a3(t) {
   var a = { x: t.x, y: t.y }, i, s, e;
   e = 1 / (this.pn1 - t.y * this.sw), i = this.pn1 * t.x * e, s = this.pn1 * t.y * this.cw * e, t.x = i * this.cg + s * this.sg, t.y = s * this.cg - i * this.sg;
   var r = H(t.x, t.y);
-  if (Math.abs(r) < S)
+  if (Math.abs(r) < w)
     a.x = 0, a.y = t.y;
   else {
     var h, n;
@@ -4522,7 +4522,7 @@ function l3() {
   this.es = 0, this.long0 = this.long0 !== void 0 ? this.long0 : 0;
 }
 function f3(t) {
-  var a = w(t.x - this.long0), i = t.y, s = Math.asin(V0 * Math.sin(i)), e = s * s, r = e * e * e;
+  var a = S(t.x - this.long0), i = t.y, s = Math.asin(V0 * Math.sin(i)), e = s * s, r = e * e * e;
   return t.x = a * Math.cos(s) / (V0 * (G0 + 3 * b0 * e + r * (7 * N0 + 9 * A0 * e))), t.y = s * (G0 + b0 * e + r * (N0 + A0 * e)), t.x = this.a * t.x + this.x0, t.y = this.a * t.y + this.y0, t;
 }
 function c3(t) {
@@ -4530,7 +4530,7 @@ function c3(t) {
   var a = 1e-9, i = 12, s = t.y, e, r, h, n, o, l;
   for (l = 0; l < i && (e = s * s, r = e * e * e, h = s * (G0 + b0 * e + r * (N0 + A0 * e)) - t.y, n = G0 + 3 * b0 * e + r * (7 * N0 + 9 * A0 * e), s -= o = h / n, !(Math.abs(o) < a)); ++l)
     ;
-  return e = s * s, r = e * e * e, t.x = V0 * t.x * (G0 + 3 * b0 * e + r * (7 * N0 + 9 * A0 * e)) / Math.cos(s), t.y = Math.asin(Math.sin(s) / V0), t.x = w(t.x + this.long0), t;
+  return e = s * s, r = e * e * e, t.x = V0 * t.x * (G0 + 3 * b0 * e + r * (7 * N0 + 9 * A0 * e)) / Math.cos(s), t.y = Math.asin(Math.sin(s) / V0), t.x = S(t.x + this.long0), t;
 }
 var _3 = ["eqearth", "Equal Earth", "Equal_Earth"];
 const u3 = {
@@ -4549,13 +4549,13 @@ function g3() {
     this.am1 = Math.sin(this.phi1),
     t = Math.cos(this.phi1),
     this.en
-  ), this.am1 = t / (Math.sqrt(1 - this.es * this.am1 * this.am1) * this.am1), this.inverse = M3, this.forward = d3) : (Math.abs(this.phi1) + R0 >= v ? this.cphi1 = 0 : this.cphi1 = 1 / Math.tan(this.phi1), this.inverse = v3, this.forward = m3);
-}
-function d3(t) {
-  var a = w(t.x - (this.long0 || 0)), i = t.y, s, e, r;
-  return s = this.am1 + this.m1 - y0(i, e = Math.sin(i), r = Math.cos(i), this.en), e = r * a / (s * Math.sqrt(1 - this.es * e * e)), t.x = s * Math.sin(e), t.y = this.am1 - s * Math.cos(e), t.x = this.a * t.x + (this.x0 || 0), t.y = this.a * t.y + (this.y0 || 0), t;
+  ), this.am1 = t / (Math.sqrt(1 - this.es * this.am1 * this.am1) * this.am1), this.inverse = d3, this.forward = M3) : (Math.abs(this.phi1) + R0 >= v ? this.cphi1 = 0 : this.cphi1 = 1 / Math.tan(this.phi1), this.inverse = v3, this.forward = m3);
 }
 function M3(t) {
+  var a = S(t.x - (this.long0 || 0)), i = t.y, s, e, r;
+  return s = this.am1 + this.m1 - y0(i, e = Math.sin(i), r = Math.cos(i), this.en), e = r * a / (s * Math.sqrt(1 - this.es * e * e)), t.x = s * Math.sin(e), t.y = this.am1 - s * Math.cos(e), t.x = this.a * t.x + (this.x0 || 0), t.y = this.a * t.y + (this.y0 || 0), t;
+}
+function d3(t) {
   t.x = (t.x - (this.x0 || 0)) / this.a, t.y = (t.y - (this.y0 || 0)) / this.a;
   var a, i, s, e;
   if (i = H(t.x, t.y = this.am1 - t.y), e = v1(this.am1 + this.m1 - i, this.es, this.en), (a = Math.abs(e)) < v)
@@ -4564,10 +4564,10 @@ function M3(t) {
     s = 0;
   else
     throw new Error();
-  return t.x = w(s + (this.long0 || 0)), t.y = r0(e), t;
+  return t.x = S(s + (this.long0 || 0)), t.y = r0(e), t;
 }
 function m3(t) {
-  var a = w(t.x - (this.long0 || 0)), i = t.y, s, e;
+  var a = S(t.x - (this.long0 || 0)), i = t.y, s, e;
   return e = this.cphi1 + this.phi1 - i, Math.abs(e) > R0 ? (t.x = e * Math.sin(s = a * Math.cos(i) / e), t.y = this.cphi1 - e * Math.cos(s)) : t.x = t.y = 0, t.x = this.a * t.x + (this.x0 || 0), t.y = this.a * t.y + (this.y0 || 0), t;
 }
 function v3(t) {
@@ -4575,17 +4575,17 @@ function v3(t) {
   var a, i, s = H(t.x, t.y = this.cphi1 - t.y);
   if (i = this.cphi1 + this.phi1 - s, Math.abs(i) > v)
     throw new Error();
-  return Math.abs(Math.abs(i) - v) <= R0 ? a = 0 : a = s * Math.atan2(t.x, t.y) / Math.cos(i), t.x = w(a + (this.long0 || 0)), t.y = r0(i), t;
+  return Math.abs(Math.abs(i) - v) <= R0 ? a = 0 : a = s * Math.atan2(t.x, t.y) / Math.cos(i), t.x = S(a + (this.long0 || 0)), t.y = r0(i), t;
 }
 var y3 = ["bonne", "Bonne (Werner lat_1=90)"];
-const S3 = {
+const w3 = {
   init: g3,
   names: y3
 };
-function w3(t) {
-  t.Proj.projections.add(B0), t.Proj.projections.add(j0), t.Proj.projections.add(y5), t.Proj.projections.add(A5), t.Proj.projections.add(T5), t.Proj.projections.add(z5), t.Proj.projections.add(j5), t.Proj.projections.add(X5), t.Proj.projections.add(t4), t.Proj.projections.add(r4), t.Proj.projections.add(v4), t.Proj.projections.add(x4), t.Proj.projections.add(C4), t.Proj.projections.add(q4), t.Proj.projections.add(U4), t.Proj.projections.add(H4), t.Proj.projections.add(K4), t.Proj.projections.add(a7), t.Proj.projections.add(h7), t.Proj.projections.add(_7), t.Proj.projections.add(m7), t.Proj.projections.add(E7), t.Proj.projections.add(C7), t.Proj.projections.add(O7), t.Proj.projections.add(D7), t.Proj.projections.add(Q7), t.Proj.projections.add(Z7), t.Proj.projections.add(s3), t.Proj.projections.add(o3), t.Proj.projections.add(u3), t.Proj.projections.add(S3);
+function S3(t) {
+  t.Proj.projections.add(j0), t.Proj.projections.add(B0), t.Proj.projections.add(y5), t.Proj.projections.add(A5), t.Proj.projections.add(T5), t.Proj.projections.add(z5), t.Proj.projections.add(B5), t.Proj.projections.add(X5), t.Proj.projections.add(t4), t.Proj.projections.add(r4), t.Proj.projections.add(v4), t.Proj.projections.add(x4), t.Proj.projections.add(C4), t.Proj.projections.add(q4), t.Proj.projections.add(U4), t.Proj.projections.add(H4), t.Proj.projections.add(K4), t.Proj.projections.add(a7), t.Proj.projections.add(h7), t.Proj.projections.add(_7), t.Proj.projections.add(m7), t.Proj.projections.add(E7), t.Proj.projections.add(C7), t.Proj.projections.add(O7), t.Proj.projections.add(D7), t.Proj.projections.add(Q7), t.Proj.projections.add(Z7), t.Proj.projections.add(s3), t.Proj.projections.add(o3), t.Proj.projections.add(u3), t.Proj.projections.add(w3);
 }
-const S9 = Object.assign(k2, {
+const w9 = Object.assign(k2, {
   defaultDatum: "WGS84",
   Proj: K,
   WGS84: new K("WGS84"),
@@ -4597,9 +4597,9 @@ const S9 = Object.assign(k2, {
   mgrs: L2,
   version: "__VERSION__"
 });
-w3(S9);
-function F3(t, a) {
-  return b9(t, S9), t.Proj && (t.Projection.BaiduMercator = t.Util.extend({}, t.Projection.Mercator, {
+S3(w9);
+function j3(t, a) {
+  return b9(t, w9), t.Proj && (t.Projection.BaiduMercator = t.Util.extend({}, t.Projection.Mercator, {
     R: 6378206,
     R_MINOR: 6356584314245179e-9,
     bounds: t.bounds(
@@ -4766,16 +4766,16 @@ function z0(t) {
 }
 const A3 = (3 + 16 * Y) * Y, C3 = (2 + 12 * Y) * Y, p3 = (9 + 64 * Y) * Y * Y, f0 = z0(4), W1 = z0(8), Q1 = z0(12), J1 = z0(16), F = z0(4);
 function I3(t, a, i, s, e, r, h) {
-  let n, o, l, _, c, f, u, g, d, M, m, y, E, P, x, G, b, N;
+  let n, o, l, _, c, f, u, g, M, d, m, y, E, P, x, G, b, N;
   const A = t - e, O = i - e, I = a - r, k = s - r;
-  P = A * k, f = D * A, u = f - (f - A), g = A - u, f = D * k, d = f - (f - k), M = k - d, x = g * M - (P - u * d - g * d - u * M), G = I * O, f = D * I, u = f - (f - I), g = I - u, f = D * O, d = f - (f - O), M = O - d, b = g * M - (G - u * d - g * d - u * M), m = x - b, c = x - m, f0[0] = x - (m + c) + (c - b), y = P + m, c = y - P, E = P - (y - c) + (m - c), m = E - G, c = E - m, f0[1] = E - (m + c) + (c - G), N = y + m, c = N - y, f0[2] = y - (N - c) + (m - c), f0[3] = N;
+  P = A * k, f = D * A, u = f - (f - A), g = A - u, f = D * k, M = f - (f - k), d = k - M, x = g * d - (P - u * M - g * M - u * d), G = I * O, f = D * I, u = f - (f - I), g = I - u, f = D * O, M = f - (f - O), d = O - M, b = g * d - (G - u * M - g * M - u * d), m = x - b, c = x - m, f0[0] = x - (m + c) + (c - b), y = P + m, c = y - P, E = P - (y - c) + (m - c), m = E - G, c = E - m, f0[1] = E - (m + c) + (c - G), N = y + m, c = N - y, f0[2] = y - (N - c) + (m - c), f0[3] = N;
   let z = N3(4, f0), l0 = C3 * h;
   if (z >= l0 || -z >= l0 || (c = t - A, n = t - (A + c) + (c - e), c = i - O, l = i - (O + c) + (c - e), c = a - I, o = a - (I + c) + (c - r), c = s - k, _ = s - (k + c) + (c - r), n === 0 && o === 0 && l === 0 && _ === 0) || (l0 = p3 * h + b3 * Math.abs(z), z += A * _ + k * n - (I * l + O * o), z >= l0 || -z >= l0)) return z;
-  P = n * k, f = D * n, u = f - (f - n), g = n - u, f = D * k, d = f - (f - k), M = k - d, x = g * M - (P - u * d - g * d - u * M), G = o * O, f = D * o, u = f - (f - o), g = o - u, f = D * O, d = f - (f - O), M = O - d, b = g * M - (G - u * d - g * d - u * M), m = x - b, c = x - m, F[0] = x - (m + c) + (c - b), y = P + m, c = y - P, E = P - (y - c) + (m - c), m = E - G, c = E - m, F[1] = E - (m + c) + (c - G), N = y + m, c = N - y, F[2] = y - (N - c) + (m - c), F[3] = N;
+  P = n * k, f = D * n, u = f - (f - n), g = n - u, f = D * k, M = f - (f - k), d = k - M, x = g * d - (P - u * M - g * M - u * d), G = o * O, f = D * o, u = f - (f - o), g = o - u, f = D * O, M = f - (f - O), d = O - M, b = g * d - (G - u * M - g * M - u * d), m = x - b, c = x - m, F[0] = x - (m + c) + (c - b), y = P + m, c = y - P, E = P - (y - c) + (m - c), m = E - G, c = E - m, F[1] = E - (m + c) + (c - G), N = y + m, c = N - y, F[2] = y - (N - c) + (m - c), F[3] = N;
   const P9 = r1(4, f0, 4, F, W1);
-  P = A * _, f = D * A, u = f - (f - A), g = A - u, f = D * _, d = f - (f - _), M = _ - d, x = g * M - (P - u * d - g * d - u * M), G = I * l, f = D * I, u = f - (f - I), g = I - u, f = D * l, d = f - (f - l), M = l - d, b = g * M - (G - u * d - g * d - u * M), m = x - b, c = x - m, F[0] = x - (m + c) + (c - b), y = P + m, c = y - P, E = P - (y - c) + (m - c), m = E - G, c = E - m, F[1] = E - (m + c) + (c - G), N = y + m, c = N - y, F[2] = y - (N - c) + (m - c), F[3] = N;
+  P = A * _, f = D * A, u = f - (f - A), g = A - u, f = D * _, M = f - (f - _), d = _ - M, x = g * d - (P - u * M - g * M - u * d), G = I * l, f = D * I, u = f - (f - I), g = I - u, f = D * l, M = f - (f - l), d = l - M, b = g * d - (G - u * M - g * M - u * d), m = x - b, c = x - m, F[0] = x - (m + c) + (c - b), y = P + m, c = y - P, E = P - (y - c) + (m - c), m = E - G, c = E - m, F[1] = E - (m + c) + (c - G), N = y + m, c = N - y, F[2] = y - (N - c) + (m - c), F[3] = N;
   const x9 = r1(P9, W1, 4, F, Q1);
-  P = n * _, f = D * n, u = f - (f - n), g = n - u, f = D * _, d = f - (f - _), M = _ - d, x = g * M - (P - u * d - g * d - u * M), G = o * l, f = D * o, u = f - (f - o), g = o - u, f = D * l, d = f - (f - l), M = l - d, b = g * M - (G - u * d - g * d - u * M), m = x - b, c = x - m, F[0] = x - (m + c) + (c - b), y = P + m, c = y - P, E = P - (y - c) + (m - c), m = E - G, c = E - m, F[1] = E - (m + c) + (c - G), N = y + m, c = N - y, F[2] = y - (N - c) + (m - c), F[3] = N;
+  P = n * _, f = D * n, u = f - (f - n), g = n - u, f = D * _, M = f - (f - _), d = _ - M, x = g * d - (P - u * M - g * M - u * d), G = o * l, f = D * o, u = f - (f - o), g = o - u, f = D * l, M = f - (f - l), d = l - M, b = g * d - (G - u * M - g * M - u * d), m = x - b, c = x - m, F[0] = x - (m + c) + (c - b), y = P + m, c = y - P, E = P - (y - c) + (m - c), m = E - G, c = E - m, F[1] = E - (m + c) + (c - G), N = y + m, c = N - y, F[2] = y - (N - c) + (m - c), F[3] = N;
   const G9 = r1(x9, Q1, 4, F, J1);
   return J1[G9 - 1];
 }
@@ -4787,11 +4787,11 @@ function T3(t, a) {
   var i, s, e = 0, r, h, n, o, l, _, c, f = t[0], u = t[1], g = a.length;
   for (i = 0; i < g; i++) {
     s = 0;
-    var d = a[i], M = d.length - 1;
-    if (_ = d[0], _[0] !== d[M][0] && _[1] !== d[M][1])
+    var M = a[i], d = M.length - 1;
+    if (_ = M[0], _[0] !== M[d][0] && _[1] !== M[d][1])
       throw new Error("First and last coordinates in a ring must be the same");
-    for (h = _[0] - f, n = _[1] - u, s; s < M; s++) {
-      if (c = d[s + 1], o = c[0] - f, l = c[1] - u, n === 0 && l === 0) {
+    for (h = _[0] - f, n = _[1] - u, s; s < d; s++) {
+      if (c = M[s + 1], o = c[0] - f, l = c[1] - u, n === 0 && l === 0) {
         if (o <= 0 && h >= 0 || h <= 0 && o >= 0)
           return 0;
       } else if (l >= 0 && n <= 0 || l <= 0 && n >= 0) {
@@ -4842,7 +4842,7 @@ function L3(t, a) {
   return a[0] <= t[0] && a[1] <= t[1] && a[2] >= t[0] && a[3] >= t[1];
 }
 const q = 3.141592653589793, Z0 = 6378245, Y0 = 0.006693421622965943, X1 = q * 3e3 / 180;
-function w9(t, a) {
+function S9(t, a) {
   let i = -100 + 2 * t + 3 * a + 0.2 * a * a + 0.1 * t * a + 0.2 * Math.sqrt(Math.abs(t));
   return i += (20 * Math.sin(6 * t * q) + 20 * Math.sin(2 * t * q)) * 2 / 3, i += (20 * Math.sin(a * q) + 40 * Math.sin(a / 3 * q)) * 2 / 3, i += (160 * Math.sin(a / 12 * q) + 320 * Math.sin(a * q / 30)) * 2 / 3, i;
 }
@@ -4851,7 +4851,7 @@ function E9(t, a) {
   return i += (20 * Math.sin(6 * t * q) + 20 * Math.sin(2 * t * q)) * 2 / 3, i += (20 * Math.sin(t * q) + 40 * Math.sin(t / 3 * q)) * 2 / 3, i += (150 * Math.sin(t / 12 * q) + 300 * Math.sin(t / 30 * q)) * 2 / 3, i;
 }
 function z3(t, a) {
-  let i = w9(t - 105, a - 35), s = E9(t - 105, a - 35), e = a / 180 * q, r = Math.sin(e);
+  let i = S9(t - 105, a - 35), s = E9(t - 105, a - 35), e = a / 180 * q, r = Math.sin(e);
   r = 1 - Y0 * r * r;
   let h = Math.sqrt(r);
   i = i * 180 / (Z0 * (1 - Y0) / (r * h) * q), s = s * 180 / (Z0 / h * Math.cos(e) * q);
@@ -4868,13 +4868,21 @@ function D3(t, a) {
     lat: r
   };
 }
+function U3(t, a) {
+  const i = Math.PI * 3e3 / 180, s = t - 65e-4, e = a - 6e-3, r = Math.sqrt(s * s + e * e) - 2e-5 * Math.sin(e * i), h = Math.atan2(e, s) - 3e-6 * Math.cos(s * i), n = r * Math.cos(h), o = r * Math.sin(h);
+  return { lng: n, lat: o };
+}
+function B3(t, a) {
+  const i = U3(t, a);
+  return F3(i.lng, i.lat);
+}
 function x1(t, a) {
   return G3.features.some((i) => {
     const s = i.geometry;
     return k3(P3([t, a]), s);
   });
 }
-function $3(t, a) {
+function F3(t, a) {
   if (!x1(t, a))
     return { lng: t, lat: a };
   let i = z3(t, a), s = t * 2 - i.lng, e = a * 2 - i.lat;
@@ -4883,10 +4891,10 @@ function $3(t, a) {
     lat: e
   };
 }
-function U3(t, a) {
+function $3(t, a) {
   if (!x1(t, a))
     return { lng: t, lat: a };
-  let i = w9(t - 105, a - 35), s = E9(t - 105, a - 35), e = a / 180 * q, r = Math.sin(e);
+  let i = S9(t - 105, a - 35), s = E9(t - 105, a - 35), e = a / 180 * q, r = Math.sin(e);
   r = 1 - Y0 * r * r;
   let h = Math.sqrt(r);
   i = i * 180 / (Z0 * (1 - Y0) / (r * h) * q), s = s * 180 / (Z0 / h * Math.cos(e) * q);
@@ -4896,15 +4904,18 @@ function U3(t, a) {
     lat: n
   };
 }
-function B3(t, a) {
+function H3(t, a) {
   if (!x1(t, a))
     return { lng: t, lat: a };
-  const i = U3(t, a);
+  const i = $3(t, a);
   return D3(i.lng, i.lat);
 }
 export {
-  $3 as gcj02ToWgs84,
-  B3 as wgs84ToBd09,
-  U3 as wgs84ToGcj02,
-  F3 as withTmsProvider
+  U3 as bd09ToGcj02,
+  B3 as bd09ToWgs84,
+  D3 as gcj02ToBd09,
+  F3 as gcj02ToWgs84,
+  H3 as wgs84ToBd09,
+  $3 as wgs84ToGcj02,
+  j3 as withTmsProvider
 };
