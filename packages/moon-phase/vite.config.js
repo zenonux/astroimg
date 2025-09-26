@@ -9,8 +9,16 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'Analytics',
+      name: 'MoonPhase',
       fileName: format => `index.${format}.js`,
+    },
+    rollupOptions: {
+      external: ['vue'], // 将 Vue 设置为外部依赖
+      output: {
+        globals: {
+          vue: 'Vue', // 指定 Vue 的全局变量名称
+        },
+      },
     },
   },
 })

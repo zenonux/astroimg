@@ -1,19 +1,15 @@
-export interface AnalyticsOptions {
-    project: string;
-    pageLeave: {
-        urlPropertyMap: (url: string) => {
-            page_type: string;
-            page_id: string;
-        };
-        isCollectUrl: (url: string) => boolean;
-    };
-    sensorsConfig: any;
+import { default as MoonPhaseCanvas } from './MoonPhaseCanvas.vue';
+declare function getMoonDay(): number;
+declare function isUpMoon(moonDay: number): boolean;
+declare enum MoonPhaseType {
+    NewMoon = "NewMoon",// 新月
+    WaxingCrescent = "WaxingCrescent",// 娥眉月（上弦前）
+    FirstQuarter = "FirstQuarter",// 上弦月
+    WaxingGibbous = "WaxingGibbous",// 盈凸月
+    FullMoon = "FullMoon",// 满月
+    WaningGibbous = "WaningGibbous",// 亏凸月
+    LastQuarter = "LastQuarter",// 下弦月
+    WaningCrescent = "WaningCrescent"
 }
-export type AnalyticsInstance<E extends string, P extends Record<E, any>> = {
-    track: (event: E, params: P[E]) => void;
-    setProfile: (params: Record<string, any>) => void;
-    registerPage: (params: Record<string, any>) => void;
-} & Record<string, any>;
-export declare function initAnalytics<E extends string, P extends Record<E, any>>(options: AnalyticsOptions): AnalyticsInstance<E, P>;
-export declare function getAnalytics<E extends string, P extends Record<E, any>>(): AnalyticsInstance<E, P>;
-export * from './vAnalytics';
+declare function getMoonPhaseType(moonDay: number): MoonPhaseType;
+export { getMoonDay, getMoonPhaseType, isUpMoon, MoonPhaseCanvas, MoonPhaseType, };
