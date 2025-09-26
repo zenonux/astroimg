@@ -1,14 +1,11 @@
-# @astroimg/analytic
+# @astroimg/moon-phase
 
-wrapper for sensors sdk.
-
-- 修改内置pageleave插件
-- 增加pageview事件
+Moon Phase
 
 ## Install
 
 ```bash
-pnpm add @astroimg/analytic
+pnpm add @astroimg/moon-phase
 ```
 
 ## Usage
@@ -16,36 +13,6 @@ pnpm add @astroimg/analytic
 - 初始化
 
 ```js
-import { initAnalytics } from "@astroimg/analytic";
-const analytics = initAnalytics({
-  project: "test",
-  pageLeave: {
-    isCollectUrl() {
-      return false;
-    },
-    urlPropertyMap() {
-      return {
-        page_id: "",
-        page_type: "",
-      };
-    },
-  },
-  sensorsConfig: {
-    server_url: "",
-    use_client_time: true,
-    send_type: "beacon",
-    show_log: true,
-    heatmap: {
-      clickmap: "not_collect",
-      scroll_notice_map: "not_collect",
-    },
-  },
-});
-```
-
-- 埋点
-
-```js
-import { getAnalytics } from "@astroimg/analytic";
-getAnalytics().track();
+import { MoonPhaseCanvas } from "@astroimg/moon-phase";
+<MoonPhaseCanvas :illumination=".1" :moon-orient="20" :size="200" :is-up-moon="false" texture-url="" />
 ```
