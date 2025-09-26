@@ -91,7 +91,7 @@ const Q = 0.552284749831, L = /* @__PURE__ */ F({
           d.value,
           0
         );
-        M.addColorStop(0, "rgba(0,0,0,1)"), M.addColorStop(1, "rgba(0,0,0,0.6)"), i.fillStyle = M, i.fill(h);
+        M.addColorStop(0, "rgba(0,0,0,.9)"), M.addColorStop(1, "rgba(0,0,0,0.3)"), i.fillStyle = M, i.fill(h);
       });
     }
     function b(u, t, s) {
