@@ -1,7 +1,8 @@
-import withProj from "./proj4leaflet";
-import proj4 from "proj4";
+import withProj from './proj4leaflet'
+import proj4 from 'proj4'
+
 export function withTmsProvider(L, opts) {
-  withProj(L, proj4);
+  withProj(L, proj4)
   if (L.Proj) {
     L.Projection.BaiduMercator = L.Util.extend({}, L.Projection.Mercator, {
       R: 6378206,
@@ -10,157 +11,157 @@ export function withTmsProvider(L, opts) {
         [-20037725.11268234, -19994619.55417086],
         [20037725.11268234, 19994619.55417086],
       ),
-    });
+    })
     L.CRS.Baidu = L.Util.extend({}, L.CRS.Earth, {
-      code: "EPSG:Baidu",
+      code: 'EPSG:Baidu',
       projection: L.Projection.BaiduMercator,
       transformation: new L.Transformation(1, 0.5, -1, 0.5),
-      scale: function (t) {
-        return 1 / Math.pow(2, 18 - t);
+      scale(t) {
+        return 1 / 2 ** (18 - t)
       },
-      zoom: function (t) {
-        return 18 - Math.log(1 / t) / Math.LN2;
+      zoom(t) {
+        return 18 - Math.log(1 / t) / Math.LN2
       },
       wrapLng: void 0,
-    });
+    })
   }
   L.TileLayer.TmsProvider = L.TileLayer.extend({
-    initialize: function (type, options) {
+    initialize(type, options) {
       // (type, Object)
-      var providers = L.TileLayer.TmsProvider.providers;
+      let providers = L.TileLayer.TmsProvider.providers
 
-      options = options || {};
+      options = options || {}
 
-      var parts = type.split(".");
+      let parts = type.split('.')
 
-      var providerName = parts[0];
-      var mapName = parts[1];
-      var mapType = parts[2];
+      let providerName = parts[0]
+      let mapName = parts[1]
+      let mapType = parts[2]
 
-      var url = providers[providerName][mapName][mapType];
-      options.subdomains = providers[providerName].Subdomains;
-      options.key = options.key || providers[providerName].key;
-      options.getUrlArgs = options.key || providers[providerName].getUrlArgs;
+      let url = providers[providerName][mapName][mapType]
+      options.subdomains = providers[providerName].Subdomains
+      options.key = options.key || providers[providerName].key
+      options.getUrlArgs = options.key || providers[providerName].getUrlArgs
 
-      L.TileLayer.prototype.initialize.call(this, url, options);
+      L.TileLayer.prototype.initialize.call(this, url, options)
     },
 
-    getTileUrl: function (coords) {
-      const { x, y, z } = this.options.getUrlArgs ? this.options.getUrlArgs(coords) : coords;
-      var data = {
+    getTileUrl(coords) {
+      const { x, y, z } = this.options.getUrlArgs ? this.options.getUrlArgs(coords) : coords
+      let data = {
         s: this._getSubdomain(coords),
-        x: x,
-        y: y,
-        z: z,
+        x,
+        y,
+        z,
         l: opts.locale,
-      };
-      data.sx = data.x >> 4;
-      data.sy = ((1 << data.z) - data.y) >> 4;
+      }
+      data.sx = data.x >> 4
+      data.sy = ((1 << data.z) - data.y) >> 4
 
-      return L.Util.template(this._url, L.Util.extend(data, this.options));
+      return L.Util.template(this._url, L.Util.extend(data, this.options))
     },
-  });
+  })
 
   L.TileLayer.TmsProvider.providers = {
     TianDiTu: {
       Normal: {
-        Map: "//t{s}.tianditu.gov.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}&tk={key}",
+        Map: '//t{s}.tianditu.gov.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}&tk={key}',
         Annotion:
-          "//t{s}.tianditu.gov.cn/DataServer?T=cva_w&X={x}&Y={y}&L={z}&tk={key}",
+          '//t{s}.tianditu.gov.cn/DataServer?T=cva_w&X={x}&Y={y}&L={z}&tk={key}',
       },
       Satellite: {
-        Map: "//t{s}.tianditu.gov.cn/DataServer?T=img_w&X={x}&Y={y}&L={z}&tk={key}",
+        Map: '//t{s}.tianditu.gov.cn/DataServer?T=img_w&X={x}&Y={y}&L={z}&tk={key}',
         Annotion:
-          "//t{s}.tianditu.gov.cn/DataServer?T=cia_w&X={x}&Y={y}&L={z}&tk={key}",
+          '//t{s}.tianditu.gov.cn/DataServer?T=cia_w&X={x}&Y={y}&L={z}&tk={key}',
       },
       Terrain: {
-        Map: "//t{s}.tianditu.gov.cn/DataServer?T=ter_w&X={x}&Y={y}&L={z}&tk={key}",
+        Map: '//t{s}.tianditu.gov.cn/DataServer?T=ter_w&X={x}&Y={y}&L={z}&tk={key}',
         Annotion:
-          "//t{s}.tianditu.gov.cn/DataServer?T=cta_w&X={x}&Y={y}&L={z}&tk={key}",
+          '//t{s}.tianditu.gov.cn/DataServer?T=cta_w&X={x}&Y={y}&L={z}&tk={key}',
       },
-      Subdomains: ["0", "1", "2", "3", "4", "5", "6", "7"],
-      key: "174705aebfe31b79b3587279e211cb9a",
+      Subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
+      key: '174705aebfe31b79b3587279e211cb9a',
     },
 
     GaoDe: {
       Normal: {
-        Map: "//webrd0{s}.is.autonavi.com/appmaptile?lang={l}&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
+        Map: '//webrd0{s}.is.autonavi.com/appmaptile?lang={l}&size=1&scale=1&style=8&x={x}&y={y}&z={z}',
       },
       Satellite: {
-        Map: "//webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
+        Map: '//webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
         Annotion:
-          "//webst0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}",
+          '//webst0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}',
       },
-      Subdomains: ["1", "2", "3", "4"],
+      Subdomains: ['1', '2', '3', '4'],
     },
 
     Google: {
       Normal: {
-        Map: "//www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}",
+        Map: '//www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}',
       },
       Satellite: {
-        Map: "//www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}",
-        Annotion: "//www.google.cn/maps/vt?lyrs=y@189&gl=cn&x={x}&y={y}&z={z}",
+        Map: '//www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}',
+        Annotion: '//www.google.cn/maps/vt?lyrs=y@189&gl=cn&x={x}&y={y}&z={z}',
       },
       Subdomains: [],
     },
 
     Geoq: {
       Normal: {
-        Map: "//map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer/tile/{z}/{y}/{x}",
+        Map: '//map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer/tile/{z}/{y}/{x}',
         PurplishBlue:
-          "//map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",
-        Gray: "//map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}",
-        Warm: "//map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetWarm/MapServer/tile/{z}/{y}/{x}",
+          '//map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}',
+        Gray: '//map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}',
+        Warm: '//map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetWarm/MapServer/tile/{z}/{y}/{x}',
       },
       Theme: {
         Hydro:
-          "//thematic.geoq.cn/arcgis/rest/services/ThematicMaps/WorldHydroMap/MapServer/tile/{z}/{y}/{x}",
+          '//thematic.geoq.cn/arcgis/rest/services/ThematicMaps/WorldHydroMap/MapServer/tile/{z}/{y}/{x}',
       },
       Subdomains: [],
     },
 
     OSM: {
       Normal: {
-        Map: "//{s}.tile.osm.org/{z}/{x}/{y}.png",
+        Map: '//{s}.tile.osm.org/{z}/{x}/{y}.png',
       },
-      Subdomains: ["a", "b", "c"],
+      Subdomains: ['a', 'b', 'c'],
     },
 
     Baidu: {
       Normal: {
-        Map: "//maponline{s}.bdimg.com/tile/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&scaler=2&udt=&from=jsapi3_0",
+        Map: '//maponline{s}.bdimg.com/tile/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&scaler=2&udt=&from=jsapi3_0',
       },
-      getUrlArgs: function (t) {
-        return { x: t.x, y: -1 - t.y, z: t.z };
+      getUrlArgs(t) {
+        return { x: t.x, y: -1 - t.y, z: t.z }
       },
       Satellite: {
-        Map: "//shangetu{s}.map.bdimg.com/it/u=x={x};y={y};z={z};v=009;type=sate&fm=46",
+        Map: '//shangetu{s}.map.bdimg.com/it/u=x={x};y={y};z={z};v=009;type=sate&fm=46',
         Annotion:
-          "//online{s}.map.bdimg.com/tile/?qt=tile&x={x}&y={y}&z={z}&styles=sl&v=020",
+          '//online{s}.map.bdimg.com/tile/?qt=tile&x={x}&y={y}&z={z}&styles=sl&v=020',
       },
-      Subdomains: ["0", "1", "2"],
+      Subdomains: ['0', '1', '2'],
     },
 
     Tencent: {
       Normal: {
-        Map: "//rt{s}.map.gtimg.com/tile?z={z}&x={x}&y={-y}&type=vector&styleid=3",
+        Map: '//rt{s}.map.gtimg.com/tile?z={z}&x={x}&y={-y}&type=vector&styleid=3',
       },
       Satellite: {
-        Map: "//p{s}.map.gtimg.com/sateTiles/{z}/{sx}/{sy}/{x}_{-y}.jpg",
+        Map: '//p{s}.map.gtimg.com/sateTiles/{z}/{sx}/{sy}/{x}_{-y}.jpg',
       },
       Terrain: {
-        Map: "//p{s}.map.gtimg.com/demTiles/{z}/{sx}/{sy}/{x}_{-y}.jpg",
+        Map: '//p{s}.map.gtimg.com/demTiles/{z}/{sx}/{sy}/{x}_{-y}.jpg',
       },
-      Subdomains: "0123",
+      Subdomains: '0123',
     },
-  };
+  }
 
   L.tileLayer.tmsProvider = function (type, options) {
-    options = options || {};
-    options.corrdType = "wgs84";
-    return new L.TileLayer.TmsProvider(type, options);
-  };
+    options = options || {}
+    options.corrdType = 'wgs84'
+    return new L.TileLayer.TmsProvider(type, options)
+  }
 
-  return L;
+  return L
 }

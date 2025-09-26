@@ -27,7 +27,10 @@ onMounted(() => {
     worldCopyJump: false,
   });
   L.tileLayer
-    .tmsProvider("Baidu.Normal.Map", { maxZoom: 18, minZoom: 2 })
+    .tmsProvider("Baidu.Normal.Map", {
+      maxZoom: 18, 
+      minZoom: 2,
+    })
     .addTo(map);
 });
 </script>
@@ -38,5 +41,8 @@ body,
 #map {
   margin: 0;
   height: 100%;
+}
+.leaflet-tile {
+   image-rendering: pixelated; /* 防止缩放模糊 */
 }
 </style>
