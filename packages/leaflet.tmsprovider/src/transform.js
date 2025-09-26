@@ -130,7 +130,7 @@ export function wgs84ToBd09(lng, lat) {
   if (!isInsideMainland(lng, lat)) {
     return { lng, lat }
   }
-  let gcj02 = wgs84ToGcj02(lng, lat)
-  let bd09 = gcj02ToBd09(gcj02.lng, gcj02.lat)
+  const gcj02 = wgs84ToGcj02(lng, lat)
+  const bd09 = gcj02ToBd09(gcj02.lng, gcj02.lat)
   return bd09
 }

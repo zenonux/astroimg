@@ -1,32 +1,32 @@
 {
   "name": "@astroimg/leaflet.tmsprovider",
-  "version": "1.2.0",
+  "type": "module",
+  "version": "2.0.0",
   "publishConfig": {
     "access": "public"
   },
-  "type": "module",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
+  "author": "zenonux",
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js"
     }
   },
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build"
+  },
+  "dependencies": {
+    "@turf/boolean-point-in-polygon": "^7.2.0",
+    "@turf/helpers": "^7.2.0",
+    "proj4": "^2.19.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
     "leaflet": "^1.9.4",
     "vite": "^6.1.0",
     "vue": "^3.5.13"
-  },
-  "author": "zenonux",
-  "dependencies": {
-    "@turf/boolean-point-in-polygon": "^7.2.0",
-    "@turf/helpers": "^7.2.0",
-    "proj4": "^2.19.3"
   }
 }
