@@ -5766,16 +5766,16 @@ X.prototype.init = function(e, t) {
     $referrer_host: t ? this._.getHostname(t) : "",
     $referrer: t,
     $viewport_position: r,
-    $utm_source: i.$utm_source,
-    $utm_medium: i.$utm_medium,
-    $utm_term: i.$utm_term,
-    $utm_content: i.$utm_content,
-    $utm_campaign: i.$utm_campaign,
-    $latest_utm_source: i.$latest_utm_source,
-    $latest_utm_medium: i.$latest_utm_medium,
-    $latest_utm_term: i.$latest_utm_term,
-    $latest_utm_content: i.$latest_utm_content,
-    $latest_utm_campaign: i.$latest_utm_campaign
+    $utm_source: i.$utm_source || "",
+    $utm_medium: i.$utm_medium || "",
+    $utm_term: i.$utm_term || "",
+    $utm_content: i.$utm_content || "",
+    $utm_campaign: i.$utm_campaign || "",
+    $latest_utm_source: i.$latest_utm_source || "",
+    $latest_utm_medium: i.$latest_utm_medium || "",
+    $latest_utm_term: i.$latest_utm_term || "",
+    $latest_utm_content: i.$latest_utm_content || "",
+    $latest_utm_campaign: i.$latest_utm_campaign || ""
   };
   return e !== 0 && (n[this.option.event_duration] = e), n = this._.extend(n, this.option.custom_props);
 };
