@@ -19,7 +19,6 @@ function prefixKeys<T extends Record<string, any>>(obj: T, prefix: string): Reco
 export type AnalyticsInstance<E extends string, P extends Record<E, any>> = {
   track: (event: E, params: P[E]) => void
   setProfile: (params: Record<string, any>) => void
-  registerPage: (params: Record<string, any>) => void
 } & Record<string, any>
 
 class Analytics<E extends string, P extends Record<E, any>> {
@@ -45,10 +44,6 @@ class Analytics<E extends string, P extends Record<E, any>> {
 
   track(event: E, params: P[E]) {
     this.sensors.track(`${this.options.project}_${event}`, params || {})
-  }
-
-  registerPage(params: Record<string, any>) {
-    this.sensors.registerPage(prefixKeys(params || {}, `${this.options.project}_`))
   }
 
   setProfile(params: Record<string, any>) {
