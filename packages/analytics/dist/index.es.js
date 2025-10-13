@@ -433,7 +433,7 @@ var I = {
 function d(e) {
   return e != null && Object.prototype.toString.call(e) == "[object Object]";
 }
-let Qi = function() {
+let en = function() {
   let e = (/* @__PURE__ */ new Date()).getTime();
   return function(t) {
     return Math.ceil((e = (9301 * e + 49297) % 233280) / 233280 * t);
@@ -447,7 +447,7 @@ function ve() {
       return e.getRandomValues(t)[0] / 2 ** 32;
     }
   }
-  return Qi(1e19) / 1e19;
+  return en(1e19) / 1e19;
 }
 function ie(e) {
   let t = null;
@@ -475,14 +475,14 @@ function Ke(e) {
   }
   return t;
 }
-function ca() {
+function da() {
   function e() {
   }
   return typeof Object.create != "function" ? (e.prototype = null, new e()) : /* @__PURE__ */ Object.create(null);
 }
 function ar(e) {
   e = e || "";
-  for (var t = ca(), r = e.substring(1).split("&"), i = 0; i < r.length; i++) {
+  for (var t = da(), r = e.substring(1).split("&"), i = 0; i < r.length; i++) {
     let n = r[i].indexOf("=");
     if (n !== -1) {
       let a = r[i].substring(0, n), l = r[i].substring(n + 1);
@@ -675,9 +675,9 @@ function j(e) {
   return Array.isArray && $(j) ? Array.isArray(e) : Object.prototype.toString.call(e) === "[object Array]";
 }
 function ye(e) {
-  return new en(e);
+  return new tn(e);
 }
-var en = function(e) {
+var tn = function(e) {
   this.ele = e;
 };
 let fi = function(e, t) {
@@ -718,11 +718,11 @@ function pt(e, t, r, i) {
     }
   }).apply(null, arguments);
 }
-function tn(e) {
+function rn(e) {
   let t = "pushState" in window.history ? "popstate" : "hashchange";
   pt(window, t, e);
 }
-function rn(e) {
+function nn(e) {
   if (e)
     return typeof window.XMLHttpRequest < "u" && "withCredentials" in new XMLHttpRequest() ? new XMLHttpRequest() : typeof XDomainRequest < "u" ? new XDomainRequest() : null;
   if (typeof window.XMLHttpRequest < "u")
@@ -757,7 +757,7 @@ function A(e) {
   }
   return e;
 }
-function nn(e) {
+function an(e) {
   function t(l) {
     if (!l)
       return "";
@@ -768,7 +768,7 @@ function nn(e) {
     }
   }
   e.timeout = e.timeout || 2e4, e.credentials = typeof e.credentials > "u" || e.credentials;
-  let r = rn(e.cors);
+  let r = nn(e.cors);
   if (!r)
     return !1;
   e.type || (e.type = e.data ? "POST" : "GET");
@@ -814,7 +814,7 @@ function nn(e) {
   }
   r.send(e.data || null);
 }
-function an(e, t) {
+function sn(e, t) {
   let r = [];
   return e == null ? r : Array.prototype.map && e.map === Array.prototype.map ? e.map(t) : (D(e, (i, n, a) => {
     r.push(t(i, n, a));
@@ -823,7 +823,7 @@ function an(e, t) {
 function kt(e) {
   let t = [];
   try {
-    t = an(atob(e).split(""), (r) => `%${`00${r.charCodeAt(0).toString(16)}`.slice(-2)}`);
+    t = sn(atob(e).split(""), (r) => `%${`00${r.charCodeAt(0).toString(16)}`.slice(-2)}`);
   } catch {
     t = [];
   }
@@ -844,7 +844,7 @@ function qt(e) {
   }
   return t;
 }
-function da(e, t) {
+function pa(e, t) {
   t = t || window;
   let r = !1, i = !0, n = t.document, a = n.documentElement, l = n.addEventListener, u = l ? "addEventListener" : "attachEvent", p = l ? "removeEventListener" : "detachEvent", b = l ? "" : "on", w = function(P) {
     P.type == "readystatechange" && n.readyState != "complete" || ((P.type == "load" ? t : n)[p](b + P.type, w, !1), !r && (r = !0) && e.call(t, P.type || P));
@@ -870,7 +870,7 @@ function da(e, t) {
     n[u](`${b}DOMContentLoaded`, w, !1), n[u](`${b}readystatechange`, w, !1), t[u](`${b}load`, w, !1);
   }
 }
-en.prototype = {
+tn.prototype = {
   addClass(e) {
     return !` ${this.ele.className} `.includes(` ${e} `) && (this.ele.className = this.ele.className + (this.ele.className === "" ? "" : " ") + e), this;
   },
@@ -1005,7 +1005,7 @@ let st = {
     return navigator.cookieEnabled && (a.set(e, t, r, i, n), a.get(e) === t && (a.remove(e), !0));
   }
 };
-function sn(e) {
+function on(e) {
   return D(Array.prototype.slice.call(arguments, 1), (t) => {
     for (let r in t) t[r] !== void 0 && e[r] === void 0 && (e[r] = t[r]);
   }), e;
@@ -1019,7 +1019,7 @@ function Ft(e) {
   }
   return t;
 }
-function pa(e) {
+function ga(e) {
   let t = "t6KJCZa5pDdQ9khoEM3Tj70fbP2eLSyc4BrsYugARqFIw1mzlGNVXOHiWvxUn8", r = t.length - 1, i = {}, n = 0;
   for (n = 0; n < t.length; n++) i[t.charAt(n)] = t.charAt(r - n);
   let a = "";
@@ -1036,18 +1036,18 @@ function Vr(e) {
   }
   return `${e.getFullYear()}-${t(e.getMonth() + 1)}-${t(e.getDate())} ${t(e.getHours())}:${t(e.getMinutes())}:${t(e.getSeconds())}.${t(e.getMilliseconds())}`;
 }
-function on(e) {
+function ln(e) {
   return D(e, (t, r) => {
-    Kt(t) ? e[r] = Vr(t) : d(t) && (e[r] = on(t));
+    Kt(t) ? e[r] = Vr(t) : d(t) && (e[r] = ln(t));
   }), e;
 }
-function ln(e) {
+function un(e) {
   return D(Array.prototype.slice.call(arguments, 1), (t) => {
     for (let r in t)
       t[r] !== void 0 && (d(t[r]) && d(e[r]) ? A(e[r], t[r]) : e[r] = t[r]);
   }), e;
 }
-function un(e, t, r) {
+function cn(e, t, r) {
   let i = Object.prototype.hasOwnProperty;
   if (e.filter)
     return e.filter(t);
@@ -1058,19 +1058,19 @@ function un(e, t, r) {
     }
   return n;
 }
-function ga(e) {
+function fa(e) {
   try {
     return JSON.stringify(e, null, "  ");
   } catch {
     return JSON.stringify(e);
   }
 }
-function fa(e) {
+function _a(e) {
   return typeof e == "string" && e.match(/^[a-z0-9\u4E00-\u9FA5\-.]+$/i) ? e : "";
 }
 function Wr(e, t, r) {
   t = t || "domain_test";
-  let i = fa(e = e || location.hostname), n = i.split(".");
+  let i = _a(e = e || location.hostname), n = i.split(".");
   if (j(n) && n.length >= 2 && !/^(\d+\.)+\d+$/.test(i)) {
     for (let a = `.${n.splice(n.length - 1, 1)}`; n.length > 0; )
       if (a = `.${n.splice(n.length - 1, 1)}${a}`, st.set(t, "true", 0, null, r, `; domain=${a}`), document.cookie.includes(`${t}=true`))
@@ -1119,7 +1119,7 @@ function Yt(e) {
     return a && ne(a) ? i(a) : null;
   }()) && ne(t) ? t : null;
 }
-function cn(e, t) {
+function dn(e, t) {
   let r = "", i = "";
   return e.textContent ? r = Fe(e.textContent) : e.innerText && (r = Fe(e.innerText)), r && (r = r.replace(/[\r\n]/g, " ").replace(/ +/g, " ").substring(0, 255)), i = r || "", t !== "input" && t !== "INPUT" || (i = e.value || ""), i;
 }
@@ -1152,14 +1152,14 @@ function xt(e) {
   let t = {}, r = e.split("?")[1] || "";
   return r && (t = ar(`?${r}`)), t;
 }
-function dn() {
+function pn() {
   return typeof window.matchMedia < "u" || typeof window.msMatchMedia < "u";
 }
-function _a() {
+function ha() {
   let e = screen.msOrientation || screen.mozOrientation || (screen.orientation || {}).type, t = "未取到值";
   if (e)
     t = e.includes("landscape") ? "landscape" : "portrait";
-  else if (dn()) {
+  else if (pn()) {
     let r = window.matchMedia || window.msMatchMedia;
     r("(orientation: landscape)").matches ? t = "landscape" : r("(orientation: portrait)").matches && (t = "portrait");
   }
@@ -1190,7 +1190,7 @@ function Xr(e, t) {
     return r;
   }
 }
-function pn(e) {
+function gn(e) {
   if (typeof e != "string")
     return 0;
   let t = 0;
@@ -1222,14 +1222,14 @@ function ae(e, t) {
       return i;
   return -1;
 }
-function ha(e, t) {
+function ma(e, t) {
   return e.prototype = new t(), e.prototype.constructor = e, e.superclass = t.prototype, e;
 }
-let ma = Object.prototype.hasOwnProperty;
-function gn(e) {
-  return !(!e || !ma.call(e, "callee"));
-}
+let ya = Object.prototype.hasOwnProperty;
 function fn(e) {
+  return !(!e || !ya.call(e, "callee"));
+}
+function _n(e) {
   return Object.prototype.toString.call(e) == "[object Boolean]";
 }
 function se(e) {
@@ -1241,10 +1241,10 @@ function se(e) {
   }
   return !1;
 }
-function _n(e) {
+function hn(e) {
   return typeof e != "string" ? !1 : /^https?:\/\/.+/.test(e) !== !1 || (ee.log("Invalid URL"), !1);
 }
-function hn() {
+function mn() {
   return !!navigator.userAgent.match(/iPhone|iPad|iPod/i);
 }
 function sr(e) {
@@ -1258,7 +1258,7 @@ function sr(e) {
 function He(e) {
   return Object.prototype.toString.call(e) == "[object Number]" && /[\d.]+/.test(String(e));
 }
-function ya() {
+function va() {
   let e = !1;
   if (typeof navigator != "object" || typeof navigator.sendBeacon != "function")
     return e;
@@ -1270,10 +1270,10 @@ function ya() {
     (t.chrome > 38 || t.edge > 13 || t.firefox > 30 || t.opera > 25 || t.safari > 11) && (e = !0);
   return e;
 }
-function va() {
+function ba() {
   return typeof window.XMLHttpRequest < "u" && ("withCredentials" in new XMLHttpRequest() || typeof XDomainRequest < "u");
 }
-function mn(e) {
+function yn(e) {
   if (!d(e) || !g(e.callbackName))
     return ee.log("JSONP 请求缺少 callbackName"), !1;
   e.success = $(e.success) ? e.success : function() {
@@ -1309,7 +1309,7 @@ function mn(e) {
     }, clearTimeout(i), i = null, r.removeChild(t), e.error(u), n = !0;
   }, t.src = e.url;
 }
-function yn(e) {
+function vn(e) {
   ({
     visibleHandler: $(e.visible) ? e.visible : function() {
     },
@@ -1359,20 +1359,20 @@ function fr(e) {
     e.error(), t.onerror = null;
   }, e.appendCall(t);
 }
-function ba(e) {
+function wa(e) {
   if (typeof e != "string")
     return "";
   for (let t = /^\s*javascript/i; t.test(e); ) e = e.replace(t, "");
   return e;
 }
-function vn(e, t) {
+function bn(e, t) {
   t = typeof t == "number" ? t : 13;
   for (var r = (e = String(e)).split(""), i = 0; i < r.length; i++)
     r[i].charCodeAt(0) < 126 && (r[i] = String.fromCharCode((r[i].charCodeAt(0) + t) % 126));
   return r.join("");
 }
-function bn(e) {
-  return vn(e = String(e), 113);
+function wn(e) {
+  return bn(e = String(e), 113);
 }
 function Zr(e) {
   d(e) && D(e, (t, r) => {
@@ -1401,14 +1401,14 @@ function Zt(e) {
   let r = document.getElementsByTagName("head")[0], i = document.getElementsByTagName("script")[0];
   r ? r.children.length ? r.insertBefore(t, r.children[0]) : r.appendChild(t) : i.parentNode.insertBefore(t, i);
 }
-function wa(e) {
+function Sa(e) {
   if (typeof e != "string")
     return ee.log("转换unicode错误", e), e;
   for (var t = "", r = 0; r < e.length; r++)
     t += `\\${e.charCodeAt(r).toString(16)}`;
   return t;
 }
-function Sa(e, t, r) {
+function $a(e, t, r) {
   let i, n, a, l = null, u = 0;
   r || (r = {});
   let p = function() {
@@ -1421,26 +1421,26 @@ function Sa(e, t, r) {
     return i = this, n = arguments, w <= 0 || w > t ? (l && (clearTimeout(l), l = null), u = b, a = e.apply(i, n), l || (i = n = null)) : l || r.trailing === !1 || (l = setTimeout(p, w)), a;
   };
 }
-function wn(e) {
+function Sn(e) {
   let t = [];
   return e == null || D(e, (r) => {
     t[t.length] = r;
   }), t;
 }
-function $a(e) {
-  return e ? e.toArray ? e.toArray() : j(e) || gn(e) ? Array.prototype.slice.call(e) : wn(e) : [];
+function ka(e) {
+  return e ? e.toArray ? e.toArray() : j(e) || fn(e) ? Array.prototype.slice.call(e) : Sn(e) : [];
 }
 function Gt(e) {
   for (var t, r = [], i = {}, n = 0; n < e.length; n++)
     (t = e[n]) in i || (i[t] = !0, r.push(t));
   return r;
 }
-let ka = { "+": "-", "/": "_", "=": "." }, Fa = { "-": "+", _: "/", ".": "=" }, Ca = {
+let Fa = { "+": "-", "/": "_", "=": "." }, Ca = { "-": "+", _: "/", ".": "=" }, Ea = {
   encode(e) {
-    return e.replace(/[+/=]/g, (t) => ka[t]);
+    return e.replace(/[+/=]/g, (t) => Fa[t]);
   },
   decode(e) {
-    return e.replace(/[-_.]/g, (t) => Fa[t]);
+    return e.replace(/[-_.]/g, (t) => Ca[t]);
   },
   trim(e) {
     return e.replace(/[.=]{1,2}$/, "");
@@ -1458,7 +1458,7 @@ function Nr(e, t, r) {
 function Or(e) {
   return e !== "__proto__" && e !== "constructor" && e !== "prototype";
 }
-let Ea = {
+let Da = {
   __proto__: null,
   noPrototypePollution: Or,
   ConcurrentStorage: nr,
@@ -1466,84 +1466,84 @@ let Ea = {
   URL: Ve,
   UUID: rt,
   addEvent: pt,
-  addHashEvent: tn,
-  ajax: nn,
+  addHashEvent: rn,
+  ajax: an,
   base64Decode: kt,
   base64Encode: qt,
-  bindReady: da,
+  bindReady: pa,
   cookie: st,
-  coverExtend: sn,
+  coverExtend: on,
   decodeURI: Ft,
   decodeURIComponent: Ke,
-  dfmapping: pa,
+  dfmapping: ga,
   each: D,
-  encodeDates: on,
+  encodeDates: ln,
   extend: A,
-  extend2Lev: ln,
-  filter: un,
+  extend2Lev: un,
+  filter: cn,
   formatDate: Vr,
-  formatJsonString: ga,
+  formatJsonString: fa,
   getCookieTopLevelDomain: Wr,
   getDomBySelector: Yt,
-  getElementContent: cn,
+  getElementContent: dn,
   getHostname: Re,
   getIOSVersion: Ir,
   getQueryParam: qe,
   getQueryParamsFromUrl: xt,
   getRandom: ve,
-  getRandomBasic: Qi,
-  getScreenOrientation: _a,
+  getRandomBasic: en,
+  getScreenOrientation: ha,
   getUA: zr,
   getURL: oe,
   getURLPath: gt,
   getURLSearchParams: ar,
   hasAttribute: jr,
   hasAttributes: Xr,
-  hashCode: pn,
+  hashCode: gn,
   hashCode53: Yr,
   indexOf: ae,
-  inherit: ha,
-  isArguments: gn,
+  inherit: ma,
+  isArguments: fn,
   isArray: j,
-  isBoolean: fn,
+  isBoolean: _n,
   isDate: Kt,
   isElement: ne,
   isEmptyObject: se,
   isFunction: $,
-  isHttpUrl: _n,
-  isIOS: hn,
+  isHttpUrl: hn,
+  isIOS: mn,
   isJSONString: sr,
   isNumber: He,
   isObject: d,
   isString: g,
-  isSupportBeaconSend: ya,
-  isSupportCors: va,
+  isSupportBeaconSend: va,
+  isSupportCors: ba,
   isUndefined: Ue,
-  jsonp: mn,
-  listenPageState: yn,
+  jsonp: yn,
+  listenPageState: vn,
   loadScript: fr,
   localStorage: I,
   logger: ee,
-  map: an,
-  mediaQueriesSupported: dn,
+  map: sn,
+  mediaQueriesSupported: pn,
   now: me,
-  removeScriptProtocol: ba,
-  rot13defs: bn,
-  rot13obfs: vn,
+  removeScriptProtocol: wa,
+  rot13defs: wn,
+  rot13obfs: bn,
   ry: ye,
   safeJSONParse: ie,
   searchObjDate: Zr,
   sessionStorage: St,
   setCssStyle: Zt,
-  strToUnicode: wa,
-  throttle: Sa,
-  toArray: $a,
+  strToUnicode: Sa,
+  throttle: $a,
+  toArray: ka,
   trim: Fe,
   unique: Gt,
   urlParse: Kr,
-  urlSafeBase64: Ca,
-  values: wn,
-  xhr: rn,
+  urlSafeBase64: Ea,
+  values: Sn,
+  xhr: nn,
   startsWith: Nr
 }, zt = [], mt = {
   appendWriter(e) {
@@ -1624,7 +1624,7 @@ let h = {}, Qt = {
   white_list: {}
 };
 Qt.white_list[location.host] = Ve(location.href).hostname;
-let Sn = "utm_source utm_medium utm_campaign utm_content utm_term", _r = "1.27.11", $n = "sensorsdata_domain_test", Ut = {
+let $n = "utm_source utm_medium utm_campaign utm_content utm_term", _r = "1.27.11", kn = "sensorsdata_domain_test", Ut = {
   LOGIN: "$identity_login_id"
 };
 function Gr(e) {
@@ -1638,7 +1638,7 @@ function Gr(e) {
     default:
       var i = Wr(
         null,
-        $n,
+        kn,
         h.is_secure_cookie
       );
       return e === "" || i === "" ? "url解析失败" : i;
@@ -1670,7 +1670,7 @@ let je = {
     return e = e || "sajssdk_2015_cookie_access_test", t = t || "1", st.isSupport(e, t, 0, null, h.is_secure_cookie);
   }
 };
-function kn(e, t) {
+function Fn(e, t) {
   let r = "";
   if (h.cross_subdomain === !1) {
     try {
@@ -1687,7 +1687,7 @@ function kn(e, t) {
   return r;
 }
 function or() {
-  return je.isSupport() ? je.get("sensorsdata_is_new_user") !== null || je.get(kn("new_user")) !== null : lr.get(lr.getNewUserFlagMemoryKey("new_user")) !== null;
+  return je.isSupport() ? je.get("sensorsdata_is_new_user") !== null || je.get(Fn("new_user")) !== null : lr.get(lr.getNewUserFlagMemoryKey("new_user")) !== null;
 }
 je.getNewUser = or;
 var lr = {
@@ -1729,7 +1729,7 @@ let Rt = {
         s: 59 - e.getSeconds()
       };
       je.isSupport() ? je.set(
-        kn("new_user"),
+        Fn("new_user"),
         "1",
         `${3600 * t.h + 60 * t.m + t.s}s`
       ) : lr.set(
@@ -1785,13 +1785,13 @@ Qr.prototype = {
 let Jt = {
   data: {},
   id() {
-    return this.data.id ? this.data.id : (this.data.id = Cn(), this.data.id);
+    return this.data.id ? this.data.id : (this.data.id = En(), this.data.id);
   },
   type() {
-    return this.data.type ? this.data.type : (this.data.type = Fn(), this.data.type);
+    return this.data.type ? this.data.type : (this.data.type = Cn(), this.data.type);
   }
 };
-function Fn() {
+function Cn() {
   let e = xt(document.referrer);
   if (se(e) || !e.eqid) {
     let t = xt(location.href);
@@ -1799,7 +1799,7 @@ function Fn() {
   }
   return "baidu_seo_keyword_id";
 }
-function Cn() {
+function En() {
   let e = xt(document.referrer);
   return se(e) || !e.eqid ? rt().replace(/-/g, "") : e.eqid;
 }
@@ -1811,7 +1811,7 @@ function ur(e) {
     return !0;
   let t = Wr(
     null,
-    $n,
+    kn,
     h.is_secure_cookie
   ), r = Re(e);
   return !(r = `.${r}`).includes(t) && t !== "";
@@ -1821,7 +1821,7 @@ function It(e, t) {
   let r = h.source_type.keyword;
   if (document && g(e)) {
     if (e.indexOf("http") === 0) {
-      let i = En(e), n = xt(e);
+      let i = Dn(e), n = xt(e);
       if (se(n))
         return h.preset_properties.search_keyword_baidu && Ht() ? void 0 : "未取到值";
       let a = null;
@@ -1842,7 +1842,7 @@ function It(e, t) {
   }
   return `取值异常_referrer异常_${String(e)}`;
 }
-function En(e) {
+function Dn(e) {
   let t = Re(e);
   if (!t || t === "hostname解析异常")
     return "";
@@ -1956,7 +1956,7 @@ var T = {
     e = e || "", t = t || "";
     let r = T.campaignParams(), i = {}, n = {};
     return D(r, (a, l, u) => {
-      ` ${Sn} `.includes(` ${l} `) ? i[e + l] = u[l] : n[t + l] = u[l];
+      ` ${$n} `.includes(` ${l} `) ? i[e + l] = u[l] : n[t + l] = u[l];
     }), { $utms: i, otherUtms: n };
   },
   properties() {
@@ -1989,11 +1989,11 @@ function ei() {
   }
   return "获取url异常";
 }
-function Dn(e) {
+function Pn(e) {
   let t = qe(e, "gdt_vid"), r = qe(e, "hash_key"), i = qe(e, "callbacks"), n = { click_id: "", hash_key: "", callbacks: "" };
   return g(t) && t.length && (n.click_id = t.length == 16 || t.length == 18 ? t : "参数解析不合法", g(r) && r.length && (n.hash_key = r), g(i) && i.length && (n.callbacks = i)), n;
 }
-function Pn(e) {
+function An(e) {
   let t = e.properties, r = JSON.parse(JSON.stringify(e));
   d(t) && D(t, (i, n) => {
     if ($(i))
@@ -2008,47 +2008,47 @@ function Pn(e) {
       }
   });
 }
-function An(e) {
+function Bn(e) {
   if (d(e) && e.$option) {
     let t = e.$option;
     return delete e.$option, t;
   }
   return {};
 }
-function Bn(e) {
+function In(e) {
   let t = {};
   return D(e, (r, i) => {
     r != null && (t[i] = r);
   }), t;
 }
-function Da(e) {
+function Pa(e) {
   let t = !e.type || e.type.slice(0, 7) !== "profile";
   d(e.properties) && t && ("$referrer" in e.properties && (e.properties.$referrer_host = e.properties.$referrer === "" ? "" : Re(e.properties.$referrer, "取值异常")), h.preset_properties.latest_referrer && h.preset_properties.latest_referrer_host && (e.properties.$latest_referrer_host = e.properties.$latest_referrer === "" ? "" : Re(
     e.properties.$latest_referrer,
     "取值异常"
   )));
 }
-function Pa(e) {
+function Aa(e) {
   let t = !e.type || e.type.slice(0, 7) !== "profile", r = h.preset_properties && t;
   r && h.preset_properties.url && Ue(e.properties.$url) && (e.properties.$url = oe()), r && h.preset_properties.title && Ue(e.properties.$title) && (e.properties.$title = document.title);
 }
-function In(e) {
+function jn(e) {
   if (!ne(e.target))
     return !1;
   let t = e.target, r = g(t.tagName) ? t.tagName.toLowerCase() : "unknown", i = {};
-  return i.$element_type = r, i.$element_name = t.getAttribute("name"), i.$element_id = t.getAttribute("id"), i.$element_class_name = g(t.className) ? t.className : null, i.$element_target_url = t.getAttribute("href"), i.$element_content = cr(t, r), (i = Bn(i)).$url = oe(), i.$url_path = gt(), i.$title = document.title, i;
+  return i.$element_type = r, i.$element_name = t.getAttribute("name"), i.$element_id = t.getAttribute("id"), i.$element_class_name = g(t.className) ? t.className : null, i.$element_target_url = t.getAttribute("href"), i.$element_content = cr(t, r), (i = In(i)).$url = oe(), i.$url_path = gt(), i.$title = document.title, i;
 }
-function Aa(e) {
+function Ba(e) {
   let t = h.heatmap && $(h.heatmap.collect_input) && h.heatmap.collect_input(e);
   return (e.type === "button" || e.type === "submit" || t) && e.value || "";
 }
 function cr(e, t) {
-  return g(t) && t.toLowerCase() === "input" ? Aa(e) : cn(e, t);
+  return g(t) && t.toLowerCase() === "input" ? Ba(e) : dn(e, t);
 }
 function ti(e) {
-  return et.protocol.ajax(e.url), nn(e);
+  return et.protocol.ajax(e.url), an(e);
 }
-function jn(e, t) {
+function Nn(e, t) {
   if (typeof e == "string" && (e = Fe(e)) && (e.slice(0, 3) === "://" ? e = location.protocol.slice(0, -1) + e : e.slice(0, 2) === "//" ? e = location.protocol + e : e.slice(0, 4) !== "http" && (e = "")), j(e) && e.length)
     for (let r = 0; r < e.length; r++)
       /sa\.gif[^/]*$/.test(e[r]) || (e[r] = e[r].replace(/\/sa$/, "/sa.gif").replace(/(\/sa)(\?[^/]+)$/, "/sa.gif$2"));
@@ -2056,12 +2056,12 @@ function jn(e, t) {
     /sa\.gif[^/]*$/.test(e) || typeof e != "string" || (e = e.replace(/\/sa$/, "/sa.gif").replace(/(\/sa)(\?[^/]+)$/, "/sa.gif$2"));
   return t && typeof t == "string" && (e = t), e;
 }
-function Nn(e) {
+function On(e) {
   g(e) || (e = JSON.stringify(e));
-  let t = qt(e), r = `crc=${pn(t)}`;
+  let t = qt(e), r = `crc=${gn(t)}`;
   return `data=${encodeURIComponent(t)}&ext=${encodeURIComponent(r)}`;
 }
-function Ba(e) {
+function Ia(e) {
   let t, r = location.href, i = window.history.pushState, n = window.history.replaceState;
   $(window.history.pushState) && (window.history.pushState = function() {
     i.apply(window.history, arguments), e(r), r = location.href;
@@ -2072,12 +2072,12 @@ function Ba(e) {
   });
 }
 let z = {}, Tr = new De();
-function On(e, t) {
+function Tn(e, t) {
   let r = [];
   typeof e == "string" && e in z.EVENT_LIST && (r = z.EVENT_LIST[e], z[r[0]].on(r[1], t));
 }
 z.spa = Tr, z.sdk = new De(), z.data = new De(), z.initSystemEvent = function() {
-  Ba((e) => {
+  Ia((e) => {
     Tr.emit("switch", e);
   });
 }, z.EVENT_LIST = {
@@ -2133,10 +2133,10 @@ Lr.prototype.start = function() {
   }
 };
 let _i = "sawebjssdk-", vr = "tab-sawebjssdk-";
-function Tn() {
+function Ln() {
   this.sendTimeStamp = 0, this.timer = null, this.serverUrl = "", this.hasTabStorage = !1;
 }
-Tn.prototype = {
+Ln.prototype = {
   batchInterval() {
     this.serverUrl === "" && this.getServerUrl(), this.hasTabStorage || (this.generateTabStorage(), this.hasTabStorage = !0);
     let e = this;
@@ -2304,7 +2304,7 @@ er.prototype.start = function() {
   }
   self.lastClear && self.lastClear();
 };
-let Ia = {
+let ja = {
   __proto__: null,
   addEvent: ot,
   EventEmitterSa: Qr,
@@ -2313,27 +2313,27 @@ let Ia = {
   getReferrer: Ze,
   getCurrentDomain: Gr,
   isBaiduTraffic: Ht,
-  getReferrerEqid: Cn,
-  getReferrerEqidType: Fn,
+  getReferrerEqid: En,
+  getReferrerEqidType: Cn,
   getBaiduKeyword: Jt,
   isReferralTraffic: ur,
   getKeywordFromReferrer: It,
-  getReferSearchEngine: En,
+  getReferSearchEngine: Dn,
   getSourceFromReferrer: ei,
-  getWxAdIdFromUrl: Dn,
-  parseSuperProperties: Pn,
-  searchConfigData: An,
-  strip_empty_properties: Bn,
-  getEleInfo: In,
+  getWxAdIdFromUrl: Pn,
+  parseSuperProperties: An,
+  searchConfigData: Bn,
+  strip_empty_properties: In,
+  getEleInfo: jn,
   getElementContent: cr,
   ajax: ti,
-  optimizeServerUrl: jn,
-  encodeTrackData: Nn,
+  optimizeServerUrl: Nn,
+  encodeTrackData: On,
   AjaxSend: Lr,
-  BatchSend: Tn,
+  BatchSend: Ln,
   BeaconSend: xr,
   ImageSend: er
-}, Ln = new Qr();
+}, xn = new Qr();
 var c = {
   requests: [],
   _sessionState: {},
@@ -2376,7 +2376,7 @@ var c = {
   set(e, t) {
     this._state = this._state || {};
     let r = this._state.distinct_id;
-    this._state[e] = t, e === "first_id" ? delete this._state._first_id : e === "distinct_id" && delete this._state._distinct_id, this.save(), e === "distinct_id" && r && Ln.tempAdd("changeDistinctId", t);
+    this._state[e] = t, e === "first_id" ? delete this._state._first_id : e === "distinct_id" && delete this._state._distinct_id, this.save(), e === "distinct_id" && r && xn.tempAdd("changeDistinctId", t);
   },
   change(e, t) {
     this._state[`_${e}`] = t;
@@ -2399,7 +2399,7 @@ var c = {
   },
   setPropsOnce(e) {
     let t = this._state.props || {};
-    sn(t, e), this.set("props", t);
+    on(t, e), this.set("props", t);
   },
   clearAllProps(e) {
     let t;
@@ -2443,7 +2443,7 @@ var c = {
       function(i) {
         let n;
         i.identities && (i.identities.indexOf(`
-/`) === 0 ? i.identities = ie(bn(i.identities)) : i.identities = ie(
+/`) === 0 ? i.identities = ie(wn(i.identities)) : i.identities = ie(
           kt(i.identities)
         ));
         let a = c.getOriginUnionId(i);
@@ -2553,7 +2553,7 @@ let V = {
     let t = c._state.history_login_id;
     return (!t || !t.name || t.name !== e) && !(ae(this.bindReservedNames, e) > -1);
   }
-}, ja = {
+}, Na = {
   distinct_id: {
     rules: ["string", "emptyString", "idLength"],
     onComplete(e, t, r) {
@@ -2658,11 +2658,11 @@ let V = {
 };
 function q(e, t) {
   for (let r in e)
-    if (Object.prototype.hasOwnProperty.call(e, r) && !ja.check(r, e[r], t))
+    if (Object.prototype.hasOwnProperty.call(e, r) && !Na.check(r, e[r], t))
       return !1;
   return !0;
 }
-function Na(e, t) {
+function Oa(e, t) {
   return d(e) && D(e, (r, i) => {
     if (j(r)) {
       let a = [];
@@ -2697,7 +2697,7 @@ function Na(e, t) {
         );
       }
     else
-      g(r) || He(r) || Kt(r) || fn(r) || j(r) || $(r) || i === "$option" || n || (k(
+      g(r) || He(r) || Kt(r) || _n(r) || j(r) || $(r) || i === "$option" || n || (k(
         "您的数据-",
         i,
         r,
@@ -2705,12 +2705,12 @@ function Na(e, t) {
       ), delete e[i]);
   }), e;
 }
-function Oa(e, t) {
+function Ta(e, t) {
   return He(t) && e.length > t ? (k(
     `字符串长度超过限制，已经做截取--${e}`
   ), e.slice(0, t)) : e;
 }
-function Ta(e, t) {
+function La(e, t) {
   d(e) && D(
     [
       "distinct_id",
@@ -2737,37 +2737,37 @@ function Ta(e, t) {
     }
   );
 }
-function xn(e) {
+function Un(e) {
   let t = ["$element_selector", "$element_path"], r = ["sensorsdata_app_visual_properties"];
   d(e) && D(e, (i, n) => {
     if (d(i))
-      xn(e[n]);
+      Un(e[n]);
     else if (g(i)) {
       if (ae(r, n) > -1)
         return;
-      e[n] = Oa(
+      e[n] = Ta(
         i,
         ae(t, n) > -1 ? 1024 : h.max_string_length
       );
     }
   });
 }
-function La(e) {
+function xa(e) {
   typeof e.properties.$project < "u" && (e.project = e.properties.$project, delete e.properties.$project), typeof e.properties.$token < "u" && (e.token = e.properties.$token, delete e.properties.$token);
 }
-function xa(e) {
+function Ua(e) {
   "item_type" in e && q({ item_type: e.item_type }, (t) => (t || delete e.item_type, !0)), "item_id" in e && q({ item_id: e.item_id }, (t, r, i) => (t || i !== "string" || delete e.item_id, !0));
 }
-function Ua(e, t) {
+function Ra(e, t) {
   D(e, (r, i) => {
     ae([], i) === -1 && q({ propertyKey: i }, (n, a, l) => (n || l === "keyLength" || delete e[i], !0));
   });
 }
-function Ra(e) {
+function Ha(e) {
   let t = e.properties;
-  Zr(e), d(t) ? (Na(t), Ta(t), La(e), Ua(t), xn(t)) : "properties" in e && (e.properties = {}), xa(e);
+  Zr(e), d(t) ? (Oa(t), La(t), xa(e), Ra(t), Un(t)) : "properties" in e && (e.properties = {}), Ua(e);
 }
-function Ha(e, t) {
+function Ja(e, t) {
   let r = t.sensors;
   return e._track_id = Number(
     String(ve()).slice(2, 5) + String(ve()).slice(2, 4) + String((/* @__PURE__ */ new Date()).getTime()).slice(-4)
@@ -2779,7 +2779,7 @@ var Z = {
       server_url: { project: "", host: "" },
       page_url: { host: "", pathname: "" }
     };
-    if (!_n(s.para.server_url))
+    if (!hn(s.para.server_url))
       return B(
         "----vcollect---server_url必须为有效 URL 字符串"
       ), !1;
@@ -2953,7 +2953,7 @@ var Z = {
     }), i) : [];
   }
 };
-let Ja = {
+let Ma = {
   events: [],
   getAssignConfigs: Z.getAssignConfigs,
   filterConfig: Z.filterConfig,
@@ -3012,7 +3012,7 @@ let Ja = {
   }
 }, ri = {
   events: [],
-  customProp: Ja,
+  customProp: Ma,
   getAssignConfigs: Z.getAssignConfigs,
   initUrl: Z.initUrl,
   init() {
@@ -3073,7 +3073,7 @@ let Ja = {
         return !0;
     return !1;
   }
-}, Un = {
+}, Rn = {
   events: [],
   configSwitch: !1,
   collectAble() {
@@ -3110,7 +3110,7 @@ var it = {
   url_info: {},
   timer: null,
   update_time: null,
-  customProp: Un,
+  customProp: Rn,
   initUrl() {
     let e = Z.initUrl();
     if (e) {
@@ -3180,7 +3180,7 @@ var it = {
   },
   pageStateListenner() {
     let e = this;
-    yn({
+    vn({
       visible() {
         let t = (/* @__PURE__ */ new Date()).getTime() - e.update_time;
         if (He(t) && t > 0 && t < e.para.update_interval) {
@@ -3216,7 +3216,7 @@ var it = {
   },
   sendRequest(e, t) {
     let r = { app_id: this.url_info.page_url.host };
-    this.config.version && (r.v = this.config.version), mn({
+    this.config.version && (r.v = this.config.version), yn({
       url: this.url_info.api_url,
       callbackName: "saJSSDKVtrackCollectConfig",
       data: r,
@@ -3232,7 +3232,7 @@ var it = {
   getAssignConfigs: Z.getAssignConfigs,
   configIsMatch: Z.configIsMatch
 };
-function Ma(e, t) {
+function qa(e, t) {
   try {
     let r = t.sensors, i = {};
     d(e) && d(e.identities) && !se(e.identities) ? A(i, e.identities) : A(i, c.getIdentities());
@@ -3246,7 +3246,7 @@ function Ma(e, t) {
       },
       properties: {}
     };
-    return d(e) && d(e.properties) && !se(e.properties) && (e.properties.$lib_detail && (n.lib.$lib_detail = e.properties.$lib_detail, delete e.properties.$lib_detail), e.properties.$lib_method && (n.lib.$lib_method = e.properties.$lib_method, delete e.properties.$lib_method)), ln(n, c.getUnionId(), e), d(e.properties) && !se(e.properties) && A(n.properties, e.properties), n.event === "$UnbindID" && (n.login_id && delete n.login_id, n.anonymous_id && delete n.anonymous_id), e.type && e.type.slice(0, 7) === "profile" || (r.para.properties_priority && r.para.properties_priority === 3 ? n.properties = A(
+    return d(e) && d(e.properties) && !se(e.properties) && (e.properties.$lib_detail && (n.lib.$lib_detail = e.properties.$lib_detail, delete e.properties.$lib_detail), e.properties.$lib_method && (n.lib.$lib_method = e.properties.$lib_method, delete e.properties.$lib_method)), un(n, c.getUnionId(), e), d(e.properties) && !se(e.properties) && A(n.properties, e.properties), n.event === "$UnbindID" && (n.login_id && delete n.login_id, n.anonymous_id && delete n.anonymous_id), e.type && e.type.slice(0, 7) === "profile" || (r.para.properties_priority && r.para.properties_priority === 3 ? n.properties = A(
       {},
       T.properties(),
       c.getSessionProps(),
@@ -3271,26 +3271,26 @@ function Ma(e, t) {
         JSON.parse(JSON.stringify(a))
       );
       d(l) && !se(l) && (a.properties = A(a.properties, l));
-    }(n), Pn(n), Rt.checkIsAddSign(n), Rt.checkIsFirstTime(n), Da(n), Pa(n), n;
+    }(n), An(n), Rt.checkIsAddSign(n), Rt.checkIsFirstTime(n), Pa(n), Aa(n), n;
   } catch (r) {
     return { _debug_web_msg: String(r) };
   }
 }
-let qa = {
-  basicProps: { priority: 0, entry: Ma },
-  formatData: { priority: 0, entry: Ra },
-  finalAdjustData: { priority: 0, entry: Ha }
+let Ka = {
+  basicProps: { priority: 0, entry: qa },
+  formatData: { priority: 0, entry: Ha },
+  finalAdjustData: { priority: 0, entry: Ja }
 }, ii = {
   stage: null,
   init(e) {
     this.stage = e;
   },
-  interceptor: qa
+  interceptor: Ka
 };
-function Ka(e) {
+function Va(e) {
   return ii.stage.process("basicProps", e);
 }
-function Va(e) {
+function Wa(e) {
   return ii.stage.process("formatData", e);
 }
 let le = {};
@@ -3312,7 +3312,7 @@ function mi(e, t, r, i) {
     a(l);
   });
 }
-function Rn() {
+function Hn() {
   let e = location.protocol;
   return e === "http:" || e === "https:" ? e : "http:";
 }
@@ -3325,7 +3325,7 @@ le.check = q, le.sendItem = function(e) {
     },
     time: 1 * /* @__PURE__ */ new Date()
   };
-  A(t, e), Va(t), s.kit.sendData(t);
+  A(t, e), Wa(t), s.kit.sendData(t);
 }, le.send = function(e, t) {
   let r = s.kit.buildData(e);
   s.kit.sendData(r, t);
@@ -3336,10 +3336,10 @@ let ni = {
     this.stage = e;
   }
 };
-function Wa(e) {
+function za(e) {
   return ni.stage.process("webClickEvent", e);
 }
-function za(e) {
+function Xa(e) {
   return ni.stage.process("webStayEvent", e);
 }
 let br = { label: !1, li: !1, a: !0, button: !0 };
@@ -3441,7 +3441,7 @@ var Ae = {
     }(i);
   },
   setNotice(e) {
-    s.is_heatmap_render_mode = !0, s.para.heatmap || (s.errorMsg = "您 SDK 没有配置开启点击图 ！"), e && e.slice(0, 5) === "http:" && location.protocol === "https:" && (s.errorMsg = "您的当前页面是 https 的地址，神策分析环境也必须是 https ！"), s.para.heatmap_url || (s.para.heatmap_url = `${Rn()}//static.sensorsdata.cn/sdk/${s.lib_version}/heatmap.min.js`);
+    s.is_heatmap_render_mode = !0, s.para.heatmap || (s.errorMsg = "您 SDK 没有配置开启点击图 ！"), e && e.slice(0, 5) === "http:" && location.protocol === "https:" && (s.errorMsg = "您的当前页面是 https 的地址，神策分析环境也必须是 https ！"), s.para.heatmap_url || (s.para.heatmap_url = `${Hn()}//static.sensorsdata.cn/sdk/${s.lib_version}/heatmap.min.js`);
   },
   getDomIndex(e) {
     if (!e.parentNode)
@@ -3493,7 +3493,7 @@ var Ae = {
     return isNaN(e) ? 0 : e;
   },
   getEleDetail(e) {
-    let t = this.getDomSelector(e), r = In({ target: e });
+    let t = this.getDomSelector(e), r = jn({ target: e });
     r.$element_selector = t || "", r.$element_path = s.heatmap.getElementPath(
       e,
       s.para.heatmap && s.para.heatmap.element_selector === "not_use_id"
@@ -3534,7 +3534,7 @@ var Ae = {
   start(e, t, r, i, n) {
     if (d(s.para.heatmap) && $(s.para.heatmap.collect_element) && !s.para.heatmap.collect_element(t))
       return !1;
-    Wa(Ae.getBasicEleInfo(e, t, r, i, n));
+    za(Ae.getBasicEleInfo(e, t, r, i, n));
   },
   getBasicEleInfo(e, t, r, i, n) {
     let a = d(i) ? i : {}, l = $(n) ? n : $(i) ? i : void 0, u = this.getEleDetail(t);
@@ -3642,7 +3642,7 @@ var Ae = {
         (l > s.para.heatmap.scroll_delay_time && n - r.$viewport_position != 0 || i) && (r.$url = oe(), r.$title = document.title, r.$url_path = gt(), r.event_duration = Math.min(
           s.para.heatmap.scroll_event_duration,
           Number.parseInt(l) / 1e3
-        ), r.event_duration = r.event_duration < 0 ? 0 : r.event_duration, za(r)), this.current_time = a;
+        ), r.event_duration = r.event_duration < 0 ? 0 : r.event_duration, Xa(r)), this.current_time = a;
       }
     });
     t.current_time = /* @__PURE__ */ new Date(), ot(window, "scroll", () => {
@@ -3806,7 +3806,7 @@ let tr = {
     let r = Ur(), i = !e.not_set_profile;
     e.not_set_profile && delete e.not_set_profile;
     let n = location.href;
-    s.para.is_single_page && tn(() => {
+    s.para.is_single_page && rn(() => {
       let a = Ze(n, !0);
       s.track(
         "$pageview",
@@ -3854,7 +3854,7 @@ let tr = {
     this.setPlugin.apply(this, arguments);
   }
 };
-function Hn(e, t) {
+function Jn(e, t) {
   let r = e.id, i = e.callback, n = e.name, a = c.getFirstId(), l = c.getOriginDistinctId();
   if (!q({ distinct_id: r }))
     return B("login id is invalid"), !1;
@@ -3867,16 +3867,16 @@ function Hn(e, t) {
     let u = {
       $identity_cookie_id: c._state.identities.$identity_cookie_id
     };
-    return u[n] = r, Jn(u), !0;
+    return u[n] = r, Mn(u), !0;
   }
   return !1;
 }
-function Jn(e) {
+function Mn(e) {
   let t = {};
   for (let r in e) t[r] = e[r];
   c._state.identities = t, c.save();
 }
-function Xa(e, t) {
+function Ya(e, t) {
   if (!q({ unbindKey: e, bindValue: t }))
     return !1;
   if (d(c._state.identities) && c._state.identities.hasOwnProperty(e) && c._state.identities[e] === t) {
@@ -3886,10 +3886,10 @@ function Xa(e, t) {
   let r = {};
   return r[e] = t, r;
 }
-function Ya() {
-  s._t = s._t || 1 * /* @__PURE__ */ new Date(), s.is_first_visitor = !1, s.source_channel_standard = Sn;
+function Za() {
+  s._t = s._t || 1 * /* @__PURE__ */ new Date(), s.is_first_visitor = !1, s.source_channel_standard = $n;
 }
-function Za(e) {
+function Ga(e) {
   A(h, e || s.para || {}), s.para = h;
   let t, r = {};
   if (d(s.para.is_track_latest))
@@ -3955,19 +3955,19 @@ function Za(e) {
   ];
   if (s.para.heatmap && !d(s.para.heatmap) && (s.para.heatmap = {}), d(s.para.heatmap)) {
     s.para.heatmap.clickmap = s.para.heatmap.clickmap || "default", s.para.heatmap.scroll_notice_map = s.para.heatmap.scroll_notice_map || "default", s.para.heatmap.scroll_delay_time = s.para.heatmap.scroll_delay_time || 4e3, s.para.heatmap.scroll_event_duration = s.para.heatmap.scroll_event_duration || 18e3, s.para.heatmap.renderRefreshTime = s.para.heatmap.renderRefreshTime || 1e3, s.para.heatmap.loadTimeout = s.para.heatmap.loadTimeout || 1e3, s.para.heatmap.request_timeout = s.para.heatmap.request_timeout || 1e4, s.para.heatmap.get_vtrack_config !== !0 && (s.para.heatmap.get_vtrack_config = !1);
-    let p = j(s.para.heatmap.track_attr) ? un(s.para.heatmap.track_attr, (b) => b && typeof b == "string") : [];
+    let p = j(s.para.heatmap.track_attr) ? cn(s.para.heatmap.track_attr, (b) => b && typeof b == "string") : [];
     p.push("data-sensors-click"), s.para.heatmap.track_attr = p, d(s.para.heatmap.collect_tags) ? s.para.heatmap.collect_tags.div === !0 ? s.para.heatmap.collect_tags.div = { ignore_tags: u, max_level: 1 } : d(s.para.heatmap.collect_tags.div) ? (s.para.heatmap.collect_tags.div.ignore_tags ? j(s.para.heatmap.collect_tags.div.ignore_tags) || (k(
       "ignore_tags 参数必须是数组格式"
     ), s.para.heatmap.collect_tags.div.ignore_tags = u) : s.para.heatmap.collect_tags.div.ignore_tags = u, s.para.heatmap.collect_tags.div.max_level && ae([1, 2, 3], s.para.heatmap.collect_tags.div.max_level) === -1 && (s.para.heatmap.collect_tags.div.max_level = 1)) : s.para.heatmap.collect_tags.div = !1 : s.para.heatmap.collect_tags = { div: !1 };
   }
-  s.para.server_url = jn(
+  s.para.server_url = Nn(
     s.para.server_url,
     s.para.custom_server_url
   ), s.para.noCache === !0 ? s.para.noCache = `?${(/* @__PURE__ */ new Date()).getTime()}` : s.para.noCache = "", s.para.callback_timeout > s.para.datasend_timeout && (s.para.datasend_timeout = s.para.callback_timeout), s.para.heatmap && s.para.heatmap.collect_tags && d(s.para.heatmap.collect_tags) && D(s.para.heatmap.collect_tags, (p, b) => {
     b !== "div" && p && s.heatmap.otherTags.push(b);
   }), s.para.heatmap && s.para.heatmap.clickmap === "default" && s.heatmap.initUnlimitedTags();
 }
-let Ga = {
+let Qa = {
   state: 0,
   historyState: [],
   stateType: {
@@ -3983,7 +3983,7 @@ let Ga = {
     String(e) in this.stateType && (this.state = e), this.historyState.push(this.stateType[e]);
   }
 };
-function Qa() {
+function es() {
   let e = Array.prototype.slice.call(arguments), t = e[0], r = e.slice(1);
   if (typeof t == "string" && tr[t])
     return tr[t].apply(tr, r);
@@ -3991,8 +3991,8 @@ function Qa() {
     `quick方法中没有这个功能${e[0]}`
   );
 }
-let es = 1;
-function Mn(e, t) {
+let ts = 1;
+function qn(e, t) {
   if (g(e) || d(e)) {
     let r;
     if (d(e)) {
@@ -4003,22 +4003,22 @@ function Mn(e, t) {
     }
     return g(e) && (d(s.modules) && d(s.modules[e]) ? r = s.modules[e] : d(window.SensorsDataWebJSSDKPlugin) && d(window.SensorsDataWebJSSDKPlugin[e]) ? r = window.SensorsDataWebJSSDKPlugin[e] : window.sensorsDataAnalytic201505 && window.sensorsDataAnalytic201505.modules[e] && (r = window.sensorsDataAnalytic201505.modules[e])), r && $(r.init) ? (r.plugin_is_init || (r.plugin_name || k("warning: invalid plugin, plugin_name required."), r.plugin_version ? r.plugin_version !== s.lib_version && k(
       "warning: plugin version not match SDK version. plugin may not work correctly. "
-    ) : k("warning: invalid plugin, plugin version required."), !r.plugin_is_init && r.init(s, t), r.plugin_is_init = !0, s.modules = s.modules || {}, s.modules[r.plugin_name || `unnamed_${es++}`] = r), r) : (k(
+    ) : k("warning: invalid plugin, plugin version required."), !r.plugin_is_init && r.init(s, t), r.plugin_is_init = !0, s.modules = s.modules || {}, s.modules[r.plugin_name || `unnamed_${ts++}`] = r), r) : (k(
       `${e.plugin_name || e} is not found or it's not a standard plugin. Please check sensorsdata official documents.`
     ), r);
   }
   B("use's first arguments must be string or object.");
 }
-function ts(e, t, r) {
+function rs(e, t, r) {
   q({ event: e, properties: t }) && le.send({ type: "track", event: e, properties: t }, r);
 }
-function rs(e, t) {
+function is(e, t) {
   if (!q({ bindKey: e, bindValue: t }))
     return !1;
   c._state.identities[e] = t, c.save(), le.send({ type: "track_id_bind", event: "$BindID", properties: {} });
 }
-function is(e, t) {
-  let r = Xa(e, t);
+function ns(e, t) {
+  let r = Ya(e, t);
   r && le.send({
     identities: r,
     type: "track_id_unbind",
@@ -4026,10 +4026,10 @@ function is(e, t) {
     properties: {}
   });
 }
-function ns(e, t, r) {
+function as(e, t, r) {
   typeof e == "object" && e.tagName ? mi({ ele: e }, t, r, s.track) : typeof e == "object" && e.target && e.event && mi(e, t, r, s.track);
 }
-function as(e, t, r) {
+function ss(e, t, r) {
   return r = r || {}, !(!e || typeof e != "object") && !(!e.href || e.href.startsWith("javascript") || e.target) && void ot(e, "click", (i) => {
     i.preventDefault();
     let n = !1;
@@ -4039,7 +4039,7 @@ function as(e, t, r) {
     setTimeout(a, 1e3), s.track(t, r, a);
   });
 }
-function ss(e, t, r) {
+function os(e, t, r) {
   q({ item_type: e, item_id: t, properties: r }) && le.sendItem({
     type: "item_set",
     item_type: e,
@@ -4047,23 +4047,23 @@ function ss(e, t, r) {
     properties: r || {}
   });
 }
-function os(e, t) {
+function ls(e, t) {
   q({ item_type: e, item_id: t }) && le.sendItem({ type: "item_delete", item_type: e, item_id: t });
 }
-function ls(e, t) {
+function us(e, t) {
   q({ propertiesMust: e }) && le.send({ type: "profile_set", properties: e }, t);
 }
-function us(e, t) {
+function cs(e, t) {
   q({ propertiesMust: e }) && le.send({ type: "profile_set_once", properties: e }, t);
 }
-function cs(e, t) {
+function ds(e, t) {
   q({ propertiesMust: e }) && (D(e, (r, i) => {
     g(r) && Or(i) ? e[i] = [r] : j(r) && Or(i) ? e[i] = r : (delete e[i], k(
       "appendProfile属性的值必须是字符串或者数组"
     ));
   }), se(e) || le.send({ type: "profile_append", properties: e }, t));
 }
-function ds(e, t) {
+function ps(e, t) {
   let r = e;
   g(e) && ((e = {})[r] = 1), q({ propertiesMust: e }) && (function(i) {
     for (let n in i)
@@ -4072,10 +4072,10 @@ function ds(e, t) {
     return !0;
   }(e) ? le.send({ type: "profile_increment", properties: e }, t) : B("profile_increment的值只能是数字"));
 }
-function ps(e) {
+function gs(e) {
   le.send({ type: "profile_delete" }, e), c.set("distinct_id", rt()), c.set("first_id", "");
 }
-function gs(e, t) {
+function fs(e, t) {
   let r = e, i = {};
   g(e) && (e = []).push(r), j(e) ? (D(e, (n) => {
     g(n) ? i[n] = !0 : k(
@@ -4086,7 +4086,7 @@ function gs(e, t) {
     "profile_unset的参数必须是数组"
   );
 }
-function fs(e) {
+function _s(e) {
   typeof e == "number" && (e = String(e));
   let t = c.getFirstId();
   if (e === void 0) {
@@ -4095,7 +4095,7 @@ function fs(e) {
   } else
     q({ distinct_id: e }) && (t ? c.set("first_id", e) : c.set("distinct_id", e));
 }
-function _s(e) {
+function hs(e) {
   if (c.getFirstId())
     return B("resetAnonymousIdentity must be used in a logout state ！"), !1;
   if (typeof e == "number" && (e = String(e)), e === void 0) {
@@ -4117,16 +4117,16 @@ function ai(e, t, r, i) {
     i
   );
 }
-function hs(e, t, r, i) {
+function ms(e, t, r, i) {
   typeof e == "number" && (e = String(e)), q({ distinct_id: e, event: t, properties: r }) && ai(e, t, r, i);
 }
-function ms(e) {
+function ys(e) {
   q({ properties: e }) ? A(T.currentProps, e) : B("register输入的参数有误");
 }
-function ys(e) {
+function vs(e) {
   c.clearAllProps(e);
 }
-function vs(e) {
+function bs(e) {
   let t;
   if (j(e) && e.length > 0)
     for (t = 0; t < e.length; t++)
@@ -4134,31 +4134,31 @@ function vs(e) {
   else if (e === !0)
     for (t in T.currentProps) delete T.currentProps[t];
 }
-function qn(e) {
+function Kn(e) {
   q({ properties: e }) ? c.setProps(e) : B("register输入的参数有误");
 }
-function bs(e) {
+function ws(e) {
   q({ properties: e }) ? c.setPropsOnce(e) : B("registerOnce输入的参数有误");
 }
-function ws(e) {
+function Ss(e) {
   s.log(
     "registerSession 方法已经弃用，有问题联系技术顾问"
   ), q({ properties: e }) ? c.setSessionProps(e) : B("registerSession输入的参数有误");
 }
-function Ss(e) {
+function $s(e) {
   s.log(
     "registerSessionOnce 方法已经弃用，有问题联系技术顾问"
   ), q({ properties: e }) ? c.setSessionPropsOnce(e) : B(
     "registerSessionOnce输入的参数有误"
   );
 }
-function Kn(e, t) {
-  typeof e == "number" && (e = String(e)), !Hn({ id: e, callback: t, name: Ut.LOGIN }, ai) && $(t) && t();
+function Vn(e, t) {
+  typeof e == "number" && (e = String(e)), !Jn({ id: e, callback: t, name: Ut.LOGIN }, ai) && $(t) && t();
 }
-function $s(e, t) {
-  return k("loginWithKey is deprecated !!!"), typeof t == "number" && (t = String(t)), typeof e == "number" && (e = String(e)), !!q({ loginIdKey: e }) && (Ut.LOGIN === e ? (Kn(t), !1) : void Hn({ id: t, callback: null, name: e }, ai));
+function ks(e, t) {
+  return k("loginWithKey is deprecated !!!"), typeof t == "number" && (t = String(t)), typeof e == "number" && (e = String(e)), !!q({ loginIdKey: e }) && (Ut.LOGIN === e ? (Vn(t), !1) : void Jn({ id: t, callback: null, name: e }, ai));
 }
-function ks(e) {
+function Fs(e) {
   let t = c.getFirstId();
   if (t)
     if (c.set("first_id", ""), e === !0) {
@@ -4166,11 +4166,11 @@ function ks(e) {
       c.set("distinct_id", r);
     } else
       c.set("distinct_id", t);
-  Jn({
+  Mn({
     $identity_cookie_id: c._state.identities.$identity_cookie_id
   }), c.set("history_login_id", { name: "", value: "" });
 }
-function Fs() {
+function Cs() {
   let e, t, r = {
     $is_first_day: or(),
     $is_first_time: Rt.is_page_first_visited,
@@ -4192,53 +4192,53 @@ function Fs() {
   );
   return s.para.preset_properties.latest_referrer && s.para.preset_properties.latest_referrer_host && (i.$latest_referrer_host = i.$latest_referrer === "" ? "" : Re(i.$latest_referrer)), i;
 }
-let Cs = {
+let Es = {
   __proto__: null,
-  setInitVar: Ya,
-  initPara: Za,
-  quick: Qa,
-  use: Mn,
-  track: ts,
-  bind: rs,
-  unbind: is,
-  trackLink: ns,
-  trackLinks: as,
-  setItem: ss,
-  deleteItem: os,
-  setProfile: ls,
-  setOnceProfile: us,
-  appendProfile: cs,
-  incrementProfile: ds,
-  deleteProfile: ps,
-  unsetProfile: gs,
-  identify: fs,
-  resetAnonymousIdentity: _s,
-  trackSignup: hs,
-  registerPage: ms,
-  clearAllRegister: ys,
-  clearPageRegister: vs,
-  register: qn,
-  registerOnce: bs,
-  registerSession: ws,
-  registerSessionOnce: Ss,
-  login: Kn,
-  loginWithKey: $s,
-  logout: ks,
-  getPresetProperties: Fs,
-  readyState: Ga,
+  setInitVar: Za,
+  initPara: Ga,
+  quick: es,
+  use: qn,
+  track: rs,
+  bind: is,
+  unbind: ns,
+  trackLink: as,
+  trackLinks: ss,
+  setItem: os,
+  deleteItem: ls,
+  setProfile: us,
+  setOnceProfile: cs,
+  appendProfile: ds,
+  incrementProfile: ps,
+  deleteProfile: gs,
+  unsetProfile: fs,
+  identify: _s,
+  resetAnonymousIdentity: hs,
+  trackSignup: ms,
+  registerPage: ys,
+  clearAllRegister: vs,
+  clearPageRegister: bs,
+  register: Kn,
+  registerOnce: ws,
+  registerSession: Ss,
+  registerSessionOnce: $s,
+  login: Vn,
+  loginWithKey: ks,
+  logout: Fs,
+  getPresetProperties: Cs,
+  readyState: Qa,
   debug: et,
-  on: On,
+  on: Tn,
   log: Je
 };
 ee.setup(Je);
-let Vn = A({}, Ea, Ia);
-function Es() {
+let Wn = A({}, Da, ja);
+function Ds() {
   let e = "", t = " { cursor: pointer; -webkit-tap-highlight-color: rgba(0,0,0,0); }";
   s.heatmap && j(s.heatmap.otherTags) && D(s.heatmap.otherTags, (r) => {
     e += r + t;
-  }), hn() && Ir() && Ir() < 13 && (s.para.heatmap && s.para.heatmap.collect_tags && s.para.heatmap.collect_tags.div && Zt(`div, [data-sensors-click]${t}`), s.para.heatmap && s.para.heatmap.track_attr && Zt(`[${s.para.heatmap.track_attr.join("], [")}]${t}`), e !== "" && Zt(e));
+  }), mn() && Ir() && Ir() < 13 && (s.para.heatmap && s.para.heatmap.collect_tags && s.para.heatmap.collect_tags.div && Zt(`div, [data-sensors-click]${t}`), s.para.heatmap && s.para.heatmap.track_attr && Zt(`[${s.para.heatmap.track_attr.join("], [")}]${t}`), e !== "" && Zt(e));
 }
-let Ds = {
+let Ps = {
   bridge_info: {
     touch_app_bridge: !1,
     verify_success: !1,
@@ -4279,7 +4279,7 @@ let Ds = {
     let e = window.SensorsData_App_Visual_Bridge, t = "sensorsdata_visualized_mode";
     return d(e) && e[t] && (e[t] === !0 || e[t]());
   },
-  validateAppUrl: Ps
+  validateAppUrl: As
 };
 function jt(e) {
   let t = this;
@@ -4319,7 +4319,7 @@ function vi(e) {
     `数据发往App失败，App没有暴露bridge,type:${e.callType}`
   ), !1;
 }
-function Ps(e) {
+function As(e) {
   function t(n) {
     let a = { hostname: "", project: "" };
     try {
@@ -4340,10 +4340,10 @@ function Ps(e) {
     }
   return !1;
 }
-function Wn(e) {
+function zn(e) {
   this.bridge = new jt(e.type);
 }
-function As() {
+function Bs() {
   let e = T.pageProp.url_domain, t = {};
   e === "" && (e = "url解析失败");
   let r = It(document.referrer, !0);
@@ -4370,7 +4370,7 @@ function As() {
             t.$latest_landing_page = oe();
             break;
           case "wx_ad_click_id":
-            var a = Dn(location.href);
+            var a = Pn(location.href);
             t._latest_wx_ad_click_id = a.click_id, t._latest_wx_ad_hash_key = a.hash_key, t._latest_wx_ad_callbacks = a.callbacks;
         }
     } else if (n === "utm" && c._state && c._state.props)
@@ -4390,7 +4390,7 @@ function As() {
     let i = T.campaignParamsStandard("$latest_", "_latest_"), n = i.$utms, a = i.otherUtms;
     se(n) || A(t, n), se(a) || A(t, a);
   }
-  qn(t);
+  Kn(t);
 }
 function bi(e) {
   let t = null;
@@ -4422,7 +4422,7 @@ jt.prototype.call = function(e, t) {
 }, jt.prototype.notifyApp = function(e, t) {
   let r = A({ callType: this.type }, e);
   return t && (r.message_id = t), vi(r);
-}, Wn.prototype = {
+}, zn.prototype = {
   double() {
   },
   getAppData() {
@@ -4515,7 +4515,7 @@ var Ye = {
       error() {
       },
       type: "js",
-      url: s.para.vtrack_url ? s.para.vtrack_url : `${Rn()}//static.sensorsdata.cn/sdk/${s.lib_version}/vtrack.min.js`
+      url: s.para.vtrack_url ? s.para.vtrack_url : `${Hn()}//static.sensorsdata.cn/sdk/${s.lib_version}/vtrack.min.js`
     });
   },
   messageListener(e) {
@@ -4596,7 +4596,7 @@ function wr(e) {
     else
       r();
 }
-function Bs(e) {
+function Is(e) {
   s.para.is_track_single_page && Tr.on("switch", (t) => {
     let r = function(i) {
       if (i = i || {}, t !== location.href) {
@@ -4613,23 +4613,23 @@ function Bs(e) {
     }
   });
 }
-function Is() {
+function js() {
   s._q && j(s._q) && s._q.length > 0 && D(s._q, (e) => {
     s[e[0]].apply(s, Array.prototype.slice.call(e[1]));
   }), d(s.para.heatmap) && (Ae.initHeatmap(), Ae.initScrollmap());
 }
-function js() {
+function Ns() {
   s.readyState.setState(3), new s.SDKJSBridge("visualized").onAppNotify(() => {
     wr(typeof sa_jssdk_app_define_mode < "u");
-  }), wr(!1), s.bridge.app_js_bridge_v1(), T.initPage(), Bs(), c.init(), As(), Os(), s.readyState.setState(4), Is();
-}
-function Ns() {
-  Ye.isWindowNameHasKeyword() ? Ye.windowNameHasKeywordHandle() : Ye.isSeachHasKeyword() ? Ye.hasKeywordHandle() : window.parent !== self && Be.isSearchHasKeyword() ? Be.verifyVtrackMode() : Ye.isStorageHasKeyword() ? Ye.storageHasKeywordHandle() : window.parent !== self && Be.isStorageHasKeyword() ? Be.verifyVtrackMode() : (js(), Be.notifyUser());
+  }), wr(!1), s.bridge.app_js_bridge_v1(), T.initPage(), Is(), c.init(), Bs(), Ts(), s.readyState.setState(4), js();
 }
 function Os() {
+  Ye.isWindowNameHasKeyword() ? Ye.windowNameHasKeywordHandle() : Ye.isSeachHasKeyword() ? Ye.hasKeywordHandle() : window.parent !== self && Be.isSearchHasKeyword() ? Be.verifyVtrackMode() : Ye.isStorageHasKeyword() ? Ye.storageHasKeywordHandle() : window.parent !== self && Be.isStorageHasKeyword() ? Be.verifyVtrackMode() : (Ns(), Be.notifyUser());
+}
+function Ts() {
   it.init(), s.bridge.bridge_info.verify_success === "success" && ri.init();
 }
-let Ts = [
+let Ls = [
   "setItem",
   "deleteItem",
   "getAppStatus",
@@ -4657,7 +4657,7 @@ let Ts = [
   "loginWithKey"
 ];
 function wi() {
-  D(Ts, (e) => {
+  D(Ls, (e) => {
     let t = s[e];
     s[e] = function() {
       if (s.readyState.state < 3)
@@ -4670,7 +4670,7 @@ function wi() {
     };
   });
 }
-let Ls = {
+let xs = {
   track(e, t, r) {
   },
   quick(e, t, r, i) {
@@ -4722,7 +4722,7 @@ let Ls = {
   registerPropertyPlugin(e) {
   }
 };
-function xs(e, t) {
+function Us(e, t) {
   this.cancel = function() {
     e = !0;
   }, this.getCanceled = function() {
@@ -4733,7 +4733,7 @@ function xs(e, t) {
     return t || !1;
   };
 }
-function Us(e, t, r) {
+function Rs(e, t, r) {
   let i = null;
   try {
     i = JSON.parse(JSON.stringify(e || null));
@@ -4743,7 +4743,7 @@ function Us(e, t, r) {
     return i;
   }, this.getPosition = function() {
     return t;
-  }, this.cancellationToken = new xs(), this.sensors = r;
+  }, this.cancellationToken = new Us(), this.sensors = r;
 }
 function ft(e) {
   if (!d(e))
@@ -4754,7 +4754,7 @@ ft.prototype.process = function(e, t) {
   if (e && e in this.processDef) {
     let r = this.registeredInterceptors[e];
     if (r && j(r) && r.length > 0)
-      for (let i = { current: 0, total: r.length }, n = new Us(t, i, s), a = 0; a < r.length; a++)
+      for (let i = { current: 0, total: r.length }, n = new Rs(t, i, s), a = 0; a < r.length; a++)
         try {
           if (i.current = a + 1, t = r[a].call(null, t, n) || t, n.cancellationToken.getCanceled())
             break;
@@ -4779,27 +4779,27 @@ ft.prototype.process = function(e, t) {
       }
     }
 };
-let Rs = {
+let Hs = {
   basicProps: "extendProps",
   extendProps: "formatData",
   formatData: "finalAdjustData",
   finalAdjustData: null
-}, zn = new ft(Rs), Hs = { send: null }, Xn = new ft(Hs), Js = { getUtmData: null, callSchema: null }, Yn = new ft(Js), Ms = { webClickEvent: null, webStayEvent: null }, Zn = new ft(Ms);
+}, Xn = new ft(Hs), Js = { send: null }, Yn = new ft(Js), Ms = { getUtmData: null, callSchema: null }, Zn = new ft(Ms), qs = { webClickEvent: null, webStayEvent: null }, Gn = new ft(qs);
 function Sr(e) {
-  e && e.buildDataStage && zn.registerStageImplementation(e.buildDataStage), e && e.businessStage && Yn.registerStageImplementation(e.businessStage), e && e.sendDataStage && Xn.registerStageImplementation(e.sendDataStage), e && e.viewStage && Zn.registerStageImplementation(e.viewStage);
+  e && e.buildDataStage && Xn.registerStageImplementation(e.buildDataStage), e && e.businessStage && Zn.registerStageImplementation(e.businessStage), e && e.sendDataStage && Yn.registerStageImplementation(e.sendDataStage), e && e.viewStage && Gn.registerStageImplementation(e.viewStage);
 }
 let Si = {
   buildDataStage(e) {
-    e && zn.registerInterceptor(e);
-  },
-  businessStage(e) {
-    e && Yn.registerInterceptor(e);
-  },
-  sendDataStage(e) {
     e && Xn.registerInterceptor(e);
   },
-  viewStage(e) {
+  businessStage(e) {
     e && Zn.registerInterceptor(e);
+  },
+  sendDataStage(e) {
+    e && Yn.registerInterceptor(e);
+  },
+  viewStage(e) {
+    e && Gn.registerInterceptor(e);
   }
 };
 function Rr(e, t) {
@@ -4811,10 +4811,10 @@ let Hr = {
     this.stage = e;
   }
 };
-function qs() {
+function Ks() {
   return Hr.stage && Hr.stage.process("getUtmData");
 }
-let Gn = {
+let Qn = {
   stage: null,
   init(e) {
     this.stage = e;
@@ -4827,21 +4827,21 @@ let Gn = {
     }
   }
 };
-function Ks(e) {
-  return Gn.stage.process("send", e);
+function Vs(e) {
+  return Qn.stage.process("send", e);
 }
 let Pt = {};
-function Vs(e) {
-  e.kit = Pt, e.saEvent = le, this.buildDataStage = ii, this.sendDataStage = Gn, this.businessStage = Hr;
-}
 function Ws(e) {
+  e.kit = Pt, e.saEvent = le, this.buildDataStage = ii, this.sendDataStage = Qn, this.businessStage = Hr;
+}
+function zs(e) {
   e.heatmap = Ae, this.viewStage = ni;
 }
 Pt.buildData = function(e) {
-  return Ka(e);
+  return Va(e);
 }, Pt.sendData = function(e, t) {
-  let r = An(e.properties);
-  Ks({
+  let r = Bn(e.properties);
+  Vs({
     origin_data: e,
     server_url: s.para.server_url,
     data: e,
@@ -4849,11 +4849,11 @@ Pt.buildData = function(e) {
     callback: t
   }), s.log(e);
 }, Pt.encodeTrackData = function(e) {
-  return Nn(e);
+  return On(e);
 }, Pt.getUtmData = function() {
-  return qs();
+  return Ks();
 };
-let zs = {
+let Xs = {
   webClickEvent: {
     entry(e, t) {
       let r = t.sensors;
@@ -4870,7 +4870,7 @@ let zs = {
     }
   }
 };
-function Xs(e) {
+function Ys(e) {
   $(e.properties) ? !e.isMatchedWithFilter || $(e.isMatchedWithFilter) ? Rr("buildDataStage", {
     finalAdjustData: {
       priority: 100,
@@ -4890,23 +4890,23 @@ function Xs(e) {
     "registerPropertyPlugin arguments error, properties must be function"
   );
 }
-let $i = window.sensors_data_pre_config, ki = !!Vn.isObject($i) && $i.is_compliance_enabled;
+let $i = window.sensors_data_pre_config, ki = !!Wn.isObject($i) && $i.is_compliance_enabled;
 function $r(e) {
-  e && (s.events = Ln, s.bridge = Ds, s.SDKJSBridge = jt, s.JSBridge = Wn, s.store = c, s.unlimitedDiv = dr, s.customProp = Un, s.vtrackcollect = it, s.vapph5collect = ri, s.detectMode = Ns, s.registerFeature = Sr, s.registerInterceptor = Rr, s.commonWays = tr, Sr(new Vs(s)), Sr(new Ws(s)), Rr("viewStage", zs));
-  let t = e ? Cs : Ls;
+  e && (s.events = xn, s.bridge = Ps, s.SDKJSBridge = jt, s.JSBridge = zn, s.store = c, s.unlimitedDiv = dr, s.customProp = Rn, s.vtrackcollect = it, s.vapph5collect = ri, s.detectMode = Os, s.registerFeature = Sr, s.registerInterceptor = Rr, s.commonWays = tr, Sr(new Ws(s)), Sr(new zs(s)), Rr("viewStage", Xs));
+  let t = e ? Es : xs;
   for (let r in t) s[r] = t[r];
-  s.logger = mt, s.log = Je, s._ = Vn, s.on = On, s.ee = z, s.use = Mn, s.lib_version = _r, s.registerPropertyPlugin = Xs;
+  s.logger = mt, s.log = Je, s._ = Wn, s.on = Tn, s.ee = z, s.use = qn, s.lib_version = _r, s.registerPropertyPlugin = Ys;
 }
 s.init = function(e) {
   if (z.sdk.emit("beforeInit"), s.readyState && s.readyState.state && s.readyState.state >= 2)
     return !1;
-  ki && ($r(!0), wi()), z.initSystemEvent(), s.setInitVar(), s.readyState.setState(2), s.initPara(e), z.sdk.emit("initPara"), z.sdk.emit("afterInitPara"), z.sdk.emit("initAPI"), z.sdk.emit("afterInitAPI"), s.detectMode(), Es(), z.sdk.emit("afterInit"), z.sdk.emit("ready");
+  ki && ($r(!0), wi()), z.initSystemEvent(), s.setInitVar(), s.readyState.setState(2), s.initPara(e), z.sdk.emit("initPara"), z.sdk.emit("afterInitPara"), z.sdk.emit("initAPI"), z.sdk.emit("afterInitAPI"), s.detectMode(), Ds(), z.sdk.emit("afterInit"), z.sdk.emit("ready");
 }, ki ? $r(!1) : ($r(!0), wi());
-let Ys = "1.27.11";
-function Zs(e, t, r) {
-  return e.plugin_version = Ys, e;
+let Zs = "1.27.11";
+function Gs(e, t, r) {
+  return e.plugin_version = Zs, e;
 }
-let Gs = {
+let Qs = {
   init(e) {
     let t = e._.isString, r = e._.rot13defs, i = e._.dfmapping, n = "data:enc;";
     e.ee.sdk.on("afterInitPara", () => {
@@ -4920,12 +4920,12 @@ let Gs = {
     });
   },
   plugin_name: "UserEncryptDefault"
-}, Qs = Zs(Gs), eo = "1.27.11";
-function to(e, t, r) {
+}, eo = Gs(Qs), to = "1.27.11";
+function ro(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (ro(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (io(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -4935,7 +4935,7 @@ function to(e, t, r) {
   }
   return e;
 }
-function ro(e, t, r) {
+function io(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -4947,10 +4947,10 @@ function ro(e, t, r) {
     i("error", arguments);
   };
 }
-function io(e, t, r) {
-  return to(e, t, r), e.plugin_version = eo, e;
+function no(e, t, r) {
+  return ro(e, t, r), e.plugin_version = to, e;
 }
-let no = {
+let ao = {
   sd: null,
   init(e) {
     if (this.sd || (this.sd = e, !this.sd || !this.sd._))
@@ -4985,29 +4985,29 @@ let no = {
   setAmpId(e) {
     this.sd._.cookie.set("sensors_amp_id", e);
   }
-}, ao = io(no, "Amp", "sdkReady"), We = window.SensorsData_App_Visual_Bridge, so = We && We.sensorsdata_visualized_mode, Fi = We && We.sensorsdata_visualized_alert_info, Ci = We && We.sensorsdata_hover_web_nodes;
-function oo(e) {
+}, so = no(ao, "Amp", "sdkReady"), We = window.SensorsData_App_Visual_Bridge, oo = We && We.sensorsdata_visualized_mode, Fi = We && We.sensorsdata_visualized_alert_info, Ci = We && We.sensorsdata_hover_web_nodes;
+function lo(e) {
   return Fi && Fi.call(We, JSON.stringify(e));
 }
 function Ei(e) {
-  return so.call(We) && Ci && Ci.call(We, JSON.stringify(e));
+  return oo.call(We) && Ci && Ci.call(We, JSON.stringify(e));
 }
-function lo(e, t) {
+function uo(e, t) {
   return t && typeof t[e.callType] == "function" && t[e.callType]();
 }
 let Ie, pr, Et, M, Nt, _t, Di = {
   commands: {
-    app_alert: oo,
+    app_alert: lo,
     visualized_track: Ei,
     page_info: Ei,
-    sensorsdata_get_app_visual_config: lo
+    sensorsdata_get_app_visual_config: uo
   }
-}, uo = "1.27.11";
-function co(e, t, r) {
+}, co = "1.27.11";
+function po(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (po(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (go(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -5017,7 +5017,7 @@ function co(e, t, r) {
   }
   return e;
 }
-function po(e, t, r) {
+function go(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -5029,29 +5029,29 @@ function po(e, t, r) {
     i("error", arguments);
   };
 }
-function go(e, t, r) {
-  return co(e, t, r), e.plugin_version = uo, e;
+function fo(e, t, r) {
+  return po(e, t, r), e.plugin_version = co, e;
 }
-let Qn = {
+let ea = {
   init(e) {
     Nt = (M = e) && M._, _t = M && M.log || console && console.log || function() {
-    }, fo();
+    }, _o();
   },
-  handleCommand: ho
+  handleCommand: mo
 };
-function fo() {
-  Ie = window.SensorsData_APP_New_H5_Bridge, pr = Ie && Ie.sensorsdata_track, Et = pr && Ie.sensorsdata_get_server_url && Ie.sensorsdata_get_server_url(), _t("---test---fail---", !M, M.bridge.activeBridge, !Et), M && !M.bridge.activeBridge && Et && (M.bridge.activeBridge = Qn, M.para.app_js_bridge && !M.para.app_js_bridge.is_mui && (M.bridge.is_verify_success = Et && M.bridge.validateAppUrl(Et), _t("---test---bridge-verify-", M.bridge.is_verify_success)), M.bridge.bridge_info = {
+function _o() {
+  Ie = window.SensorsData_APP_New_H5_Bridge, pr = Ie && Ie.sensorsdata_track, Et = pr && Ie.sensorsdata_get_server_url && Ie.sensorsdata_get_server_url(), _t("---test---fail---", !M, M.bridge.activeBridge, !Et), M && !M.bridge.activeBridge && Et && (M.bridge.activeBridge = ea, M.para.app_js_bridge && !M.para.app_js_bridge.is_mui && (M.bridge.is_verify_success = Et && M.bridge.validateAppUrl(Et), _t("---test---bridge-verify-", M.bridge.is_verify_success)), M.bridge.bridge_info = {
     touch_app_bridge: !0,
     platform: "android",
     verify_success: M.bridge.is_verify_success ? "success" : "fail",
     support_two_way_call: !!Ie.sensorsdata_js_call_app
   }, M.para.app_js_bridge ? M.registerInterceptor("sendDataStage", {
-    send: { priority: 60, entry: _o }
+    send: { priority: 60, entry: ho }
   }) : _t(
     "---test---app_js_bridge is not configured, data will not be sent by android bridge."
   ));
 }
-function _o(e, t) {
+function ho(e, t) {
   if (_t("---test---datasend-", M.bridge.is_verify_success), M.para.app_js_bridge.is_mui || e.data.type === "item_set" || e.data.type === "item_delete")
     return e;
   let r = e.callback;
@@ -5062,39 +5062,39 @@ function _o(e, t) {
     )
   ), Nt.isFunction(r) && r(), t.cancellationToken.cancel(), e) : (_t("---test---bridge-verify-fail-----", M.bridge.is_verify_success), M.para.app_js_bridge.is_send ? (M.debug.apph5({ data: e.data, step: "4.2", output: "all" }), e) : (Nt.isFunction(r) && r(), t.cancellationToken.cancel(), e));
 }
-function ho(e) {
+function mo(e) {
   let t = e.callType;
   if (t in Di.commands)
     return Di.commands[t](e, Ie);
   Ie && Nt.isFunction(Ie.sensorsdata_js_call_app) && Ie.sensorsdata_js_call_app(JSON.stringify(e));
 }
-let Pi = go(
-  Qn,
+let Pi = fo(
+  ea,
   "AndroidBridge",
   "sdkAfterInitPara"
-), ze = window.SensorsData_App_Visual_Bridge, mo = ze && ze.sensorsdata_visualized_mode, Ai = ze && ze.sensorsdata_visualized_alert_info, Bi = ze && ze.sensorsdata_hover_web_nodes;
-function yo(e) {
+), ze = window.SensorsData_App_Visual_Bridge, yo = ze && ze.sensorsdata_visualized_mode, Ai = ze && ze.sensorsdata_visualized_alert_info, Bi = ze && ze.sensorsdata_hover_web_nodes;
+function vo(e) {
   return Ai && Ai.call(ze, JSON.stringify(e));
 }
 function Ii(e) {
-  return mo.call(ze) && Bi && Bi.call(ze, JSON.stringify(e));
+  return yo.call(ze) && Bi && Bi.call(ze, JSON.stringify(e));
 }
-function vo(e, t) {
+function bo(e, t) {
   return t && typeof t[e.callType] == "function" && t[e.callType]();
 }
 let he, vt, lt, Dt, G, at, Pe, kr = {
   commands: {
-    app_alert: yo,
+    app_alert: vo,
     visualized_track: Ii,
     page_info: Ii,
-    sensorsdata_get_app_visual_config: vo
+    sensorsdata_get_app_visual_config: bo
   }
-}, bo = "1.27.11";
-function wo(e, t, r) {
+}, wo = "1.27.11";
+function So(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (So(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if ($o(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -5104,7 +5104,7 @@ function wo(e, t, r) {
   }
   return e;
 }
-function So(e, t, r) {
+function $o(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -5116,17 +5116,17 @@ function So(e, t, r) {
     i("error", arguments);
   };
 }
-function $o(e, t, r) {
-  return wo(e, t, r), e.plugin_version = bo, e;
+function ko(e, t, r) {
+  return So(e, t, r), e.plugin_version = wo, e;
 }
-let ea = {
+let ta = {
   init(e) {
     at = (G = e) && G._, Pe = G && G.log || console && console.log || function() {
-    }, ko();
+    }, Fo();
   },
-  handleCommand: Co
+  handleCommand: Eo
 };
-function ko() {
+function Fo() {
   if (Pe("ObsoleteBridge---test---init---"), he = window.SensorsData_APP_JS_Bridge, vt = he && he.sensorsdata_track, lt = he && he.sensorsdata_verify, Dt = he && he.sensorsdata_visual_verify, Pe(
     "ObsoleteBridge-",
     G.bridge.activeBridge,
@@ -5134,7 +5134,7 @@ function ko() {
     vt,
     Dt
   ), G && !G.bridge.activeBridge && (lt || vt || Dt)) {
-    G.bridge.activeBridge = ea;
+    G.bridge.activeBridge = ta;
     let e = lt || vt;
     Dt && (e = !!Dt.call(
       he,
@@ -5144,13 +5144,13 @@ function ko() {
       platform: "android",
       verify_success: e ? "success" : "fail"
     }, G.para.app_js_bridge ? (G.registerInterceptor("sendDataStage", {
-      send: { priority: 80, entry: Fo }
+      send: { priority: 80, entry: Co }
     }), Pe("Android obsolete bridge inits succeed.")) : Pe(
       "app_js_bridge is not configured, data will not be sent by android obsolete bridge."
     );
   }
 }
-function Fo(e, t) {
+function Co(e, t) {
   if (Pe("ObsoleteBridge---senddata"), G.para.app_js_bridge.is_mui || e.data.type === "item_set" || e.data.type === "item_delete")
     return e;
   let r = e.callback;
@@ -5170,21 +5170,21 @@ function Fo(e, t) {
     )
   ), at.isFunction(r) && r(), t.cancellationToken.cancel(), e;
 }
-function Co(e) {
+function Eo(e) {
   Pe("ObsoleteBridge---handleCommadn");
   let t = e.callType;
   return t in kr.commands ? (Pe("ObsoleteBridge---", t, kr.commands), kr.commands[t](e, he)) : he && at.isFunction(he.sensorsdata_js_call_app) ? (Pe("ObsoleteBridge---handleCommadn-abridge"), he.sensorsdata_js_call_app(JSON.stringify(e))) : void 0;
 }
-let _e, $e, Fr, Cr, ji = $o(
-  ea,
+let _e, $e, Fr, Cr, ji = ko(
+  ta,
   "AndroidObsoleteBridge",
   "sdkAfterInitPara"
-), Eo = "1.27.11";
-function Do(e, t, r) {
+), Do = "1.27.11";
+function Po(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (Po(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (Ao(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -5194,7 +5194,7 @@ function Do(e, t, r) {
   }
   return e;
 }
-function Po(e, t, r) {
+function Ao(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -5206,8 +5206,8 @@ function Po(e, t, r) {
     i("error", arguments);
   };
 }
-function Ao(e, t, r) {
-  return Do(e, t, r), e.plugin_version = Eo, e;
+function Bo(e, t, r) {
+  return Po(e, t, r), e.plugin_version = Do, e;
 }
 let Mt;
 var ke = {
@@ -5308,12 +5308,12 @@ var ke = {
     }
   }
 };
-let Bo = Ao(ke, "SensorsChannel", "sdkAfterInitAPI"), Io = "1.27.11";
-function jo(e, t, r) {
+let Io = Bo(ke, "SensorsChannel", "sdkAfterInitAPI"), jo = "1.27.11";
+function No(e, t, r) {
   if (e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (No(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (Oo(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -5323,7 +5323,7 @@ function jo(e, t, r) {
   }
   return e;
 }
-function No(e, t, r) {
+function Oo(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -5335,33 +5335,33 @@ function No(e, t, r) {
     i("error", arguments);
   };
 }
-function Oo(e, t, r) {
-  return jo(e, t, r), e.plugin_version = Io, e;
+function To(e, t, r) {
+  return No(e, t, r), e.plugin_version = jo, e;
 }
-let ta = function() {
+let ra = function() {
   let e = {};
   return typeof document.hidden < "u" ? (e.hidden = "hidden", e.visibilityChange = "visibilitychange") : typeof document.msHidden < "u" ? (e.hidden = "msHidden", e.visibilityChange = "msvisibilitychange") : typeof document.webkitHidden < "u" && (e.hidden = "webkitHidden", e.visibilityChange = "webkitvisibilitychange"), e;
 };
-function ra() {
+function ia() {
   return Mt !== void 0 && document[Mt];
 }
-Mt = ta().hidden;
+Mt = ra().hidden;
 let Er, ht, W, Ot, Jr, Mr = {
   android: /Android/i,
   iOS: /iPhone|iPad|iPod/i,
   harmony: /OpenHarmony/i
-}, To = function() {
+}, Lo = function() {
   for (let e in Mr)
     if (navigator.userAgent.match(Mr[e]))
       return e;
   return "";
-}, rr = To(), Lo = function() {
+}, rr = Lo(), xo = function() {
   return Mr.hasOwnProperty(rr);
 }, Xt = function(e) {
   return e != null && Object.prototype.toString.call(e) == "[object Object]";
-}, xo = function(e) {
-  return e.match(/\/sd\/(\w+)\/(\w+)$/);
 }, Uo = function(e) {
+  return e.match(/\/sd\/(\w+)\/(\w+)$/);
+}, Ro = function(e) {
   let t = e._.URL(e.para.server_url);
   return {
     origin: t.origin,
@@ -5371,16 +5371,16 @@ let Er, ht, W, Ot, Jr, Mr = {
   e.log("尝试唤起 android app");
   let i = t;
   e.log(`唤起APP的地址：${i}`), window.location = i, e.timer = setTimeout(() => {
-    let n = ra();
+    let n = ia();
     if (e.log(`hide:${Mt}:${document[Mt]}`), n)
       return e.log("The page is hidden, stop navigating to download page"), !1;
     e.log(
       "App可能未安装，跳转到下载地址"
     ), window.location = r;
   }, e.timeout);
-}, Ro = function(e, t, r) {
+}, Ho = function(e, t, r) {
   e.log(`尝试唤起 iOS app:${t}`), window.location.href = t, e.timer = setTimeout(() => {
-    if (ra())
+    if (ia())
       return e.log("The page is hidden, stop navigating to download page"), !1;
     e.log(
       "App可能未安装，跳转到下载地址"
@@ -5400,7 +5400,7 @@ var At = {
       return this.logger("deeplink已经初始化"), !1;
     arguments[0] ? Xt(arguments[0]) && typeof arguments[0].timeout == "number" ? this.sd = window.sensorsDataAnalytic201505 : this.sd = e : this.sd = window.sensorsDataAnalytic201505;
     let t = {};
-    if (arguments.length > 0 && (arguments.length === 1 && Xt(arguments[0]) ? t = arguments[0] : arguments.length >= 2 && Xt(arguments[1]) && (t = arguments[1])), !Lo())
+    if (arguments.length > 0 && (arguments.length === 1 && Xt(arguments[0]) ? t = arguments[0] : arguments.length >= 2 && Xt(arguments[1]) && (t = arguments[1])), !xo())
       return this.logger(
         "不支持当前系统，目前只支持Android和iOS"
       ), !1;
@@ -5408,7 +5408,7 @@ var At = {
       return this.logger(
         "神策JS SDK配置项server_url未正确配置"
       ), !1;
-    let r = Uo(this.sd);
+    let r = Ro(this.sd);
     this.apiURL = this.apiURL.replace("{origin}", r.origin).replace("{project}", r.project);
     let i = this.sd._.getQueryParam(window.location.href, "deeplink");
     if (!i)
@@ -5416,7 +5416,7 @@ var At = {
         "当前页面缺少deeplink参数"
       ), !1;
     i = window.decodeURIComponent(i);
-    let n = xo(i);
+    let n = Uo(i);
     if (!n)
       return this.logger(
         "当前页面的deeplink参数无效"
@@ -5447,7 +5447,7 @@ var At = {
     if (rr === "iOS") {
       this.logger("当前系统是iOS");
       let e = this.sd && this.sd._ && this.sd._.getIOSVersion() >= 9 && this.data.ios_info.ios_wake_url ? this.data.ios_info.ios_wake_url : this.data.ios_info.url_schemes;
-      this.logger(`唤起APP的地址：${e}`), Ro(this, e, this.data.ios_info.download_url);
+      this.logger(`唤起APP的地址：${e}`), Ho(this, e, this.data.ios_info.download_url);
     } else if (rr === "android")
       this.logger("当前系统是 android"), Ni(
         this,
@@ -5463,7 +5463,7 @@ var At = {
     this.sd && this.sd.log(e);
   },
   addListeners() {
-    let e = ta().visibilityChange, t = this;
+    let e = ra().visibilityChange, t = this;
     e && document.addEventListener(
       e,
       () => {
@@ -5479,12 +5479,12 @@ var At = {
     );
   }
 };
-let Ho = Oo(At, null, "sdkReady"), Jo = "1.27.11";
-function Mo(e, t, r) {
+let Jo = To(At, null, "sdkReady"), Mo = "1.27.11";
+function qo(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (qo(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (Ko(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -5494,7 +5494,7 @@ function Mo(e, t, r) {
   }
   return e;
 }
-function qo(e, t, r) {
+function Ko(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -5506,31 +5506,31 @@ function qo(e, t, r) {
     i("error", arguments);
   };
 }
-function Ko(e, t, r) {
-  return Mo(e, t, r), e.plugin_version = Jo, e;
+function Vo(e, t, r) {
+  return qo(e, t, r), e.plugin_version = Mo, e;
 }
-let ia = {
+let na = {
   init(e) {
     Ot = (W = e) && W._, Jr = W && W.log || console && console.log || function() {
-    }, Vo();
+    }, Wo();
   },
-  handleCommand: zo
+  handleCommand: Xo
 };
-function Vo() {
+function Wo() {
   Er = window.SensorsData_iOS_JS_Bridge && window.SensorsData_iOS_JS_Bridge.sensorsdata_app_server_url, ht = function() {
     return window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.sensorsdataNativeTracker;
-  }, W && !W.bridge.activeBridge && ht() && ht().postMessage && (W.bridge.activeBridge = ia, W.para.app_js_bridge && !W.para.app_js_bridge.is_mui && (W.bridge.is_verify_success = Er && W.bridge.validateAppUrl(Er)), W.bridge.bridge_info = {
+  }, W && !W.bridge.activeBridge && ht() && ht().postMessage && (W.bridge.activeBridge = na, W.para.app_js_bridge && !W.para.app_js_bridge.is_mui && (W.bridge.is_verify_success = Er && W.bridge.validateAppUrl(Er)), W.bridge.bridge_info = {
     touch_app_bridge: !0,
     platform: "ios",
     verify_success: W.bridge.is_verify_success ? "success" : "fail",
     support_two_way_call: !0
   }, W.para.app_js_bridge ? (W.registerInterceptor("sendDataStage", {
-    send: { priority: 70, entry: Wo }
+    send: { priority: 70, entry: zo }
   }), Jr("IOS bridge inits succeed.")) : Jr(
     "app_js_bridge is not configured, data will not be sent by iOS bridge."
   ));
 }
-function Wo(e, t) {
+function zo(e, t) {
   if (W.para.app_js_bridge.is_mui || e.data.type === "item_set" || e.data.type === "item_delete")
     return e;
   let r = e.callback;
@@ -5541,16 +5541,16 @@ function Wo(e, t) {
     })
   ), Ot.isFunction(r) && r(), t.cancellationToken.cancel(), e) : W.para.app_js_bridge.is_send ? (W.debug.apph5({ data: e.data, step: "4.1", output: "all" }), e) : (Ot.isFunction(r) && r(), t.cancellationToken.cancel(), e);
 }
-function zo(e) {
+function Xo(e) {
   let t = e.callType;
   return t !== "page_info" && t !== "visualized_track" || W.bridge.hasVisualModeBridge() ? t === "sensorsdata_get_app_visual_config" ? Ot.isObject(window.SensorsData_APP_New_H5_Bridge) && window.SensorsData_APP_New_H5_Bridge[t] : ht() && ht().postMessage(JSON.stringify(e)) : null;
 }
-let Q, $t, qr, Oi = Ko(ia, "IOSBridge", "sdkAfterInitPara"), Xo = "1.27.11";
-function Yo(e, t, r) {
+let Q, $t, qr, Oi = Vo(na, "IOSBridge", "sdkAfterInitPara"), Yo = "1.27.11";
+function Zo(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (Zo(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (Go(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -5560,7 +5560,7 @@ function Yo(e, t, r) {
   }
   return e;
 }
-function Zo(e, t, r) {
+function Go(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -5572,30 +5572,30 @@ function Zo(e, t, r) {
     i("error", arguments);
   };
 }
-function Go(e, t, r) {
-  return Yo(e, t, r), e.plugin_version = Xo, e;
+function Qo(e, t, r) {
+  return Zo(e, t, r), e.plugin_version = Yo, e;
 }
-let na = {
+let aa = {
   init(e) {
     $t = (Q = e) && Q._, qr = Q && Q.log || console && console.log || function() {
-    }, Qo();
+    }, el();
   }
 };
-function Qo() {
-  Q && !Q.bridge.activeBridge && el() && (Q.bridge.activeBridge = na, Q.bridge.bridge_info = {
+function el() {
+  Q && !Q.bridge.activeBridge && tl() && (Q.bridge.activeBridge = aa, Q.bridge.bridge_info = {
     touch_app_bridge: !0,
     platform: "ios",
-    verify_success: tl() ? "success" : "fail"
+    verify_success: rl() ? "success" : "fail"
   }, Q.para.app_js_bridge ? (Q.registerInterceptor("sendDataStage", {
-    send: { priority: 90, entry: rl }
+    send: { priority: 90, entry: il }
   }), qr("IOS obsolete bridge inits succeed.")) : qr(
     "app_js_bridge is not configured, data will not be sent by iOS obsolete bridge."
   ));
 }
-function el() {
+function tl() {
   return (/sensors-verify/.test(navigator.userAgent) || /sa-sdk-ios/.test(navigator.userAgent)) && !window.MSStream;
 }
-function tl() {
+function rl() {
   if (/sensors-verify/.test(navigator.userAgent)) {
     let e = navigator.userAgent.match(/sensors-verify\/(\S+)/);
     if (e && e[0] && typeof e[1] == "string" && e[1].split("?").length === 2) {
@@ -5612,7 +5612,7 @@ function tl() {
   }
   return !!/sa-sdk-ios/.test(navigator.userAgent);
 }
-function rl(e, t) {
+function il(e, t) {
   if (Q.para.app_js_bridge.is_mui || e.data.type === "item_set" || e.data.type === "item_delete")
     return e;
   let r, i, n = e.callback;
@@ -5624,16 +5624,16 @@ function rl(e, t) {
   }
   return Q.para.app_js_bridge.is_send ? (Q.debug.apph5({ data: e.data, step: "3.2", output: "all" }), e) : ($t.isFunction(n) && n(), t.cancellationToken.cancel(), e);
 }
-let Ti = Go(
-  na,
+let Ti = Qo(
+  aa,
   "IOSObsoleteBridge",
   "sdkAfterInitPara"
-), il = "1.27.11";
-function nl(e, t, r) {
+), nl = "1.27.11";
+function al(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (al(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (sl(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -5643,7 +5643,7 @@ function nl(e, t, r) {
   }
   return e;
 }
-function al(e, t, r) {
+function sl(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -5655,12 +5655,12 @@ function al(e, t, r) {
     i("error", arguments);
   };
 }
-function sl(e, t, r) {
-  return nl(e, t, r), e.plugin_version = il, e;
+function ol(e, t, r) {
+  return al(e, t, r), e.plugin_version = nl, e;
 }
-let ol = 5e3, ll = 432e3;
+let ll = 5e3, ul = 432e3;
 function X() {
-  this.sd = null, this.start_time = +/* @__PURE__ */ new Date(), this.page_show_status = !0, this.page_hidden_status = !1, this._ = {}, this.timer = null, this.current_page_url = document.referrer, this.url = location.href, this.title = document.title || "", this.option = {}, this.heartbeat_interval_time = 5e3, this.heartbeat_interval_timer = null, this.page_id = null, this.storage_name = "sawebjssdkpageleave", this.max_duration = ll;
+  this.sd = null, this.start_time = +/* @__PURE__ */ new Date(), this.page_show_status = !0, this.page_hidden_status = !1, this._ = {}, this.timer = null, this.current_page_url = document.referrer, this.url = location.href, this.title = document.title || "", this.option = {}, this.heartbeat_interval_time = 5e3, this.heartbeat_interval_timer = null, this.page_id = null, this.storage_name = "sawebjssdkpageleave", this.max_duration = ul;
 }
 X.prototype.init = function(e, t) {
   if (e) {
@@ -5682,7 +5682,7 @@ X.prototype.init = function(e, t) {
   let e = this;
   this.timer && (clearTimeout(this.timer), this.timer = null), this.timer = setTimeout(() => {
     e.page_hidden_status = !1;
-  }, ol);
+  }, ll);
 }, X.prototype.hiddenStatusHandler = function() {
   clearTimeout(this.timer), this.timer = null, this.page_hidden_status = !1;
 }, X.prototype.pageStartHandler = function() {
@@ -5779,12 +5779,12 @@ X.prototype.init = function(e, t) {
   };
   return e !== 0 && (n[this.option.event_duration] = e), n = this._.extend(n, this.option.custom_props);
 };
-let ul = new X(), cl = sl(ul, "PageLeave", "sdkReady"), dl = "1.27.11";
-function pl(e, t, r) {
+let cl = new X(), dl = ol(cl, "PageLeave", "sdkReady"), pl = "1.27.11";
+function gl(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (gl(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (fl(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -5794,7 +5794,7 @@ function pl(e, t, r) {
   }
   return e;
 }
-function gl(e, t, r) {
+function fl(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -5806,10 +5806,10 @@ function gl(e, t, r) {
     i("error", arguments);
   };
 }
-function fl(e, t, r) {
-  return pl(e, t, r), e.plugin_version = dl, e;
+function _l(e, t, r) {
+  return gl(e, t, r), e.plugin_version = pl, e;
 }
-let Li = !1, _l = {
+let Li = !1, hl = {
   init(e, t) {
     function r() {
       let i = 0, n = window.performance || window.webkitPerformance || window.msPerformance || window.mozPerformance, a = {
@@ -5844,8 +5844,8 @@ let Li = !1, _l = {
     }
     document.readyState == "complete" ? r() : window.addEventListener ? window.addEventListener("load", r) : window.attachEvent && window.attachEvent("onload", r);
   }
-}, hl = fl(_l, "PageLoad", "sdkReady");
-function ml(e, t) {
+}, ml = _l(hl, "PageLoad", "sdkReady");
+function yl(e, t) {
   if (e.type !== "track")
     return e;
   let r = t.sd, i = r._, n = r.saEvent.check, a = i.extend2Lev({ properties: {} }, e), l = t.customRegister, u = a.properties, p = a.event, b = {};
@@ -5870,7 +5870,7 @@ Tt.prototype.init = function(e) {
       extendProps: {
         priority: 0,
         entry(r) {
-          return ml(r, t);
+          return yl(r, t);
         }
       }
     });
@@ -5881,17 +5881,17 @@ Tt.prototype.init = function(e) {
 }, Tt.prototype.hookRegister = function(e) {
   this.sd ? this._.isFunction(e) ? this.customRegister.push(e) : this.log("RegisterProperties: hookRegister 参数错误") : this.log("神策JS SDK未成功引入");
 };
-let yl = "1.27.11";
-function vl(e, t, r) {
-  return e.plugin_version = yl, e;
+let vl = "1.27.11";
+function bl(e, t, r) {
+  return e.plugin_version = vl, e;
 }
 Tt.prototype.plugin_name = "RegisterProperties";
-let bl = new Tt(), wl = vl(bl), Sl = "1.27.11";
-function $l(e, t, r) {
+let wl = new Tt(), Sl = bl(wl), $l = "1.27.11";
+function kl(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (kl(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (Fl(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -5901,7 +5901,7 @@ function $l(e, t, r) {
   }
   return e;
 }
-function kl(e, t, r) {
+function Fl(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -5913,12 +5913,12 @@ function kl(e, t, r) {
     i("error", arguments);
   };
 }
-function Fl(e, t, r) {
-  return $l(e, t, r), e.plugin_version = Sl, e;
+function Cl(e, t, r) {
+  return kl(e, t, r), e.plugin_version = $l, e;
 }
-let bt, aa, Bt = window.console && window.console.log || function() {
+let bt, sa, Bt = window.console && window.console.log || function() {
 };
-function Cl(e) {
+function El(e) {
   try {
     if (e.event !== "$pageview" && (!e.type || e.type.slice(0, 7) !== "profile")) {
       let t = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0, r = document.documentElement.scrollHeight || 0, i = { $page_height: Math.max(t, r) || 0 };
@@ -5927,26 +5927,26 @@ function Cl(e) {
   } catch {
     Bt("页面高度获取异常。");
   }
-  return aa.call(bt.kit, e);
+  return sa.call(bt.kit, e);
 }
-let El = {
+let Dl = {
   init(e) {
-    Bt = (bt = e) && bt.log || Bt, e && e.kit && e.kit.buildData ? (aa = bt.kit.buildData, bt.kit.buildData = Cl, Bt(
+    Bt = (bt = e) && bt.log || Bt, e && e.kit && e.kit.buildData ? (sa = bt.kit.buildData, bt.kit.buildData = El, Bt(
       "RegisterPropertyPageHeight 插件初始化完成"
     )) : Bt(
       "RegisterPropertyPageHeight 插件初始化失败,当前主sdk不支持 RegisterPropertyPageHeight 插件，请升级主sdk"
     );
   }
-}, Dl = Fl(
-  El,
+}, Pl = Cl(
+  Dl,
   "RegisterPropertyPageHeight",
   "sdkReady"
-), Pl = "1.27.11";
-function Al(e, t, r) {
+), Al = "1.27.11";
+function Bl(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (Bl(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (Il(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -5956,7 +5956,7 @@ function Al(e, t, r) {
   }
   return e;
 }
-function Bl(e, t, r) {
+function Il(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -5968,10 +5968,10 @@ function Bl(e, t, r) {
     i("error", arguments);
   };
 }
-function Il(e, t, r) {
-  return Al(e, t, r), e.plugin_version = Pl, e;
+function jl(e, t, r) {
+  return Bl(e, t, r), e.plugin_version = Al, e;
 }
-let Me, jl = {
+let Me, Nl = {
   getPart(e) {
     let t = this.option.length;
     if (t) {
@@ -6056,12 +6056,12 @@ let Me, jl = {
       "请配置打通域名参数！"
     );
   }
-}, Nl = Il(jl, "SiteLinker", "sdkReady"), Ol = "utm_source utm_medium utm_campaign utm_content utm_term", Tl = "1.27.11";
-function Ll(e, t, r) {
+}, Ol = jl(Nl, "SiteLinker", "sdkReady"), Tl = "utm_source utm_medium utm_campaign utm_content utm_term", Ll = "1.27.11";
+function xl(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (xl(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (Ul(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -6071,7 +6071,7 @@ function Ll(e, t, r) {
   }
   return e;
 }
-function xl(e, t, r) {
+function Ul(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -6083,17 +6083,17 @@ function xl(e, t, r) {
     i("error", arguments);
   };
 }
-function Ul(e, t, r) {
-  return Ll(e, t, r), e.plugin_version = Tl, e;
+function Rl(e, t, r) {
+  return xl(e, t, r), e.plugin_version = Ll, e;
 }
-let Rl = {
+let Hl = {
   init(e) {
     e && !Me && (Me = e).registerInterceptor("businessStage", {
       getUtmData: {
         priority: 0,
         entry() {
           return function() {
-            let t = Ol.split(" "), r = "", i = {};
+            let t = Tl.split(" "), r = "", i = {};
             return Me._.isArray(Me.para.source_channel) && Me.para.source_channel.length > 0 && (t = t.concat(Me.para.source_channel), t = Me._.unique(t)), Me._.each(t, (n) => {
               (r = Me._.getQueryParam(location.href, n)).length && (i[n] = r);
             }), i;
@@ -6102,12 +6102,12 @@ let Rl = {
       }
     });
   }
-}, xi = Ul(Rl, "Utm", "sdkAfterInitPara"), Hl = "1.27.11";
-function Jl(e, t, r) {
+}, xi = Rl(Hl, "Utm", "sdkAfterInitPara"), Jl = "1.27.11";
+function Ml(e, t, r) {
   if (e.plugin_name = t, e.init) {
     let i = e.init;
     e.init = function(n, a) {
-      if (Ml(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
+      if (ql(n, e, t), n.readyState && n.readyState.state >= 3 || !n.on)
         return l();
       function l() {
         i.call(e, n, a);
@@ -6117,7 +6117,7 @@ function Jl(e, t, r) {
   }
   return e;
 }
-function Ml(e, t, r) {
+function ql(e, t, r) {
   function i(n, a) {
     e.logger ? e.logger.msg.apply(e.logger, a).module(`${r}` || "").level(n).log() : e.log && e.log.apply(e, a);
   }
@@ -6129,28 +6129,28 @@ function Ml(e, t, r) {
     i("error", arguments);
   };
 }
-function ql(e, t, r) {
-  return Jl(e, t, r), e.plugin_version = Hl, e;
+function Kl(e, t, r) {
+  return Ml(e, t, r), e.plugin_version = Jl, e;
 }
-let si = !1, Dr = null, Kl = {
+let si = !1, Dr = null, Vl = {
   init(e) {
-    (Dr = e).disableSDK = Vl, Dr.enableSDK = Wl, Dr.getDisabled = zl;
+    (Dr = e).disableSDK = Wl, Dr.enableSDK = zl, Dr.getDisabled = Xl;
   }
 };
-function Vl() {
+function Wl() {
   si = !0;
 }
-function Wl() {
+function zl() {
   si = !1;
 }
-function zl() {
+function Xl() {
   return si;
 }
-let K, ut, Ui = ql(Kl, "DisableSDK", "sdkInitAPI"), Xl = "1.27.11";
-function Yl(e, t, r) {
-  return e.plugin_version = Xl, e;
+let K, ut, Ui = Kl(Vl, "DisableSDK", "sdkInitAPI"), Yl = "1.27.11";
+function Zl(e, t, r) {
+  return e.plugin_version = Yl, e;
 }
-function Zl(e) {
+function Gl(e) {
   let t = e, r = "";
   r = K.para.debug_mode_url.includes("?") ? `${K.para.debug_mode_url}&${K.kit.encodeTrackData(e)}` : `${K.para.debug_mode_url}?${K.kit.encodeTrackData(e)}`, ut.ajax({
     url: r,
@@ -6164,14 +6164,14 @@ function Zl(e) {
     }
   });
 }
-function Gl(e, t) {
+function Ql(e, t) {
   if (K.para.debug_mode === !0) {
     let r = e.data;
-    e.callback, Zl(JSON.stringify(r)), t.cancellationToken.stop();
+    e.callback, Gl(JSON.stringify(r)), t.cancellationToken.stop();
   }
   return e;
 }
-function Ql() {
+function eu() {
   K.para.debug_mode === !0 && (K.para.debug_mode_upload = K.para.debug_mode_upload || !1, ut.isString(K.para.debug_mode_url) || (ut.isString(K.para.server_url) ? K.para.debug_mode_url = K.para.server_url.replace(
     "sa.gif",
     "debug"
@@ -6180,39 +6180,39 @@ function Ql() {
     "debug"
   ) : K.para.debug_mode = !1));
 }
-function eu() {
+function tu() {
   K.on("sdkInitPara", () => {
-    Ql();
+    eu();
   }), K.on("sdkAfterInitPara", () => {
     K.registerInterceptor("sendDataStage", {
-      send: { priority: 30, entry: Gl }
+      send: { priority: 30, entry: Ql }
     });
   });
 }
-let ce, ct, tu = {
+let ce, ct, ru = {
   plugin_name: "DebugSender",
   init(e) {
-    ut = (K = e)._, eu();
+    ut = (K = e)._, tu();
   }
-}, Ri = Yl(tu), ru = "1.27.11";
-function iu(e, t, r) {
-  return e.plugin_version = ru, e;
+}, Ri = Zl(ru), iu = "1.27.11";
+function nu(e, t, r) {
+  return e.plugin_version = iu, e;
 }
-function nu(e, t) {
+function au(e, t) {
   if (ct.isObject(ce.para.jsapp) && !ce.para.jsapp.isOnline && typeof ce.para.jsapp.setData == "function") {
     let r = e;
     delete r.callback, r = JSON.stringify(r), ce.para.jsapp.setData(r), t.cancellationToken.stop();
   }
   return e;
 }
-function au() {
+function su() {
   ce.on("sdkAfterInitAPI", () => {
-    ct.isObject(ce.commonWays) && (ce.commonWays.setOnlineState = su), ce.registerInterceptor("sendDataStage", {
-      send: { priority: 40, entry: nu }
+    ct.isObject(ce.commonWays) && (ce.commonWays.setOnlineState = ou), ce.registerInterceptor("sendDataStage", {
+      send: { priority: 40, entry: au }
     });
   });
 }
-function su(e) {
+function ou(e) {
   if (e === !0 && ct.isObject(ce.para.jsapp) && typeof ce.para.jsapp.getData == "function") {
     ce.para.jsapp.isOnline = !0;
     let t = ce.para.jsapp.getData();
@@ -6222,45 +6222,45 @@ function su(e) {
   } else
     ce.para.jsapp.isOnline = !1;
 }
-let de, tt, ou = {
+let de, tt, lu = {
   plugin_name: "JsappSender",
   init(e) {
-    ct = (ce = e)._, au();
+    ct = (ce = e)._, su();
   }
-}, Hi = iu(ou), lu = "1.27.11";
-function uu(e, t, r) {
-  return e.plugin_version = lu, e;
+}, Hi = nu(lu), uu = "1.27.11";
+function cu(e, t, r) {
+  return e.plugin_version = uu, e;
 }
 let ir = null;
-function cu(e, t) {
+function du(e, t) {
   return !de.para.app_js_bridge && de.para.batch_send && tt.localStorage.isSupport() && localStorage.length < de.para.batch_send.storage_length && (ir.add(e.data), t.cancellationToken.stop()), e;
 }
-function du() {
+function pu() {
   let e = { datasend_timeout: 6e3, send_interval: 6e3, storage_length: 200 };
   tt.localStorage.isSupport() && tt.isSupportCors() && typeof localStorage == "object" ? de.para.batch_send === !0 ? de.para.batch_send = tt.extend({}, e) : typeof de.para.batch_send == "object" && (de.para.batch_send = tt.extend({}, e, de.para.batch_send)) : de.para.batch_send = !1;
 }
-function pu() {
+function gu() {
   de.on("sdkInitPara", () => {
-    du();
+    pu();
   }), de.on("sdkAfterInitPara", () => {
     !de.para.app_js_bridge && de.para.batch_send && tt.localStorage.isSupport() && (ir || (ir = new tt.BatchSend()), ir.batchInterval(), de.registerInterceptor("sendDataStage", {
-      send: { priority: 100, entry: cu }
+      send: { priority: 100, entry: du }
     }));
   });
 }
-let Le, Ge, gu = {
+let Le, Ge, fu = {
   plugin_name: "BatchSender",
   init(e) {
-    tt = (de = e)._, pu();
+    tt = (de = e)._, gu();
   }
-}, Ji = uu(gu), fu = "1.27.11";
-function _u(e, t, r) {
-  return e.plugin_version = fu, e;
+}, Ji = cu(fu), _u = "1.27.11";
+function hu(e, t, r) {
+  return e.plugin_version = _u, e;
 }
 function Mi(e) {
   new Ge.BeaconSend(e).start();
 }
-function hu(e, t) {
+function mu(e, t) {
   let r = null, i = null;
   if (Ge.isObject(e.config) && (r = e.config.send_type, i = Ge.optimizeServerUrl(e.config.server_url)), (r === "beacon" || !r && Le.para.send_type === "beacon") && Ge.isSupportBeaconSend()) {
     let n = i || e.server_url;
@@ -6272,31 +6272,31 @@ function hu(e, t) {
   }
   return e;
 }
-function mu() {
+function yu() {
   Le.para.send_type !== "beacon" || Ge.isSupportBeaconSend() || (Le.para.send_type = Le.DEFAULT_SEND_TYPE);
 }
-function yu() {
+function vu() {
   Le.on("sdkInitPara", () => {
-    mu();
+    yu();
   }), Le.on("sdkAfterInitPara", () => {
     Le.registerInterceptor("sendDataStage", {
-      send: { priority: 110, entry: hu }
+      send: { priority: 110, entry: mu }
     });
   });
 }
-let xe, Qe, vu = {
+let xe, Qe, bu = {
   plugin_name: "BeaconSender",
   init(e) {
-    Ge = (Le = e)._, yu();
+    Ge = (Le = e)._, vu();
   }
-}, qi = _u(vu), bu = "1.27.11";
-function wu(e, t, r) {
-  return e.plugin_version = bu, e;
+}, qi = hu(bu), wu = "1.27.11";
+function Su(e, t, r) {
+  return e.plugin_version = wu, e;
 }
 function Ki(e) {
   new Qe.AjaxSend(e).start();
 }
-function Su(e, t) {
+function $u(e, t) {
   let r = null, i = null;
   if (Qe.isObject(e.config) && (r = e.config.send_type, i = Qe.optimizeServerUrl(e.config.server_url)), (r === "ajax" || !r && xe.para.send_type === "ajax") && Qe.isSupportCors()) {
     let n = i || e.server_url;
@@ -6308,26 +6308,26 @@ function Su(e, t) {
   }
   return e;
 }
-function $u() {
+function ku() {
   xe.para.send_type !== "ajax" || Qe.isSupportCors() || (xe.para.send_type = xe.DEFAULT_SEND_TYPE);
 }
-function ku() {
+function Fu() {
   xe.on("sdkInitPara", () => {
-    $u();
+    ku();
   }), xe.on("sdkAfterInitPara", () => {
     xe.registerInterceptor("sendDataStage", {
-      send: { priority: 120, entry: Su }
+      send: { priority: 120, entry: $u }
     });
   });
 }
-let Ne, wt, Fu = {
+let Ne, wt, Cu = {
   plugin_name: "AjaxSender",
   init(e) {
-    Qe = (xe = e)._, ku();
+    Qe = (xe = e)._, Fu();
   }
-}, Vi = wu(Fu), Cu = "1.27.11";
-function Eu(e, t, r) {
-  return e.plugin_version = Cu, e;
+}, Vi = Su(Cu), Eu = "1.27.11";
+function Du(e, t, r) {
+  return e.plugin_version = Eu, e;
 }
 function Wi(e, t) {
   let r = Ne.kit.encodeTrackData(t);
@@ -6336,7 +6336,7 @@ function Wi(e, t) {
 function zi(e) {
   new wt.ImageSend(e).start();
 }
-function Du(e, t) {
+function Pu(e, t) {
   let r = null;
   wt.isObject(e.config) && (r = wt.optimizeServerUrl(e.config.server_url));
   let i = r || e.server_url, n = e.data;
@@ -6346,76 +6346,76 @@ function Du(e, t) {
     "当前 server_url 为空或不正确，只在控制台打印日志，network 中不会发数据，请配置正确的 server_url！"
   ).level("warn").log(), t.cancellationToken.stop();
 }
-function Pu() {
+function Au() {
   Ne.para.send_type !== "image" && Ne.para.send_type !== "ajax" && Ne.para.send_type !== "beacon" && (Ne.para.send_type = "image");
 }
-function Au() {
+function Bu() {
   Ne.on("sdkInitPara", () => {
-    Pu();
+    Au();
   }), Ne.on("sdkAfterInitPara", () => {
     Ne.registerInterceptor("sendDataStage", {
-      send: { priority: 130, entry: Du }
+      send: { priority: 130, entry: Pu }
     });
   });
 }
-let Bu = {
+let Iu = {
   plugin_name: "ImageSender",
   init(e) {
-    wt = (Ne = e)._, Au();
+    wt = (Ne = e)._, Bu();
   }
-}, Xi = Eu(Bu);
-function Iu(e, t, r) {
+}, Xi = Du(Iu);
+function ju(e, t, r) {
   return e.plugin_name = t, e;
 }
-function ju(e, t, r) {
-  return Iu(e, t, r), e.plugin_version = _r, e;
+function Nu(e, t, r) {
+  return ju(e, t, r), e.plugin_version = _r, e;
 }
-let re = null, be = null, Lt = [], Nu = {
+let re = null, be = null, Lt = [], Ou = {
   init(e) {
-    e && (be = (re = e)._, re.logger && re.logger.appendWriter(Ou), re.on && re.on("sdkAfterInitPara", () => {
-      for (let t = 0; t < Lt.length; t++) sa(Lt[t]);
+    e && (be = (re = e)._, re.logger && re.logger.appendWriter(Tu), re.on && re.on("sdkAfterInitPara", () => {
+      for (let t = 0; t < Lt.length; t++) oa(Lt[t]);
       Lt = null;
     }), re.on && re.on("sdkInitAPI", () => {
-      re.enableLocalLog = Uu, re.disableLocalLog = Ru;
+      re.enableLocalLog = Ru, re.disableLocalLog = Hu;
     }));
   }
-}, Yi = ju(Nu, "ConsoleLogger");
-function Ou(e) {
-  Lt !== null ? Lt.push(e) : sa(e);
+}, Yi = Nu(Ou, "ConsoleLogger");
+function Tu(e) {
+  Lt !== null ? Lt.push(e) : oa(e);
 }
-function sa(e) {
+function oa(e) {
   try {
-    if (e.level === "log" && oa() || e.level === "warn" && Tu() || e.level === "error" && Lu())
+    if (e.level === "log" && la() || e.level === "warn" && Lu() || e.level === "error" && xu())
       return void Pr(e);
   } catch {
   }
 }
-function oa() {
+function la() {
   return !!li() || re.para.show_log === !0 || be.isObject(re.para.show_log) && re.para.show_log.level === "log";
 }
-function Tu() {
-  return !!li() || oa() || be.isObject(re.para.show_log) && re.para.show_log.level === "warn";
-}
 function Lu() {
+  return !!li() || la() || be.isObject(re.para.show_log) && re.para.show_log.level === "warn";
+}
+function xu() {
   return !!li() || !be.isObject(re.para.show_log) || re.para.show_log.level !== "none";
 }
 function Pr(e) {
-  let t = e.content, r = be.isObject(t[0]) ? be.formatJsonString(t[0]) : t[0], i = xu(e);
+  let t = e.content, r = be.isObject(t[0]) ? be.formatJsonString(t[0]) : t[0], i = Uu(e);
   t[0] = i + (i.length > 0 ? ": " : "") + r;
   try {
     console && (be.isFunction(console[e.level]) ? console[e.level].apply(console, t) : be.isObject(console[e.level]) && console[e.level](t[0]));
   } catch {
   }
 }
-function xu(e) {
+function Uu(e) {
   let t = "", r = "", i = re.para.show_log;
   return be.isObject(i) && i.show_brand === !1 || (t += e.brand), be.isObject(i) && i.show_level === !1 || (t += (t.length > 0 ? "-" : "") + e.level), t.length > 0 && (t = `[${t}]`), be.isObject(i) && i.show_module === !1 || (r = e.module), t + r;
 }
 let oi = "sensorsdata_jssdk_debug";
-function Uu() {
+function Ru() {
   be.sessionStorage.isSupport() && sessionStorage.setItem(oi, "true");
 }
-function Ru() {
+function Hu() {
   be.sessionStorage.isSupport() && sessionStorage.removeItem(oi);
 }
 function li() {
@@ -6424,18 +6424,18 @@ function li() {
 s.modules = s.modules || {};
 for (var Zi = [
   Yi,
-  ao,
+  so,
   Pi,
   ji,
-  Bo,
-  Ho,
+  Io,
+  Jo,
   Oi,
   Ti,
-  cl,
-  hl,
-  wl,
-  Dl,
-  Nl,
+  dl,
+  ml,
+  Sl,
+  Pl,
+  Ol,
   xi,
   Ui,
   Ri,
@@ -6446,7 +6446,7 @@ for (var Zi = [
   Xi
 ], Gi = [
   Yi,
-  Qs,
+  eo,
   xi,
   Ui,
   Hi,
@@ -6466,14 +6466,14 @@ for (var Zi = [
   });
 }
 for (dt = 0; dt < Gi.length; dt++) s.use(Gi[dt]);
-let la = s;
+let ua = s;
 try {
-  typeof window.sensorsDataAnalytic201505 == "string" ? (s.para = window[sensorsDataAnalytic201505].para, s._q = window[sensorsDataAnalytic201505]._q, window[sensorsDataAnalytic201505] = s, window.sensorsDataAnalytic201505 = s, s.init()) : typeof window.sensorsDataAnalytic201505 > "u" ? window.sensorsDataAnalytic201505 = s : la = window.sensorsDataAnalytic201505;
+  typeof window.sensorsDataAnalytic201505 == "string" ? (s.para = window[sensorsDataAnalytic201505].para, s._q = window[sensorsDataAnalytic201505]._q, window[sensorsDataAnalytic201505] = s, window.sensorsDataAnalytic201505 = s, s.init()) : typeof window.sensorsDataAnalytic201505 > "u" ? window.sensorsDataAnalytic201505 = s : ua = window.sensorsDataAnalytic201505;
 } catch (e) {
   B(e);
 }
-let ua = la;
-ua.DEFAULT_SEND_TYPE = "image";
+let ca = ua;
+ca.DEFAULT_SEND_TYPE = "image";
 const qu = {
   mounted(e, t) {
     const r = Array.isArray(t.value) ? t.value : [t.value], i = Mu(), n = [];
@@ -6490,8 +6490,8 @@ const qu = {
     const t = e.__trackHandlers__;
     t && (t.forEach((r) => r()), delete e.__trackHandlers__);
   }
-}, Ar = ua;
-function Hu(e, t) {
+}, Ar = ca;
+function Qi(e, t) {
   return Object.fromEntries(
     Object.entries(e).map(([r, i]) => [`${t}${r}`, i])
   );
@@ -6513,7 +6513,10 @@ class Ju {
     this.sensors.track(`${this.options.project}_${t}`, r || {});
   }
   setProfile(t) {
-    this.sensors.setProfile(Hu(t || {}, `${this.options.project}_`));
+    this.sensors.setProfile(Qi(t || {}, `${this.options.project}_`));
+  }
+  setOnceProfile(t) {
+    this.sensors.setOnceProfile(Qi(t || {}, `${this.options.project}_`));
   }
 }
 let gr = null;
