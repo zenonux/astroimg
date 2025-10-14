@@ -60,7 +60,6 @@ let analytics: AnalyticsInstance<any, any> | null = null
 
 export function initAnalytics<E extends string, P extends Record<E, any>>(options: AnalyticsOptions) {
   sensors.use('PageLeave', {
-    event_duration: `page_duration`,
     event_name_view: `${options.project}_page_view`,
     event_name_leave: `${options.project}_page_leave`,
     urlPropertyMap: options.pageLeave.urlPropertyMap,
