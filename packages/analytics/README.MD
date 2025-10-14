@@ -2,7 +2,7 @@
 
 wrapper for sensors sdk.
 
-- 修改内置pageleave插件
+- 修改内置pageleave插件,改事件名
 - 增加pageview事件
 
 ## Install
