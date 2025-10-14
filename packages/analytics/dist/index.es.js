@@ -5766,6 +5766,7 @@ X.prototype.init = function(e, t) {
     $referrer_host: t ? this._.getHostname(t) : "",
     $referrer: t,
     $viewport_position: r,
+    $is_first_time: i.$is_first_time || !1,
     $utm_source: i.$utm_source || "",
     $utm_medium: i.$utm_medium || "",
     $utm_term: i.$utm_term || "",

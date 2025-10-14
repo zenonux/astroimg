@@ -9201,6 +9201,7 @@ function PageLeave() {
     $referrer_host: t ? this._.getHostname(t) : '',
     $referrer: t,
     $viewport_position: r,
+    $is_first_time: presetProps.$is_first_time || false,
     $utm_source: presetProps.$utm_source || '',
     $utm_medium: presetProps.$utm_medium || '',
     $utm_term: presetProps.$utm_term || '',
