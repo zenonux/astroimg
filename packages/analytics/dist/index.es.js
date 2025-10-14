@@ -5687,11 +5687,11 @@ X.prototype.init = function(e, t) {
   clearTimeout(this.timer), this.timer = null, this.page_hidden_status = !1;
 }, X.prototype.pageStartHandler = function() {
   let e = this.getPageLeaveProperties();
-  this.start_time = +/* @__PURE__ */ new Date(), document.hidden ? this.page_show_status = !1 : this.page_show_status = !0, this.url = location.href, delete e[this.option.event_duration], this.isCollectUrl(this.url) && this.sd.track(this.option.event_name_view, Object.assign(e, this.option.urlPropertyMap(this.url))), this.title = document.title;
+  this.start_time = +/* @__PURE__ */ new Date(), document.hidden ? this.page_show_status = !1 : this.page_show_status = !0, this.url = location.href, delete e.event_duration, this.isCollectUrl(this.url) && this.sd.track(this.option.event_name_view, Object.assign(e, this.option.urlPropertyMap(this.url))), this.title = document.title;
 }, X.prototype.pageEndHandler = function() {
   if (this.page_hidden_status !== !0) {
     let e = this.getPageLeaveProperties();
-    this.page_show_status === !1 && delete e[this.option.event_duration], this.page_show_status = !1, this.page_hidden_status = !0, this.isCollectUrl(this.url) && this.sd.track(this.option.event_name_leave, Object.assign(e, this.option.urlPropertyMap(this.url))), this.refreshPageEndTimer(), this.delHeartBeatData();
+    this.page_show_status === !1 && delete e.event_duration, this.page_show_status = !1, this.page_hidden_status = !0, this.isCollectUrl(this.url) && this.sd.track(this.option.event_name_leave, Object.assign(e, this.option.urlPropertyMap(this.url))), this.refreshPageEndTimer(), this.delHeartBeatData();
   }
 }, X.prototype.addEventListener = function() {
   this.addPageStartListener(), this.addPageSwitchListener(), this.addSinglePageListener(), this.addPageEndListener();
@@ -5737,7 +5737,7 @@ X.prototype.init = function(e, t) {
   clearInterval(this.heartbeat_interval_timer), this.heartbeat_interval_timer = null;
 }, X.prototype.saveHeartBeatData = function(e) {
   let t = this.getPageLeaveProperties(), r = /* @__PURE__ */ new Date();
-  t.$time = r, e === "is_first_heartbeat" && (t[this.option.event_duration] = 3.14);
+  t.$time = r, e === "is_first_heartbeat" && (t.event_duration = 3.14);
   let i = this.sd.kit.buildData({
     type: "track",
     event: this.option.event_name_leave,
@@ -5778,7 +5778,7 @@ X.prototype.init = function(e, t) {
     $latest_utm_content: i.$latest_utm_content || "",
     $latest_utm_campaign: i.$latest_utm_campaign || ""
   };
-  return e !== 0 && (n[this.option.event_duration] = e), n = this._.extend(n, this.option.custom_props);
+  return e !== 0 && (n.event_duration = e), n = this._.extend(n, this.option.custom_props);
 };
 let cl = new X(), dl = ol(cl, "PageLeave", "sdkReady"), pl = "1.27.11";
 function gl(e, t, r) {
@@ -6523,7 +6523,6 @@ class Ju {
 let gr = null;
 function Ku(e) {
   return Ar.use("PageLeave", {
-    event_duration: "page_duration",
     event_name_view: `${e.project}_page_view`,
     event_name_leave: `${e.project}_page_leave`,
     urlPropertyMap: e.pageLeave.urlPropertyMap,
