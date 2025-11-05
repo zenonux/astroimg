@@ -2,7 +2,7 @@
 
 wrapper for sensors sdk.
 
-- 修改内置pageleave插件,改事件名
+- 修改内置pageleave插件,改事件名，不上报
 - 增加pageview事件
 
 ## Install
@@ -19,7 +19,7 @@ pnpm add @astroimg/analytic
 import { initAnalytics } from "@astroimg/analytic";
 const analytics = initAnalytics({
   project: "test",
-  pageLeave: {
+  pageView: {
     isCollectUrl() {
       return false;
     },

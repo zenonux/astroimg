@@ -3,7 +3,7 @@ import sensorsdata from '../libs/sensorsdata.es6'
 const sensors: any = sensorsdata
 export interface AnalyticsOptions {
   project: string
-  pageLeave: {
+  pageView: {
     urlPropertyMap: (url: string) => { page_type: string }
     isCollectUrl: (url: string) => boolean
   }
@@ -46,8 +46,8 @@ export function initAnalytics<E extends string, P extends Record<E, any>>(option
   sensors.use('PageLeave', {
     event_name_view: `${options.project}_page_view`,
     event_name_leave: `${options.project}_page_leave`,
-    urlPropertyMap: options.pageLeave.urlPropertyMap,
-    isCollectUrl: options.pageLeave.isCollectUrl,
+    urlPropertyMap: options.pageView.urlPropertyMap,
+    isCollectUrl: options.pageView.isCollectUrl,
   })
   sensors.init({ ...options.sensorsConfig })
 
