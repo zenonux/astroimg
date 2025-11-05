@@ -9064,7 +9064,8 @@ function PageLeave() {
     (!1 === this.page_show_status && delete e.event_duration,
     (this.page_show_status = !1),
     (this.page_hidden_status = !0),
-    this.isCollectUrl(this.url) && this.sd.track(this.option.event_name_leave, Object.assign(e, this.option.urlPropertyMap(this.url))),
+    // PageLeave 不上报
+    // this.isCollectUrl(this.url) && this.sd.track(this.option.event_name_leave, Object.assign(e, this.option.urlPropertyMap(this.url))),
     this.refreshPageEndTimer(),
     this.delHeartBeatData())
   }

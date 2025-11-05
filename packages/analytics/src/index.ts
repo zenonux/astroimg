@@ -4,22 +4,14 @@ const sensors: any = sensorsdata
 export interface AnalyticsOptions {
   project: string
   pageLeave: {
-    urlPropertyMap: (url: string) => { page_type: string, page_id: string }
+    urlPropertyMap: (url: string) => { page_type: string }
     isCollectUrl: (url: string) => boolean
   }
   sensorsConfig: any
 }
 
-function prefixKeys<T extends Record<string, any>>(obj: T, prefix: string): Record<string, T[keyof T]> {
-  return Object.fromEntries(
-    Object.entries(obj).map(([key, value]) => [`${prefix}${key}`, value]),
-  ) as Record<string, T[keyof T]>
-}
-
 export type AnalyticsInstance<E extends string, P extends Record<E, any>> = {
   track: (event: E, params: P[E]) => void
-  setProfile: (params: Record<string, any>) => void
-  setOnceProfile: (params: Record<string, any>) => void
 } & Record<string, any>
 
 class Analytics<E extends string, P extends Record<E, any>> {
@@ -45,14 +37,6 @@ class Analytics<E extends string, P extends Record<E, any>> {
 
   track(event: E, params: P[E]) {
     this.sensors.track(`${this.options.project}_${event}`, params || {})
-  }
-
-  setProfile(params: Record<string, any>) {
-    this.sensors.setProfile(prefixKeys(params || {}, `${this.options.project}_`))
-  }
-
-  setOnceProfile(params: Record<string, any>) {
-    this.sensors.setOnceProfile(prefixKeys(params || {}, `${this.options.project}_`))
   }
 }
 
